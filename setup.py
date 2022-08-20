@@ -23,7 +23,7 @@ if '--NewMinor' in sys.argv:
 
 Version = f'{Major}.{Mid}.{Minor}'
 
-print(f"PyFinitDifference Version: {Version}")
+print(f"PyFinitDiff Version: {Version}")
 
 with open(os.path.join(__location__, 'Version'), "w+") as f:
     f.writelines(Version)
@@ -49,23 +49,23 @@ def _find_packages():
 
 
 setuptools.setup(
-    name                          = 'PyFinitDifference',
+    name                          = 'PyFinitDiff',
     version                       = Version,
-    description                   = 'A package for light scattering simulations.',
+    description                   = 'A package for finite difference',
     long_description              = long_description,
     long_description_content_type = 'text/markdown',
     author                        = 'Martin Poinsinet de Sivry',
     author_email                  = 'Martin.poinsinet.de.sivry@gmail.com',
-    setup_requires                = ['numpy', 'pybind11'],
+    setup_requires                = ['numpy', ],
     python_requires               = '>=3.6',
-    url                           = 'https://github.com/MartinPdeS/PyMieSim',
+    url                           = 'https://github.com/MartinPdeS/PyFinitDiff',
     packages                      = _find_packages(),
     install_requires              = REQUIRED,
     extras_require                = {},
     dependency_links              = [],
     include_package_data          = True,
     license                       = 'MIT',
-    package_data                  = {'PyMieSim': ['requirements.txt', "*.for"]},
+    package_data                  = {'PyFinitDiff': ['requirements.txt']},
     classifiers=[  # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
                                     'License :: OSI Approved :: MIT License',
                                     'Operating System :: Unix',

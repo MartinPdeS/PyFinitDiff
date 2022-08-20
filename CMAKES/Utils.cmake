@@ -1,5 +1,5 @@
 
-#Upload Pypi package-----------------------------------------------------------------------
+#Upload Pypi package-------------------------------
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/Upload.txt
   COMMAND rm -rf dist/*
@@ -10,7 +10,7 @@ add_custom_command(
 add_custom_target(Upload DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Upload.txt)
 
 
-#Cleaning command--------------------------------------------------------------------------
+#Cleaning command---------------------------------
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/Clean.txt
   COMMAND rm -rf dist CMakeCache.txt cmake_install.cmake *.egg* CMakeCache.txt CMakeFiles *.cmake build

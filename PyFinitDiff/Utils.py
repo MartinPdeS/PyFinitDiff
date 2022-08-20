@@ -2,15 +2,13 @@ class NameSpace:
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 
+
+
 class BoundaryClass:
 
-    __AcceptedValues = ['Symmetric', 'AntiSymmetric', 'Zero', 'None']
+    __AcceptedValues = ['Symmetric', 'AntiSymmetric', 'Zero', 'None', 1, -1, 0]
 
     def __init__(self, Left='None', Right='None', Top='None', Bottom='None'):
-        self._Left  = None
-        self._Right = None
-        self._Bottom = None
-        self._Top    = None
         self.Left   = Left
         self.Right  = Right
         self.Bottom = Bottom

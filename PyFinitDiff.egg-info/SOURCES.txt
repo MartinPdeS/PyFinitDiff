@@ -1,0 +1,7 @@
+README.rst
+setup.py
+PyFinitDiff.egg-info/PKG-INFO
+PyFinitDiff.egg-info/SOURCES.txt
+PyFinitDiff.egg-info/dependency_links.txt
+PyFinitDiff.egg-info/requires.txt
+PyFinitDiff.egg-info/top_level.txt

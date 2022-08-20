@@ -1,9 +1,6 @@
+project(PyMieSim)
 
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/CMAKES/Utils.cmake)
-
-project(PyMieSim LANGUAGES PYTHON)
-
-
+#CREDENTIALS------------------------------------------------
 set(Token    "$ENV{PyPiUsername}")
 set(Password "$ENV{PyPiPassword}")
