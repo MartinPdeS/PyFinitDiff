@@ -23,7 +23,7 @@ class FiniteDifference2D():
     Derivative: int = 1
     Accuracy: int = 2
     Naive: bool = False
-    Symmetries: Dict[str, str] = field(default_factory = lambda: ({'Left': None, 'Right': None, 'Top': None, 'Bottom': None}))
+    Symmetries: Dict[str, str] = field(default_factory = lambda: ({'Bottom': None, 'Top': None, 'Right': None, 'Left': None}))
 
     def __post_init__(self):
         self.FinitCoefficients = FinitCoefficients(Derivative=self.Derivative, Accuracy=self.Accuracy)
@@ -31,13 +31,13 @@ class FiniteDifference2D():
 
     @property
     def Size(self):
-        return self.Nx * self.Ny
+        return self.Ny * self.Nx
 
     @property
     def Shape(self):
         return [self.Size, self.Size]
 
-    def SetRightBoundary(self, Value, Mesh):
+    def SetTopBoundary(self, Value, Mesh):
         if Value in ['Symmetric', 1]:
             for idx, value in self.FinitCoefficients.Central().items():
                 Mesh[self.Index.i == self.Index.j+idx] = (value if idx==0 else 2*value if idx >0 else 0)
@@ -48,7 +48,7 @@ class FiniteDifference2D():
 
         elif Value in ['Zero', 0]:
             for idx, value in {0: -2, 1: 1}.items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = value
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = value
 
         elif Value == 'None':
             for idx, value in self.FinitCoefficients.Forward().items():
@@ -57,7 +57,7 @@ class FiniteDifference2D():
         return Mesh
 
 
-    def SetLeftBoundary(self, Value, Mesh):
+    def SetBottomBoundary(self, Value, Mesh):
         if Value in ['Symmetric', 1]:
             for idx, value in self.FinitCoefficients.Central().items():
                 Mesh[self.Index.i == self.Index.j+idx] = (value if idx==0 else 2*value if idx <0 else 0)
@@ -69,7 +69,7 @@ class FiniteDifference2D():
 
         elif Value in ['Zero', 0]:
             for idx, value in {0: -2, -1: 1}.items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = value
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = value
 
         elif Value == 'None':
             for idx, value in self.FinitCoefficients.Backward().items():
@@ -78,61 +78,61 @@ class FiniteDifference2D():
         return Mesh
 
 
-    def SetTopBoundary(self, Value, Mesh):
+    def SetRightBoundary(self, Value, Mesh):
         if Value in ['Symmetric', 1]:
             for idx, value in self.FinitCoefficients.Central().items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = (value if idx==0 else 2*value if idx >0 else 0)
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = (value if idx==0 else 2*value if idx >0 else 0)
 
         elif Value in ['AntiSymmetric', -1]:
             for idx, value in self.FinitCoefficients.Central().items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = (value if idx==0 else 0 if idx >0 else 0)
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = (value if idx==0 else 0 if idx >0 else 0)
 
         elif Value in ['Zero', 0]:
             for idx, value in {0: -2, 1: 1}.items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = value
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = value
 
         elif Value == 'None':
             for idx, value in self.FinitCoefficients.Forward().items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = value
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = value
 
         return Mesh
 
 
-    def SetBottomBoundary(self, Value, Mesh):
+    def SetLeftBoundary(self, Value, Mesh):
         if Value in ['Symmetric', 1]:
             for idx, value in self.FinitCoefficients.Central().items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = (value if idx==0 else 2*value if idx <0 else 0)
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = (value if idx==0 else 2*value if idx <0 else 0)
 
         elif Value in ['AntiSymmetric', -1]:
             for idx, value in self.FinitCoefficients.Central().items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = (value if idx==0 else 0 if idx >0 else 0)
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = (value if idx==0 else 0 if idx >0 else 0)
 
         elif Value in ['Zero', 0]:
             for idx, value in {0: -2, -1: 1}.items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = value
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = value
 
         elif Value == 'None':
             for idx, value in self.FinitCoefficients.Backward().items():
-                Mesh[self.Index.i == self.Index.j+idx*self.Nx] = value
+                Mesh[self.Index.i == self.Index.j+idx*self.Ny] = value
 
         return Mesh
 
 
 
     def ComputeSlices(self):
-        self.SliceRight, self.SliceLeft, self.SliceBottom, self.SliceTop = self.GetZeros(n=4, Type=bool)
+        self.SliceTop, self.SliceBottom, self.SliceLeft, self.SliceRight = self.GetZeros(n=4, Type=bool)
 
         for Offset in range(1, self.FinitCoefficients.OffsetIndex+1):
-            self.SliceRight[self.Nx-Offset::self.Nx, :] = True
+            self.SliceTop[self.Ny-Offset::self.Ny, :] = True
 
         for Offset in range(0, self.FinitCoefficients.OffsetIndex ):
-            self.SliceLeft[Offset::self.Nx, :] = True
+            self.SliceBottom[Offset::self.Ny, :] = True
 
         for Offset in range(1, self.FinitCoefficients.OffsetIndex+1 ):
-            self.SliceTop[self.Size-Offset*self.Nx:, :] = True
+            self.SliceRight[self.Size-Offset*self.Ny:, :] = True
 
         for Offset in range(1, self.FinitCoefficients.OffsetIndex+1):
-            self.SliceBottom[:Offset*self.Nx, :] = True
+            self.SliceLeft[:Offset*self.Ny, :] = True
 
         
 
@@ -143,8 +143,8 @@ class FiniteDifference2D():
         for idx, value in self.FinitCoefficients.Central().items():
             self.XMeshes.Center[self.Index.i == self.Index.j+idx] = value
 
-        self.XMeshes.Right = self.SetRightBoundary(self.Symmetries['Right'], self.XMeshes.Right)
-        self.XMeshes.Left = self.SetLeftBoundary(self.Symmetries['Left'], self.XMeshes.Left)
+        self.XMeshes.Top = self.SetTopBoundary(self.Symmetries['Top'], self.XMeshes.Top)
+        self.XMeshes.Bottom = self.SetBottomBoundary(self.Symmetries['Bottom'], self.XMeshes.Bottom)
 
 
 
@@ -156,45 +156,45 @@ class FiniteDifference2D():
 
 
     def ComputeMeshes(self):
-        self.XMeshes = NameSpace(Right  = self.GetZeros(1)[0],
-                                 Left   = self.GetZeros(1)[0],
+        self.XMeshes = NameSpace(Top  = self.GetZeros(1)[0],
+                                 Bottom   = self.GetZeros(1)[0],
                                  Center = self.GetZeros(1)[0] )
 
-        self.YMeshes = NameSpace(Top    = self.GetZeros(1)[0],
-                                 Bottom = self.GetZeros(1)[0],
+        self.YMeshes = NameSpace(Right    = self.GetZeros(1)[0],
+                                 Left = self.GetZeros(1)[0],
                                  Center = self.GetZeros(1)[0] )
 
 
     def SlicesMeshes(self):
         if self.Naive:
-            self.YMeshes.Bottom = 0
-            self.YMeshes.Top    = 0
+            self.YMeshes.Left = 0
+            self.YMeshes.Right    = 0
 
-            self.XMeshes.Right  = 0
-            self.XMeshes.Left   = 0
+            self.XMeshes.Top  = 0
+            self.XMeshes.Bottom   = 0
 
         else:
-            self.YMeshes.Bottom[~self.SliceBottom]                  = 0
-            self.YMeshes.Top[~self.SliceTop]                        = 0
-            self.YMeshes.Center[self.SliceBottom + self.SliceTop]   = 0
+            self.YMeshes.Left[~self.SliceLeft]                  = 0
+            self.YMeshes.Right[~self.SliceRight]                        = 0
+            self.YMeshes.Center[self.SliceLeft + self.SliceRight]   = 0
 
-            self.XMeshes.Right[~self.SliceRight]                    = 0
-            self.XMeshes.Left[~self.SliceLeft]                      = 0
-            self.XMeshes.Center[ self.SliceRight + self.SliceLeft ] = 0
+            self.XMeshes.Top[~self.SliceTop]                    = 0
+            self.XMeshes.Bottom[~self.SliceBottom]                      = 0
+            self.XMeshes.Center[ self.SliceTop + self.SliceBottom ] = 0
 
 
     def AddMeshes(self):
-        self.M = (self.YMeshes.Top + self.YMeshes.Bottom + self.YMeshes.Center)/(self.dy**self.FinitCoefficients.Derivative) # Y Derivative
+        self.M = (self.YMeshes.Right + self.YMeshes.Left + self.YMeshes.Center)/(self.dx**self.FinitCoefficients.Derivative) # Y Derivative
 
-        self.M += (self.XMeshes.Left + self.XMeshes.Right + self.XMeshes.Center)/(self.dx**self.FinitCoefficients.Derivative) # X Derivative
+        self.M += (self.XMeshes.Bottom + self.XMeshes.Top + self.XMeshes.Center)/(self.dy**self.FinitCoefficients.Derivative) # X Derivative
 
 
     def GetYDiagonal(self):
         for idx, value in self.FinitCoefficients.Central().items():
-            self.YMeshes.Center[self.Index.i == self.Index.j - idx*self.Nx] = value
+            self.YMeshes.Center[self.Index.i == self.Index.j - idx*self.Ny] = value
 
-        self.YMeshes.Top = self.SetTopBoundary(self.Symmetries['Top'], self.YMeshes.Top)
-        self.YMeshes.Bottom = self.SetBottomBoundary(self.Symmetries['Bottom'], self.YMeshes.Bottom)
+        self.YMeshes.Right = self.SetRightBoundary(self.Symmetries['Right'], self.YMeshes.Right)
+        self.YMeshes.Left = self.SetLeftBoundary(self.Symmetries['Left'], self.YMeshes.Left)
 
 
 
