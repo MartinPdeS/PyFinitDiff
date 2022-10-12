@@ -7,6 +7,7 @@ add_custom_command(
   COMMAND python3 -m twine upload --password $ENV{PyPiPassword} --username $ENV{PyPiToken} --repository pypi dist/*
   COMMENT "Upload on Pypi"
   COMMAND make Clean
+  )
 add_custom_target(Upload DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Upload.txt)
 
 
