@@ -1,0 +1,16 @@
+*.DS_store
+*.ipynb_checkpoints*
+*__pycache__*
+*.so
+
+dist
+build
+*.egg*
+Perso/
+Reports/*
+
+CMakeCache.txt
+CMakeFiles
+Makefile
+install_manifest.txt
+cmake_install.cmake

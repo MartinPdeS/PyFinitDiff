@@ -3,60 +3,58 @@ class NameSpace:
         self.__dict__.update(kwargs)
 
 
-
 class BoundaryClass:
 
-    __AcceptedValues = ['Symmetric', 'AntiSymmetric', 'Zero', 'None', 1, -1, 0]
+    _acceptedValues = ['symmetric', 'anti_symmetric', 'zero', 'none', 1, -1, 0]
 
-    def __init__(self, Left='None', Right='None', Top='None', Bottom='None'):
-        self.Left   = Left
-        self.Right  = Right
-        self.Bottom = Bottom
-        self.Top    = Top
-
+    def __init__(self, left='None', right='None', top='None', bottom='None'):
+        self.left = left
+        self.right = right
+        self.bottom = bottom
+        self.top = top
 
     def __repr__(self):
-        return f"Symmetries \n{'-'*50} \n{self.Top = }\n{self.Bottom = }\n{self.Left = }\n{self.Right = }"
+        return f"symmetries \n{'-'*50} \n{self.top = }\n{self.bottom = }\n{self.left = }\n{self.right = }"
 
     def AssertValues(self, value):
-        assert value in self.Symmetries, f"Error unexpected symmetry value {value}. Accepted are {self.Symmetries}"
+        assert value in self.symmetries, f"Error unexpected symmetry value {value}. Accepted are {self.symmetries}"
 
     @property
-    def Top(self):
-        return self._Top
+    def top(self):
+        return self._top
 
-    @Top.setter
-    def Top(self, value):
-        assert value in self.__AcceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self.__AcceptedValues}"
+    @top.setter
+    def top(self, value):
+        assert value in self._acceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self._acceptedValues}"
 
-        self._Top = value
-
-    @property
-    def Bottom(self):
-        return self._Bottom
-
-    @Bottom.setter
-    def Bottom(self, value):
-        assert value in self.__AcceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self.__AcceptedValues}"
-
-        self._Bottom = value
+        self._top = value
 
     @property
-    def Left(self):
-        return self._Left
+    def bottom(self):
+        return self._bottom
 
-    @Left.setter
-    def Left(self, value):
-        assert value in self.__AcceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self.__AcceptedValues}"
+    @bottom.setter
+    def bottom(self, value):
+        assert value in self._acceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self._acceptedValues}"
 
-        self._Left = value
+        self._bottom = value
 
     @property
-    def Right(self):
-        return self._Right
+    def left(self):
+        return self._left
 
-    @Right.setter
-    def Right(self, value):
-        assert value in self.__AcceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self.__AcceptedValues}"
+    @left.setter
+    def left(self, value):
+        assert value in self._acceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self._acceptedValues}"
 
-        self._Right = value
+        self._left = value
+
+    @property
+    def right(self):
+        return self._right
+
+    @right.setter
+    def right(self, value):
+        assert value in self._acceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self._acceptedValues}"
+
+        self._right = value
