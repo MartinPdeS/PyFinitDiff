@@ -1,0 +1,8 @@
+wheel
+numpy
+matplotlib
+Jinja2
+numpydoc
+Babel
+sphinx >= 3, != 5.2.0
+sphinx_gallery
