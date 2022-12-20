@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(ProjectPath, "PyFinitDiff"))
 
 
 DocPath = os.path.join(ProjectPath, "docs")
-html_logo = os.path.join(DocPath, "images/Logo.png")
+html_logo = os.path.join(DocPath, "images/logo.png")
 CSS_path = os.path.join(DocPath, "_static/default.css")
 
 
