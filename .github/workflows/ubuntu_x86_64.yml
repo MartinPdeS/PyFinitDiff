@@ -1,0 +1,135 @@
+name: Ubuntu-Workflow
+
+
+permissions:
+  contents: write
+
+on:
+  workflow_call:
+    inputs:
+      update_coverage:
+        type: boolean
+        default: false
+      publish_wheel:
+        type: boolean
+        required: false
+        default: false
+      python_wheel:
+        type: string
+        required: false
+        default: "['3.7']"
+      python_twine:
+        type: string
+        required: false
+        default: "3.9"
+      upload_documentation:
+        type: boolean
+        required: false
+        default: false
+      python_documentation:
+        type: string
+        required: false
+        default: "3.9"
+
+
+jobs:
+  job_create_wheel:
+    name: "Python ${{ matrix.python-version[1] }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ${{ fromJson(inputs.python_wheel) }}
+    steps:
+
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+
+      - name: "Set-up: Python ${{ matrix.python-version[1] }}"
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version[0] }}
+
+      - name: "Install: Dependencies"
+        run: |
+          python -m pip install --upgrade pip
+          sudo apt install -y xvfb x11-utils libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 xdotool
+          Xvfb :99 &
+          export DISPLAY=:99
+
+      - name: "Run: Tests"
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .[devs_all]
+          python -m coverage run -p -m pytest -s
+          coverage combine
+          coverage report -m --skip-covered
+          coverage json -o CoverageReport.json
+          python setup.py bdist_wheel
+
+      - name: "Computing total coverage"
+        run: |
+          export TOTAL=$(python -c "import json;print(json.load(open('CoverageReport.json'))['totals']['percent_covered_display'])")
+          echo "total=$TOTAL" >> $GITHUB_ENV
+
+      - name: "Upload: Wheel"
+        if: ${{ inputs.publish_wheel == true }}"
+        uses: actions/upload-artifact@v3
+        with:
+          name: "manylinux_wheel_python${{ matrix.python-version[1] }}"
+          path: ./dist/*
+
+      - name: "Upload: Coverage badge"
+        if: ${{ inputs.update_coverage == true }}"
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          auth: ${{ secrets.MPdS_gist_token }}
+          gistID: c4f12a9ab97461a9453d9a174ae88e17
+          filename: covbadge.json
+          label: Coverage
+          message: ${{ env.total }}%
+          minColorRange: 50
+          maxColorRange: 90
+          valColorRange: ${{ env.total }}
+
+
+  Documentation:
+    needs: [job_create_wheel]
+    if: ${{ inputs.upload_documentation == true }}"
+    name: "Publish documentation to RTD"
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+
+      - name: "Set-up: Python ${{ inputs.Python_documentation }}"
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ inputs.Python_documentation }}"
+
+      - name: "Build: documentation"
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .[devs_all]
+          make -C docs html
+
+      - name: "Upload: GitHub Pages"
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: docs/build/html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+
+
+
+
+# -
