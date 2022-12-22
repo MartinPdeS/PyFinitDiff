@@ -113,10 +113,10 @@ class FinitCoefficients():
         pprint.PrettyPrinter(indent=4).pprint(temp)
 
     @property
-    def OffsetIndex(self):
-        OffsetIndex = 0
+    def offset_index(self):
+        offset_index = 0
         for Index, value in self.Central().items():
-            if value != 0 and Index > OffsetIndex:
-                OffsetIndex = Index
+            if value != 0 and Index > offset_index:
+                offset_index = Index
 
-        return OffsetIndex
+        return offset_index

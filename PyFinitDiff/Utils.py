@@ -1,3 +1,9 @@
+import matplotlib.pyplot as plt
+from collections.abc import Iterable
+import numpy
+import scipy
+
+
 class NameSpace:
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
@@ -58,3 +64,31 @@ class BoundaryClass:
         assert value in self._acceptedValues, f"Error unexpected symmetry value {value}. Accepted are {self._acceptedValues}"
 
         self._right = value
+
+
+def plot_mesh(*meshes, text=False):
+    from pylab import cm
+    cmap = cm.get_cmap('viridis', 101)
+
+    figure, axes = plt.subplots(1, len(meshes), figsize=(5 * len(meshes), 5))
+
+    if not isinstance(axes, Iterable):
+        axes = [axes]
+
+    for ax, mesh in zip(axes, meshes):
+
+        if isinstance(mesh, scipy.sparse._csr.csr_matrix):
+            mesh = mesh.todense()
+
+        im0 = ax.imshow(mesh, cmap=cmap)
+        plt.colorbar(im0, ax=ax)
+        ax.set_title('Finite-difference coefficients.')
+        ax.grid(True)
+
+        if text:
+            for (i, j), z in numpy.ndenumerate(mesh.astype(float)):
+                ax.text(j, i, '{:.0f}'.format(z), ha='center', va='center', size=8)
+
+    plt.show()
+
+# -
