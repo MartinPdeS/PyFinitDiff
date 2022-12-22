@@ -22,7 +22,7 @@ class FiniteDifference2D():
     derivative: int = 1
     accuracy: int = 2
     naive: bool = False
-    symmetries: Dict[str, str] = field(default_factory=lambda: ({'left': None, 'right': None, 'top': None, 'bottom': None}))
+    symmetries: Dict[str, str] = field(default_factory=lambda: ({'left': 0, 'right': 0, 'top': 0, 'bottom': 0}))
 
     def __post_init__(self):
         self.finit_coefficient = FinitCoefficients(derivative=self.derivative, accuracy=self.accuracy)
@@ -209,6 +209,12 @@ class FiniteDifference2D():
 
         self._get_x_diagonal_()
 
+        plot_mesh(self.y_meshes.top,
+                  self.y_meshes.bottom,
+                  self.x_meshes.right,
+                  self.x_meshes.left)
+
+
         self._slices_meshes_()
 
         self._add_meshes_()
@@ -222,7 +228,7 @@ class FiniteDifference2D():
 
     @property
     def Sparse(self):
-        return sparse.csr_matrix(self.M) 
+        return sparse.csr_matrix(self.M)
 
     def _to_triplet_(self):
         Coordinate = self.Sparse.tocoo()

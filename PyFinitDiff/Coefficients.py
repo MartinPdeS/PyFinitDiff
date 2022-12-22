@@ -45,25 +45,25 @@ BCoefficients = \
 
 
 class FinitCoefficients():
-    accuracyList = [2, 4, 6]
-    derivativeList = [1, 2]
+    accuracy_list = [2, 4, 6]
+    derivative_list = [1, 2]
 
-    _CentralCoef = CCoefficients
-    _ForwardCoef = FCoefficients
-    _BackwardCoef = BCoefficients
+    _central_coef = CCoefficients
+    _forward_coef = FCoefficients
+    _backward_coef = BCoefficients
 
     def __init__(self, derivative, accuracy):
         self.derivative = derivative
         self.accuracy = accuracy
 
-        assert accuracy in self.accuracyList, f'Error accuracy has to be in the list {self.accuracyList}'
-        assert derivative in self.derivativeList, f'Error derivative has to be in the list {self.derivative}'
+        assert accuracy in self.accuracy_list, f'Error accuracy: {self.accuracy} has to be in the list {self.accuracy_list}'
+        assert derivative in self.derivative_list, f'Error derivative: {self.derivative} has to be in the list {self.derivative_list}'
 
         D = f"derivative {self.derivative}"
         A = f"accuracy {self.accuracy}"
-        self._Central = {key: value for key, value in self._CentralCoef[D][A].items() if value != 0.}
-        self._Backward = {key: value for key, value in self._BackwardCoef[D][A].items() if value != 0.}
-        self._Forward = {key: value for key, value in self._ForwardCoef[D][A].items() if value != 0.}
+        self._Central = {key: value for key, value in self._central_coef[D][A].items() if value != 0.}
+        self._Backward = {key: value for key, value in self._backward_coef[D][A].items() if value != 0.}
+        self._Forward = {key: value for key, value in self._forward_coef[D][A].items() if value != 0.}
 
     def Central(self, attribute='zero'):
         if attribute == 'zero':

@@ -66,7 +66,7 @@ class BoundaryClass:
         self._right = value
 
 
-def plot_mesh(*meshes, text=False):
+def plot_mesh(*meshes, text=False, title=''):
     from pylab import cm
     cmap = cm.get_cmap('viridis', 101)
 
@@ -82,7 +82,7 @@ def plot_mesh(*meshes, text=False):
 
         im0 = ax.imshow(mesh, cmap=cmap)
         plt.colorbar(im0, ax=ax)
-        ax.set_title('Finite-difference coefficients.')
+        ax.set_title(f'FD:  {title}')
         ax.grid(True)
 
         if text:
