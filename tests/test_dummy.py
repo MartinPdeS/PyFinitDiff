@@ -41,7 +41,7 @@ def test_memory_monitoring_sparse_0():
 
 
 def test_compare_sparse_dense_0():
-    kwargs = {'n_x': 5, 'n_y': 5, 'dx': 1, 'dy': 1, 'derivative': 2, 'accuracy': 2}
+    kwargs = {'n_x': 4, 'n_y': 4, 'dx': 1, 'dy': 1, 'derivative': 2, 'accuracy': 2}
 
     sparse_instance = SparseFD(**kwargs, symmetries={'left': 1, 'right': 1, 'top': 1, 'bottom': 1})
     dense_instance = DenseFD(**kwargs, symmetries={'left': 1, 'right': 1, 'top': 1, 'bottom': 1})
