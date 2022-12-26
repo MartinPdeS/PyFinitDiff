@@ -214,10 +214,11 @@ class FiniteDifference2D():
                   self.x_meshes.right,
                   self.x_meshes.left)
 
-
         self._slices_meshes_()
 
         self._add_meshes_()
+
+        plot_mesh(self.M)
 
         # if Addmesh is not None:
             # np.fill_diagonal(self.M, self.M.diagonal() + Addmesh.flatten())

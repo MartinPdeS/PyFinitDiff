@@ -43,13 +43,13 @@ def test_memory_monitoring_sparse_0():
 def test_compare_sparse_dense_0():
     kwargs = {'n_x': 4, 'n_y': 4, 'dx': 1, 'dy': 1, 'derivative': 2, 'accuracy': 2}
 
-    sparse_instance = SparseFD(**kwargs, symmetries={'left': 1, 'right': 1, 'top': 1, 'bottom': 1})
-    dense_instance = DenseFD(**kwargs, symmetries={'left': 1, 'right': 1, 'top': 1, 'bottom': 1})
+    sparse_instance = SparseFD(**kwargs, symmetries={'left': 0, 'right': 0, 'top': 0, 'bottom': 0})
+    dense_instance = DenseFD(**kwargs, symmetries={'left': 0, 'right': 0, 'top': 0, 'bottom': 0})
 
-    # dense_instance.construct_matrix()
-    sparse_instance.construct_matrix()
+    dense_instance.construct_matrix()
+    triplet = sparse_instance.get_triplet()
 
-    # assert (sparse_instance.M.todense() == dense_instance.M.todense()).all(), "Error: Finit difference matrix generation sparse and dense do not match!"
+    assert (sparse_instance.M.todense() == dense_instance.M.todense()).all(), "Error: Finit difference matrix generation sparse and dense do not match!"
     print('test finished')
 
 
