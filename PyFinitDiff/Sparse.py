@@ -15,7 +15,7 @@ class Namespace:
 
 
 class Triplet():
-    def __init__(self, array: numpy.ndarray, add_extra_column=None):
+    def __init__(self, array: numpy.ndarray = None, add_extra_column=None):
         self._array = numpy.asarray(array)
         self._array = numpy.atleast_2d(self._array)
 
@@ -70,9 +70,10 @@ class Triplet():
 
     def add_triplet(self, *others) -> 'Triplet':
         others_array = (other._array for other in others)
+
         self._array = numpy.r_[(self._array, *others_array)]
 
-        return self.remove_duplicate()
+        self.merge_duplicate()
 
     def remove_duplicate(self) -> 'Triplet':
         new_array = self._array
@@ -92,22 +93,18 @@ class Triplet():
 
         return Triplet(triplet_array)
 
-    def coincide_i(self, other) -> 'Triplet':
+    def coincide_i(self, mask) -> 'Triplet':
         """
         The methode removing all index i which do not coincide with the
         other triplet
         """
-        new_triplet = self._array
-        index_to_remove = []
-        for n_i, i in enumerate(self.i):
-            if i not in other.i:
-                index_to_remove.append(n_i)
+        mask_i = numpy.unique(mask.i[mask.values != 0])
 
-        new_triplet = numpy.delete(new_triplet, index_to_remove, axis=0)
+        temp = (self._array[self.i == i] for i in mask_i)
 
-        return Triplet(new_triplet)
+        self._array = numpy.r_[tuple(temp)]
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> 'Triplet':
         """
         The methode removing index[i] (rows) value corresponding between the two triplets.
         It doesn't change the other triplet, only the instance that called the method.
@@ -119,9 +116,6 @@ class Triplet():
 
         return Triplet(triplet_array)
 
-    def initialize_row_index(self):
-        self._array[:, 0] = numpy.arange(self.size)
-
     def __iter__(self):
         for i, j, value in self._array:
             yield (int(i), int(j)), value
@@ -130,7 +124,7 @@ class Triplet():
         for n, (i, j, value) in enumerate(self._array[start:stop, :]):
             yield n, (int(i), int(j), value)
 
-    def get_duplicate_index(self):
+    def get_duplicate_index(self) -> numpy.ndarray:
 
         _, inverse, count = numpy.unique(self.index, axis=0, return_inverse=True, return_counts=True)
 
@@ -140,7 +134,17 @@ class Triplet():
 
         _, inverse_rows = numpy.unique(rows, return_index=True)
 
-        return numpy.asarray(numpy.split(cols, inverse_rows[1:]))
+        return numpy.asarray(numpy.split(cols, inverse_rows[1:]), dtype=object)
+
+    def merge_duplicate(self):
+        duplicates = self.get_duplicate_index()
+
+        for duplicate in duplicates:  # merge values
+            self._array[int(duplicate[0]), 2] = self._array[duplicate.astype(int)][:, 2].sum()
+
+        duplicates = [d[1:] for d in duplicates]
+
+        self._array = numpy.delete(self._array, numpy.concatenate(duplicates).astype(int), axis=0)
 
     @property
     def max_i(self) -> int:
@@ -379,35 +383,27 @@ class FiniteDifference2D():
     def _construct_triplet_(self, Addmesh: numpy.ndarray = None):
         right_slice_triplet, left_slice_triplet, top_slice_triplet, bottom_slice_triplet = self._compute_slices_idx_()
 
-        triplets = Namespace(
-                             x=self._get_x_diagonal_triplet_(),
+        triplets = Namespace(x=self._get_x_diagonal_triplet_(),
                              y=self._get_y_diagonal_triplet_(),
                              bottom=self._get_bottom_boundary_(),
                              top=self._get_top_boundary_(),
                              left=self._get_left_boundary_(),
-                             right=self._get_right_boundary_()
-                             )
+                             right=self._get_right_boundary_())
 
-        triplets.x.plot(max_i=self.size, max_j=self.size)
         triplets.x = triplets.x - left_slice_triplet - right_slice_triplet
-        triplets.x.plot(max_i=self.size, max_j=self.size)
         triplets.y = triplets.y - top_slice_triplet - bottom_slice_triplet
 
-        # triplets.top = triplets.top.coincide_i(top_slice_triplet)
-        # triplets.bottom = triplets.bottom.coincide_i(bottom_slice_triplet)
-        # triplets.right = triplets.right.coincide_i(right_slice_triplet)
-        # triplets.left = triplets.left.coincide_i(left_slice_triplet)
+        triplets.top.coincide_i(mask=top_slice_triplet)
 
-        # triplets.x.plot(max_i=self.size, max_j=self.size)
-        # triplets.left.plot(max_i=self.size, max_j=self.size)
-        # triplets.right.plot(max_i=self.size, max_j=self.size)
+        triplets.bottom.coincide_i(mask=bottom_slice_triplet)
+        triplets.right.coincide_i(mask=right_slice_triplet)
+        triplets.left.coincide_i(mask=left_slice_triplet)
 
-        # (triplets.x + triplets.left + triplets.right).plot(max_i=self.size, max_j=self.size)
+        total_triplet = triplets.y
 
+        total_triplet.add_triplet(triplets.x, triplets.top, triplets.bottom, triplets.left, triplets.right)
 
-        # total_triplet = triplets.y.add_triplet(triplets.x, triplets.top, triplets.bottom, triplets.left, triplets.right)
-
-        # return total_triplet
+        return total_triplet
 
     def get_triplet(self):
         return self._construct_triplet_()
