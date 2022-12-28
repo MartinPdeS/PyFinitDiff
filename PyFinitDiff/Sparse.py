@@ -227,7 +227,12 @@ class DiagonalTriplet(Triplet):
 @dataclass
 class FiniteDifference2D():
     """
-    Reference : ['math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf']
+    .. note::
+        This class represent a specific finit difference configuration,
+        which is defined with the descretization of the mesh, the derivative order,
+        accuracy and the boundary condition that are defined.
+        More information is providided at the following link:
+        'math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf'
     """
     n_x: int
     """ Number of point in the x direction """
@@ -247,10 +252,13 @@ class FiniteDifference2D():
     def __post_init__(self):
         self.finit_coefficient = FinitCoefficients(derivative=self.derivative, accuracy=self.accuracy)
         self._triplet = None
-        self.debug = False
 
     @property
     def triplet(self):
+        """
+        Triplet representing the non-nul values of the specific
+        finit-difference configuration.
+        """
         if not self._triplet:
             self._construct_triplet_()
         return self._triplet
@@ -263,7 +271,7 @@ class FiniteDifference2D():
     def shape(self):
         return [self.size, self.size]
 
-    def _get_diagonal_triplet_(self, coefficients: dict, offset: int, symmetry = None):
+    def _get_diagonal_triplet_(self, coefficients: dict, offset: int, symmetry=None):
         triplet = numpy.array([[0, 0, 0]])
 
         if symmetry in [-1, 1]:
@@ -350,26 +358,23 @@ class FiniteDifference2D():
     def _construct_triplet_(self, Addmesh: numpy.ndarray = None):
         right_slice_triplet, left_slice_triplet, top_slice_triplet, bottom_slice_triplet = self._compute_slices_idx_()
 
-        triplets = Namespace(x=self._get_x_diagonal_triplet_(),
-                             y=self._get_y_diagonal_triplet_(),
-                             bottom=self._get_bottom_boundary_(),
-                             top=self._get_top_boundary_(),
-                             left=self._get_left_boundary_(),
-                             right=self._get_right_boundary_())
+        self.triplets_component = Namespace(x=self._get_x_diagonal_triplet_(),
+                                            y=self._get_y_diagonal_triplet_(),
+                                            bottom=self._get_bottom_boundary_(),
+                                            top=self._get_top_boundary_(),
+                                            left=self._get_left_boundary_(),
+                                            right=self._get_right_boundary_())
 
-        triplets.x = triplets.x - left_slice_triplet - right_slice_triplet
-        triplets.y = triplets.y - top_slice_triplet - bottom_slice_triplet
+        self.triplets_component.x = self.triplets_component.x - left_slice_triplet - right_slice_triplet
+        self.triplets_component.y = self.triplets_component.y - top_slice_triplet - bottom_slice_triplet
 
-        triplets.top.coincide_i(mask=top_slice_triplet)
-        triplets.bottom.coincide_i(mask=bottom_slice_triplet)
-        triplets.right.coincide_i(mask=right_slice_triplet)
-        triplets.left.coincide_i(mask=left_slice_triplet)
+        self.triplets_component.top.coincide_i(mask=top_slice_triplet)
+        self.triplets_component.bottom.coincide_i(mask=bottom_slice_triplet)
+        self.triplets_component.right.coincide_i(mask=right_slice_triplet)
+        self.triplets_component.left.coincide_i(mask=left_slice_triplet)
 
-        total_triplet = triplets.y
+        self._triplet = self.triplets_component.y
 
-        total_triplet.add_triplet(triplets.x, triplets.top, triplets.bottom, triplets.left, triplets.right)
-
-        self._triplet = total_triplet
-
+        self._triplet.add_triplet(self.triplets_component.x, self.triplets_component.top, self.triplets_component.bottom, self.triplets_component.left, self.triplets_component.right)
 
 # -
