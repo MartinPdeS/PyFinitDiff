@@ -42,10 +42,10 @@ extensions = [
 ]
 
 
-prefix = "../../PyFinitDiff/src/Examples/"
+prefix = "../../PyFinitDiff/Examples/"
 sphinx_gallery_conf = {
-    'examples_dirs': [],
-    'gallery_dirs': [],
+    'examples_dirs': [prefix + "triplets", prefix + "eigenmodes"],
+    'gallery_dirs': ['gallery/triplets', 'gallery/eigenmodes'],
     'image_scrapers': ('matplotlib'),
     'ignore_pattern': '/__',
     'plot_gallery': True,

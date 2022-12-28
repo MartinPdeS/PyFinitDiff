@@ -3,6 +3,8 @@ from collections.abc import Iterable
 import numpy
 import scipy
 
+from PyFinitDiff.Sparse import DiagonalTriplet
+
 
 class NameSpace:
     def __init__(self, **kwargs):
@@ -90,5 +92,23 @@ def plot_mesh(*meshes, text=False, title=''):
                 ax.text(j, i, '{:.0f}'.format(z), ha='center', va='center', size=8)
 
     plt.show()
+
+
+def get_circular_mesh_triplet(n_x: int,
+                              n_y: int,
+                              radius: float,
+                              x_offset: float = 0,
+                              y_offset: float = 0,
+                              value0: float = 0,
+                              value1: float = 1):
+
+    y, x = numpy.mgrid[-100:100:complex(n_x),
+                       -100:100:complex(n_y)]
+
+    r = numpy.sqrt((x - x_offset)**2 + (y - y_offset)**2)
+    mesh = numpy.ones(x.shape) * value0
+    mesh[r < radius] = value1
+
+    return DiagonalTriplet(mesh)
 
 # -

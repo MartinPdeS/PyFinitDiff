@@ -5,7 +5,6 @@ from scipy import sparse
 from dataclasses import dataclass, field
 from typing import Dict
 
-from PyFinitDiff.Utils import NameSpace
 from PyFinitDiff.Coefficients import FinitCoefficients
 
 
