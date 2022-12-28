@@ -8,7 +8,7 @@ Example: triplets 1
 #    :widths: 25
 #    :header-rows: 1
 #
-#    * - symmetries {left: 0, right: 0, top: 0, bottom: 0}
+#    * - symmetries: {left: 0, right: 0, top: 0, bottom: 0}
 #    * - derivative: 2
 #    * - accuracy: 4
 

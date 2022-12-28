@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**00:00.078** total execution time for **gallery_triplets** files:
+**00:00.122** total execution time for **gallery_triplets** files:
 
 +------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_triplets_plot_triplets_0.py` (``plot_triplets_0.py``) | 00:00.078 | 0.0 MB |
+| :ref:`sphx_glr_gallery_triplets_plot_triplets_0.py` (``plot_triplets_0.py``) | 00:00.076 | 0.0 MB |
 +------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_triplets_plot_triplets_1.py` (``plot_triplets_1.py``) | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr_gallery_triplets_plot_triplets_1.py` (``plot_triplets_1.py``) | 00:00.046 | 0.0 MB |
 +------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr_gallery_triplets_plot_triplets_2.py` (``plot_triplets_2.py``) | 00:00.000 | 0.0 MB |
 +------------------------------------------------------------------------------+-----------+--------+

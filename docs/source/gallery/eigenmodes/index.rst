@@ -1,9 +1,7 @@
 :orphan:
 
-.. _examples:
-
-Examples
-========
+Eigenmode solving
+~~~~~~~~~~~~~~~~~
 
 
 .. raw:: html

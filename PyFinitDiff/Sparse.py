@@ -230,13 +230,19 @@ class FiniteDifference2D():
     Reference : ['math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf']
     """
     n_x: int
+    """ Number of point in the x direction """
     n_y: int
+    """ Number of point in the y direction """
     dx: float = 1
+    """ Infinetisemal displacement in x direction """
     dy: float = 1
+    """ Infinetisemal displacement in y direction """
     derivative: int = 1
+    """ Derivative order to convert into finit-difference matrix. """
     accuracy: int = 2
-    naive: bool = False
+    """ Accuracy of the derivative approximation [error is inversly proportional to the power of that value]. """
     symmetries: Dict[str, str] = field(default_factory=lambda: ({'left': 0, 'right': 0, 'top': 0, 'bottom': 0}))
+    """ Values of the four possible symmetries of the system. """
 
     def __post_init__(self):
         self.finit_coefficient = FinitCoefficients(derivative=self.derivative, accuracy=self.accuracy)
@@ -365,24 +371,5 @@ class FiniteDifference2D():
 
         self._triplet = total_triplet
 
-    def Plot(self, Text=False):
-        from pylab import cm
-        cmap = cm.get_cmap('viridis', 101)
-
-        Figure, Axes = plt.subplots(1, 1, figsize=(10, 9))
-        Axes.set_title('Finite-difference coefficients.')
-        Data = self.M
-
-        if isinstance(Data, scipy.sparse._csr.csr_matrix):
-            Data = Data.todense()
-
-        Axes.grid(True)
-        im0 = Axes.imshow(Data, cmap=cmap)
-        plt.colorbar(im0, ax=Axes)
-        if Text:
-            for (i, j), z in numpy.ndenumerate(Data.astype(float)):
-                Axes.text(j, i, '{:.0e}'.format(z), ha='center', va='center', size=8)
-
-        plt.show()
 
 # -

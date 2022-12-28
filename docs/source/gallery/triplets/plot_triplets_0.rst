@@ -25,7 +25,7 @@ Example: triplets 0
 
 .. list-table:: Finit-difference parameters
    :widths: 25
-   :header-rows: 3
+   :header-rows: 1
 
    * - symmetries: {left: 0, right: 0, top: 0, bottom: 0}
    * - derivative: 2
@@ -65,7 +65,7 @@ Example: triplets 0
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.078 seconds)
+   **Total running time of the script:** ( 0 minutes  0.076 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_0.py:

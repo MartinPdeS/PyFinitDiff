@@ -2,8 +2,8 @@
 
 .. _examples:
 
-Examples
-========
+triplets computation
+~~~~~~~~~~~~~~~~~~~~
 
 
 .. raw:: html

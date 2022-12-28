@@ -6,7 +6,7 @@ Example: triplets 0
 # %%
 # .. list-table:: Finit-difference parameters
 #    :widths: 25
-#    :header-rows: 3
+#    :header-rows: 1
 #
 #    * - symmetries: {left: 0, right: 0, top: 0, bottom: 0}
 #    * - derivative: 2
