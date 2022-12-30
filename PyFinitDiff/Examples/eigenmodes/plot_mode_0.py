@@ -10,7 +10,7 @@ from scipy.sparse import linalg
 
 
 from PyFinitDiff.Sparse import FiniteDifference2D as SparseFD
-from PyFinitDiff.Utils import get_circular_mesh_triplet
+from PyFinitDiff.Utils import get_2D_circular_mesh_triplet
 
 n_y = n_x = 40
 sparse_instance = SparseFD(n_x=n_x,
@@ -19,15 +19,18 @@ sparse_instance = SparseFD(n_x=n_x,
                            dy=1,
                            derivative=2,
                            accuracy=2,
-                           symmetries={'left': 0, 'right': 0, 'top': 0, 'bottom': 0})
+                           boundaries={'left': 'none',
+                                       'right': 'none',
+                                       'top': 'none',
+                                       'bottom': 'none'})
 
-mesh_triplet = get_circular_mesh_triplet(n_x=n_x,
-                                         n_y=n_y,
-                                         value0=1.0,
-                                         value1=1.4444,
-                                         x_offset=0,
-                                         y_offset=0,
-                                         radius=70)
+mesh_triplet = get_2D_circular_mesh_triplet(n_x=n_x,
+                                            n_y=n_y,
+                                            value0=1.0,
+                                            value1=1.4444,
+                                            x_offset=0,
+                                            y_offset=0,
+                                            radius=70)
 
 dynamic_triplet = sparse_instance.triplet + mesh_triplet
 

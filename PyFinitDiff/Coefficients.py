@@ -1,56 +1,11 @@
-CCoefficients = \
-{'derivative 1':
-  {'accuracy 2': {-4: +0.0,  -3: +0.0,  -2: 0.0,  -1: -1/2, 0: 0.,  +1: 1/2, +2: 0.0,   +3: 0.0,   +4: 0.0},
-   'accuracy 4': {-4: +0.0,  -3: +0.0,  -2: 1/12, -1: -2/3, 0: 0.,  +1: 2/3, +2: -1/12, +3: 0.0,   +4: 0.0},
-   'accuracy 6': {-4: +0.0,  -3: -1/60, -2: 3/20, -1: -3/4, 0: 0.,  +1: 3/4, +2: -3/20, +3: 1/60,  +4: 0.0},
-   'accuracy 8': {-4: 1/280, -3: 4/105, -2: 1/5,  -1: +4/5, 0: 0.,  +1: 4/5, +2: -1/5,  +3: 4/105, +4: -1/280},
- },
-
- 'derivative 2':
-  {
-   'accuracy 2': {-4: +0.,    -3:0.,     -2: 0.,    -1: 1.,  0: -2,      +1:1.,   +2:0.,     +3: 0.,    +4: +0.},
-   'accuracy 4': {-4: +0.,    -3:0.,     -2: -1/12, -1: 4/3, 0: -5/2,    +1: 4/3, +2: -1/12, +3: 0.,    +4: +0.},
-   'accuracy 6': {-4: +0.,    -3: 1/90,  -2: -3/20, -1: 3/2, 0: -49/18,  +1: 3/2, +2: -3/20, +3: 1/90,  +4: +0.},
-   'accuracy 8': {-4: -1/560, -3: 8/315, -2: -1/5,  -1: 8/5, 0: -205/72, +1: 8/5, +2: -1/5,  +3: 8/315, +4: -1/560},
-  },
-}
-
-
-FCoefficients = \
-{'derivative 1':
-  { 'accuracy 2': {0: -3/2,    +1: 2, +2: -1/2,  +3: 0.,   +4: 0.,   +5: 0.,  +6: 0.},
-    'accuracy 4': {0: -25/12,  +1: 4, +2: -3,    +3: 4/3,  +4: -1/4, +5: 0.,  +6: 0.},
-    'accuracy 6': {0: -49/20 , +1: 6, +2: -15/2, +3: 20/3, +4: -15/4, 5: 6/5, +6: -1/6},
-  },
- 'derivative 2':
-  { 'accuracy 2': {0: +2 ,     +1: -5 ,     +2: 4,      +3: -1,      +4: +0.,    +5:0.,       +6: +0.,        +7: +0.},
-    'accuracy 4': {0: +15/4,   +1: -77/6,   +2: 107/6,  +3: -13,     +4: +61/12, +5: -5/6,    +6: +0.,        +7: +0.},
-    'accuracy 6': {0: +469/90, +1: -223/10, +2: 879/20, +3: -949/18, +4: +41,    +5: -201/10, +6: +1019/180,  +7: -7/10},
-  },
-}
-
-
-BCoefficients = \
-{'derivative 1':
- { 'accuracy 2': {0: +3/2,    -1: -2, -2: +1/2,  -3: +0.,   -4: +0.,   -5: +0.,  -6: +0.},
-   'accuracy 4': {0: +25/12,  -1: -4, -2: +3,    -3: -4/3,  -4: +1/4,  -5: +0.,  -6: +0.},
-   'accuracy 6': {0: +49/20 , -1: -6, -2: +15/2, -3: -20/3, -4: +15/4, -5: -6/5, -6: +1/6},
- },
- 'derivative 2':
-  { 'accuracy 2': {0: +2 ,     -1: -5 ,     -2: +4,      -3: -1,      -4: +0.,    -5: +0.,     -6: +0.,      -7: +0.},
-    'accuracy 4': {0: +15/4,   -1: -77/6,   -2: +107/6,  -3: -13,     -4: +61/12, -5: -5/6,    -6: +0.,      -7: +0.},
-    'accuracy 6': {0: +469/90, -1: -223/10, -2: +879/20, -3: -949/18, -4: +41,    -5: -201/10, -6: 1019/180, -7: -7/10},
-  },
-}
+from PyFinitDiff.coefficients.central import coefficients as central_coefficent
+from PyFinitDiff.coefficients.forward import coefficients as forward_coefficent
+from PyFinitDiff.coefficients.backward import coefficients as backward_coefficent
 
 
 class FinitCoefficients():
     accuracy_list = [2, 4, 6]
     derivative_list = [1, 2]
-
-    _central_coef = CCoefficients
-    _forward_coef = FCoefficients
-    _backward_coef = BCoefficients
 
     def __init__(self, derivative, accuracy):
         self.derivative = derivative
@@ -58,59 +13,33 @@ class FinitCoefficients():
 
         assert accuracy in self.accuracy_list, f'Error accuracy: {self.accuracy} has to be in the list {self.accuracy_list}'
         assert derivative in self.derivative_list, f'Error derivative: {self.derivative} has to be in the list {self.derivative_list}'
+        self._central = central_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
+        self._forward = forward_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
+        self._backward = backward_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
+        self.central_max_offset = self._central['max_offset']
 
-        D = f"derivative {self.derivative}"
-        A = f"accuracy {self.accuracy}"
-        self._Central = {key: value for key, value in self._central_coef[D][A].items() if value != 0.}
-        self._Backward = {key: value for key, value in self._backward_coef[D][A].items() if value != 0.}
-        self._Forward = {key: value for key, value in self._forward_coef[D][A].items() if value != 0.}
+    def central(self, symmetry=None):
+        coefficients = {key: float(value) for key, value in self._central['coefficients'].items() if value != 0.}
+        match symmetry:
+            case None:
+                return coefficients
+            case 'symmetric':
+                return {idx: 2 * value if idx != 0 else value for idx, value in coefficients.items()}
+            case 'anti-symmetric':
+                return {idx: value if idx == 0 else 0. for idx, value in coefficients.items()}
 
-    def Central(self, attribute='zero'):
-        if attribute == 'zero':
-            return self._Central
-        elif attribute == 'symmetric':
-            return {key: (value if key == 0 else 2 * value) for key, value in self._Central.items()}
-        elif attribute == 'anti_symmetric':
-            return {key: (value if key == 0 else 0) for key, value in self._Central.items()}
+    def backward(self):
+        return {key: float(value) for key, value in self._backward['coefficients'].items() if value != 0.}
 
-    def Backward(self, attribute='zero'):
-        if attribute == 'zero':
-            return self._Backward
-        elif attribute == 'symmetric':
-            return {key: (value if key == 0 else 2 * value) for key, value in self._Forward.items()}
-        elif attribute == 'anti_symmetric':
-            return {key: (value if key == 0 else 0) for key, value in self._Forward.items()}
+    def forward(self):
+        return {key: float(value) for key, value in self._forward['coefficients'].items() if value != 0.}
 
-    def Forward(self, attribute='zero'):
-        if attribute == 'zero':
-            return self._Forward
-        elif attribute == 'symmetric':
-            return {key: (value if key == 0 else 2 * value) for key, value in self._Forward.items()}
-        elif attribute == 'anti_symmetric':
-            return {key: (value if key == 0 else 0) for key, value in self._Forward.items()}
-
-    def Test(self):
-        Sum = 0
-        for key, value in self.Central.items():
-            Sum += value
-        print(f'Central sum: {Sum}')
-
-        Sum = 0
-        for key, value in self.Forward.items():
-            Sum += value
-        print(f'Forward sum: {Sum}')
-
-        Sum = 0
-        for key, value in self.Backward.items():
-            Sum += value
-        print(f'Backward sum: {Sum}')
-
-    def Print(self):
-        import pprint
-        temp = {'Central': self.Central,
-                'Forward': self.Forward,
-                'Backward': self.Backward}
-        pprint.PrettyPrinter(indent=4).pprint(temp)
+    def __repr__(self):
+        return f""" \
+        \rcentral coefficients: {self.central()}\
+        \rforward coefficients: {self.forward()}\
+        \rbackward coefficients: {self.backward()}\
+        """
 
     @property
     def offset_index(self):
@@ -120,3 +49,5 @@ class FinitCoefficients():
                 offset_index = Index
 
         return offset_index
+
+# -

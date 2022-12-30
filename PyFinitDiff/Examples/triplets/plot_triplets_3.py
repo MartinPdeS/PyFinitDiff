@@ -20,8 +20,11 @@ sparse_instance = SparseFD(n_x=6,
                            dy=1,
                            derivative=2,
                            accuracy=4,
-                           symmetries={'left': -1, 'right': 0, 'top': 0, 'bottom': 0})
+                           symmetries={'left': 'anti-symmetric',
+                                       'right': 'none',
+                                       'top': 'none',
+                                       'bottom': 'none'})
 
-sparse_instance.triplet.plot() 
+sparse_instance.triplet.plot()
 
 # -

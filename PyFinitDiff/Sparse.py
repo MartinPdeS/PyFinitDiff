@@ -1,9 +1,7 @@
 import numpy
-import scipy
-import matplotlib.pyplot as plt
-from scipy import sparse
 from dataclasses import dataclass, field
 from typing import Dict
+from MPSPlots.Render2D import Scene2D, Axis, Mesh, ColorBar
 
 from PyFinitDiff.Coefficients import FinitCoefficients
 
@@ -138,6 +136,9 @@ class Triplet():
     def merge_duplicate(self):
         duplicates = self.get_duplicate_index()
 
+        if numpy.size(duplicates) == 0:
+            return self._array
+
         for duplicate in duplicates:  # merge values
             self._array[int(duplicate[0]), 2] = self._array[duplicate.astype(int)][:, 2].sum()
 
@@ -194,23 +195,22 @@ class Triplet():
         max_i = self.max_i + 1 if max_i is None else max_i
         max_j = self.max_j + 1 if max_j is None else max_j
 
-        from pylab import cm
-        cmap = cm.get_cmap('viridis', 101)
+        figure = Scene2D(unit_size=(6, 6), tight_layout=True)
+        colorbar = ColorBar(discreet=True, position='right', numeric_format='%.4f')
 
-        figure, ax = plt.subplots(1, 1, figsize=(5, 5))
+        ax = Axis(row=0,
+                  col=0,
+                  title='Finite-difference coefficients structure',
+                  show_legend=False,
+                  colorbar=colorbar)
 
-        mesh = self.to_dense(max_i, max_j)
+        artist = Mesh(scalar=numpy.flip(self.to_dense(max_i, max_j), axis=[0]), colormap='Blues')
 
-        i_list = numpy.arange(0, max_i)
-        j_list = numpy.arange(0, max_j)
+        ax.AddArtist(artist)
 
-        im0 = ax.pcolormesh(j_list, i_list, mesh, cmap=cmap)
-        plt.gca().invert_yaxis()
-        ax.set_aspect('equal')
-        plt.colorbar(im0, ax=ax)
-        ax.grid(True)
+        figure.AddAxes(ax)
 
-        plt.show()
+        figure.Show()
 
 
 class DiagonalTriplet(Triplet):
@@ -246,8 +246,8 @@ class FiniteDifference2D():
     """ Derivative order to convert into finit-difference matrix. """
     accuracy: int = 2
     """ Accuracy of the derivative approximation [error is inversly proportional to the power of that value]. """
-    symmetries: Dict[str, str] = field(default_factory=lambda: ({'left': 0, 'right': 0, 'top': 0, 'bottom': 0}))
-    """ Values of the four possible symmetries of the system. """
+    boundaries: Dict[str, str] = field(default_factory=lambda: ({'left': 'none', 'right': 'none', 'top': 'none', 'bottom': 'none'}))
+    """ Values of the four possible boundaries of the system. """
 
     def __post_init__(self):
         self.finit_coefficient = FinitCoefficients(derivative=self.derivative, accuracy=self.accuracy)
@@ -271,16 +271,16 @@ class FiniteDifference2D():
     def shape(self):
         return [self.size, self.size]
 
-    def _get_diagonal_triplet_(self, coefficients: dict, offset: int, symmetry=None):
+    def _get_diagonal_triplet_(self, coefficients: dict, offset: int, boundary=None):
         triplet = numpy.array([[0, 0, 0]])
 
-        if symmetry in [-1, 1]:
-            coefficients = self.finit_coefficient.Central()
+        if boundary in ['anti-symmetric', 'symmetric']:
+            coefficients = self.finit_coefficient.central()
 
         for idx, value in coefficients.items():
-            if symmetry == 1:
+            if boundary == 'symmetric':
                 value = value if idx == 0 else 2 * value
-            if symmetry == -1:
+            if boundary == 'anti-symmetric':
                 value = value if idx == 0 else 0
 
             end_idx = self.size - abs(idx * offset)
@@ -307,24 +307,24 @@ class FiniteDifference2D():
         return Triplet(triplet[1:, :])
 
     def _get_top_boundary_(self):
-        return self._get_diagonal_triplet_(symmetry=self.symmetries['top'],
-                                   coefficients=self.finit_coefficient.Forward(),
-                                   offset=self.n_y)
+        return self._get_diagonal_triplet_(boundary=self.boundaries['top'],
+                                           coefficients=self.finit_coefficient.forward(),
+                                           offset=self.n_y)
 
     def _get_bottom_boundary_(self):
-        return self._get_diagonal_triplet_(symmetry=self.symmetries['bottom'],
-                                  coefficients=self.finit_coefficient.Backward(),
-                                  offset=self.n_y)
+        return self._get_diagonal_triplet_(boundary=self.boundaries['bottom'],
+                                           coefficients=self.finit_coefficient.backward(),
+                                           offset=self.n_y)
 
     def _get_right_boundary_(self):
-        return self._get_diagonal_triplet_(symmetry=self.symmetries['right'],
-                                   coefficients=self.finit_coefficient.Forward(),
-                                   offset=1)
+        return self._get_diagonal_triplet_(boundary=self.boundaries['right'],
+                                           coefficients=self.finit_coefficient.forward(),
+                                           offset=1)
 
     def _get_left_boundary_(self):
-        return self._get_diagonal_triplet_(symmetry=self.symmetries['left'],
-                                   coefficients=self.finit_coefficient.Backward(),
-                                   offset=1)
+        return self._get_diagonal_triplet_(boundary=self.boundaries['left'],
+                                           coefficients=self.finit_coefficient.backward(),
+                                           offset=1)
 
     def _compute_slices_idx_(self):
         for offset in range(1, self.finit_coefficient.offset_index + 1):
@@ -350,10 +350,10 @@ class FiniteDifference2D():
         return right_slice_triplet, left_slice_triplet, top_slice_triplet, bottom_slice_triplet
 
     def _get_y_diagonal_triplet_(self):
-        return self._get_diagonal_triplet_(coefficients=self.finit_coefficient.Central(), offset=self.n_y)
+        return self._get_diagonal_triplet_(coefficients=self.finit_coefficient.central(), offset=self.n_y)
 
     def _get_x_diagonal_triplet_(self):
-        return self._get_diagonal_triplet_(coefficients=self.finit_coefficient.Central(), offset=1)
+        return self._get_diagonal_triplet_(coefficients=self.finit_coefficient.central(), offset=1)
 
     def _construct_triplet_(self, Addmesh: numpy.ndarray = None):
         right_slice_triplet, left_slice_triplet, top_slice_triplet, bottom_slice_triplet = self._compute_slices_idx_()
@@ -376,5 +376,177 @@ class FiniteDifference2D():
         self._triplet = self.triplets_component.y
 
         self._triplet.add_triplet(self.triplets_component.x, self.triplets_component.top, self.triplets_component.bottom, self.triplets_component.left, self.triplets_component.right)
+
+
+@dataclass
+class FiniteDifference1D():
+    """
+    .. note::
+        This class represent a specific finit difference configuration,
+        which is defined with the descretization of the mesh, the derivative order,
+        accuracy and the boundary condition that are defined.
+        More information is providided at the following link:
+        'math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf'
+    """
+    n_x: int
+    """ Number of point in the x direction """
+    dx: float = 1
+    """ Infinetisemal displacement in x direction """
+    derivative: int = 1
+    """ Derivative order to convert into finit-difference matrix. """
+    accuracy: int = 2
+    """ Accuracy of the derivative approximation [error is inversly proportional to the power of that value]. """
+    boundaries: Dict[str, str] = field(default_factory=lambda: ({'left': 'none', 'right': 'none'}))
+    """ Values of the four possible boundaries of the system. """
+
+    def __post_init__(self):
+        self.finit_coefficient = FinitCoefficients(derivative=self.derivative, accuracy=self.accuracy)
+        self._triplet = None
+
+    @property
+    def triplet(self):
+        """
+        Triplet representing the non-nul values of the specific
+        finit-difference configuration.
+        """
+        if not self._triplet:
+            self._construct_triplet_()
+        return self._triplet
+
+    @property
+    def size(self):
+        return self.n_x
+
+    @property
+    def shape(self):
+        return [self.size, self.size]
+
+    def _get_diagonal_triplet_(self, coefficients: dict, offset: int, boundary=None):
+        triplet = numpy.array([[0, 0, 0]])
+
+        if boundary in ['anti-symmetric', 'symmetric']:
+            coefficients = self.finit_coefficient.central(symmetry=boundary)
+
+        for idx, value in coefficients.items():
+            end_idx = self.size - abs(idx * offset)
+            line_0 = numpy.arange(end_idx)
+            line_2 = numpy.ones(line_0.size) * value
+
+            # sub_triplet = numpy.c_[line_0, line_0 - idx * offset, line_2]
+
+            if idx < 0:
+                sub_triplet = numpy.c_[line_0, line_0 - idx * offset, line_2]
+
+            if idx == 0:
+                sub_triplet = numpy.c_[line_0, line_0 - idx * offset, line_2]
+
+            if idx > 0:
+                sub_triplet = numpy.c_[line_0 + idx * offset, line_0, line_2]
+
+            triplet = numpy.r_[triplet, sub_triplet]
+
+        return Triplet(triplet[1:, :])
+
+    def _get_right_boundary_(self):
+        return self._get_diagonal_triplet_(boundary=self.boundaries['right'],
+                                           coefficients=self.finit_coefficient.forward(),
+                                           offset=1)
+
+    def get_diagonal_index(self, value, offset=0, mirror_values=True):
+        shape = [self.size, self.size]
+        size = min(shape) - abs(offset)
+        col_0 = numpy.arange(0, size)
+        values = numpy.ones(col_0.size) * value
+
+        array = numpy.c_[col_0, col_0 + abs(offset), values]
+
+        if mirror_values:
+            col_1 = numpy.arange(array[-1, 0] + 1, shape[0])
+            col_2 = array[-1, 1] - (1 + numpy.arange(col_1.size))
+            values = numpy.ones(col_1.size) * value
+            mirror_array = numpy.c_[col_1, col_2, values]
+            array = numpy.r_[array, mirror_array]
+
+            col_1 = numpy.arange(1, offset + 1)
+            col_2 = offset - (1 + numpy.arange(col_1.size))
+            values = numpy.ones(col_1.size) * value
+            mirror_array = numpy.c_[col_1, col_2, values]
+
+            array = numpy.r_[array, mirror_array]
+
+        if offset < 0:
+            array[:, 0], array[:, 1] = array[:, 1], array[:, 0].copy()
+
+        return Triplet(array)
+
+    def get_diagonal_index(self, value, offset=0, mirror_values=True, mirror_multiplicator=1.):
+        col_0 = numpy.arange(abs(offset), self.size)
+        values = numpy.ones(col_0.size) * value
+
+        array = numpy.c_[col_0 - abs(offset), col_0, values]
+
+        if mirror_values:
+            col_1 = numpy.arange(array[-1, 0] + 1, self.size)
+            col_2 = array[-1, 1] - (1 + numpy.arange(col_1.size))
+
+            values = numpy.ones(col_1.size) * value
+            mirror_array0 = numpy.c_[col_1, col_2, values * mirror_multiplicator]
+
+            col_3 = numpy.arange(array[0, 0], array[0, 0] + abs(offset))
+            col_4 = array[0, 1] - (1 + numpy.arange(col_3.size))
+            values = numpy.ones(col_4.size) * value
+            mirror_array1 = numpy.c_[col_4, col_3 + 1, values * mirror_multiplicator]
+
+        if offset < 0:
+            array[:, 0], array[:, 1] = array[:, 1].copy(), array[:, 0].copy()
+            array = numpy.r_[array, mirror_array1]
+        else:
+            array = numpy.r_[array, mirror_array0]
+
+        return Triplet(array)
+
+    def _get_left_boundary_(self):
+        return self._get_diagonal_triplet_(boundary=self.boundaries['left'],
+                                           coefficients=self.finit_coefficient.backward(),
+                                           offset=1)
+
+    def _compute_slices_idx_(self):
+        right_slice = [[self.size - 1, 0, 1]]
+        right_slice = Triplet(right_slice)
+
+        left_slice = [[0, 0, 1]]
+        left_slice = Triplet(left_slice)
+        return right_slice, left_slice
+
+    def _get_x_diagonal_triplet_(self):
+        diagonals = []
+        for idx, value in self.finit_coefficient.central().items():
+            d = self.get_diagonal_index(value=value, offset=idx)
+            diagonals.append(d)
+
+        d0 = diagonals[0]
+        for d in diagonals[1:]:
+            d0 += d
+
+        d0.plot()
+        return d0
+
+    def _construct_triplet_(self, Addmesh: numpy.ndarray = None):
+        right_slice_triplet, left_slice_triplet = self._compute_slices_idx_()
+
+        self.triplets_component = Namespace(x=self._get_x_diagonal_triplet_(),
+                                            left=self._get_left_boundary_(),
+                                            right=self._get_right_boundary_())
+
+        # self.triplets_component.x = self.triplets_component.x - left_slice_triplet - right_slice_triplet
+
+        # self.triplets_component.right.coincide_i(mask=right_slice_triplet)
+        # self.triplets_component.left.coincide_i(mask=left_slice_triplet)
+
+        self._triplet = self.triplets_component.x
+        self._triplet.plot()
+        # print()
+
+        # self._triplet.add_triplet(self.triplets_component.left, self.triplets_component.right)
 
 # -
