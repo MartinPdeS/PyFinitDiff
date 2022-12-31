@@ -61,9 +61,11 @@ class Triplet():
         reduce if any coinciding index values.
         """
 
-        self._array = numpy.r_[self._array, other._array]
+        new_array = numpy.r_[self._array, other._array]
 
-        return self.remove_duplicate()
+        new_triplet = Triplet(new_array)
+
+        return new_triplet.remove_duplicate()
 
     def add_triplet(self, *others) -> 'Triplet':
         others_array = (other._array for other in others)
@@ -196,12 +198,13 @@ class Triplet():
         max_j = self.max_j + 1 if max_j is None else max_j
 
         figure = Scene2D(unit_size=(6, 6), tight_layout=True)
-        colorbar = ColorBar(discreet=True, position='right', numeric_format='%.4f')
+        colorbar = ColorBar(discreet=False, position='right', numeric_format='%.4f')
 
         ax = Axis(row=0,
                   col=0,
                   title='Finite-difference coefficients structure',
                   show_legend=False,
+                  show_grid=True,
                   colorbar=colorbar)
 
         artist = Mesh(scalar=numpy.flip(self.to_dense(max_i, max_j), axis=[0]), colormap='Blues')
@@ -421,11 +424,8 @@ class FiniteDifference1D():
     def shape(self):
         return [self.size, self.size]
 
-    def _get_diagonal_triplet_(self, coefficients: dict, offset: int, boundary=None):
+    def _get_diagonal_triplet_(self, coefficients: dict, offset: int):
         triplet = numpy.array([[0, 0, 0]])
-
-        if boundary in ['anti-symmetric', 'symmetric']:
-            coefficients = self.finit_coefficient.central(symmetry=boundary)
 
         for idx, value in coefficients.items():
             end_idx = self.size - abs(idx * offset)
@@ -448,36 +448,8 @@ class FiniteDifference1D():
         return Triplet(triplet[1:, :])
 
     def _get_right_boundary_(self):
-        return self._get_diagonal_triplet_(boundary=self.boundaries['right'],
-                                           coefficients=self.finit_coefficient.forward(),
+        return self._get_diagonal_triplet_(coefficients=self.finit_coefficient.forward(),
                                            offset=1)
-
-    def get_diagonal_index(self, value, offset=0, mirror_values=True):
-        shape = [self.size, self.size]
-        size = min(shape) - abs(offset)
-        col_0 = numpy.arange(0, size)
-        values = numpy.ones(col_0.size) * value
-
-        array = numpy.c_[col_0, col_0 + abs(offset), values]
-
-        if mirror_values:
-            col_1 = numpy.arange(array[-1, 0] + 1, shape[0])
-            col_2 = array[-1, 1] - (1 + numpy.arange(col_1.size))
-            values = numpy.ones(col_1.size) * value
-            mirror_array = numpy.c_[col_1, col_2, values]
-            array = numpy.r_[array, mirror_array]
-
-            col_1 = numpy.arange(1, offset + 1)
-            col_2 = offset - (1 + numpy.arange(col_1.size))
-            values = numpy.ones(col_1.size) * value
-            mirror_array = numpy.c_[col_1, col_2, values]
-
-            array = numpy.r_[array, mirror_array]
-
-        if offset < 0:
-            array[:, 0], array[:, 1] = array[:, 1], array[:, 0].copy()
-
-        return Triplet(array)
 
     def get_diagonal_index(self, value, offset=0, mirror_values=True, mirror_multiplicator=1.):
         col_0 = numpy.arange(abs(offset), self.size)
@@ -506,8 +478,7 @@ class FiniteDifference1D():
         return Triplet(array)
 
     def _get_left_boundary_(self):
-        return self._get_diagonal_triplet_(boundary=self.boundaries['left'],
-                                           coefficients=self.finit_coefficient.backward(),
+        return self._get_diagonal_triplet_(coefficients=self.finit_coefficient.backward(),
                                            offset=1)
 
     def _compute_slices_idx_(self):
@@ -518,10 +489,25 @@ class FiniteDifference1D():
         left_slice = Triplet(left_slice)
         return right_slice, left_slice
 
+    def _iterate_left_coefficients_(self):
+        central = self.finit_coefficient.central().items()
+
     def _get_x_diagonal_triplet_(self):
         diagonals = []
         for idx, value in self.finit_coefficient.central().items():
-            d = self.get_diagonal_index(value=value, offset=idx)
+            if idx < 0 and self.boundaries['left'] == 'symmetric':
+                mirror_multiplicator = 1
+
+            if idx < 0 and self.boundaries['left'] == 'anti-symmetric':
+                mirror_multiplicator = -1
+
+            if idx > 0 and self.boundaries['right'] == 'symmetric':
+                mirror_multiplicator = 1
+
+            if idx > 0 and self.boundaries['right'] == 'anti-symmetric':
+                mirror_multiplicator = -1
+
+            d = self.get_diagonal_index(value=value, offset=idx, mirror_multiplicator=mirror_multiplicator)
             diagonals.append(d)
 
         d0 = diagonals[0]

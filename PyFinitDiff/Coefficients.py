@@ -16,17 +16,9 @@ class FinitCoefficients():
         self._central = central_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
         self._forward = forward_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
         self._backward = backward_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
-        self.central_max_offset = self._central['max_offset']
 
-    def central(self, symmetry=None):
-        coefficients = {key: float(value) for key, value in self._central['coefficients'].items() if value != 0.}
-        match symmetry:
-            case None:
-                return coefficients
-            case 'symmetric':
-                return {idx: 2 * value if idx != 0 else value for idx, value in coefficients.items()}
-            case 'anti-symmetric':
-                return {idx: value if idx == 0 else 0. for idx, value in coefficients.items()}
+    def central(self):
+        return {key: float(value) for key, value in self._central['coefficients'].items() if value != 0.}
 
     def backward(self):
         return {key: float(value) for key, value in self._backward['coefficients'].items() if value != 0.}
@@ -41,13 +33,5 @@ class FinitCoefficients():
         \rbackward coefficients: {self.backward()}\
         """
 
-    @property
-    def offset_index(self):
-        offset_index = 0
-        for Index, value in self.Central().items():
-            if value != 0 and Index > offset_index:
-                offset_index = Index
-
-        return offset_index
 
 # -
