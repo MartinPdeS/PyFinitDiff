@@ -3,7 +3,7 @@ from collections.abc import Iterable
 import numpy
 import scipy
 
-from PyFinitDiff.Sparse import DiagonalTriplet
+from PyFinitDiff.Tools import DiagonalTriplet
 
 
 class NameSpace:

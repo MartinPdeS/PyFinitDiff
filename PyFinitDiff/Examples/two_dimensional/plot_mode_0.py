@@ -1,34 +1,38 @@
 """
-Example: eigenmodes 4
+Example: eigenmodes 0
 =====================
 
-Symmetry left: 0, right: -1, top: 0, bottom: 0
+Symmetry left: 0, right: 0, top: 0, bottom: 0
 """
 import numpy
 import matplotlib.pyplot as plt
 from scipy.sparse import linalg
 
 
-from PyFinitDiff.Sparse import FiniteDifference2D as SparseFD
+from PyFinitDiff.Sparse2D import FiniteDifference2D
 from PyFinitDiff.Utils import get_2D_circular_mesh_triplet
 
-n_y = n_x = 40
-sparse_instance = SparseFD(n_x=n_x,
-                           n_y=n_y,
-                           dx=1,
-                           dy=1,
-                           derivative=2,
-                           accuracy=2,
-                           boundaries={'left': 'none',
-                                       'right': 'anti-symmetric',
-                                       'top': 'none',
-                                       'bottom': 'none'})
+n_y = n_x = 30
+
+
+sparse_instance = FiniteDifference2D(n_x=n_x,
+                                     n_y=n_y,
+                                     dx=1,
+                                     dy=1,
+                                     derivative=2,
+                                     accuracy=2,
+                                     boundaries={'left': 'zero',
+                                                 'right': 'zero',
+                                                 'top': 'zero',
+                                                 'bottom': 'zero'})
+
+triplet = sparse_instance.triplet
 
 mesh_triplet = get_2D_circular_mesh_triplet(n_x=n_x,
                                             n_y=n_y,
                                             value0=1.0,
                                             value1=1.4444,
-                                            x_offset=100,
+                                            x_offset=0,
                                             y_offset=0,
                                             radius=70)
 
