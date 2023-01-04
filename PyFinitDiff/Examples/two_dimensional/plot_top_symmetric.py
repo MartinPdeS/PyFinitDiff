@@ -18,7 +18,7 @@ from PyFinitDiff.Sparse2D import FiniteDifference2D
 from PyFinitDiff.Utils import get_2D_circular_mesh_triplet
 from MPSPlots.Render2D import Scene2D, Axis, Mesh
 
-n_x = 30
+n_x = 40
 n_y = 50
 
 sparse_instance = FiniteDifference2D(n_x=n_x,
@@ -49,7 +49,7 @@ shape = [sparse_instance.n_y, sparse_instance.n_x]
 figure = Scene2D(unit_size=(3, 3), tight_layout=True)
 
 for i in range(4):
-    Vector = eigen_vectors[:, i].real.reshape(shape).T
+    Vector = eigen_vectors[:, i].real.reshape(shape)
     ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
     artist = Mesh(scalar=Vector)
     ax.AddArtist(artist)
