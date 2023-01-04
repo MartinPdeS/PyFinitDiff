@@ -20,7 +20,7 @@ from scipy.sparse import linalg
 from PyFinitDiff.Sparse2D import FiniteDifference2D
 from PyFinitDiff.Utils import get_2D_circular_mesh_triplet
 
-n_y = n_x = 60
+n_y = n_x = 60 
 
 
 sparse_instance = FiniteDifference2D(n_x=n_x,
