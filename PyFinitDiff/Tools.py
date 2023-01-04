@@ -1,7 +1,7 @@
 import numpy
 
 from MPSPlots.Render2D import Scene2D, Axis, Mesh, ColorBar
-
+from scipy.sparse import coo_matrix
 
 class Triplet():
     def __init__(self, array: numpy.ndarray = None, add_extra_column: bool = False):
@@ -54,6 +54,7 @@ class Triplet():
         """
         The methode concatenate the two triplet array and
         reduce if any coinciding index values.
+
         """
 
         new_array = numpy.r_[self._array, other._array]
@@ -158,7 +159,12 @@ class Triplet():
             yield n, (int(i), int(j), value)
 
     def get_duplicate_index(self) -> numpy.ndarray:
+        """
+        Gets the duplicate index.
 
+        :returns:   The duplicate index.
+        :rtype:     numpy.ndarray
+        """
         _, inverse, count = numpy.unique(self.index, axis=0, return_inverse=True, return_counts=True)
 
         index_duplicate = numpy.where(count > 1)[0]
@@ -210,15 +216,14 @@ class Triplet():
         """
         return self.j.min()
 
-    def to_dense(self, max_i: int = None, max_j: int = None) -> numpy.ndarray:
+    def to_dense(self) -> numpy.ndarray:
         """
-        Return dense representation of the triplet, if none of max_i and max_j is provided
-        it assumes the max_i and max_j is the shape of the dense matrix.
-        """
-        max_i = self.max_i + 1 if max_i is None else max_i
-        max_j = self.max_j + 1 if max_j is None else max_j
+        Returns a dense representation of the object.
 
-        matrix = numpy.zeros([max_i, max_j])
+        :returns:   Dense representation of the object.
+        :rtype:     numpy.ndarray:
+        """
+        matrix = numpy.zeros([self.max_i + 1, self.max_j + 1])
         for index, value in self:
             matrix[index] = value
 
@@ -249,8 +254,14 @@ class Triplet():
 
         figure.Show()
 
+    def to_scipy_sparse(self) -> coo_matrix:
+        """
+        Returns a scipy sparse representation of the object.
 
-
+        :returns:   Scipy sparse representation of the object.
+        :rtype:     coo_matrix
+        """
+        return coo_matrix((self.values, (self.i, self.j)), shape=(self.max_i + 1, self.max_j + 1))
 
 
 class DiagonalTriplet(Triplet):
