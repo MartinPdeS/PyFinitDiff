@@ -80,11 +80,11 @@ class Diagonal2D():
             case 3:
                 shift_vector = numpy.zeros(self.shape[0])
                 shift_vector[-abs(self.offset):] = - numpy.arange(1, abs(self.offset) + 1)
-                shift_vector = numpy.tile(shift_vector, self.shape[0])
+                shift_vector = numpy.tile(shift_vector, self.shape[1])
             case 4:
                 shift_vector = numpy.zeros(self.shape[0])
                 shift_vector[:abs(self.offset)] = numpy.arange(1, abs(self.offset) + 1)[::-1]
-                shift_vector = numpy.tile(shift_vector, self.shape[0])
+                shift_vector = numpy.tile(shift_vector, self.shape[1])
 
         return shift_vector
 
@@ -173,6 +173,14 @@ class FiniteDifference2D():
     def shape(self):
         return [self.n_x, self.n_y]
 
+    @property
+    def _dx(self):
+        return self.dx ** self.derivative
+
+    @property
+    def _dy(self):
+        return self.dy ** self.derivative
+
     def iterate_center(self, multiplier: int = 1):
         fd_coeffcient = {k: v for k, v in self.finit_coefficient.central(offset_multiplier=multiplier).items() if k == 0}
 
@@ -208,32 +216,32 @@ class FiniteDifference2D():
 
         for parameters in self.iterate_left():
             center_diagonals.append(
-                Diagonal2D(shape=self.shape, **parameters).triplet
+                (1 / self._dx) * Diagonal2D(shape=self.shape, **parameters).triplet
             )
 
         for parameters in self.iterate_right():
             center_diagonals.append(
-                Diagonal2D(shape=self.shape, **parameters).triplet
+                (1 / self._dx) * Diagonal2D(shape=self.shape, **parameters).triplet
             )
 
         for parameters in self.iterate_center():
             center_diagonals.append(
-                Diagonal2D(shape=self.shape, **parameters).triplet
+                (1 / self._dx) * Diagonal2D(shape=self.shape, **parameters).triplet
             )
 
         for parameters in self.iterate_top(multiplier=self.n_x):
             center_diagonals.append(
-                Diagonal2D(shape=self.shape, **parameters).triplet
+                (1 / self._dy) * Diagonal2D(shape=self.shape, **parameters).triplet
             )
 
         for parameters in self.iterate_bottom(multiplier=self.n_x):
             center_diagonals.append(
-                Diagonal2D(shape=self.shape, **parameters).triplet
+                (1 / self._dy) * Diagonal2D(shape=self.shape, **parameters).triplet
             )
 
         for parameters in self.iterate_center():
             center_diagonals.append(
-                Diagonal2D(shape=self.shape, **parameters).triplet
+                (1 / self._dy) * Diagonal2D(shape=self.shape, **parameters).triplet
             )
 
         return sum(center_diagonals, start=Triplet())

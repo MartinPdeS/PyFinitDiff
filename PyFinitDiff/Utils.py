@@ -102,8 +102,8 @@ def get_2D_circular_mesh_triplet(n_x: int,
                                  value0: float = 0,
                                  value1: float = 1):
 
-    y, x = numpy.mgrid[-100:100:complex(n_x),
-                       -100:100:complex(n_y)]
+    y, x = numpy.mgrid[-100:100:complex(n_y),
+                       -100:100:complex(n_x)]
 
     r = numpy.sqrt((x - x_offset)**2 + (y - y_offset)**2)
     mesh = numpy.ones(x.shape) * value0

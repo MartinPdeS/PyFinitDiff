@@ -62,6 +62,45 @@ class Triplet():
 
         return new_triplet.remove_duplicate()
 
+    def __mul__(self, factor) -> 'Triplet':
+        """
+        The method output a new triplet where the values
+        are mutliplied by the factor
+
+        """
+        new_triplet = Triplet(self._array)
+
+        new_triplet.values *= factor
+
+        return new_triplet
+
+    def __rmul__(self, factor):
+        return self.__mul__(factor)
+
+    def __div__(self, factor) -> 'Triplet':
+        """
+        The method output a new triplet where the values
+        are mutliplied by the factor
+
+        """
+        new_triplet = Triplet(self._array)
+
+        new_triplet /= factor
+
+        return new_triplet
+
+    def __rdiv__(self, factor) -> 'Triplet':
+        """
+        The method output a new triplet where the values
+        are mutliplied by the factor
+
+        """
+        new_triplet = Triplet(self._array)
+
+        new_triplet /= factor
+
+        return new_triplet
+
     def add_triplet(self, *others) -> 'Triplet':
         others_array = (other._array for other in others)
 
