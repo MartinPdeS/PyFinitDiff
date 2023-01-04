@@ -27,17 +27,17 @@ Example: triplets 0
    :widths: 25
    :header-rows: 1
 
-   * - symmetries: {left: 0, right: 0, top: 0, bottom: 0}
+   * - boundaries: {left: 0, right: 0, top: 0, bottom: 0}
    * - derivative: 2
    * - accuracy: 4
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-28
+.. GENERATED FROM PYTHON SOURCE LINES 14-31
 
 .. code-block:: python3
    :lineno-start: 15
 
 
-    from PyFinitDiff.Sparse import FiniteDifference2D as SparseFD
+    from PyFinitDiff.Sparse2D import FiniteDifference2D as SparseFD
 
     sparse_instance = SparseFD(n_x=6,
                                n_y=6,
@@ -45,7 +45,10 @@ Example: triplets 0
                                dy=1,
                                derivative=2,
                                accuracy=2,
-                               symmetries={'left': 0, 'right': 0, 'top': 0, 'bottom': 0})
+                               boundaries={'left': 'none',
+                                           'right': 'none',
+                                           'top': 'none',
+                                           'bottom': 'none'})
 
     sparse_instance.triplet.plot()
 
@@ -54,7 +57,7 @@ Example: triplets 0
 
 
 .. image-sg:: /gallery/triplets/images/sphx_glr_plot_triplets_0_001.png
-   :alt: plot triplets 0
+   :alt: , Finite-difference coefficients structure
    :srcset: /gallery/triplets/images/sphx_glr_plot_triplets_0_001.png
    :class: sphx-glr-single-img
 
@@ -65,7 +68,7 @@ Example: triplets 0
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.076 seconds)
+   **Total running time of the script:** ( 0 minutes  0.137 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_0.py:

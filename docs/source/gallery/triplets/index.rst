@@ -1,7 +1,5 @@
 :orphan:
 
-.. _examples:
-
 triplets computation
 ~~~~~~~~~~~~~~~~~~~~
 

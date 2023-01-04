@@ -44,8 +44,8 @@ extensions = [
 
 prefix = "../../PyFinitDiff/Examples/"
 sphinx_gallery_conf = {
-    'examples_dirs': [prefix + "triplets", prefix + "eigenmodes"],
-    'gallery_dirs': ['gallery/triplets', 'gallery/eigenmodes'],
+    'examples_dirs': [prefix + "triplets", prefix + "one_dimensional", prefix + "two_dimensional"],
+    'gallery_dirs': ['gallery/triplets', 'gallery/one_dimensional', 'gallery/two_dimensional'],
     'image_scrapers': ('matplotlib'),
     'ignore_pattern': '/__',
     'plot_gallery': True,

@@ -1,2 +1,2 @@
-Eigenmode solving
-~~~~~~~~~~~~~~~~~
+2-dimensional
+~~~~~~~~~~~~~
