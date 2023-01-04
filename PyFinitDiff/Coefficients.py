@@ -17,14 +17,14 @@ class FinitCoefficients():
         self._forward = forward_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
         self._backward = backward_coefficent[f"d{self.derivative}"][f"a{self.accuracy}"]
 
-    def central(self):
-        return {key: float(value) for key, value in self._central['coefficients'].items() if value != 0.}
+    def central(self, offset_multiplier: int = 1):
+        return {offset * offset_multiplier: float(value) for offset, value in self._central['coefficients'].items() if value != 0.}
 
-    def backward(self):
-        return {key: float(value) for key, value in self._backward['coefficients'].items() if value != 0.}
+    def backward(self, offset_multiplier: int = 1):
+        return {offset * offset_multiplier: float(value) for offset, value in self._backward['coefficients'].items() if value != 0.}
 
-    def forward(self):
-        return {key: float(value) for key, value in self._forward['coefficients'].items() if value != 0.}
+    def forward(self, offset_multiplier: int = 1):
+        return {offset * offset_multiplier: float(value) for offset, value in self._forward['coefficients'].items() if value != 0.}
 
     def __repr__(self):
         return f""" \

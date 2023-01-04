@@ -71,6 +71,12 @@ class Diagonal2D():
         match self.type:
             case 0:
                 shift_vector = 0
+            case 1:
+                shift_vector = numpy.zeros(self.size)
+                shift_vector[:abs(self.offset)] += abs(self.offset)
+            case 2:
+                shift_vector = numpy.zeros(self.size)
+                shift_vector[-abs(self.offset):] -= abs(self.offset)
             case 3:
                 shift_vector = numpy.zeros(self.shape[0])
                 shift_vector[-abs(self.offset):] = - numpy.arange(1, abs(self.offset) + 1)
@@ -79,12 +85,6 @@ class Diagonal2D():
                 shift_vector = numpy.zeros(self.shape[0])
                 shift_vector[:abs(self.offset)] = numpy.arange(1, abs(self.offset) + 1)[::-1]
                 shift_vector = numpy.tile(shift_vector, self.shape[0])
-            case 1:
-                shift_vector = numpy.zeros(self.size)
-                shift_vector[:abs(self.offset)] = numpy.arange(abs(self.offset))[::-1] + 1
-            case 2:
-                shift_vector = numpy.zeros(self.size)
-                shift_vector[-abs(self.offset) - 1:] = - numpy.arange(abs(self.offset) + 1)
 
         return shift_vector
 
@@ -159,6 +159,7 @@ class FiniteDifference2D():
         """
         Triplet representing the non-nul values of the specific
         finit-difference configuration.
+
         """
         if not self._triplet:
             self._construct_triplet_()
@@ -173,34 +174,34 @@ class FiniteDifference2D():
         return [self.n_x, self.n_y]
 
     def iterate_center(self, multiplier: int = 1):
-        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central().items() if k == 0}
+        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central(offset_multiplier=multiplier).items() if k == 0}
 
         for offset, value in fd_coeffcient.items():
-            yield {'offset': offset * multiplier, 'value': value, 'boundary': 'zero', 'type': 0}
-
-    def iterate_bottom(self, multiplier: int = 1):
-        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central().items() if k > 0}
-
-        for offset, value in fd_coeffcient.items():
-            yield {'offset': offset * multiplier, 'value': value, 'boundary': self.boundaries['bottom'], 'type': 2}
-
-    def iterate_right(self, multiplier: int = 1):
-        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central().items() if k > 0}
-
-        for offset, value in fd_coeffcient.items():
-            yield {'offset': offset * multiplier, 'value': value, 'boundary': self.boundaries['right'], 'type': 3}
-
-    def iterate_left(self, multiplier: int = 1):
-        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central().items() if k < 0}
-
-        for offset, value in fd_coeffcient.items():
-            yield {'offset': offset * multiplier, 'value': value, 'boundary': self.boundaries['left'], 'type': 4}
+            yield {'offset': offset, 'value': value, 'boundary': 'zero', 'type': 0}
 
     def iterate_top(self, multiplier: int = 1):
-        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central().items() if k < 0}
+        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central(offset_multiplier=multiplier).items() if k > 0}
 
         for offset, value in fd_coeffcient.items():
-            yield {'offset': offset * multiplier, 'value': value, 'boundary': self.boundaries['top'], 'type': 1}
+            yield {'offset': offset, 'value': value, 'boundary': self.boundaries['top'], 'type': 2}
+
+    def iterate_right(self, multiplier: int = 1):
+        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central(offset_multiplier=multiplier).items() if k > 0}
+
+        for offset, value in fd_coeffcient.items():
+            yield {'offset': offset, 'value': value, 'boundary': self.boundaries['right'], 'type': 3}
+
+    def iterate_left(self, multiplier: int = 1):
+        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central(offset_multiplier=multiplier).items() if k < 0}
+
+        for offset, value in fd_coeffcient.items():
+            yield {'offset': offset, 'value': value, 'boundary': self.boundaries['left'], 'type': 4}
+
+    def iterate_bottom(self, multiplier: int = 1):
+        fd_coeffcient = {k: v for k, v in self.finit_coefficient.central(offset_multiplier=multiplier).items() if k < 0}
+
+        for offset, value in fd_coeffcient.items():
+            yield {'offset': offset, 'value': value, 'boundary': self.boundaries['bottom'], 'type': 1}
 
     def _construct_central_triplet_(self):
         center_diagonals = []
