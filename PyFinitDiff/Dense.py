@@ -7,7 +7,6 @@ from typing import Dict
 
 from PyFinitDiff.Utils import NameSpace
 from PyFinitDiff.Coefficients import FinitCoefficients
-from PyFinitDiff.Utils import plot_mesh
 
 
 @dataclass
