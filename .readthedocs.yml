@@ -11,21 +11,7 @@ submodules:
 
 build:
   os: ubuntu-22.04
-  apt_packages:
-    - cmake
-    - gcc
-    - gfortran
-    - xvfb
-    - x11-utils
-    - libxkbcommon-x11-0
-    - libxcb-icccm4
-    - libxcb-image0
-    - libxcb-keysyms1
-    - libxcb-randr0
-    - libxcb-render-util0
-    - libxcb-xinerama0
-    - libxcb-xfixes0
-    - xdotool
+
 
   tools:
     python: "3.10"
@@ -37,18 +23,14 @@ build:
       - sleep 3
 
 python:
-  version: "3.10"
   system_packages: false
   install:
     - method: pip
       path: .
       extra_requirements:
-        - docs/requirements.txt
+        - docs
 
 sphinx:
   builder: html
   configuration: docs/source/conf.py
   fail_on_warning: false
-
-
-
