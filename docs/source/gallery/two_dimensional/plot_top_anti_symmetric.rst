@@ -26,19 +26,17 @@ Example: eigenmodes 7
 +-------------+------------+--------------+------------+------------+
 | Boundaries  |    left    |     right    |    top     |   bottom   |
 +=============+============+==============+============+============+
-|             |    zero    |   anti-sym   |   zero     |   zero     |
+|      -      |    zero    |   anti-sym   |   zero     |   zero     |
 +-------------+------------+--------------+------------+------------+
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-64
+.. GENERATED FROM PYTHON SOURCE LINES 13-61
 
 .. code-block:: python3
    :lineno-start: 14
 
 
-    import numpy
-    import matplotlib.pyplot as plt
     from scipy.sparse import linalg
-
+    from MPSPlots.Render2D import Scene2D, Axis, Mesh
 
     from PyFinitDiff.Sparse2D import FiniteDifference2D
     from PyFinitDiff.Utils import get_2D_circular_mesh_triplet
@@ -61,27 +59,26 @@ Example: eigenmodes 7
                                                 n_y=n_y,
                                                 value0=1.0,
                                                 value1=1.4444,
-                                                x_offset=+100,
-                                                y_offset=0,
+                                                x_offset=0,
+                                                y_offset=+100,
                                                 radius=70)
 
     dynamic_triplet = sparse_instance.triplet + mesh_triplet
 
-    eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_dense(), k=5, which='LM', sigma=1.4444)
-
-    fig, axes = plt.subplots(1, eigen_values.size, figsize=(10, 3))
+    eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_dense(), k=4, which='LM', sigma=1.4444)
 
     shape = [sparse_instance.n_x, sparse_instance.n_y]
 
-    for i, ax in enumerate(axes[:]):
-        Vector = eigen_vectors.T[i].real.reshape(shape).T
-        Vector = numpy.flip(Vector, -1)
-        ax.imshow(Vector.T)
-        ax.set_title(f'eigenvalues: \n{eigen_values[i]:.1f}')
+    figure = Scene2D(unit_size=(3, 3), tight_layout=True)
 
-    plt.tight_layout()
+    for i in range(4):
+        Vector = eigen_vectors[:, i].real.reshape(shape)
+        ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
+        artist = Mesh(scalar=Vector)
+        ax.AddArtist(artist)
+        figure.AddAxes(ax)
 
-    plt.show()
+    figure.Show()
 
 
     # -
@@ -89,18 +86,24 @@ Example: eigenmodes 7
 
 
 .. image-sg:: /gallery/two_dimensional/images/sphx_glr_plot_top_anti_symmetric_001.png
-   :alt: eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j, eigenvalues:  1.3+0.0j, eigenvalues:  1.3+0.0j
+   :alt: , eigenvalues:  1.416+0.000j, eigenvalues:  1.394+0.000j, eigenvalues:  1.366+0.000j, eigenvalues:  1.351+0.000j
    :srcset: /gallery/two_dimensional/images/sphx_glr_plot_top_anti_symmetric_001.png
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    Scene2D(unit_size=(3, 3), tight_layout=True, title='')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.724 seconds)
+   **Total running time of the script:** ( 0 minutes  1.395 seconds)
 
 
 .. _sphx_glr_download_gallery_two_dimensional_plot_top_anti_symmetric.py:
