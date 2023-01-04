@@ -1,3 +1,4 @@
+MPSPlots
 wheel
 numpy
 matplotlib
