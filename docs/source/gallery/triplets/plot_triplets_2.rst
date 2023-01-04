@@ -69,7 +69,7 @@ Example: triplets 2
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.068 seconds)
+   **Total running time of the script:** ( 0 minutes  0.062 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_2.py:

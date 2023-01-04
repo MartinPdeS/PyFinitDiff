@@ -31,19 +31,17 @@ Example: 1D eigenmodes 0
    * - derivative: 2
    * - accuracy: 6
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-55
+.. GENERATED FROM PYTHON SOURCE LINES 15-51
 
 .. code-block:: python3
-   :lineno-start: 17
+   :lineno-start: 16
 
 
-
-    import numpy
-    import matplotlib.pyplot as plt
     from scipy.sparse import linalg
 
     from PyFinitDiff.Sparse1D import FiniteDifference1D
     from PyFinitDiff.Utils import get_1D_circular_mesh_triplet
+    from MPSPlots.Render2D import Scene2D, Axis, Line
 
 
     n_x = 100
@@ -61,37 +59,41 @@ Example: 1D eigenmodes 0
 
     eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_dense(), k=4, which='LM', sigma=1.4444)
 
-    fig, axes = plt.subplots(1, eigen_values.size, figsize=(14, 3))
+    figure = Scene2D(unit_size=(3, 3), tight_layout=True)
 
-    shape = [sparse_instance.n_x]
+    for i in range(4):
+        Vector = eigen_vectors[:, i].real.reshape([sparse_instance.n_x])
+        ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
+        artist = Line(y=Vector)
+        ax.add_artist(artist)
+        figure.add_axes(ax)
 
-    for i, ax in enumerate(axes[:]):
-        Vector = eigen_vectors.T[i].real.reshape(shape).T
-        Vector = numpy.flip(Vector, -1)
-        ax.plot(Vector.T)
-        ax.set_title(f'eigenvalues: \n{eigen_values[i]:.1f}')
+    figure.show()
 
-    plt.tight_layout()
-
-    plt.show()
 
     # -
 
 
 
 .. image-sg:: /gallery/one_dimensional/images/sphx_glr_plot_mode_0_001.png
-   :alt: eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j
+   :alt: , eigenvalues:  1.442+0.000j, eigenvalues:  1.434+0.000j, eigenvalues:  1.422+0.000j, eigenvalues:  1.405+0.000j
    :srcset: /gallery/one_dimensional/images/sphx_glr_plot_mode_0_001.png
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    Scene2D(unit_size=(3, 3), tight_layout=True, title='')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.258 seconds)
+   **Total running time of the script:** ( 0 minutes  0.192 seconds)
 
 
 .. _sphx_glr_download_gallery_one_dimensional_plot_mode_0.py:

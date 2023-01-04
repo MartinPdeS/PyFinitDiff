@@ -52,10 +52,10 @@ for i in range(4):
     Vector = eigen_vectors[:, i].real.reshape(shape)
     ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
     artist = Mesh(scalar=Vector)
-    ax.AddArtist(artist)
-    figure.AddAxes(ax)
+    ax.add_artist(artist)
+    figure.add_axes(ax)
 
-figure.Show()
+figure.show()
 
 
 # -

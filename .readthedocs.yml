@@ -37,12 +37,13 @@ build:
       - sleep 3
 
 python:
+  version: "3.10"
   system_packages: false
   install:
     - method: pip
       path: .
       extra_requirements:
-        - docs
+        - docs/requirements.txt
 
 sphinx:
   builder: html

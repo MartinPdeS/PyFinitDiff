@@ -31,26 +31,24 @@ Example: 1D eigenmodes 2
    * - derivative: 2
    * - accuracy: 6
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-56
+.. GENERATED FROM PYTHON SOURCE LINES 15-49
 
 .. code-block:: python3
    :lineno-start: 16
 
 
-    import numpy
-    import matplotlib.pyplot as plt
     from scipy.sparse import linalg
 
     from PyFinitDiff.Sparse1D import FiniteDifference1D
     from PyFinitDiff.Utils import get_1D_circular_mesh_triplet
-
+    from MPSPlots.Render2D import Scene2D, Axis, Line
 
     n_x = 200
     sparse_instance = FiniteDifference1D(n_x=n_x,
                                          dx=1,
                                          derivative=2,
                                          accuracy=6,
-                                         boundaries={'left': 'anti-symmetrix',
+                                         boundaries={'left': 'anti-symmetric',
                                                      'right': 'zero'})
 
     mesh_triplet = get_1D_circular_mesh_triplet(n_x=n_x, radius=60, value0=1, value1=1.4444, x_offset=+100)
@@ -59,21 +57,16 @@ Example: 1D eigenmodes 2
 
     eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_dense(), k=4, which='LM', sigma=1.4444)
 
-    fig, axes = plt.subplots(1, eigen_values.size, figsize=(14, 3))
+    figure = Scene2D(unit_size=(3, 3), tight_layout=True)
 
-    shape = [sparse_instance.n_x]
+    for i in range(4):
+        Vector = eigen_vectors[:, i].real.reshape([sparse_instance.n_x])
+        ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
+        artist = Line(y=Vector)
+        ax.add_artist(artist)
+        figure.add_axes(ax)
 
-    print(shape)
-
-    for i, ax in enumerate(axes[:]):
-        Vector = eigen_vectors.T[i].real.reshape(shape).T
-        Vector = numpy.flip(Vector, -1)
-        ax.plot(Vector.T)
-        ax.set_title(f'eigenvalues: \n{eigen_values[i]:.1f}')
-
-    plt.tight_layout()
-
-    plt.show()
+    figure.show()
 
 
     # -
@@ -81,7 +74,7 @@ Example: 1D eigenmodes 2
 
 
 .. image-sg:: /gallery/one_dimensional/images/sphx_glr_plot_mode_3_001.png
-   :alt: eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j, eigenvalues:  1.4+0.0j
+   :alt: , eigenvalues:  1.442+0.000j, eigenvalues:  1.434+0.000j, eigenvalues:  1.421+0.000j, eigenvalues:  1.403+0.000j
    :srcset: /gallery/one_dimensional/images/sphx_glr_plot_mode_3_001.png
    :class: sphx-glr-single-img
 
@@ -90,15 +83,15 @@ Example: 1D eigenmodes 2
 
  .. code-block:: none
 
-    [200]
 
+    Scene2D(unit_size=(3, 3), tight_layout=True, title='')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.245 seconds)
+   **Total running time of the script:** ( 0 minutes  0.198 seconds)
 
 
 .. _sphx_glr_download_gallery_one_dimensional_plot_mode_3.py:

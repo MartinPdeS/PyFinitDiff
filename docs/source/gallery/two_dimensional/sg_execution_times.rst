@@ -5,24 +5,24 @@
 
 Computation times
 =================
-**00:11.487** total execution time for **gallery_two_dimensional** files:
+**00:19.194** total execution time for **gallery_two_dimensional** files:
 
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_bottom_symmetric.py` (``plot_bottom_symmetric.py``)           | 00:01.576 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_left_anti_symmetric.py` (``plot_left_anti_symmetric.py``)     | 00:02.642 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_right_anti_symmetric.py` (``plot_right_anti_symmetric.py``)   | 00:01.454 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_right_symmetric.py` (``plot_right_symmetric.py``)             | 00:02.640 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_left_anti_symmetric.py` (``plot_left_anti_symmetric.py``)     | 00:01.452 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_right_anti_symmetric.py` (``plot_right_anti_symmetric.py``)   | 00:02.638 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_left_symmetric.py` (``plot_left_symmetric.py``)               | 00:01.426 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_bottom_symmetric.py` (``plot_bottom_symmetric.py``)           | 00:02.637 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_right_symmetric.py` (``plot_right_symmetric.py``)             | 00:01.396 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_top_anti_symmetric.py` (``plot_top_anti_symmetric.py``)       | 00:02.634 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_top_anti_symmetric.py` (``plot_top_anti_symmetric.py``)       | 00:01.395 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_left_symmetric.py` (``plot_left_symmetric.py``)               | 00:02.632 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_bottom_anti_symmetric.py` (``plot_bottom_anti_symmetric.py``) | 00:01.205 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_no_symmetry.py` (``plot_no_symmetry.py``)                     | 00:01.566 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_no_symmetry.py` (``plot_no_symmetry.py``)                     | 00:01.153 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_bottom_anti_symmetric.py` (``plot_bottom_anti_symmetric.py``) | 00:01.532 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_two_dimensional_plot_top_symmetric.py` (``plot_top_symmetric.py``)                 | 00:00.432 | 0.0 MB |
+| :ref:`sphx_glr_gallery_two_dimensional_plot_top_symmetric.py` (``plot_top_symmetric.py``)                 | 00:00.272 | 0.0 MB |
 +-----------------------------------------------------------------------------------------------------------+-----------+--------+

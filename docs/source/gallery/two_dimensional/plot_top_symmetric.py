@@ -42,7 +42,7 @@ mesh_triplet = get_2D_circular_mesh_triplet(n_x=n_x,
 
 dynamic_triplet = sparse_instance.triplet + mesh_triplet
 
-eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_dense(), k=4, which='LM', sigma=1.4444)
+eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_scipy_sparse(), k=4, which='LM', sigma=1.4444)
 
 shape = [sparse_instance.n_y, sparse_instance.n_x]
 
@@ -52,10 +52,10 @@ for i in range(4):
     Vector = eigen_vectors[:, i].real.reshape(shape)
     ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
     artist = Mesh(scalar=Vector)
-    ax.AddArtist(artist)
-    figure.AddAxes(ax)
+    ax.add_artist(artist)
+    figure.add_axes(ax)
 
-figure.Show()
+figure.show()
 
 
 # -

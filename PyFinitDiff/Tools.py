@@ -3,6 +3,7 @@ import numpy
 from MPSPlots.Render2D import Scene2D, Axis, Mesh, ColorBar
 from scipy.sparse import coo_matrix
 
+
 class Triplet():
     def __init__(self, array: numpy.ndarray = None, add_extra_column: bool = False):
         if array is None:
@@ -229,12 +230,10 @@ class Triplet():
 
         return matrix
 
-    def plot(self, max_i: int = None, max_j: int = None) -> None:
+    def plot(self) -> None:
         """
         Plot the dense matrix representation of the triplet.
         """
-        max_i = self.max_i + 1 if max_i is None else max_i
-        max_j = self.max_j + 1 if max_j is None else max_j
 
         figure = Scene2D(unit_size=(6, 6), tight_layout=True)
         colorbar = ColorBar(discreet=False, position='right', numeric_format='%.4f')
@@ -246,13 +245,13 @@ class Triplet():
                   show_grid=True,
                   colorbar=colorbar)
 
-        artist = Mesh(scalar=numpy.flip(self.to_dense(max_i, max_j), axis=[0]), colormap='Blues')
+        artist = Mesh(scalar=numpy.flip(self.to_dense(), axis=[0]), colormap='Blues')
 
-        ax.AddArtist(artist)
+        ax.add_artist(artist)
 
-        figure.AddAxes(ax)
+        figure.add_axes(ax)
 
-        figure.Show()
+        figure.show()
 
     def to_scipy_sparse(self) -> coo_matrix:
         """

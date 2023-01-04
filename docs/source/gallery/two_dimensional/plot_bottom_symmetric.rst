@@ -41,7 +41,7 @@ Example: eigenmodes 1
     from PyFinitDiff.Sparse2D import FiniteDifference2D
     from PyFinitDiff.Utils import get_2D_circular_mesh_triplet
 
-    n_y = n_x = 60
+    n_y = n_x = 80
 
 
     sparse_instance = FiniteDifference2D(n_x=n_x,
@@ -67,7 +67,7 @@ Example: eigenmodes 1
 
     dynamic_triplet = sparse_instance.triplet + mesh_triplet
 
-    eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_dense(), k=4, which='LM', sigma=1.4444)
+    eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_scipy_sparse(), k=4, which='LM', sigma=1.4444)
 
     shape = [sparse_instance.n_x, sparse_instance.n_y]
 
@@ -77,10 +77,10 @@ Example: eigenmodes 1
         Vector = eigen_vectors[:, i].real.reshape(shape)
         ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
         artist = Mesh(scalar=Vector)
-        ax.AddArtist(artist)
-        figure.AddAxes(ax)
+        ax.add_artist(artist)
+        figure.add_axes(ax)
 
-    figure.Show()
+    figure.show()
 
 
     # -
@@ -88,7 +88,7 @@ Example: eigenmodes 1
 
 
 .. image-sg:: /gallery/two_dimensional/images/sphx_glr_plot_bottom_symmetric_001.png
-   :alt: , eigenvalues:  1.433+0.000j, eigenvalues:  1.415+0.000j, eigenvalues:  1.392+0.000j, eigenvalues:  1.384+0.000j
+   :alt: , eigenvalues:  1.438+0.000j, eigenvalues:  1.427+0.000j, eigenvalues:  1.414+0.000j, eigenvalues:  1.409+0.000j
    :srcset: /gallery/two_dimensional/images/sphx_glr_plot_bottom_symmetric_001.png
    :class: sphx-glr-single-img
 
@@ -105,7 +105,7 @@ Example: eigenmodes 1
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.576 seconds)
+   **Total running time of the script:** ( 0 minutes  2.637 seconds)
 
 
 .. _sphx_glr_download_gallery_two_dimensional_plot_bottom_symmetric.py:
