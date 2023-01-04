@@ -23,7 +23,7 @@ from PyFinitDiff.Utils import get_2D_circular_mesh_triplet
 n_y = n_x = 60
 
 
-sparse_instance = FiniteDifference2D(n_x=n_x, 
+sparse_instance = FiniteDifference2D(n_x=n_x
                                      n_y=n_y,
                                      dx=1,
                                      dy=1,
