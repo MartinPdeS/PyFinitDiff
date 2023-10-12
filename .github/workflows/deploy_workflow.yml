@@ -1,0 +1,38 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: write
+
+jobs:
+  Ubuntu_x86_64:
+    uses: MartinPdeS/PyFinitDiff/.github/workflows/build_ubuntu_x86_64.yml@master
+    secrets: inherit
+    with:
+      python_version: "[['3.10', 'cp310']]"
+
+  job_post_coverage:
+    needs: [Ubuntu_x86_64]
+    uses: MartinPdeS/PyFinitDiff/.github/workflows/sub_deploy_coverage_badge.yml@master
+    secrets: inherit
+    with:
+      python_version: "3.10"
+
+  job_build_documentation:
+    needs: [Ubuntu_x86_64]
+    uses: MartinPdeS/PyFinitDiff/.github/workflows/sub_deploy_documentation.yml@master
+    secrets: inherit
+    with:
+      python_version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
+
+  job_publish_wheel:
+    needs: [Ubuntu_x86_64]
+    uses: MartinPdeS/PyFinitDiff/.github/workflows/sub_deploy_pypi.yml@master
+    secrets: inherit
+    with:
+      python_version: "3.10"
