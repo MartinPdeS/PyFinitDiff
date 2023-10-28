@@ -154,7 +154,7 @@ class FiniteDifference2D():
     """ Derivative order to convert into finit-difference matrix. """
     accuracy: int = 2
     """ Accuracy of the derivative approximation [error is inversly proportional to the power of that value]. """
-    boundaries: Boundaries2D = field(default=Boundaries2D())
+    boundaries: Boundaries2D = field(default_factory=Boundaries2D())
     """ Values of the four possible boundaries of the system. """
 
     def __post_init__(self):
