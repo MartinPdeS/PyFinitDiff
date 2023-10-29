@@ -1,38 +1,51 @@
 name: Deploy
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "master" ]
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  Ubuntu_x86_64:
-    uses: MartinPdeS/PyFinitDiff/.github/workflows/build_ubuntu_x86_64.yml@master
-    secrets: inherit
-    with:
-      python_version: "[['3.10', 'cp310']]"
+    build_pure_python:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: MartinPdeS/MPSActions/build_pure_python_package@master
+            with:
+                python-version: '3.10'
 
-  job_post_coverage:
-    needs: [Ubuntu_x86_64]
-    uses: MartinPdeS/PyFinitDiff/.github/workflows/sub_deploy_coverage_badge.yml@master
-    secrets: inherit
-    with:
-      python_version: "3.10"
+    publish_coverage:
+        if: "contains(github.event.head_commit.message, '[publish]')"
+        needs: [build_pure_python]
+        runs-on: ubuntu-latest
+        steps:
+          - uses: MartinPdeS/MPSActions/publish_coverage@master
+            with:
+                package-name: PyFinitDiff
+                python-version: "3.10"
+                auth: ${{ secrets.MPdS_gist_token }}
+                gistID: c4f12a9ab97461a9453d9a174ae88e17
 
-  job_build_documentation:
-    needs: [Ubuntu_x86_64]
-    uses: MartinPdeS/PyFinitDiff/.github/workflows/sub_deploy_documentation.yml@master
-    secrets: inherit
-    with:
-      python_version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
+    publish_documentation:
+        if: "contains(github.event.head_commit.message, '[publish]')"
+        needs: [build_pure_python]
+        runs-on: ubuntu-latest
+        steps:
+          - uses: MartinPdeS/MPSActions/publish_documentation@master
+            with:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                package-name: PyFinitDiff
+                python-version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
 
-  job_publish_wheel:
-    needs: [Ubuntu_x86_64]
-    uses: MartinPdeS/PyFinitDiff/.github/workflows/sub_deploy_pypi.yml@master
-    secrets: inherit
-    with:
-      python_version: "3.10"
+    publish_wheel:
+        if: "contains(github.event.head_commit.message, '[publish]')"
+        needs: [build_pure_python, publish_documentation, publish_coverage]
+        runs-on: ubuntu-latest
+        steps:
+          - uses: MartinPdeS/MPSActions/publish_pypi@master
+            with:
+                python-version: "3.10"
+                password: ${{ secrets.PYPI_API_TOKEN }}
