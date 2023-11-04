@@ -26,8 +26,8 @@ jobs:
             with:
                 package-name: PyFinitDiff
                 python-version: "3.10"
-                auth: ${{ secrets.MPdS_gist_token }}
-                gistID: c4f12a9ab97461a9453d9a174ae88e17
+                auth: ${{ secrets.GIST_TOKEN }}
+                gistID: f0955be398d59efac69042c1b0fbece2
 
     publish_documentation:
         if: "contains(github.event.head_commit.message, '[publish]')"
