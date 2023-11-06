@@ -26,6 +26,8 @@ sparse_instance = SparseFD(
     boundaries=Boundaries2D()
 )
 
-sparse_instance.triplet.plot()
+figure = sparse_instance.triplet.plot()
+
+_ = figure.show()
 
 # -

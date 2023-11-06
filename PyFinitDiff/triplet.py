@@ -261,10 +261,11 @@ class Triplet():
         )
 
         ax.add_mesh(
-            scalar=numpy.flip(self.to_dense(), axis=[0]), 
+            scalar=numpy.flip(self.to_dense(), axis=[0]),
             colormap='Blues',
-            show_colorbar=True
         )
+
+        ax.add_colorbar()
 
         return figure
 

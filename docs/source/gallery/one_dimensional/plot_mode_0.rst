@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_one_dimensional_plot_mode_0.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_one_dimensional_plot_mode_0.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -31,17 +31,16 @@ Example: 1D eigenmodes 0
    * - derivative: 2
    * - accuracy: 6
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-62
+.. GENERATED FROM PYTHON SOURCE LINES 15-60
 
 .. code-block:: python3
-   :lineno-start: 16
 
 
     from scipy.sparse import linalg
 
     from PyFinitDiff.sparse1D import FiniteDifference1D
     from PyFinitDiff.utils import get_1D_circular_mesh_triplet
-    from MPSPlots.Render2D import Scene2D, Axis, Line
+    from MPSPlots.render2D import SceneList
     from PyFinitDiff.boundaries import Boundaries1D
 
     n_x = 100
@@ -70,16 +69,14 @@ Example: 1D eigenmodes 0
         sigma=1.4444
     )
 
-    figure = Scene2D(unit_size=(3, 3), tight_layout=True)
+    figure = SceneList(unit_size=(3, 3), tight_layout=True, ax_orientation='horizontal')
 
     for i in range(4):
         Vector = eigen_vectors[:, i].real.reshape([sparse_instance.n_x])
-        ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
-        artist = Line(y=Vector)
-        ax.add_artist(artist)
-        figure.add_axes(ax)
+        ax = figure.append_ax(title=f'eigenvalues: \n{eigen_values[i]:.3f}')
+        _ = ax.add_line(y=Vector)
 
-    figure.show()
+    _ = figure.show()
 
 
     # -
@@ -92,19 +89,13 @@ Example: 1D eigenmodes 0
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    Scene2D(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.225 seconds)
+   **Total running time of the script:** (0 minutes 0.400 seconds)
 
 
 .. _sphx_glr_download_gallery_one_dimensional_plot_mode_0.py:
@@ -112,6 +103,8 @@ Example: 1D eigenmodes 0
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

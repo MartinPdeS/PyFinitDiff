@@ -17,7 +17,7 @@ from scipy.sparse import linalg
 
 from PyFinitDiff.sparse1D import FiniteDifference1D
 from PyFinitDiff.utils import get_1D_circular_mesh_triplet
-from MPSPlots.Render2D import Scene2D, Axis, Line
+from MPSPlots.render2D import SceneList
 from PyFinitDiff.boundaries import Boundaries1D
 
 n_x = 100
@@ -46,16 +46,14 @@ eigen_values, eigen_vectors = linalg.eigs(
     sigma=1.4444
 )
 
-figure = Scene2D(unit_size=(3, 3), tight_layout=True)
+figure = SceneList(unit_size=(3, 3), tight_layout=True, ax_orientation='horizontal')
 
 for i in range(4):
     Vector = eigen_vectors[:, i].real.reshape([sparse_instance.n_x])
-    ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
-    artist = Line(y=Vector)
-    ax.add_artist(artist)
-    figure.add_axes(ax)
+    ax = figure.append_ax(title=f'eigenvalues: \n{eigen_values[i]:.3f}')
+    _ = ax.add_line(y=Vector)
 
-figure.show()
+_ = figure.show()
 
 
 # -

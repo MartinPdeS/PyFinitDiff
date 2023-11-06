@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_triplets_plot_triplets_1.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_triplets_plot_triplets_1.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -31,10 +31,9 @@ Example: triplets 1
    * - derivative: 2
    * - accuracy: 4
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-33
+.. GENERATED FROM PYTHON SOURCE LINES 14-35
 
 .. code-block:: python3
-   :lineno-start: 16
 
 
 
@@ -52,7 +51,9 @@ Example: triplets 1
         boundaries=Boundaries2D()
     )
 
-    sparse_instance.triplet.plot()
+    figure = sparse_instance.triplet.plot()
+
+    _ = figure.show()
 
     # -
 
@@ -70,7 +71,7 @@ Example: triplets 1
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.125 seconds)
+   **Total running time of the script:** (0 minutes 0.191 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_1.py:
@@ -78,6 +79,8 @@ Example: triplets 1
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

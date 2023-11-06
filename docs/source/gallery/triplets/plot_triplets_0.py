@@ -25,6 +25,8 @@ sparse_instance = FiniteDifference2D(
     boundaries=Boundaries2D()
 )
 
-sparse_instance.triplet.plot()
+figure = sparse_instance.triplet.plot()
+
+_ = figure.show()
 
 # -

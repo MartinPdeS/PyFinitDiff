@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_two_dimensional_plot_left_symmetric.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_two_dimensional_plot_left_symmetric.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -29,14 +29,13 @@ Example: eigenmodes 3
 |      -      |     sym    |     zero     |   zero     |   zero     |
 +-------------+------------+--------------+------------+------------+
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-66
+.. GENERATED FROM PYTHON SOURCE LINES 13-64
 
 .. code-block:: python3
-   :lineno-start: 14
 
 
     from scipy.sparse import linalg
-    from MPSPlots.Render2D import Scene2D, Axis, Mesh
+    from MPSPlots.render2D import SceneList
 
     from PyFinitDiff.sparse2D import FiniteDifference2D
     from PyFinitDiff.utils import get_2D_circular_mesh_triplet
@@ -74,14 +73,12 @@ Example: eigenmodes 3
         sigma=1.4444
     )
 
-    figure = Scene2D(unit_size=(3, 3), tight_layout=True)
+    figure = SceneList(unit_size=(3, 3), tight_layout=True, ax_orientation='horizontal')
 
     for i in range(4):
         Vector = eigen_vectors[:, i].real.reshape(sparse_instance.shape)
-        ax = Axis(row=0, col=i, title=f'eigenvalues: \n{eigen_values[i]:.3f}')
-        artist = Mesh(scalar=Vector)
-        ax.add_artist(artist)
-        figure.add_axes(ax)
+        ax = figure.append_ax(title=f'eigenvalues: \n{eigen_values[i]:.3f}')
+        ax.add_mesh(scalar=Vector)
 
     figure.show()
 
@@ -101,14 +98,14 @@ Example: eigenmodes 3
  .. code-block:: none
 
 
-    Scene2D(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='')
+    SceneList(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='', ax_orientation='horizontal')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.905 seconds)
+   **Total running time of the script:** (0 minutes 5.270 seconds)
 
 
 .. _sphx_glr_download_gallery_two_dimensional_plot_left_symmetric.py:
@@ -116,6 +113,8 @@ Example: eigenmodes 3
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

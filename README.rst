@@ -55,7 +55,7 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :alt: Documentation Status
 
 
-.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/8187f1d56dee6f004428f4d4298d024d/raw/f835afd55a4a0164a440f6681f8f332973afb815/PyFinitDiff_coverage_badge.json
+.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/f0955be398d59efac69042c1b0fbece2/raw/6b0b0ab45384e6c451f008c91f684bc8f1f6b76d/PyFinitDiffcoverage_badge.json
 
 
 .. |PyPi| image:: https://badge.fury.io/py/PyFinitDiff.svg
