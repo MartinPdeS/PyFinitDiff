@@ -1,6 +1,6 @@
-Jinja2
-numpydoc
-Babel
-sphinx >= 3, != 5.2.0
-sphinx_gallery
-coverage
+numpydoc==1.5.0
+sphinx>=5.1.1
+sphinx-gallery>=0.11.1
+sphinx-rtd-theme>=1.0.0
+docutils==0.17.1
+pydata-sphinx-theme
