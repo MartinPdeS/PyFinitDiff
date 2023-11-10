@@ -1,3 +1,7 @@
+
+__accuracy_list__ = [2, 4, 6]
+__derivative_list__ = [1, 2]
+
 coefficients = \
     {
         'd1':
