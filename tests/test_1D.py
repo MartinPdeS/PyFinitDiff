@@ -17,8 +17,8 @@ boundaries = [
 
 
 @pytest.mark.parametrize("boundaries", boundaries)
-@pytest.mark.parametrize('accuracy', accuracies)
-@pytest.mark.parametrize('derivative', derivatives)
+@pytest.mark.parametrize('accuracy', accuracies, ids=accuracies)
+@pytest.mark.parametrize('derivative', derivatives, ids=derivatives)
 def test_0(boundaries, accuracy, derivative):
     sparse_instance = FiniteDifference1D(
         n_x=20,

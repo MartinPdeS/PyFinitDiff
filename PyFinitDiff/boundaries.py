@@ -20,12 +20,8 @@ class BoundariesBase:
             raise ValueError("Same-axis symmetries shouldn't be set on both end")
 
     def assert_boundary_acceptable(self, boundary_string: str) -> None:
-        boundary = getattr(self, boundary_string)
-        if boundary not in self.acceptable_boundary:
-            raise ValueError(
-                f"Error: {boundary_string} boundary: {boundary} argument not accepted."
-                f"{self.acceptable_boundary}"
-            )
+        boundary_value = getattr(self, boundary_string)
+        assert boundary_value in self.acceptable_boundary, f"Error: {boundary_string} boundary: {boundary_value} argument not accepted. Input must be in: {self.acceptable_boundary}"
 
     @property
     def dictionary(self) -> dict:
@@ -47,7 +43,7 @@ class Boundaries2D(BoundariesBase):
 
     all_boundaries = ['left', 'right', 'top', 'bottom']
 
-    def get_boundary_pairs(self):
+    def get_boundary_pairs(self) -> list:
         return [(self.left, self.right), (self.top, self.bottom)]
 
     @property
@@ -78,7 +74,7 @@ class Boundaries1D(BoundariesBase):
 
     all_boundaries = ['left', 'right']
 
-    def get_boundary_pairs(self):
+    def get_boundary_pairs(self) -> list:
         return [(self.left, self.right)]
 
     @property

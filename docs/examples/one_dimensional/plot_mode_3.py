@@ -33,8 +33,8 @@ sparse_instance = FiniteDifference1D(
 mesh_triplet = get_1D_circular_mesh_triplet(
     n_x=n_x,
     radius=60,
-    value0=1,
-    value1=1.4444,
+    value_out=1,
+    value_in=1.4444,
     x_offset=+100
 )
 

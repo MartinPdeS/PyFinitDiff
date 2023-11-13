@@ -56,8 +56,8 @@ Example: 1D eigenmodes 2
     mesh_triplet = get_1D_circular_mesh_triplet(
         n_x=n_x,
         radius=60,
-        value0=1,
-        value1=1.4444,
+        value_out=1,
+        value_in=1.4444,
         x_offset=+100
     )
 
@@ -95,14 +95,14 @@ Example: 1D eigenmodes 2
  .. code-block:: none
 
 
-    SceneList(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='', ax_orientation='horizontal')
+    SceneList(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='', padding=1.0, ax_orientation='horizontal')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.383 seconds)
+   **Total running time of the script:** (0 minutes 0.359 seconds)
 
 
 .. _sphx_glr_download_gallery_one_dimensional_plot_mode_3.py:

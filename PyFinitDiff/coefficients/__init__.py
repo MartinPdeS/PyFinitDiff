@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from dataclasses import dataclass
+from tabulate import tabulate
 import numpy
 
 from .central import coefficients as central_coefficent
@@ -47,25 +48,60 @@ class FiniteCoefficients():
         self.derivative_string = f'd{self.derivative}'
         self.accuracy_string = f'a{self.accuracy}'
 
-        match self.coefficient_type.lower():
-            case 'central':
-                self.module = central
-            case 'forward':
-                self.module = forward
-            case 'backward':
-                self.module = backward
+    def __setattr__(self, attribute, value):
+        if attribute == "coefficient_type":
+            assert value in ['central', 'forward', 'backward']
+            super().__setattr__(attribute, value)
 
-        assert self.accuracy in self.module.__accuracy_list__, f'Error accuracy: {self.accuracy} has to be in the list {self.module.__accuracy_list__}'
-        assert self.derivative in self.module.__derivative_list__, f'Error derivative: {self.derivative} has to be in the list {self.module.__derivative_list__}'
+        if attribute == "accuracy":
+            assert value in self.module.__accuracy_list__, f"Accuracy: {value} is not avaible for this configuration. Valid in put: {self.module.__accuracy_list__}"
+            super().__setattr__(attribute, value)
 
-        self.coefficients_dictionnary = self.module.coefficients
-        coefficients_array = self.coefficients_dictionnary[self.derivative_string][self.accuracy_string]
+        if attribute == "derivative":
+            assert value in self.module.__derivative_list__, f"Derivative: {value} is not avaible for this configuration. Valid in put: {self.module.__derivative_list__}"
+            super().__setattr__(attribute, value)
+
+    def get_coeffcient(self) -> numpy.ndarray:
+        """
+        Gets the finit difference coeffcients.
+
+        :returns:   The coeffcient.
+        :rtype:     numpy.ndarray
+        """
+        coefficients_dictionnary = self.module.coefficients
+
+        coefficients_array = coefficients_dictionnary[f"d{self.derivative}"][f"a{self.accuracy}"]
 
         coefficients_array = numpy.array(coefficients_array)
 
         reduced_coefficients = coefficients_array[coefficients_array[:, 1] != 0]
 
-        self.array = reduced_coefficients
+        return reduced_coefficients
+
+    @property
+    def array(self) -> numpy.ndarray:
+        return self.get_coeffcient()
+
+    @property
+    def module(self) -> object:
+        """
+        Returns the right module depending on which
+        type of coefficient ones need. The method also asserts
+        that the right accuracy and derivative exists on that module.
+
+        :returns:   The module.
+        :rtype:     object
+        """
+        match self.coefficient_type.lower():
+            case 'central':
+                return central
+            case 'forward':
+                return forward
+            case 'backward':
+                return backward
+
+        assert self.accuracy in self.module.__accuracy_list__, f'Error accuracy: {self.accuracy} has to be in the list {self.module.__accuracy_list__}'
+        assert self.derivative in self.module.__derivative_list__, f'Error derivative: {self.derivative} has to be in the list {self.module.__derivative_list__}'
 
     @property
     def index(self) -> numpy.ndarray:
@@ -78,4 +114,9 @@ class FiniteCoefficients():
     def __iter__(self) -> tuple[int, float]:
         for index, values in zip(self.index, self.values):
             yield index, values
+
+    def print(self):
+        table = tabulate(self.array, headers=['Index', 'Value'])
+        print(table)
+
 # -

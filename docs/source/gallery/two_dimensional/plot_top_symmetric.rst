@@ -58,8 +58,8 @@ Example: eigenmodes 8
     mesh_triplet = get_2D_circular_mesh_triplet(
         n_x=n_x,
         n_y=n_y,
-        value0=1.0,
-        value1=1.4444,
+        value_out=1.0,
+        value_in=1.4444,
         x_offset=0,
         y_offset=+100,
         radius=70
@@ -101,14 +101,14 @@ Example: eigenmodes 8
  .. code-block:: none
 
 
-    SceneList(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='', ax_orientation='horizontal')
+    SceneList(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='', padding=1.0, ax_orientation='horizontal')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.866 seconds)
+   **Total running time of the script:** (0 minutes 0.527 seconds)
 
 
 .. _sphx_glr_download_gallery_two_dimensional_plot_top_symmetric.py:

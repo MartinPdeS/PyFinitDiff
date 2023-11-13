@@ -24,7 +24,10 @@ class FiniteDifference2D():
     symmetries: Dict[str, str] = field(default_factory=lambda: ({'left': 0, 'right': 0, 'top': 0, 'bottom': 0}))
 
     def __post_init__(self):
-        self.finit_coefficient = FinitCoefficients(derivative=self.derivative, accuracy=self.accuracy)
+        self.finit_coefficient = FinitCoefficients(
+            derivative=self.derivative,
+            accuracy=self.accuracy
+        )
 
     @property
     def size(self):
@@ -34,7 +37,7 @@ class FiniteDifference2D():
     def shape(self):
         return [self.size, self.size]
 
-    def _set_right_boundary_(self, symmetry, mesh):
+    def _set_right_boundary_(self, symmetry, mesh: numpy.ndarray) -> numpy.ndarray:
         if symmetry in ['symmetric', 1]:
             for idx, value in self.finit_coefficient.Central().items():
                 mesh[self.Index.i == self.Index.j + idx] = (value if idx == 0 else 2 * value if idx > 0 else 0)
@@ -53,7 +56,7 @@ class FiniteDifference2D():
 
         return mesh
 
-    def _set_left_boundary_(self, symmetry, mesh):
+    def _set_left_boundary_(self, symmetry, mesh: numpy.ndarray) -> numpy.ndarray:
         if symmetry in ['symmetric', 1]:
             for idx, value in self.finit_coefficient.Central().items():
                 mesh[self.Index.i == self.Index.j + idx] = (value if idx == 0 else 2 * value if idx < 0 else 0)
@@ -72,7 +75,7 @@ class FiniteDifference2D():
 
         return mesh
 
-    def _set_top_boundary_(self, symmetry, mesh):
+    def _set_top_boundary_(self, symmetry, mesh: numpy.ndarray) -> numpy.ndarray:
         if symmetry in ['symmetric', 1]:
             for idx, value in self.finit_coefficient.Central().items():
                 mesh[self.Index.i == self.Index.j + idx * self.n_y] = (value if idx == 0 else 2 * value if idx > 0 else 0)
@@ -91,7 +94,7 @@ class FiniteDifference2D():
 
         return mesh
 
-    def _set_bottom_boundary_(self, symmetry, mesh):
+    def _set_bottom_boundary_(self, symmetry, mesh: numpy.ndarray) -> numpy.ndarray:
         if symmetry in ['symmetric', 1]:
             for idx, value in self.finit_coefficient.Central().items():
                 mesh[self.Index.i == self.Index.j + idx * self.n_y] = (value if idx == 0 else 2 * value if idx < 0 else 0)
@@ -110,7 +113,7 @@ class FiniteDifference2D():
 
         return mesh
 
-    def _compute_slices_(self):
+    def _compute_slices_(self) -> None:
         self.slice_right, self.slice_left, self.slice_bottom, self.slice_top = self._get_zeros_(n=4, Type=bool)
 
         for offset in range(1, self.finit_coefficient.offset_index + 1):
@@ -125,20 +128,20 @@ class FiniteDifference2D():
         for offset in range(1, self.finit_coefficient.offset_index + 1):
             self.slice_bottom[:offset * self.n_y, :] = True
 
-    def _get_x_diagonal_(self):
+    def _get_x_diagonal_(self) -> None:
         for idx, value in self.finit_coefficient.Central().items():
             self.x_meshes.center[self.Index.i == self.Index.j + idx] = value
 
         self.x_meshes.right = self._set_right_boundary_(self.symmetries['right'], self.x_meshes.right)
         self.x_meshes.left = self._set_left_boundary_(self.symmetries['left'], self.x_meshes.left)
 
-    def _get_zeros_(self, n, Type=float):
+    def _get_zeros_(self, n, Type=float) -> list:
         return [np.zeros(self.shape).astype(Type) for i in range(n)]
 
-    def _get_ones_(self, n, Type=float):
+    def _get_ones_(self, n, Type=float) -> list:
         return [np.ones(self.shape).astype(Type) for i in range(n)]
 
-    def _compute_meshes_(self):
+    def _compute_meshes_(self) -> None:
         self.x_meshes = NameSpace(right=self._get_zeros_(1)[0],
                                  left=self._get_zeros_(1)[0],
                                  center=self._get_zeros_(1)[0])
@@ -147,7 +150,7 @@ class FiniteDifference2D():
                                  bottom=self._get_zeros_(1)[0],
                                  center=self._get_zeros_(1)[0])
 
-    def _slices_meshes_(self):
+    def _slices_meshes_(self) -> None:
         if self.naive:
             self.y_meshes.bottom = 0
             self.y_meshes.top = 0
@@ -164,7 +167,7 @@ class FiniteDifference2D():
             self.x_meshes.left[~self.slice_left] = 0
             self.x_meshes.center[self.slice_right + self.slice_left] = 0
 
-    def _add_meshes_(self):
+    def _add_meshes_(self) -> None:
         self.M = (self.y_meshes.top + self.y_meshes.bottom + self.y_meshes.center) / (self.dx**self.finit_coefficient.derivative)  # Y derivative
 
         self.M += (self.x_meshes.left + self.x_meshes.right + self.x_meshes.center) / (self.dy**self.finit_coefficient.derivative)  # X derivative
@@ -178,7 +181,7 @@ class FiniteDifference2D():
         self.y_meshes.top = self._set_top_boundary_(self.symmetries['top'], self.y_meshes.top)
         self.y_meshes.bottom = self._set_bottom_boundary_(self.symmetries['bottom'], self.y_meshes.bottom)
 
-    def Plot(self, Text=False):
+    def plot(self, add_text=False):
         from pylab import cm
         cmap = cm.get_cmap('viridis', 101)
 
@@ -189,7 +192,7 @@ class FiniteDifference2D():
         Axes.grid(True)
         im0 = Axes.imshow(Data, cmap=cmap)
         plt.colorbar(im0, ax=Axes)
-        if Text:
+        if add_text:
             for (i, j), z in np.ndenumerate(Data.astype(float)):
                 Axes.text(j, i, '{:.0e}'.format(z), ha='center', va='center', size=8)
 

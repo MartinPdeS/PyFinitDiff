@@ -143,7 +143,10 @@ class FiniteDifference1D():
     """ Values of the four possible boundaries of the system. """
 
     def __post_init__(self):
-        self.finit_coefficient = FinitCoefficients(derivative=self.derivative, accuracy=self.accuracy)
+        self.finit_coefficient = FinitCoefficients(
+            derivative=self.derivative,
+            accuracy=self.accuracy
+        )
         self._triplet = None
 
     @property
@@ -157,15 +160,15 @@ class FiniteDifference1D():
         return self._triplet
 
     @property
-    def size(self):
+    def size(self) -> int:
         return self.n_x
 
     @property
-    def shape(self):
+    def shape(self) -> list:
         return [self.size, self.size]
 
     @property
-    def _dx(self):
+    def _dx(self) -> float:
         return self.dx ** self.derivative
 
     def offset_to_boundary_name(self, offset: int) -> str:
