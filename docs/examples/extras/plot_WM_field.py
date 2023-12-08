@@ -17,8 +17,8 @@ n_x = n_y = 80
 sparse_instance = FiniteDifference2D(
     n_x=n_x,
     n_y=n_y,
-    dx=100 / n_x,
-    dy=100 / n_y,
+    dx=1000 / n_x,
+    dy=1000 / n_y,
     derivative=2,
     accuracy=2,
     boundaries=Boundaries2D(top='symmetric')
