@@ -61,8 +61,9 @@ examples_dirs = [
 subsection_order = ExplicitOrder(
     [
         "../examples/triplets",
-        "../examples/one_dimensional",
-        "../examples/two_dimensional",
+        "../examples/eigenmodes_1d",
+        "../examples/eigenmodes_2d",
+        "../examples/extras",
     ]
 )
 

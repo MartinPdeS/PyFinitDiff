@@ -5,6 +5,7 @@ PyFinitDiff
 |docs|
 |unittest|
 |PyPi|
+|PyPi_download|
 
 A Python package to compute finit-difference matrices with an intuitive API.
 
@@ -37,6 +38,21 @@ As such, with the adequate configuration one can simply do
 
 ----
 
+Testing
+*******
+
+To test localy (with cloning the GitHub repository) you'll need to install the dependencies and run the coverage command as
+
+.. code:: console
+   >>> git clone https://github.com/MartinPdeS/PyFinitDiff.git
+   >>> cd PyFinitDiff
+   >>> pip install -r requirements/requirements.txt
+   >>> coverage run --source=PyFinitDiff --module pytest --verbose tests
+   >>> coverage report --show-missing
+
+----
+
+
 Contact Information
 *******************
 
@@ -60,3 +76,10 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
 
 .. |PyPi| image:: https://badge.fury.io/py/PyFinitDiff.svg
    :target: https://pypi.org/project/PyFinitDiff/
+
+.. |PyPi_download| image:: https://img.shields.io/pypi/dm/pyfinitdiff.svg
+   :target: https://pypistats.org/packages/pyfinitdiff
+
+
+
+
