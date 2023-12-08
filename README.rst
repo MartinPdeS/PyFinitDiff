@@ -71,7 +71,7 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :target: hhttps://pyfinitdiff.readthedocs.io/en/latest/
    :alt: Documentation Status
 
-.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.github.com/MartinPdeS/19aef38017fa4be1dc71b6f5d853a932/raw
+.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/19aef38017fa4be1dc71b6f5d853a932/raw
 
 .. |PyPi| image:: https://badge.fury.io/py/PyFinitDiff.svg
    :target: https://pypi.org/project/PyFinitDiff/
