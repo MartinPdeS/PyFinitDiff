@@ -43,7 +43,8 @@ Testing
 
 To test localy (with cloning the GitHub repository) you'll need to install the dependencies and run the coverage command as
 
-.. code:: console
+.. code:: python
+
    >>> git clone https://github.com/MartinPdeS/PyFinitDiff.git
    >>> cd PyFinitDiff
    >>> pip install -r requirements/requirements.txt
@@ -70,9 +71,7 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :target: hhttps://pyfinitdiff.readthedocs.io/en/latest/
    :alt: Documentation Status
 
-
-.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/f0955be398d59efac69042c1b0fbece2/raw/6b0b0ab45384e6c451f008c91f684bc8f1f6b76d/PyFinitDiffcoverage_badge.json
-
+.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.github.com/MartinPdeS/19aef38017fa4be1dc71b6f5d853a932/raw
 
 .. |PyPi| image:: https://badge.fury.io/py/PyFinitDiff.svg
    :target: https://pypi.org/project/PyFinitDiff/
