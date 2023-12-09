@@ -68,7 +68,7 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :target: https://www.python.org/
 
 .. |docs| image:: https://readthedocs.org/projects/pyfinitdiff/badge/?version=latest
-   :target: hhttps://pyfinitdiff.readthedocs.io/en/latest/
+   :target: https://pyfinitdiff.readthedocs.io/en/latest/
    :alt: Documentation Status
 
 .. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/19aef38017fa4be1dc71b6f5d853a932/raw
