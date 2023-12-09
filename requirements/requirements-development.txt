@@ -1,3 +1,17 @@
--r requirements.txt
--r requirements-documentation.txt
--r requirements-testing.txt
+numpydoc==1.5.0
+sphinx>=5.1.1
+sphinx-gallery>=0.11.1
+sphinx-rtd-theme>=1.0.0
+docutils==0.17.1
+pydata-sphinx-theme
+
+pytest>=0.6
+pytest-cov>=2.0
+pytest-json-report
+coverage
+
+numpy
+scipy
+matplotlib
+MPSPlots
+tabulate
