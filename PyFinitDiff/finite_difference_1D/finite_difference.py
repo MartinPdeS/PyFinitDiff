@@ -2,21 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from dataclasses import dataclass, field
-from typing import Dict
-
-from PyFinitDiff.triplet import Triplet
-from PyFinitDiff.coefficients import FiniteCoefficients
 import PyFinitDiff.finite_difference_1D as module
+from PyFinitDiff.coefficients import FiniteCoefficients
 
 
 @dataclass
 class FiniteDifference():
     """
-    This class represent a specific finit difference configuration,
-        which is defined with the descretization of the mesh, the derivative order,
-        accuracy and the boundary condition that are defined.
-        More information is providided at the following link:
-        'math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf'
+    This class represent a specific finit difference configuration, which is defined with the descretization of the mesh, the derivative order,
+    accuracy and the boundary condition that are defined. More information is providided at the following link: 'math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf'
     """
     n_x: int
     """ Number of point in the x direction """
@@ -26,10 +20,18 @@ class FiniteDifference():
     """ Derivative order to convert into finit-difference matrix. """
     accuracy: int = 2
     """ Accuracy of the derivative approximation [error is inversly proportional to the power of that value]. """
-    boundaries: Dict[str, str] = field(default_factory=lambda: ({'left': 'zero', 'right': 'zero'}))
+    boundaries: module.Boundaries = field(default_factory=module.Boundaries())
     """ Values of the four possible boundaries of the system. """
+    x_derivative: bool = True
+    """ Add the x derivative """
 
     def __post_init__(self):
+        self.mesh_info = module.MeshInfo(
+            n_x=self.n_x,
+            dx=self.dx,
+        )
+        self.boundaries.mesh_info = self.mesh_info
+
         self.finit_coefficient = FiniteCoefficients(
             derivative=self.derivative,
             accuracy=self.accuracy
@@ -40,65 +42,130 @@ class FiniteDifference():
     def triplet(self):
         """
         Triplet representing the non-nul values of the specific
-        finit-difference configuration.
+        finite-difference configuration.
+
         """
         if not self._triplet:
             self.construct_triplet()
         return self._triplet
 
     @property
-    def size(self) -> int:
-        return self.n_x
-
-    @property
-    def shape(self) -> list:
-        return [self.size, self.size]
-
-    @property
     def _dx(self) -> float:
         return self.dx ** self.derivative
 
-    def offset_to_boundary_name(self, offset: int) -> str:
-        if offset == 0:
-            return 'center'
-        elif offset < 0:
-            return 'left'
-        elif offset > 0:
-            return 'right'
+    @property
+    def _dy(self) -> float:
+        return self.dy ** self.derivative
 
-    def boundary_name_to_boundary_type(self, boundary_name: str) -> int:
-        match boundary_name:
-            case 'center':
-                return 0
-            case 'left':
-                return 1
-            case 'right':
-                return 2
+    def iterate_central_coefficient(
+            self,
+            coefficients: str,
+            offset_multiplier: int) -> tuple:
+        """
+        Iterate throught the given type coefficients
 
-    def construct_central_triplet(self):
-        diagonals = []
-        for offset, value in self.finit_coefficient.central:
-            boundary_name = self.offset_to_boundary_name(offset=offset)
-            boundary_type = self.boundary_name_to_boundary_type(boundary_name=boundary_name)
+        :param      coefficient_type:   The coefficient type
+        :type       coefficient_type:   str
+        :param      offset_multiplier:  The offset multiplier
+        :type       offset_multiplier:  int
 
+        :returns:   The offset, value, coefficient and boundary type
+        :rtype:     tuple
+        """
+        for offset, value in coefficients:
+            offset *= offset_multiplier
+
+            boundary = self.boundaries.offset_to_boundary(offset=offset)
+
+            yield offset, value, boundary
+
+    def _add_diagonal_coefficient(
+            self,
+            coefficient_type: str,
+            offset_multiplier: int,
+            delta: float) -> None:
+        """
+        Adds a diagonal coefficient to the list of diagonals.
+
+        :param      coefficient_type:   The coefficient type
+        :type       coefficient_type:   str
+        :param      diagonals:          The diagonals
+        :type       diagonals:          list
+        :param      offset_multiplier:  The offset multiplier
+        :type       offset_multiplier:  int
+        :param      delta:              The delta
+        :type       delta:              float
+
+        :returns:   No return
+        :rtype:     None
+        """
+        diagonal_set = module.DiagonalSet(mesh_info=self.mesh_info)
+
+        coefficients = getattr(self.finit_coefficient, coefficient_type)
+
+        iterator = self.iterate_central_coefficient(
+            coefficients=coefficients,
+            offset_multiplier=offset_multiplier
+        )
+
+        for offset, value, boundary in iterator:
             diagonal = module.ConstantDiagonal(
-                value=value,
-                size=self.n_x,
+                mesh_info=self.mesh_info,
                 offset=offset,
-                boundary=self.boundaries.dictionary.get(boundary_name),
-                boundary_type=boundary_type
+                boundary=boundary,
+                value=value / delta,
             )
 
-            diagonals.append(diagonal.triplet)
+            diagonal_set.append(diagonal)
 
-        triplet = diagonals[0]
+        diagonal_set.initialize_triplet()
 
-        for diagonal in diagonals[1:]:
-            triplet += diagonal
+        return diagonal_set
 
-        return triplet
+    def get_diagonal_set_full(self, offset_multiplier: int, delta: float) -> None:
+        """
+        Constructs and returns the central coefficents diagonals which is completed with
+        forward and backward coefficients if some 'nan' values are left.
 
-    def construct_triplet(self):
-        self._triplet = self.construct_central_triplet()
+        :param      offset_multiplier:  The offset multiplier
+        :type       offset_multiplier:  int
+        :param      delta:              The delta
+        :type       delta:              float
+
+        :returns:   No return
+        :rtype:     None
+        """
+        central_diagonal = self._add_diagonal_coefficient(
+            coefficient_type='central',
+            offset_multiplier=offset_multiplier,
+            delta=delta
+        )
+
+        forward_diagonal = self._add_diagonal_coefficient(
+            coefficient_type='forward',
+            offset_multiplier=offset_multiplier,
+            delta=delta
+        )
+
+        backward_diagonal = self._add_diagonal_coefficient(
+            coefficient_type='backward',
+            offset_multiplier=offset_multiplier,
+            delta=delta
+        )
+
+        central_diagonal.replace_nan_rows_with(forward_diagonal)
+
+        central_diagonal.replace_nan_rows_with(backward_diagonal)
+
+        return central_diagonal
+
+    def construct_triplet(self) -> None:
+        x_diagonals = self.get_diagonal_set_full(
+            offset_multiplier=1,
+            delta=self._dx
+        )
+
+        self._triplet = x_diagonals.triplet
+
 
 # -

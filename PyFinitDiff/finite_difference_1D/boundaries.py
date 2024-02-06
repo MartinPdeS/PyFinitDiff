@@ -1,22 +1,59 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import numpy
 from dataclasses import dataclass
-import dataclasses
 
 
-class BoundariesBase:
-    acceptable_boundary = ['zero', 'symmetric', 'anti-symmetric']
+@dataclass(frozen=True)
+class Boundary():
+    name: str
+    value: str
+    mesh_info: object
+
+    def get_factor(self) -> float:
+        match self.value:
+            case 'symmetric':
+                return +1
+            case 'anti-symmetric':
+                return -1
+            case 'zero':
+                return 0
+            case 'none':
+                return numpy.nan
+
+    def get_shift_vector(self, offset: int) -> numpy.ndarray:
+        offset = abs(offset)
+
+        match self.name.lower():
+            case 'center':
+                shift_vector = None
+            case 'right':
+                shift_vector = numpy.zeros(self.mesh_info.size)
+                shift_vector[:offset] = numpy.arange(offset)[::-1] + 1
+            case 'left':
+                shift_vector = numpy.zeros(self.mesh_info.size)
+                shift_vector[-offset - 1:] = - numpy.arange(offset + 1)
+
+        return shift_vector
+
+
+@dataclass()
+class Boundaries():
+    left: str = 'zero'
+    """ Value of the left boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
+    right: str = 'zero'
+    """ Value of the right boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
+
+    acceptable_boundary = ['zero', 'symmetric', 'anti-symmetric', 'none']
+
+    all_boundaries = ['left', 'right']
 
     def __post_init__(self) -> None:
         for boundary in self.all_boundaries:
             self.assert_boundary_acceptable(boundary_string=boundary)
 
-        for boundary_pair in self.get_boundary_pairs():
-            self.assert_both_boundaries_not_same(*boundary_pair)
-
     def assert_both_boundaries_not_same(self, boundary_0: str, boundary_1: str) -> None:
-        return
         if boundary_0 != 'zero' and boundary_1 != 'zero':
             raise ValueError("Same-axis symmetries shouldn't be set on both end")
 
@@ -24,33 +61,43 @@ class BoundariesBase:
         boundary_value = getattr(self, boundary_string)
         assert boundary_value in self.acceptable_boundary, f"Error: {boundary_string} boundary: {boundary_value} argument not accepted. Input must be in: {self.acceptable_boundary}"
 
-    @property
-    def dictionary(self) -> dict:
-        return {
-            field.name: getattr(self, field.name) for field in dataclasses.fields(self.__class__)
-        }
-
-
-@dataclass()
-class Boundaries(BoundariesBase):
-    left: str = 'zero'
-    """ Value of the left boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
-    right: str = 'zero'
-    """ Value of the right boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
-
-    all_boundaries = ['left', 'right']
-
     def get_boundary_pairs(self) -> list:
-        return [(self.left, self.right)]
+        return [(self.left, self.right), (self.top, self.bottom)]
 
-    @property
-    def x_symmetry(self) -> str:
-        if self.left == 'symmetric' or self.right == 'symmetric':
-            return 'symmetric'
-        elif self.left == 'anti-symmetric' or self.right == 'anti-symmetric':
-            return 'anti-symmetric'
+    def get_boundary(self, name: str) -> Boundary:
+        """
+        Return a specific instance of the boundary
+
+        :param      name:  The name
+        :type       name:  str
+
+        :returns:   The boundary.
+        :rtype:     Boundary
+        """
+        if not hasattr(self, name):
+            value = None
         else:
-            return 'zero'
+            value = getattr(self, name)
+
+        boundary = Boundary(
+            name=name,
+            value=value,
+            mesh_info=self.mesh_info
+        )
+
+        return boundary
+
+    def offset_to_boundary(self, offset: int) -> str:
+        if offset == 0:
+            return self.get_boundary('center')
+
+        if offset > 0:
+            if offset < self.mesh_info.n_x:
+                return self.get_boundary('right')
+
+        if offset < 0:
+            if offset > -self.mesh_info.n_x:
+                return self.get_boundary('left')
 
 
 # -
