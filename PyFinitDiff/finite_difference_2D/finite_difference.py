@@ -50,7 +50,7 @@ class FiniteDifference():
     def triplet(self):
         """
         Triplet representing the non-nul values of the specific
-        finit-difference configuration.
+        finite-difference configuration.
 
         """
         if not self._triplet:
@@ -82,9 +82,9 @@ class FiniteDifference():
         """
         for offset, value in coefficients:
             offset *= offset_multiplier
-            boundary = self.boundaries.offset_to_boundary(
-                offset=offset
-            )
+
+            boundary = self.boundaries.offset_to_boundary(offset=offset)
+
             yield offset, value, boundary
 
     def _add_diagonal_coefficient(
@@ -131,6 +131,18 @@ class FiniteDifference():
         return diagonal_set
 
     def get_diagonal_set_full(self, offset_multiplier: int, delta: float) -> None:
+        """
+        Constructs and returns the central coefficents diagonals which is completed with
+        forward and backward coefficients if some 'nan' values are left.
+
+        :param      offset_multiplier:  The offset multiplier
+        :type       offset_multiplier:  int
+        :param      delta:              The delta
+        :type       delta:              float
+
+        :returns:   No return
+        :rtype:     None
+        """
         central_diagonal = self._add_diagonal_coefficient(
             coefficient_type='central',
             offset_multiplier=offset_multiplier,
@@ -167,5 +179,6 @@ class FiniteDifference():
         )
 
         self._triplet = x_diagonals.triplet + y_diagonals.triplet
+
 
 # -

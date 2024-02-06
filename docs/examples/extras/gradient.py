@@ -3,23 +3,19 @@ Gradient of array
 =================
 
 """
-from PyFinitDiff.finite_difference_2D import get_array_gradient
+from PyFinitDiff.finite_difference_2D import get_array_derivative
 from PyFinitDiff.finite_difference_2D import Boundaries
 
 import numpy
-import matplotlib.pyplot as plt
+from MPSPlots.render2D import SceneList
 
-
-idx = numpy.linspace(-5, 5, 7)
-# x_array = numpy.exp(-idx**2)
-# y_array = numpy.exp(-idx**2)
-
-
-x_array = y_array = numpy.arange(7)
+idx = numpy.linspace(-5, 5, 100)
+x_array = numpy.exp(-idx**2)
+y_array = numpy.exp(-idx**2)
 
 y_array, x_array = numpy.meshgrid(x_array, y_array)
 
-mesh = x_array
+mesh = x_array * y_array
 
 condition = 'none'
 boundaries = Boundaries(
@@ -29,22 +25,29 @@ boundaries = Boundaries(
     right=condition,
 )
 
-gradient = get_array_gradient(
-    array=mesh,
-    accuracy=2,
-    order=1,
-    x_derivative=True,
-    y_derivative=True,
-    boundaries=boundaries
+scene = SceneList(
+    unit_size=(3, 3),
+    ax_orientation='horizontal'
 )
 
+ax = scene.append_ax(title='Initial mesh')
+ax.add_mesh(scalar=mesh)
 
-figure, ax = plt.subplots(1, 2)
+for derivative in [1, 2, 3]:
+    gradient = get_array_derivative(
+        array=mesh,
+        accuracy=6,
+        derivative=derivative,
+        x_derivative=True,
+        y_derivative=True,
+        boundaries=boundaries
+    )
 
-image = ax[0].imshow(mesh)
-image = ax[1].imshow(gradient)
+    ax = scene.append_ax(title=f'derivative: {derivative}')
 
-plt.show()
+    ax.add_mesh(scalar=gradient)
+
+scene.show()
 
 
 # -

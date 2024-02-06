@@ -6,9 +6,9 @@ import numpy
 import PyFinitDiff.finite_difference_2D as module
 
 
-def get_array_gradient(
+def get_array_derivative(
         array: numpy.ndarray,
-        order: int,
+        derivative: int,
         accuracy: int = 4,
         coefficient_type: str = 'central',
         dx: float = 1,
@@ -19,10 +19,10 @@ def get_array_gradient(
     """
     Gets the 2D gradient of an array array.
 
-    :param      array:             The array of which to compute the nth order gradient
+    :param      array:             The array of which to compute the nth derivative
     :type       array:             object
-    :param      order:             The order of the derivative
-    :type       order:             int
+    :param      derivative:        The order of the derivative
+    :type       derivative:        int
     :param      accuracy:          The accuracy for the derivative
     :type       accuracy:          int
     :param      coefficient_type:  The coefficient type
@@ -48,7 +48,7 @@ def get_array_gradient(
         n_y=n_y,
         dx=dx,
         dy=dy,
-        derivative=order,
+        derivative=derivative,
         accuracy=accuracy,
         boundaries=boundaries,
         x_derivative=x_derivative,
