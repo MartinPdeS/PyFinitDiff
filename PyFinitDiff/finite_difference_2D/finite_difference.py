@@ -1,68 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Self
-
-import numpy
 from dataclasses import dataclass, field
 import PyFinitDiff.finite_difference_2D as module
 from PyFinitDiff.coefficients import FiniteCoefficients
-from PyFinitDiff.triplet import Triplet
-
-
-@dataclass
-class DiagonalSet():
-    n_x: int
-    n_y: int
-    diagonals: list = field(default_factory=list)
-
-    def append(self, diagonal):
-        self.diagonals.append(diagonal)
-
-    def concatenate(self, other_diagonal_set: Self) -> Self:
-        self.diagonals += other_diagonal_set.diagonals
-
-        return self
-
-    def remove_nan_rows(self):
-        nan_index = self.get_nan_values()
-        self.triplet.array = self.triplet.array[~nan_index]
-
-    def initialize_triplet(self) -> Triplet:
-        shape = [self.n_x, self.n_y]
-
-        triplet = Triplet(array=[0, 0, 0], shape=shape)
-
-        for diagonal in self.diagonals:
-            diagonal.compute_triplet()
-            triplet += diagonal.triplet
-
-        self.triplet = triplet
-
-    def get_nan_values(self) -> numpy.ndarray:
-        return numpy.isnan(self.triplet.values)
-
-    def get_lowest_nan(self) -> int:
-        nan_index = self.get_nan_values()
-
-        rows = self.triplet[nan_index]
-
-        return rows.min()
-
-    def get_highest_nan(self) -> int:
-        nan_index = self.get_nan_values()
-
-        rows = self.triplet[nan_index]
-
-        return rows.max()
-
-    def __add__(self, other) -> Self:
-        self.diagonals += other.diagonals
-
-        return self
-
-    def plot(self):
-        return self.triplet.plot()
 
 
 @dataclass
@@ -91,6 +32,14 @@ class FiniteDifference():
     """ Add the y derivative """
 
     def __post_init__(self):
+        self.mesh_info = module.MeshInfo(
+            n_x=self.n_x,
+            n_y=self.n_y,
+            dx=self.dx,
+            dy=self.dy
+        )
+        self.boundaries.mesh_info = self.mesh_info
+
         self.finit_coefficient = FiniteCoefficients(
             derivative=self.derivative,
             accuracy=self.accuracy
@@ -109,36 +58,12 @@ class FiniteDifference():
         return self._triplet
 
     @property
-    def size(self) -> int:
-        return self.n_y * self.n_x
-
-    @property
-    def shape(self) -> tuple:
-        return (self.n_y, self.n_x)
-
-    @property
     def _dx(self) -> float:
         return self.dx ** self.derivative
 
     @property
     def _dy(self) -> float:
         return self.dy ** self.derivative
-
-    def offset_to_boundary_name(self, offset: int) -> str:
-        if offset == 0:
-            return 'center'
-
-        if offset > 0:
-            if offset < self.n_x:
-                return 'right'
-            else:
-                return 'top'
-
-        if offset < 0:
-            if offset > -self.n_x:
-                return 'left'
-            else:
-                return 'bottom'
 
     def iterate_central_coefficient(
             self,
@@ -157,8 +82,9 @@ class FiniteDifference():
         """
         for offset, value in coefficients:
             offset *= offset_multiplier
-            boundary_name = self.offset_to_boundary_name(offset=offset)
-            boundary = self.boundaries.get_boundary(boundary_name)
+            boundary = self.boundaries.offset_to_boundary(
+                offset=offset
+            )
             yield offset, value, boundary
 
     def _add_diagonal_coefficient(
@@ -181,7 +107,7 @@ class FiniteDifference():
         :returns:   No return
         :rtype:     None
         """
-        diagonal_set = DiagonalSet(n_x=self.n_x, n_y=self.n_y)
+        diagonal_set = module.DiagonalSet(mesh_info=self.mesh_info)
 
         coefficients = getattr(self.finit_coefficient, coefficient_type)
 
@@ -192,10 +118,10 @@ class FiniteDifference():
 
         for offset, value, boundary in iterator:
             diagonal = module.ConstantDiagonal(
-                shape=self.shape,
+                mesh_info=self.mesh_info,
                 offset=offset,
                 boundary=boundary,
-                value=value * (1 / delta),
+                value=value / delta,
             )
 
             diagonal_set.append(diagonal)
@@ -204,38 +130,42 @@ class FiniteDifference():
 
         return diagonal_set
 
-    def add_central_coeffients(self, diagonal_set: list) -> None:
-        x_diagonal_set = self._add_diagonal_coefficient(
+    def get_diagonal_set_full(self, offset_multiplier: int, delta: float) -> None:
+        central_diagonal = self._add_diagonal_coefficient(
             coefficient_type='central',
+            offset_multiplier=offset_multiplier,
+            delta=delta
+        )
+
+        forward_diagonal = self._add_diagonal_coefficient(
+            coefficient_type='forward',
+            offset_multiplier=offset_multiplier,
+            delta=delta
+        )
+
+        backward_diagonal = self._add_diagonal_coefficient(
+            coefficient_type='backward',
+            offset_multiplier=offset_multiplier,
+            delta=delta
+        )
+
+        central_diagonal.replace_nan_rows_with(forward_diagonal)
+
+        central_diagonal.replace_nan_rows_with(backward_diagonal)
+
+        return central_diagonal
+
+    def construct_triplet(self) -> None:
+        x_diagonals = self.get_diagonal_set_full(
             offset_multiplier=1,
             delta=self._dx
         )
-        # x_diagonal_set.remove_nan_rows()
-        # x_diagonal_set.plot().show()
 
-        diagonal_set.concatenate(x_diagonal_set)
-
-        y_diagonal_set = self._add_diagonal_coefficient(
-            coefficient_type='central',
+        y_diagonals = self.get_diagonal_set_full(
             offset_multiplier=self.n_x,
             delta=self._dy
         )
-        # y_diagonal_set.remove_nan_rows()
-        # y_diagonal_set.plot().show()
 
-        diagonal_set.concatenate(y_diagonal_set)
-
-    def construct_triplet(self) -> None:
-        diagonal_set = DiagonalSet(n_x=self.n_x, n_y=self.n_y)
-
-        self.add_central_coeffients(diagonal_set)
-
-        diagonal_set.initialize_triplet()
-
-        diagonal_set.remove_nan_rows()
-
-        # diagonal_set.triplet.plot().show()
-
-        self._triplet = diagonal_set.triplet
+        self._triplet = x_diagonals.triplet + y_diagonals.triplet
 
 # -

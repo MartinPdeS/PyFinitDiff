@@ -30,6 +30,26 @@ class Triplet():
         return numpy.c_[self.label, self.index].astype(int)
 
     @property
+    def rows(self) -> numpy.ndarray:
+        """
+        Returns the first index i of the Triplet
+
+        :returns:   The values associated to the Triplet
+        :rtype:     numpy.ndarray
+        """
+        return self.array[:, 0].astype(int)
+
+    @property
+    def columns(self) -> numpy.ndarray:
+        """
+        Returns the second index j of the Triplet
+
+        :returns:   The values associated to the Triplet
+        :rtype:     numpy.ndarray
+        """
+        return self.array[:, 1].astype(int)
+
+    @property
     def i(self) -> numpy.ndarray:
         """
         Returns the first index i of the Triplet
@@ -98,6 +118,9 @@ class Triplet():
 
     def append(self, other: object) -> None:
         self.array = numpy.r_[self.array, other.array]
+
+    def append_array(self, array: object) -> None:
+        self.array = numpy.r_[self.array, array]
 
     def __add__(self, other: object) -> Self:
         """

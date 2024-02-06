@@ -5,10 +5,11 @@ import numpy
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Boundary():
     name: str
     value: str
+    mesh_info: object
 
     def get_factor(self) -> float:
         match self.value:
@@ -21,33 +22,31 @@ class Boundary():
             case 'none':
                 return numpy.nan
 
-    def get_shift_vector(self, shape: tuple) -> numpy.ndarray:
-        offset = abs(self.offset)
+    def get_shift_vector(self, offset: int) -> numpy.ndarray:
+        offset = abs(offset)
 
         match self.name.lower():
             case 'center':
                 shift_vector = None
             case 'bottom':
-                size = self.shape[0] * self.shape[1]
-                shift_vector = numpy.zeros(size)
+                shift_vector = numpy.zeros(self.mesh_info.size)
                 shift_vector[:offset] += offset
             case 'top':
-                size = self.shape[0] * self.shape[1]
-                shift_vector = numpy.zeros(size)
+                shift_vector = numpy.zeros(self.mesh_info.size)
                 shift_vector[-offset:] -= offset
             case 'right':
-                shift_vector = numpy.zeros(self.shape[1])
+                shift_vector = numpy.zeros(self.mesh_info.n_y)
                 shift_vector[-offset:] = - numpy.arange(1, offset + 1)
-                shift_vector = numpy.tile(shift_vector, self.shape[0])
+                shift_vector = numpy.tile(shift_vector, self.mesh_info.n_x)
             case 'left':
-                shift_vector = numpy.zeros(self.shape[1])
+                shift_vector = numpy.zeros(self.mesh_info.n_y)
                 shift_vector[:offset] = numpy.arange(1, offset + 1)[::-1]
-                shift_vector = numpy.tile(shift_vector, self.shape[0])
+                shift_vector = numpy.tile(shift_vector, self.mesh_info.n_x)
 
         return shift_vector
 
 
-@dataclass
+@dataclass()
 class Boundaries():
     left: str = 'zero'
     """ Value of the left boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
@@ -94,9 +93,26 @@ class Boundaries():
 
         boundary = Boundary(
             name=name,
-            value=value
+            value=value,
+            mesh_info=self.mesh_info
         )
 
         return boundary
+
+    def offset_to_boundary(self, offset: int) -> str:
+        if offset == 0:
+            return self.get_boundary('center')
+
+        if offset > 0:
+            if offset < self.mesh_info.n_x:
+                return self.get_boundary('right')
+            else:
+                return self.get_boundary('top')
+
+        if offset < 0:
+            if offset > -self.mesh_info.n_x:
+                return self.get_boundary('left')
+            else:
+                return self.get_boundary('bottom')
 
 # -

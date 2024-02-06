@@ -10,15 +10,18 @@ import numpy
 import matplotlib.pyplot as plt
 
 
-idx = numpy.linspace(-5, 5, 5)
-x_array = numpy.exp(-idx**2)
-y_array = numpy.exp(-idx**2)
+idx = numpy.linspace(-5, 5, 7)
+# x_array = numpy.exp(-idx**2)
+# y_array = numpy.exp(-idx**2)
+
+
+x_array = y_array = numpy.arange(7)
 
 y_array, x_array = numpy.meshgrid(x_array, y_array)
 
-mesh = y_array * x_array
+mesh = x_array
 
-condition = 'symmetric'
+condition = 'none'
 boundaries = Boundaries(
     top=condition,
     bottom=condition,
@@ -38,8 +41,8 @@ gradient = get_array_gradient(
 
 figure, ax = plt.subplots(1, 2)
 
-image = ax[0].pcolormesh(mesh)
-image = ax[1].pcolormesh(gradient)
+image = ax[0].imshow(mesh)
+image = ax[1].imshow(gradient)
 
 plt.show()
 
