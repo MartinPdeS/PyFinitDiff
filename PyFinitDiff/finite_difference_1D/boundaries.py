@@ -28,10 +28,10 @@ class Boundary():
         match self.name.lower():
             case 'center':
                 shift_vector = None
-            case 'right':
+            case 'left':
                 shift_vector = numpy.zeros(self.mesh_info.size)
                 shift_vector[:offset] = numpy.arange(offset)[::-1] + 1
-            case 'left':
+            case 'right':
                 shift_vector = numpy.zeros(self.mesh_info.size)
                 shift_vector[-offset - 1:] = - numpy.arange(offset + 1)
 

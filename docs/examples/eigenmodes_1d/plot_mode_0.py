@@ -26,8 +26,8 @@ sparse_instance = FiniteDifference(
     n_x=n_x,
     dx=1,
     derivative=2,
-    accuracy=6,
-    boundaries=Boundaries()
+    accuracy=2,
+    boundaries=Boundaries(left='none', right='none')
 )
 
 mesh_triplet = get_circular_mesh_triplet(
@@ -47,7 +47,11 @@ eigen_values, eigen_vectors = linalg.eigs(
     sigma=1.4444
 )
 
-figure = SceneList(unit_size=(3, 3), tight_layout=True, ax_orientation='horizontal')
+figure = SceneList(
+    unit_size=(3, 3),
+    tight_layout=True,
+    ax_orientation='horizontal'
+)
 
 for i in range(4):
     Vector = eigen_vectors[:, i].real.reshape([sparse_instance.n_x])

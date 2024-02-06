@@ -427,7 +427,8 @@ class Triplet():
         :returns:   Scipy sparse representation of the object.
         :rtype:     coo_matrix
         """
-        size = self.shape[0] * self.shape[1]
+        size = numpy.prod(self.shape)
+
         output_shape = [size, size]
 
         sparse_matrix = coo_matrix((self.values, (self.i, self.j)), shape=output_shape)

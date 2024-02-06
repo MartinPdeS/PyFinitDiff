@@ -44,7 +44,7 @@ def get_circular_mesh_triplet(
     mesh = numpy.ones(x.shape) * value_out
     mesh[r < radius] = value_in
 
-    return DiagonalTriplet(mesh)
+    return DiagonalTriplet(mesh, shape=[n_x, n_y])
 
 
 # -

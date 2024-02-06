@@ -12,7 +12,6 @@ from PyFinitDiff.tools.directories import (
     project_path,
     doc_css_path,
     version_path,
-    examples_path
 )
 
 
@@ -52,11 +51,6 @@ extensions = [
 def reset_mpl(gallery_conf, fname):
     use_mpsplots_style()
 
-
-examples_dirs = [
-    examples_path.joinpath('clad'),
-    examples_path.joinpath('geometry')
-]
 
 subsection_order = ExplicitOrder(
     [
