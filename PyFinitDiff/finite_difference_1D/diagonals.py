@@ -23,7 +23,7 @@ class Diagonal():
     """ Offset of the column index for the diagonal. """
     values: float
     """ Value associated with the diagonal. """
-    boundary: module.Boundary = None
+    boundary: module.Boundary
     """ Instance of the boundary used for that diagonal. """
 
     @property
