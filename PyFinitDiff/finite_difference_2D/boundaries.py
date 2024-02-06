@@ -115,4 +115,20 @@ class Boundaries():
             else:
                 return self.get_boundary('bottom')
 
+    def get_x_parity(self) -> str:
+        if self.left == 'symmetric' or self.right == 'symmetric':
+            return 'symmetric'
+        elif self.left == 'anti-symmetric' or self.right == 'anti-symmetric':
+            return 'anti-symmetric'
+        else:
+            return 'zero'
+
+    def get_y_parity(self) -> str:
+        if self.top == 'symmetric' or self.bottom == 'symmetric':
+            return 'symmetric'
+        elif self.top == 'anti-symmetric' or self.bottom == 'anti-symmetric':
+            return 'anti-symmetric'
+        else:
+            return 'zero'
+
 # -

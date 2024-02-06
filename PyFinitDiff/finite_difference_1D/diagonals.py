@@ -164,6 +164,12 @@ class DiagonalSet():
         return non_nan_rows
 
     def get_nan_index(self) -> numpy.ndarray:
+        """
+        Return a boolean list of True/False depending of the values of the triplet
+
+        :returns:   The nan index.
+        :rtype:     numpy.ndarray
+        """
         return numpy.isnan(self.triplet.values)
 
     def get_array_from_rows(self, rows: numpy.ndarray) -> numpy.ndarray:
@@ -231,20 +237,6 @@ class DiagonalSet():
         self.triplet = triplet
 
         return self
-
-    def get_lowest_nan(self) -> int:
-        nan_index = self.get_nan_index()
-
-        rows = self.triplet[nan_index]
-
-        return rows.min()
-
-    def get_highest_nan(self) -> int:
-        nan_index = self.get_nan_index()
-
-        rows = self.triplet[nan_index]
-
-        return rows.max()
 
     def __add__(self, other: Self) -> Self:
         self.diagonals += other.diagonals
