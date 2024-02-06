@@ -25,7 +25,7 @@ jobs:
           - uses: MartinPdeS/MPSActions/publish_coverage@master
             with:
                 package-name: PyFinitDiff
-                python-version: "3.10"
+                python-version: "3.11"
                 auth: ${{ secrets.GIST_TOKEN }}
                 gistID: 19aef38017fa4be1dc71b6f5d853a932
 
@@ -38,7 +38,7 @@ jobs:
             with:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 package-name: PyFinitDiff
-                python-version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
+                python-version: "3.11" #no documentation for python 3.7 (pickle5 not present˘)
 
     publish_wheel:
         if: "contains(github.event.head_commit.message, '[publish]')"
@@ -47,5 +47,5 @@ jobs:
         steps:
           - uses: MartinPdeS/MPSActions/publish_pypi@master
             with:
-                python-version: "3.10"
+                python-version: "3.11"
                 password: ${{ secrets.PYPI_API_TOKEN }}

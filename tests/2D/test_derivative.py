@@ -62,6 +62,8 @@ def test_derivative(accuracy, derivative):
     theoretical = math.factorial(derivative)
     evaluation = y_gradient[size // 2, size // 2]
 
-    assert numpy.isclose(evaluation, theoretical, atol=1e-5), 'Deviation from theoretical value for derivative'
+    discrepency = numpy.isclose(evaluation, theoretical, atol=1e-5)
+
+    assert discrepency, 'Deviation from theoretical value for derivative'
 
 # -
