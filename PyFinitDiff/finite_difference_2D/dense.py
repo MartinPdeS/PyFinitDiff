@@ -10,7 +10,7 @@ from PyFinitDiff.coefficients import FinitCoefficients
 
 
 @dataclass
-class FiniteDifference2D():
+class FiniteDifference():
     """
     Reference : ['math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf']
     """

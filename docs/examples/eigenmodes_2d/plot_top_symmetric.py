@@ -14,25 +14,25 @@ Example: eigenmodes 8
 from scipy.sparse import linalg
 from MPSPlots.render2D import SceneList
 
-from PyFinitDiff.sparse2D import FiniteDifference2D
-from PyFinitDiff.utils import get_2D_circular_mesh_triplet
-from PyFinitDiff.boundaries import Boundaries2D
+from PyFinitDiff.finite_difference_2D import FiniteDifference
+from PyFinitDiff.finite_difference_2D import get_circular_mesh_triplet
+from PyFinitDiff.finite_difference_2D import Boundaries
 
 
 n_x = 40
 n_y = 50
 
-sparse_instance = FiniteDifference2D(
+sparse_instance = FiniteDifference(
     n_x=n_x,
     n_y=n_y,
     dx=100 / n_x,
     dy=100 / n_y,
     derivative=2,
     accuracy=2,
-    boundaries=Boundaries2D(top='symmetric')
+    boundaries=Boundaries(top='symmetric')
 )
 
-mesh_triplet = get_2D_circular_mesh_triplet(
+mesh_triplet = get_circular_mesh_triplet(
     n_x=n_x,
     n_y=n_y,
     value_out=1.0,

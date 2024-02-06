@@ -9,7 +9,6 @@ __all__ = [
     'root_path',
     'project_path',
     'static_doc_path',
-    'examples_path',
     'version_path',
     'doc_path',
     'logo_path',
@@ -21,8 +20,6 @@ root_path = Path(PyFinitDiff.__path__[0])
 project_path = root_path.parents[0]
 
 static_doc_path = project_path.joinpath('docs/images')
-
-examples_path = root_path.joinpath('examples')
 
 version_path = root_path.joinpath('VERSION')
 

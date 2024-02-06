@@ -15,22 +15,22 @@ Example: 1D eigenmodes 2
 
 from scipy.sparse import linalg
 
-from PyFinitDiff.sparse1D import FiniteDifference1D
-from PyFinitDiff.utils import get_1D_circular_mesh_triplet
 from MPSPlots.render2D import SceneList
-from PyFinitDiff.boundaries import Boundaries1D
 
+from PyFinitDiff.finite_difference_1D import FiniteDifference
+from PyFinitDiff.finite_difference_1D import get_circular_mesh_triplet
+from PyFinitDiff.finite_difference_1D import Boundaries
 
 n_x = 200
-sparse_instance = FiniteDifference1D(
+sparse_instance = FiniteDifference(
     n_x=n_x,
     dx=1,
     derivative=2,
     accuracy=6,
-    boundaries=Boundaries1D()
+    boundaries=Boundaries()
 )
 
-mesh_triplet = get_1D_circular_mesh_triplet(
+mesh_triplet = get_circular_mesh_triplet(
     n_x=n_x,
     radius=60,
     value_out=1,

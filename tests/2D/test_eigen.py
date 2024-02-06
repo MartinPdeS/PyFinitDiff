@@ -3,22 +3,22 @@
 from scipy.sparse import linalg
 
 
-from PyFinitDiff.sparse2D import FiniteDifference2D
+from PyFinitDiff.finite_difference_2D import FiniteDifference
 from PyFinitDiff.utils import get_2D_circular_mesh_triplet
-from PyFinitDiff.boundaries import Boundaries2D
+from PyFinitDiff.finite_difference_2D import Boundaries
 
 
 def test_compute_eigenmode_sparse_0():
     n_x = n_y = 40
 
-    sparse_instance = FiniteDifference2D(
+    sparse_instance = FiniteDifference(
         n_x=n_x,
         n_y=n_y,
         dx=1,
         dy=1,
         derivative=2,
         accuracy=2,
-        boundaries=Boundaries2D()
+        boundaries=Boundaries()
     )
 
     mesh_triplet = get_2D_circular_mesh_triplet(

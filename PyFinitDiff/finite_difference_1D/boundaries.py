@@ -16,6 +16,7 @@ class BoundariesBase:
             self.assert_both_boundaries_not_same(*boundary_pair)
 
     def assert_both_boundaries_not_same(self, boundary_0: str, boundary_1: str) -> None:
+        return
         if boundary_0 != 'zero' and boundary_1 != 'zero':
             raise ValueError("Same-axis symmetries shouldn't be set on both end")
 
@@ -30,43 +31,8 @@ class BoundariesBase:
         }
 
 
-@dataclass
-class Boundaries2D(BoundariesBase):
-    left: str = 'zero'
-    """ Value of the left boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
-    right: str = 'zero'
-    """ Value of the right boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
-    top: str = 'zero'
-    """ Value of the top boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
-    bottom: str = 'zero'
-    """ Value of the bottom boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
-
-    all_boundaries = ['left', 'right', 'top', 'bottom']
-
-    def get_boundary_pairs(self) -> list:
-        return [(self.left, self.right), (self.top, self.bottom)]
-
-    @property
-    def x_symmetry(self) -> str:
-        if self.left == 'symmetric' or self.right == 'symmetric':
-            return 'symmetric'
-        elif self.left == 'anti-symmetric' or self.right == 'anti-symmetric':
-            return 'anti-symmetric'
-        else:
-            return 'zero'
-
-    @property
-    def y_symmetry(self) -> str:
-        if self.top == 'symmetric' or self.bottom == 'symmetric':
-            return 'symmetric'
-        elif self.top == 'anti-symmetric' or self.bottom == 'anti-symmetric':
-            return 'anti-symmetric'
-        else:
-            return 'zero'
-
-
 @dataclass()
-class Boundaries1D(BoundariesBase):
+class Boundaries(BoundariesBase):
     left: str = 'zero'
     """ Value of the left boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
     right: str = 'zero'

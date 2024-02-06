@@ -3,11 +3,13 @@
 
 from PyFinitDiff.coefficients import FiniteCoefficients
 
+import numpy
 
-def get_derivative_1d(
-        function: object,
+
+def get_function_derivative(
+        function: numpy.ndarray,
         x_eval: float,
-        order: int,
+        derivative: int,
         delta: float,
         function_kwargs: dict,
         accuracy: int = 4,
@@ -32,7 +34,7 @@ def get_derivative_1d(
     :rtype:     float
     """
     coefficients = FiniteCoefficients(
-        derivative=order,
+        derivative=derivative,
         accuracy=accuracy,
         coefficient_type=coefficient_type
     )
@@ -46,7 +48,6 @@ def get_derivative_1d(
 
         summation += value * y
 
-    return summation / delta**order
-
+    return summation / delta ** derivative
 
 # -

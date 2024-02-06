@@ -1,17 +1,20 @@
 import numpy
 
+from typing import Self
 from MPSPlots.render2D import SceneList
 from scipy.sparse import coo_matrix
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
 class Triplet():
-    array: numpy.ndarray = field(default_factory=lambda: [[0, 0, 0]])
+    shape: list
+    array: numpy.ndarray
     add_extra_column: bool = False
 
     def __post_init__(self):
         self.array = numpy.atleast_2d(self.array)
+        self.shape = numpy.asarray(self.shape)
 
         if self.add_extra_column:
             self.array = numpy.c_[self.array, numpy.ones(self.array.shape[0])]
@@ -66,6 +69,26 @@ class Triplet():
         """
         return self.i.size
 
+    def remove_below_i(self, i_value: int) -> Self:
+        idx = self.i > i_value
+        self.array = self.array[idx, :]
+        return self
+
+    def remove_above_i(self, i_value: int) -> Self:
+        idx = self.i < i_value
+        self.array = self.array[idx, :]
+        return self
+
+    def remove_below_j(self, j_value: int) -> Self:
+        idx = self.j > j_value
+        self.array = self.array[idx, :]
+        return self
+
+    def remove_above_j(self, j_value: int) -> Self:
+        idx = self.j < j_value
+        self.array = self.array[idx, :]
+        return self
+
     @values.setter
     def values(self, value: float) -> None:
         self.array[:, 2] = value
@@ -76,7 +99,7 @@ class Triplet():
     def append(self, other: object) -> None:
         self.array = numpy.r_[self.array, other.array]
 
-    def __add__(self, other: object) -> 'Triplet':
+    def __add__(self, other: object) -> Self:
         """
         The methode concatenate the two triplet array and
         reduce if any coinciding index values.
@@ -84,11 +107,11 @@ class Triplet():
         """
         new_array = numpy.r_[self.array, other.array]
 
-        new_triplet = Triplet(new_array)
+        new_triplet = Triplet(array=new_array, shape=self.shape)
 
         return new_triplet.remove_duplicate()
 
-    def __mul__(self, factor: float) -> 'Triplet':
+    def __mul__(self, factor: float) -> Self:
         """
         The method output a new triplet where the values
         are left-multiplied by the factor
@@ -99,13 +122,13 @@ class Triplet():
         :returns:   The triplet after multiplication
         :rtype:     Triplet
         """
-        new_triplet = Triplet(self.array)
+        new_triplet = Triplet(array=self.array, shape=self.shape)
 
         new_triplet.values *= factor
 
         return new_triplet
 
-    def __rmul__(self, factor: float) -> 'Triplet':
+    def __rmul__(self, factor: float) -> Self:
         """
         The method output a new triplet where the values
         are right-multiplied by the factor
@@ -118,7 +141,7 @@ class Triplet():
         """
         return self.__mul__(factor)
 
-    def __div__(self, factor) -> 'Triplet':
+    def __div__(self, factor) -> Self:
         """
         The method output a new triplet where the values
         are left-divided by the factor
@@ -129,13 +152,13 @@ class Triplet():
         :returns:   The triplet after division
         :rtype:     Triplet
         """
-        new_triplet = Triplet(self.array)
+        new_triplet = Triplet(array=self.array, shape=self.shape)
 
         new_triplet /= factor
 
         return new_triplet
 
-    def __rdiv__(self, factor: float) -> 'Triplet':
+    def __rdiv__(self, factor: float) -> Self:
         """
         The method output a new triplet where the values
         are right-divided by the factor
@@ -146,20 +169,20 @@ class Triplet():
         :returns:   The triplet after division
         :rtype:     Triplet
         """
-        new_triplet = Triplet(self.array)
+        new_triplet = Triplet(array=self.array, shape=self.shape)
 
         new_triplet /= factor
 
         return new_triplet
 
-    def add_triplet(self, *others) -> 'Triplet':
+    def add_triplet(self, *others) -> Self:
         others_array = (other.array for other in others)
 
         self.array = numpy.r_[(self.array, *others_array)]
 
         self.merge_duplicate()
 
-    def remove_duplicate(self) -> 'Triplet':
+    def remove_duplicate(self) -> Self:
         """
         Removes the duplicate values of the Triplet.
 
@@ -171,7 +194,7 @@ class Triplet():
         duplicate = self.get_duplicate_index()
 
         if duplicate.size == 0:
-            return Triplet(self.array)
+            return Triplet(array=self.array, shape=self.shape)
 
         for duplicate in duplicate:
             index_to_keep = duplicate[0]
@@ -181,9 +204,9 @@ class Triplet():
 
         triplet_array = numpy.delete(new_array, index_to_delete, axis=0)
 
-        return Triplet(triplet_array)
+        return Triplet(array=triplet_array, shape=self.shape)
 
-    def coincide_i(self, mask) -> 'Triplet':
+    def coincide_i(self, mask) -> Self:
         """
         The methode removing all index i which do not coincide with the
         other triplet
@@ -194,7 +217,7 @@ class Triplet():
 
         self.array = numpy.r_[tuple(temp)]
 
-    def __sub__(self, other: object) -> 'Triplet':
+    def __sub__(self, other: object) -> Self:
         """
         The methode removing index[i] (rows) value corresponding between the two triplets.
         It doesn't change the other triplet, only the instance that called the method.
@@ -210,7 +233,7 @@ class Triplet():
 
         triplet_array = numpy.delete(self.array, index_duplicate, axis=0)
 
-        return Triplet(triplet_array)
+        return Triplet(array=triplet_array, shape=self.shape)
 
     def __iter__(self) -> tuple:
         """
@@ -331,6 +354,11 @@ class Triplet():
 
         return self + shift_triplet
 
+    def update_elements(self, other_triplet: Self, i_range: slice) -> Self:
+        self.array[i_range, :] = other_triplet.array[i_range, :]
+
+        return self
+
     def to_dense(self) -> numpy.ndarray:
         """
         Returns a dense representation of the object.
@@ -338,11 +366,11 @@ class Triplet():
         :returns:   Dense representation of the object.
         :rtype:     numpy.ndarray:
         """
-        matrix = numpy.zeros([self.max_i + 1, self.max_j + 1])
-        for index, value in self:
-            matrix[index] = value
+        dense_matrix = self.to_scipy_sparse().todense()
 
-        return matrix
+        dense_matrix = numpy.asarray(dense_matrix)
+
+        return dense_matrix
 
     def plot(self) -> SceneList:
         """
@@ -359,8 +387,10 @@ class Triplet():
             show_grid=True,
         )
 
+        dense_matrix = numpy.flip(self.to_dense(), axis=[0])
+
         artist = ax.add_mesh(
-            scalar=numpy.flip(self.to_dense(), axis=[0]),
+            scalar=dense_matrix,
         )
 
         ax.add_colorbar(artist=artist, colormap='Blues')
@@ -374,18 +404,23 @@ class Triplet():
         :returns:   Scipy sparse representation of the object.
         :rtype:     coo_matrix
         """
-        return coo_matrix((self.values, (self.i, self.j)), shape=(self.max_i + 1, self.max_j + 1))
+        size = self.shape[0] * self.shape[1]
+        output_shape = [size, size]
+
+        sparse_matrix = coo_matrix((self.values, (self.i, self.j)), shape=output_shape)
+
+        return sparse_matrix
 
 
 class DiagonalTriplet(Triplet):
-    def __init__(self, mesh: numpy.ndarray):
+    def __init__(self, mesh: numpy.ndarray, shape: list):
         size = mesh.size
         triplet_array = numpy.zeros([size, 3])
         triplet_array[:, 0] = numpy.arange(size)
         triplet_array[:, 1] = numpy.arange(size)
         triplet_array[:, 2] = mesh.ravel()
 
-        super().__init__(triplet_array)
+        super().__init__(array=triplet_array, shape=shape)
 
 
 # -
