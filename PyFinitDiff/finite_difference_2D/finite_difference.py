@@ -47,6 +47,10 @@ class FiniteDifference():
         self._triplet = None
 
     @property
+    def shape(self):
+        return (self.n_x, self.n_y)
+
+    @property
     def triplet(self):
         """
         Triplet representing the non-nul values of the specific
