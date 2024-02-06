@@ -38,6 +38,8 @@ class VariableDiagonal():
     def get_shift_vector(self) -> numpy.ndarray:
         offset = abs(self.offset)
 
+        print(self.boundary.name.lower())
+
         match self.boundary.name.lower():
             case 'center':
                 shift_vector = None

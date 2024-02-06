@@ -21,6 +21,31 @@ class Boundary():
             case 'none':
                 return numpy.nan
 
+    def get_shift_vector(self, shape: tuple) -> numpy.ndarray:
+        offset = abs(self.offset)
+
+        match self.name.lower():
+            case 'center':
+                shift_vector = None
+            case 'bottom':
+                size = self.shape[0] * self.shape[1]
+                shift_vector = numpy.zeros(size)
+                shift_vector[:offset] += offset
+            case 'top':
+                size = self.shape[0] * self.shape[1]
+                shift_vector = numpy.zeros(size)
+                shift_vector[-offset:] -= offset
+            case 'right':
+                shift_vector = numpy.zeros(self.shape[1])
+                shift_vector[-offset:] = - numpy.arange(1, offset + 1)
+                shift_vector = numpy.tile(shift_vector, self.shape[0])
+            case 'left':
+                shift_vector = numpy.zeros(self.shape[1])
+                shift_vector[:offset] = numpy.arange(1, offset + 1)[::-1]
+                shift_vector = numpy.tile(shift_vector, self.shape[0])
+
+        return shift_vector
+
 
 @dataclass
 class Boundaries():
