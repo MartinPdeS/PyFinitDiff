@@ -1,0 +1,91 @@
+
+:orphan:
+
+.. _sphx_glr_sg_execution_times:
+
+
+Computation times
+=================
+**00:41.910** total execution time for 19 files **from all galleries**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_gallery_extras_plot_WM_field.py` (``../examples/extras/plot_WM_field.py``)
+     - 00:11.252
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_left_symmetric.py` (``../examples/eigenmodes_2d/plot_left_symmetric.py``)
+     - 00:03.527
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_right_anti_symmetric.py` (``../examples/eigenmodes_2d/plot_right_anti_symmetric.py``)
+     - 00:03.513
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_right_symmetric.py` (``../examples/eigenmodes_2d/plot_right_symmetric.py``)
+     - 00:03.504
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_top_anti_symmetric.py` (``../examples/eigenmodes_2d/plot_top_anti_symmetric.py``)
+     - 00:03.498
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_left_anti_symmetric.py` (``../examples/eigenmodes_2d/plot_left_anti_symmetric.py``)
+     - 00:03.494
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_bottom_symmetric.py` (``../examples/eigenmodes_2d/plot_bottom_symmetric.py``)
+     - 00:03.478
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_bottom_anti_symmetric.py` (``../examples/eigenmodes_2d/plot_bottom_anti_symmetric.py``)
+     - 00:02.234
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_no_symmetry.py` (``../examples/eigenmodes_2d/plot_no_symmetry.py``)
+     - 00:02.223
+     - 0.0
+   * - :ref:`sphx_glr_gallery_triplets_plot_triplets_0.py` (``../examples/triplets/plot_triplets_0.py``)
+     - 00:01.234
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_plot_top_symmetric.py` (``../examples/eigenmodes_2d/plot_top_symmetric.py``)
+     - 00:00.756
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_3.py` (``../examples/eigenmodes_1d/plot_mode_3.py``)
+     - 00:00.466
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_1.py` (``../examples/eigenmodes_1d/plot_mode_1.py``)
+     - 00:00.466
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_2.py` (``../examples/eigenmodes_1d/plot_mode_2.py``)
+     - 00:00.465
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_0.py` (``../examples/eigenmodes_1d/plot_mode_0.py``)
+     - 00:00.455
+     - 0.0
+   * - :ref:`sphx_glr_gallery_triplets_plot_triplets_1.py` (``../examples/triplets/plot_triplets_1.py``)
+     - 00:00.450
+     - 0.0
+   * - :ref:`sphx_glr_gallery_triplets_plot_triplets_2.py` (``../examples/triplets/plot_triplets_2.py``)
+     - 00:00.448
+     - 0.0
+   * - :ref:`sphx_glr_gallery_triplets_plot_triplets_3.py` (``../examples/triplets/plot_triplets_3.py``)
+     - 00:00.447
+     - 0.0
+   * - :ref:`sphx_glr_gallery_extras_gradient.py` (``../examples/extras/gradient.py``)
+     - 00:00.000
+     - 0.0

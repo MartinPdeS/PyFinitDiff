@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Generating Whittle-Matérn field &#8212; PyFinitDiff 1.1.2
+ documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.7/x64/lib/python3.11/site-packages/docs/source/_static/default.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/default.css?v=265c6c44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=6f037312"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gallery/extras/plot_WM_field';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="References" href="../../references.html" />
+    <link rel="prev" title="Gradient of array" href="gradient.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+   
+
+<a class="navbar-brand logo" href="https://pyfinitdiff.readthedocs.io/en/master/">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyFinitDiff</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../theory.html">
+                        Theoretical background
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../code.html">
+                        Source code
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../references.html">
+                        References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MartinPdeS/PyFinitDiff" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/fiberfusing/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-solid fa-box fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../theory.html">
+                        Theoretical background
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../code.html">
+                        Source code
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../references.html">
+                        References
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MartinPdeS/PyFinitDiff" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/fiberfusing/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-solid fa-box fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../triplets/index.html">triplets computation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../triplets/plot_triplets_0.html">Example: triplets 0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../triplets/plot_triplets_1.html">Example: triplets 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../triplets/plot_triplets_2.html">Example: triplets 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../triplets/plot_triplets_3.html">Example: triplets 3</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../eigenmodes_1d/index.html">1-dimensional</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_1d/plot_mode_0.html">Example: 1D eigenmodes 0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_1d/plot_mode_1.html">Example: 1D eigenmodes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_1d/plot_mode_2.html">Example: 1D eigenmodes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_1d/plot_mode_3.html">Example: 1D eigenmodes 2</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../eigenmodes_2d/index.html">2-dimensional eigenmodes</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_bottom_anti_symmetric.html">Example: eigenmodes 0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_bottom_symmetric.html">Example: eigenmodes 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_left_anti_symmetric.html">Example: eigenmodes 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_left_symmetric.html">Example: eigenmodes 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_no_symmetry.html">Example: eigenmodes 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_right_anti_symmetric.html">Example: eigenmodes 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_right_symmetric.html">Example: eigenmodes 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_top_anti_symmetric.html">Example: eigenmodes 7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eigenmodes_2d/plot_top_symmetric.html">Example: eigenmodes 8</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Extras</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gradient.html">Gradient of array</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Generating Whittle-Matérn field</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Extras</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Generating...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-gallery-extras-plot-wm-field-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="generating-whittle-matern-field">
+<span id="sphx-glr-gallery-extras-plot-wm-field-py"></span><h1>Generating Whittle-Matérn field<a class="headerlink" href="#generating-whittle-matern-field" title="Link to this heading">#</a></h1>
+<img src="../../_images/sphx_glr_plot_WM_field_001.png" srcset="../../_images/sphx_glr_plot_WM_field_001.png" alt=", Correlation length: 1, Correlation length: 2, Correlation length: 4" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>SceneList(unit_size=(4, 4), tight_layout=True, transparent_background=False, title=&#39;&#39;, padding=1.0, axis_list=[Axis(row=0, col=0, x_label=None, y_label=None, title=&#39;Correlation length: 1&#39;, show_grid=True, show_legend=False, legend_position=&#39;best&#39;, x_scale=&#39;linear&#39;, y_scale=&#39;linear&#39;, x_limits=None, y_limits=None, equal_limits=False, projection=None, font_size=16, tick_size=14, y_tick_position=&#39;left&#39;, x_tick_position=&#39;bottom&#39;, show_ticks=True, show_colorbar=True, legend_font_size=14, line_width=None, line_style=None, x_scale_factor=None, y_scale_factor=None, aspect_ratio=&#39;auto&#39;, _artist_list=[Mesh(scalar=array([[  7.8859936 ,  12.49333574,  -2.52568401, ..., -12.74785462,
+        -13.39109873,  -6.77652803],
+       [  6.74705284,   1.3286139 ,  13.6620767 , ..., -29.93314325,
+        -10.59867692,  -9.81117767],
+       [  3.15474193,  -3.95416173,   8.66845716, ..., -29.18397361,
+        -15.60674883, -18.23846599],
+       ...,
+       [  2.28014734, -12.54186251, -17.05903513, ..., -36.04677685,
+        -12.5118161 ,  -5.07128543],
+       [-11.43694261,  -8.8736082 , -21.71908995, ..., -45.99158105,
+         -9.41309875, -10.7308918 ],
+       [  6.86809151,   2.6661896 ,  -4.78939696, ..., -46.76739012,
+        -12.61148098,   3.78434989]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1), Mesh(scalar=array([[  7.8859936 ,  12.49333574,  -2.52568401, ..., -12.74785462,
+        -13.39109873,  -6.77652803],
+       [  6.74705284,   1.3286139 ,  13.6620767 , ..., -29.93314325,
+        -10.59867692,  -9.81117767],
+       [  3.15474193,  -3.95416173,   8.66845716, ..., -29.18397361,
+        -15.60674883, -18.23846599],
+       ...,
+       [  2.28014734, -12.54186251, -17.05903513, ..., -36.04677685,
+        -12.5118161 ,  -5.07128543],
+       [-11.43694261,  -8.8736082 , -21.71908995, ..., -45.99158105,
+         -9.41309875, -10.7308918 ],
+       [  6.86809151,   2.6661896 ,  -4.78939696, ..., -46.76739012,
+        -12.61148098,   3.78434989]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1)], mpl_ax=&lt;Axes: title={&#39;center&#39;: &#39;Correlation length: 1&#39;}&gt;, colorbar=Colorbar(artist=Mesh(scalar=array([[  7.8859936 ,  12.49333574,  -2.52568401, ..., -12.74785462,
+        -13.39109873,  -6.77652803],
+       [  6.74705284,   1.3286139 ,  13.6620767 , ..., -29.93314325,
+        -10.59867692,  -9.81117767],
+       [  3.15474193,  -3.95416173,   8.66845716, ..., -29.18397361,
+        -15.60674883, -18.23846599],
+       ...,
+       [  2.28014734, -12.54186251, -17.05903513, ..., -36.04677685,
+        -12.5118161 ,  -5.07128543],
+       [-11.43694261,  -8.8736082 , -21.71908995, ..., -45.99158105,
+         -9.41309875, -10.7308918 ],
+       [  6.86809151,   2.6661896 ,  -4.78939696, ..., -46.76739012,
+        -12.61148098,   3.78434989]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1), discreet=False, position=&#39;right&#39;, colormap=&lt;matplotlib.colors.LinearSegmentedColormap object at 0x7f38a584a610&gt;, orientation=&#39;vertical&#39;, symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width=&#39;10%&#39;, padding=0.1, norm=None, label=&#39;&#39;)), Axis(row=0, col=1, x_label=None, y_label=None, title=&#39;Correlation length: 2&#39;, show_grid=True, show_legend=False, legend_position=&#39;best&#39;, x_scale=&#39;linear&#39;, y_scale=&#39;linear&#39;, x_limits=None, y_limits=None, equal_limits=False, projection=None, font_size=16, tick_size=14, y_tick_position=&#39;left&#39;, x_tick_position=&#39;bottom&#39;, show_ticks=True, show_colorbar=True, legend_font_size=14, line_width=None, line_style=None, x_scale_factor=None, y_scale_factor=None, aspect_ratio=&#39;auto&#39;, _artist_list=[Mesh(scalar=array([[ -5.42565478, -15.29205472, -17.13123273, ...,  -5.0164897 ,
+         -3.55262314,   3.69505183],
+       [-10.09144363, -14.87541012, -22.04367637, ...,  -8.80234487,
+          3.9640869 ,   2.95152865],
+       [-15.94858799, -28.96266718, -46.62921366, ...,  -9.3151796 ,
+          4.48589061,   4.45815823],
+       ...,
+       [  2.21061072,   4.48107325,   9.50590854, ...,   1.93249695,
+         -1.2269716 ,  -0.99552058],
+       [  1.31976065,   3.37036126,  22.63856761, ...,  -6.32360551,
+         -2.65071537,   0.73104859],
+       [  5.64316063,   6.66929294,  20.97418625, ..., -12.75760822,
+         -7.35716099,  -1.37022718]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1), Mesh(scalar=array([[ -5.42565478, -15.29205472, -17.13123273, ...,  -5.0164897 ,
+         -3.55262314,   3.69505183],
+       [-10.09144363, -14.87541012, -22.04367637, ...,  -8.80234487,
+          3.9640869 ,   2.95152865],
+       [-15.94858799, -28.96266718, -46.62921366, ...,  -9.3151796 ,
+          4.48589061,   4.45815823],
+       ...,
+       [  2.21061072,   4.48107325,   9.50590854, ...,   1.93249695,
+         -1.2269716 ,  -0.99552058],
+       [  1.31976065,   3.37036126,  22.63856761, ...,  -6.32360551,
+         -2.65071537,   0.73104859],
+       [  5.64316063,   6.66929294,  20.97418625, ..., -12.75760822,
+         -7.35716099,  -1.37022718]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1)], mpl_ax=&lt;Axes: title={&#39;center&#39;: &#39;Correlation length: 2&#39;}&gt;, colorbar=Colorbar(artist=Mesh(scalar=array([[ -5.42565478, -15.29205472, -17.13123273, ...,  -5.0164897 ,
+         -3.55262314,   3.69505183],
+       [-10.09144363, -14.87541012, -22.04367637, ...,  -8.80234487,
+          3.9640869 ,   2.95152865],
+       [-15.94858799, -28.96266718, -46.62921366, ...,  -9.3151796 ,
+          4.48589061,   4.45815823],
+       ...,
+       [  2.21061072,   4.48107325,   9.50590854, ...,   1.93249695,
+         -1.2269716 ,  -0.99552058],
+       [  1.31976065,   3.37036126,  22.63856761, ...,  -6.32360551,
+         -2.65071537,   0.73104859],
+       [  5.64316063,   6.66929294,  20.97418625, ..., -12.75760822,
+         -7.35716099,  -1.37022718]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1), discreet=False, position=&#39;right&#39;, colormap=&lt;matplotlib.colors.LinearSegmentedColormap object at 0x7f38a584a610&gt;, orientation=&#39;vertical&#39;, symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width=&#39;10%&#39;, padding=0.1, norm=None, label=&#39;&#39;)), Axis(row=0, col=2, x_label=None, y_label=None, title=&#39;Correlation length: 4&#39;, show_grid=True, show_legend=False, legend_position=&#39;best&#39;, x_scale=&#39;linear&#39;, y_scale=&#39;linear&#39;, x_limits=None, y_limits=None, equal_limits=False, projection=None, font_size=16, tick_size=14, y_tick_position=&#39;left&#39;, x_tick_position=&#39;bottom&#39;, show_ticks=True, show_colorbar=True, legend_font_size=14, line_width=None, line_style=None, x_scale_factor=None, y_scale_factor=None, aspect_ratio=&#39;auto&#39;, _artist_list=[Mesh(scalar=array([[ -2.23684543,   2.87497287,   5.47268308, ...,  -5.88726918,
+         -6.96088925,  -5.42950571],
+       [ -1.03627705,   4.43722254,   9.86242557, ...,  -7.40104601,
+         -8.478513  ,  -2.97111132],
+       [  3.20617564,  10.15799628,  15.3417301 , ..., -11.71489554,
+         -4.78176618,  -5.52580241],
+       ...,
+       [ -0.6360713 ,  -5.7769556 ,  -7.26325104, ...,  -0.97401783,
+         -6.70223362,  -6.17733602],
+       [ -2.31241981,  -5.73765194,  -1.86696308, ...,   1.3005033 ,
+         -6.11857893,  -7.23749405],
+       [  0.39036807,   0.05455765,  -0.62209573, ...,  -0.55437843,
+         -7.04201708,  -4.82592877]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1), Mesh(scalar=array([[ -2.23684543,   2.87497287,   5.47268308, ...,  -5.88726918,
+         -6.96088925,  -5.42950571],
+       [ -1.03627705,   4.43722254,   9.86242557, ...,  -7.40104601,
+         -8.478513  ,  -2.97111132],
+       [  3.20617564,  10.15799628,  15.3417301 , ..., -11.71489554,
+         -4.78176618,  -5.52580241],
+       ...,
+       [ -0.6360713 ,  -5.7769556 ,  -7.26325104, ...,  -0.97401783,
+         -6.70223362,  -6.17733602],
+       [ -2.31241981,  -5.73765194,  -1.86696308, ...,   1.3005033 ,
+         -6.11857893,  -7.23749405],
+       [  0.39036807,   0.05455765,  -0.62209573, ...,  -0.55437843,
+         -7.04201708,  -4.82592877]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1)], mpl_ax=&lt;Axes: title={&#39;center&#39;: &#39;Correlation length: 4&#39;}&gt;, colorbar=Colorbar(artist=Mesh(scalar=array([[ -2.23684543,   2.87497287,   5.47268308, ...,  -5.88726918,
+         -6.96088925,  -5.42950571],
+       [ -1.03627705,   4.43722254,   9.86242557, ...,  -7.40104601,
+         -8.478513  ,  -2.97111132],
+       [  3.20617564,  10.15799628,  15.3417301 , ..., -11.71489554,
+         -4.78176618,  -5.52580241],
+       ...,
+       [ -0.6360713 ,  -5.7769556 ,  -7.26325104, ...,  -0.97401783,
+         -6.70223362,  -6.17733602],
+       [ -2.31241981,  -5.73765194,  -1.86696308, ...,   1.3005033 ,
+         -6.11857893,  -7.23749405],
+       [  0.39036807,   0.05455765,  -0.62209573, ...,  -0.55437843,
+         -7.04201708,  -4.82592877]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+       51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+       68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1), discreet=False, position=&#39;right&#39;, colormap=&lt;matplotlib.colors.LinearSegmentedColormap object at 0x7f38a584a610&gt;, orientation=&#39;vertical&#39;, symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width=&#39;10%&#39;, padding=0.1, norm=None, label=&#39;&#39;))], _mpl_figure=&lt;Figure size 1200x400 with 6 Axes&gt;, mpl_axis_generated=False, axis_generated=True, ax_orientation=&#39;horizontal&#39;)
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="kn">from</span> <span class="nn">MPSPlots.render2D</span> <span class="kn">import</span> <span class="n">SceneList</span>
+
+<span class="kn">from</span> <span class="nn">PyFinitDiff.finite_difference_2D</span> <span class="kn">import</span> <span class="n">FiniteDifference</span>
+<span class="kn">from</span> <span class="nn">PyFinitDiff.finite_difference_2D</span> <span class="kn">import</span> <span class="n">get_circular_mesh_triplet</span>
+<span class="kn">from</span> <span class="nn">PyFinitDiff.finite_difference_2D</span> <span class="kn">import</span> <span class="n">Boundaries</span>
+
+
+<span class="n">n_x</span> <span class="o">=</span> <span class="n">n_y</span> <span class="o">=</span> <span class="mi">80</span>
+
+<span class="n">sparse_instance</span> <span class="o">=</span> <span class="n">FiniteDifference</span><span class="p">(</span>
+    <span class="n">n_x</span><span class="o">=</span><span class="n">n_x</span><span class="p">,</span>
+    <span class="n">n_y</span><span class="o">=</span><span class="n">n_y</span><span class="p">,</span>
+    <span class="n">dx</span><span class="o">=</span><span class="mi">1000</span> <span class="o">/</span> <span class="n">n_x</span><span class="p">,</span>
+    <span class="n">dy</span><span class="o">=</span><span class="mi">1000</span> <span class="o">/</span> <span class="n">n_y</span><span class="p">,</span>
+    <span class="n">derivative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">accuracy</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">boundaries</span><span class="o">=</span><span class="n">Boundaries</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">laplacian</span> <span class="o">=</span> <span class="n">sparse_instance</span><span class="o">.</span><span class="n">triplet</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">get_field</span><span class="p">(</span><span class="n">D</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Nc</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span> <span class="o">=</span> <span class="n">shape</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_x</span> <span class="o">*</span> <span class="n">n_y</span><span class="p">)</span>
+
+    <span class="n">left_hand_side</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span> <span class="n">laplacian</span> <span class="o">+</span> <span class="n">lc</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">right_hand_side</span> <span class="o">=</span> <span class="n">eta</span>
+
+    <span class="n">field</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">left_hand_side</span><span class="p">,</span> <span class="n">right_hand_side</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Nc</span> <span class="o">*</span> <span class="n">field</span>
+
+
+<span class="n">figure</span> <span class="o">=</span> <span class="n">SceneList</span><span class="p">(</span>
+    <span class="n">unit_size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="n">tight_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">ax_orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span>
+<span class="p">)</span>
+
+<span class="n">field</span> <span class="o">=</span> <span class="n">get_field</span><span class="p">(</span>
+    <span class="n">D</span> <span class="o">:=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">lc</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">Nc</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">append_ax</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Correlation length: </span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">artist</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">scalar</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">]))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_colorbar</span><span class="p">(</span><span class="n">artist</span><span class="o">=</span><span class="n">artist</span><span class="p">)</span>
+
+<span class="c1"># ---------------</span>
+
+<span class="n">field</span> <span class="o">=</span> <span class="n">get_field</span><span class="p">(</span>
+    <span class="n">D</span> <span class="o">:=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">lc</span> <span class="o">:=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">Nc</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">append_ax</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Correlation length: </span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">artist</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">scalar</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">]))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_colorbar</span><span class="p">(</span><span class="n">artist</span><span class="o">=</span><span class="n">artist</span><span class="p">)</span>
+
+
+<span class="c1"># ---------------</span>
+
+<span class="n">field</span> <span class="o">=</span> <span class="n">get_field</span><span class="p">(</span>
+    <span class="n">D</span> <span class="o">:=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">lc</span> <span class="o">:=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">Nc</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">append_ax</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Correlation length: </span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">artist</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">scalar</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">]))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">add_colorbar</span><span class="p">(</span><span class="n">artist</span><span class="o">=</span><span class="n">artist</span><span class="p">)</span>
+
+<span class="n">figure</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># -</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 11.252 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-extras-plot-wm-field-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/f9c9024ec225795e5399e91a054aa128/plot_WM_field.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_WM_field.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/3973e977097ad5e7acf14b4e15553f15/plot_WM_field.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_WM_field.py</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/gallery/extras/plot_WM_field.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, Martin Poinsinet de Sivry-Houle.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
