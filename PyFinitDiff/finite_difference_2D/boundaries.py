@@ -35,13 +35,13 @@ class Boundary():
                 shift_vector = numpy.zeros(self.mesh_info.size)
                 shift_vector[-offset:] -= offset
             case 'right':
-                shift_vector = numpy.zeros(self.mesh_info.n_y)
+                shift_vector = numpy.zeros(self.mesh_info.n_x)
                 shift_vector[-offset:] = - numpy.arange(1, offset + 1)
-                shift_vector = numpy.tile(shift_vector, self.mesh_info.n_x)
+                shift_vector = numpy.tile(shift_vector, self.mesh_info.n_y)
             case 'left':
-                shift_vector = numpy.zeros(self.mesh_info.n_y)
+                shift_vector = numpy.zeros(self.mesh_info.n_x)
                 shift_vector[:offset] = numpy.arange(1, offset + 1)[::-1]
-                shift_vector = numpy.tile(shift_vector, self.mesh_info.n_x)
+                shift_vector = numpy.tile(shift_vector, self.mesh_info.n_y)
 
         return shift_vector
 

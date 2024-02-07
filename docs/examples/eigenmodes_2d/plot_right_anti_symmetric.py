@@ -29,7 +29,7 @@ sparse_instance = FiniteDifference(
     dy=1,
     derivative=2,
     accuracy=4,
-    boundaries=Boundaries(right='anti-symmetric')
+    boundaries=Boundaries(right='symmetric')
 )
 
 mesh_triplet = get_circular_mesh_triplet(
