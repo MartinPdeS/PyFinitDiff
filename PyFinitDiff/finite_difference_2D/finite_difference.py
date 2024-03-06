@@ -4,6 +4,7 @@
 from dataclasses import dataclass, field
 import PyFinitDiff.finite_difference_2D as module
 from PyFinitDiff.coefficients import FiniteCoefficients
+from PyFinitDiff.triplet import Triplet
 
 
 @dataclass
@@ -172,17 +173,23 @@ class FiniteDifference():
         return central_diagonal
 
     def construct_triplet(self) -> None:
-        x_diagonals = self.get_diagonal_set_full(
-            offset_multiplier=1,
-            delta=self._dx
-        )
+        self._triplet = Triplet(array=[[0, 0, 0]], shape=self.mesh_info.shape)
 
-        y_diagonals = self.get_diagonal_set_full(
-            offset_multiplier=self.n_x,
-            delta=self._dy
-        )
+        if self.x_derivative:
+            x_diagonals = self.get_diagonal_set_full(
+                offset_multiplier=1,
+                delta=self._dx
+            )
 
-        self._triplet = x_diagonals.triplet + y_diagonals.triplet
+            self._triplet += x_diagonals.triplet
+
+        if self.y_derivative:
+            y_diagonals = self.get_diagonal_set_full(
+                offset_multiplier=self.n_x,
+                delta=self._dy
+            )
+
+            self._triplet += y_diagonals.triplet
 
 
 # -

@@ -43,7 +43,7 @@ def get_array_derivative(
     """
     n_x, n_y = array.shape
 
-    sparse_instance = module.FiniteDifference(
+    finite_difference = module.FiniteDifference(
         n_x=n_x,
         n_y=n_y,
         dx=dx,
@@ -55,7 +55,7 @@ def get_array_derivative(
         y_derivative=y_derivative
     )
 
-    triplet = sparse_instance.triplet
+    triplet = finite_difference.triplet
 
     gradient = triplet.to_scipy_sparse() * array.ravel()
 
