@@ -1,15 +1,18 @@
 # Built-in imports
-from typing import Self
-from dataclasses import dataclass, field
+from dataclasses import field
+from typing import Optional
+from pydantic.dataclasses import dataclass
+from pydantic import ConfigDict
 
 
 # Local imports
 import numpy
 from PyFinitDiff.triplet import Triplet
 import PyFinitDiff.finite_difference_2D as module
+from PyFinitDiff.finite_difference_2D.utils import MeshInfo
 
 
-@dataclass
+@dataclass(config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class Diagonal():
     """
     This class is a construction of diagonals element of the finit-difference method.
@@ -17,13 +20,13 @@ class Diagonal():
     boundary condition.
 
     """
-    mesh_info: object
+    mesh_info: MeshInfo
     """ Instance describing the meta info on the mesh to be considered. """
     offset: int
     """ Offset of the column index for the diagonal. """
-    values: float
+    values: numpy.ndarray
     """ Value associated with the diagonal. """
-    boundary: module.Boundary = None
+    boundary: Optional[module.Boundary] = None
     """ Instance of the boundary used for that diagonal. """
 
     @property
@@ -118,11 +121,11 @@ class DiagonalSet():
     mesh_info: object
     diagonals: list = field(default_factory=list)
 
-    def append(self, diagonal: Diagonal) -> Self:
+    def append(self, diagonal: Diagonal) -> 'DiagonalSet':
         self.diagonals.append(diagonal)
         return self
 
-    def concatenate(self, other_diagonal_set: Self) -> Self:
+    def concatenate(self, other_diagonal_set: 'DiagonalSet') -> 'DiagonalSet':
         self.diagonals += other_diagonal_set.diagonals
 
         return self
@@ -180,12 +183,12 @@ class DiagonalSet():
 
         return self.triplet.array[rows_index]
 
-    def remove_nan_rows(self) -> Self:
+    def remove_nan_rows(self) -> 'DiagonalSet':
         nan_rows = self.get_row_nan_bool()
 
         return self.remove_rows(rows=nan_rows)
 
-    def remove_rows(self, rows: numpy.ndarray) -> Self:
+    def remove_rows(self, rows: numpy.ndarray) -> 'DiagonalSet':
         index_to_remove = numpy.isin(self.triplet.rows, rows)
 
         self.triplet.array = numpy.delete(
@@ -196,15 +199,15 @@ class DiagonalSet():
 
         return self
 
-    def replace_nan_rows_with(self, other: Self) -> Self:
+    def replace_nan_rows_with(self, other: 'DiagonalSet') -> 'DiagonalSet':
         """
         Replace the nan rows in self for the equivalent rows in the other_diagonal_set if any.
 
         :param      other_diagonal_set:  The other diagonal set
-        :type       other_diagonal_set:  Self
+        :type       other_diagonal_set:  'DiagonalSet'
 
         :returns:   The self instance
-        :rtype:     Self
+        :rtype:     'DiagonalSet'
         """
         self_nan_rows = self.get_list_of_nan_rows()
 
@@ -218,7 +221,7 @@ class DiagonalSet():
 
         self.triplet.append_array(add_array)
 
-    def initialize_triplet(self) -> Self:
+    def initialize_triplet(self) -> 'DiagonalSet':
         triplet = Triplet(
             array=[0, 0, 0],
             shape=self.mesh_info.shape
@@ -246,7 +249,7 @@ class DiagonalSet():
 
         return rows.max()
 
-    def __add__(self, other: Self) -> Self:
+    def __add__(self, other: 'DiagonalSet') -> 'DiagonalSet':
         self.diagonals += other.diagonals
 
         return self

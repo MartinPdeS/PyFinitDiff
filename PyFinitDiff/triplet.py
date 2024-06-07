@@ -1,6 +1,5 @@
 import numpy
 
-from typing import Self
 from MPSPlots.render2D import SceneList
 from scipy.sparse import coo_matrix
 from dataclasses import dataclass
@@ -89,22 +88,22 @@ class Triplet():
         """
         return self.i.size
 
-    def remove_below_i(self, i_value: int) -> Self:
+    def remove_below_i(self, i_value: int) -> 'Triplet':
         idx = self.i > i_value
         self.array = self.array[idx, :]
         return self
 
-    def remove_above_i(self, i_value: int) -> Self:
+    def remove_above_i(self, i_value: int) -> 'Triplet':
         idx = self.i < i_value
         self.array = self.array[idx, :]
         return self
 
-    def remove_below_j(self, j_value: int) -> Self:
+    def remove_below_j(self, j_value: int) -> 'Triplet':
         idx = self.j > j_value
         self.array = self.array[idx, :]
         return self
 
-    def remove_above_j(self, j_value: int) -> Self:
+    def remove_above_j(self, j_value: int) -> 'Triplet':
         idx = self.j < j_value
         self.array = self.array[idx, :]
         return self
@@ -122,7 +121,7 @@ class Triplet():
     def append_array(self, array: object) -> None:
         self.array = numpy.r_[self.array, array]
 
-    def __add__(self, other: object) -> Self:
+    def __add__(self, other: object) -> 'Triplet':
         """
         The methode concatenate the two triplet array and
         reduce if any coinciding index values.
@@ -134,7 +133,7 @@ class Triplet():
 
         return new_triplet.remove_duplicate()
 
-    def __mul__(self, factor: float) -> Self:
+    def __mul__(self, factor: float) -> 'Triplet':
         """
         The method output a new triplet where the values
         are left-multiplied by the factor
@@ -151,7 +150,7 @@ class Triplet():
 
         return new_triplet
 
-    def __rmul__(self, factor: float) -> Self:
+    def __rmul__(self, factor: float) -> 'Triplet':
         """
         The method output a new triplet where the values
         are right-multiplied by the factor
@@ -164,7 +163,7 @@ class Triplet():
         """
         return self.__mul__(factor)
 
-    def __div__(self, factor) -> Self:
+    def __div__(self, factor) -> 'Triplet':
         """
         The method output a new triplet where the values
         are left-divided by the factor
@@ -181,7 +180,7 @@ class Triplet():
 
         return new_triplet
 
-    def __rdiv__(self, factor: float) -> Self:
+    def __rdiv__(self, factor: float) -> 'Triplet':
         """
         The method output a new triplet where the values
         are right-divided by the factor
@@ -198,14 +197,14 @@ class Triplet():
 
         return new_triplet
 
-    def add_triplet(self, *others) -> Self:
+    def add_triplet(self, *others) -> 'Triplet':
         others_array = (other.array for other in others)
 
         self.array = numpy.r_[(self.array, *others_array)]
 
         self.merge_duplicate()
 
-    def remove_duplicate(self) -> Self:
+    def remove_duplicate(self) -> 'Triplet':
         """
         Removes the duplicate values of the Triplet.
 
@@ -229,7 +228,7 @@ class Triplet():
 
         return Triplet(array=triplet_array, shape=self.shape)
 
-    def coincide_i(self, mask) -> Self:
+    def coincide_i(self, mask) -> 'Triplet':
         """
         The methode removing all index i which do not coincide with the
         other triplet
@@ -240,7 +239,7 @@ class Triplet():
 
         self.array = numpy.r_[tuple(temp)]
 
-    def __sub__(self, other: object) -> Self:
+    def __sub__(self, other: object) -> 'Triplet':
         """
         The methode removing index[i] (rows) value corresponding between the two triplets.
         It doesn't change the other triplet, only the instance that called the method.
@@ -377,7 +376,7 @@ class Triplet():
 
         return self + shift_triplet
 
-    def update_elements(self, other_triplet: Self, i_range: slice) -> Self:
+    def update_elements(self, other_triplet: 'Triplet', i_range: slice) -> 'Triplet':
         self.array[i_range, :] = other_triplet.array[i_range, :]
 
         return self
