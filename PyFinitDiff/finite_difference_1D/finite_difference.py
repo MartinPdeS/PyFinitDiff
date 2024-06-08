@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 import PyFinitDiff.finite_difference_1D as module
 from PyFinitDiff.coefficients import FiniteCoefficients
 
-
+ 
 @dataclass
 class FiniteDifference():
     """
