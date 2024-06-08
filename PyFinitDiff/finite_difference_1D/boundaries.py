@@ -2,13 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import numpy
-from dataclasses import dataclass
+
+from typing import Optional, Union
+from pydantic.dataclasses import dataclass
+from pydantic import ConfigDict
+
+config_dict = ConfigDict(extra='forbid', strict=True)
 
 
-@dataclass(frozen=True)
+@dataclass(config=config_dict, kw_only=True, frozen=True)
 class Boundary():
     name: str
-    value: str
+    value: Union[str, None]
     mesh_info: object
 
     def get_factor(self) -> float:
@@ -40,9 +45,9 @@ class Boundary():
 
 @dataclass()
 class Boundaries():
-    left: str = 'zero'
+    left: Optional[str] = 'zero'
     """ Value of the left boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
-    right: str = 'zero'
+    right: Optional[str] = 'zero'
     """ Value of the right boundary, either ['zero', 'symmetric', 'anti-symmetric'] """
 
     acceptable_boundary = ['zero', 'symmetric', 'anti-symmetric', 'none']
@@ -98,6 +103,5 @@ class Boundaries():
         if offset < 0:
             if offset > -self.mesh_info.n_x:
                 return self.get_boundary('left')
-
 
 # -

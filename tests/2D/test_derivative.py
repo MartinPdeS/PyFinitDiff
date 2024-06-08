@@ -1,38 +1,46 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import numpy
+import numpy as np
 import math
 import pytest
-
-from PyFinitDiff.finite_difference_2D import FiniteDifference
-from PyFinitDiff.finite_difference_2D import Boundaries
+from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
 
 
 def foo(power: int, size: int = 20):
-    x_array = numpy.arange(0, size) ** power
+    """
+    Generates 2D arrays for testing finite difference calculations.
 
-    y_array = numpy.ones(size)
+    Args:
+        power (int): The power to which elements in the x_array are raised.
+        size (int, optional): The size of the generated arrays. Default is 20.
 
-    x_array, y_array = numpy.meshgrid(x_array, y_array)
-
+    Returns:
+        tuple: A tuple containing the x_array and y_array.
+    """
+    x_array = np.arange(0, size) ** power
+    y_array = np.ones(size)
+    x_array, y_array = np.meshgrid(x_array, y_array)
     return x_array, y_array
 
 
+# Define derivatives and accuracies to be tested
 derivatives = [1, 2, 3]
-derivatives_ids = [
-    f'derivative: {d}' for d in derivatives
-]
-
+derivatives_ids = [f'derivative: {d}' for d in derivatives]
 accuracies = [2, 4, 6]
-accuracies_ids = [
-    f'accuracy: {a}' for a in accuracies
-]
+accuracies_ids = [f'accuracy: {a}' for a in accuracies]
 
 
 @pytest.mark.parametrize('derivative', derivatives, ids=derivatives_ids)
 @pytest.mark.parametrize('accuracy', accuracies, ids=accuracies_ids)
 def test_derivative(accuracy, derivative):
+    """
+    Tests the finite difference derivative calculations with various accuracies and derivatives.
+
+    Args:
+        accuracy (int): Accuracy level of the finite difference calculation.
+        derivative (int): Order of the derivative for the finite difference calculation.
+    """
     size = 20
     x_array, y_array = foo(power=derivative, size=size)
 
@@ -43,7 +51,7 @@ def test_derivative(accuracy, derivative):
         left='symmetric'
     )
 
-    finit_difference = FiniteDifference(
+    finite_difference = FiniteDifference(
         n_x=size,
         n_y=size,
         dx=1,
@@ -53,17 +61,16 @@ def test_derivative(accuracy, derivative):
         boundaries=boundaries
     )
 
-    sparse_matrix = finit_difference.triplet.to_scipy_sparse()
-
+    sparse_matrix = finite_difference.triplet.to_scipy_sparse()
     y_gradient = sparse_matrix * x_array.ravel()
-
     y_gradient = y_gradient.reshape([size, size])
 
     theoretical = math.factorial(derivative)
     evaluation = y_gradient[size // 2, size // 2]
 
-    discrepency = numpy.isclose(evaluation, theoretical, atol=1e-5)
+    discrepancy = np.isclose(evaluation, theoretical, atol=1e-5)
 
-    assert discrepency, 'Deviation from theoretical value for derivative'
-
-# -
+    assert discrepancy, (
+        f'Deviation from theoretical value for derivative. '
+        f'Evaluation: {evaluation}, Theoretical: {theoretical}'
+    )
