@@ -37,18 +37,18 @@ Example: triplets 2
 
 
 
-    from PyFinitDiff.sparse2D import FiniteDifference2D as SparseFD
-    from PyFinitDiff.boundaries import Boundaries2D
+    from PyFinitDiff.finite_difference_2D import FiniteDifference
+    from PyFinitDiff.finite_difference_2D import Boundaries
 
 
-    sparse_instance = SparseFD(
+    sparse_instance = FiniteDifference(
         n_x=12,
         n_y=12,
         dx=1,
         dy=1,
         derivative=2,
         accuracy=4,
-        boundaries=Boundaries2D()
+        boundaries=Boundaries()
     )
 
     figure = sparse_instance.triplet.plot()
@@ -71,7 +71,7 @@ Example: triplets 2
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.172 seconds)
+   **Total running time of the script:** (0 minutes 0.203 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_2.py:

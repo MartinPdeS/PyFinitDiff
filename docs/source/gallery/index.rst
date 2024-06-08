@@ -113,10 +113,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/one_dimensional/images/thumb/sphx_glr_plot_mode_0_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_0_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_one_dimensional_plot_mode_0.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_0.py`
 
 .. raw:: html
 
@@ -130,10 +130,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/one_dimensional/images/thumb/sphx_glr_plot_mode_1_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_1_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_one_dimensional_plot_mode_1.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_1.py`
 
 .. raw:: html
 
@@ -147,10 +147,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/one_dimensional/images/thumb/sphx_glr_plot_mode_2_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_2_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_one_dimensional_plot_mode_2.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_2.py`
 
 .. raw:: html
 
@@ -164,10 +164,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/one_dimensional/images/thumb/sphx_glr_plot_mode_3_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_3_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_one_dimensional_plot_mode_3.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_3.py`
 
 .. raw:: html
 
@@ -179,8 +179,8 @@ triplets computation
 
     </div>
 
-2-dimensional
-~~~~~~~~~~~~~
+2-dimensional eigenmodes
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 .. raw:: html
@@ -194,10 +194,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_bottom_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_bottom_anti_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_bottom_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_bottom_anti_symmetric.py`
 
 .. raw:: html
 
@@ -211,10 +211,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_bottom_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_bottom_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_bottom_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_bottom_symmetric.py`
 
 .. raw:: html
 
@@ -228,10 +228,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_left_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_left_anti_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_left_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_left_anti_symmetric.py`
 
 .. raw:: html
 
@@ -245,10 +245,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_left_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_left_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_left_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_left_symmetric.py`
 
 .. raw:: html
 
@@ -262,10 +262,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_no_symmetry_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_no_symmetry_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_no_symmetry.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_no_symmetry.py`
 
 .. raw:: html
 
@@ -279,10 +279,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_right_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_right_anti_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_right_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_right_anti_symmetric.py`
 
 .. raw:: html
 
@@ -296,10 +296,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_right_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_right_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_right_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_right_symmetric.py`
 
 .. raw:: html
 
@@ -313,10 +313,10 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_top_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_top_anti_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_top_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_top_anti_symmetric.py`
 
 .. raw:: html
 
@@ -330,14 +330,61 @@ triplets computation
 
 .. only:: html
 
-  .. image:: /gallery/two_dimensional/images/thumb/sphx_glr_plot_top_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_top_symmetric_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_two_dimensional_plot_top_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_top_symmetric.py`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Example: eigenmodes 8</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+Extras
+~~~~~~
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Gradient of array">
+
+.. only:: html
+
+  .. image:: /gallery/extras/images/thumb/sphx_glr_gradient_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_gallery_extras_gradient.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Gradient of array</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Generating Whittle-Matérn field">
+
+.. only:: html
+
+  .. image:: /gallery/extras/images/thumb/sphx_glr_plot_WM_field_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_gallery_extras_plot_WM_field.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Generating Whittle-Matérn field</div>
     </div>
 
 
@@ -352,8 +399,9 @@ triplets computation
 
 
    /gallery/triplets/index.rst
-   /gallery/one_dimensional/index.rst
-   /gallery/two_dimensional/index.rst
+   /gallery/eigenmodes_1d/index.rst
+   /gallery/eigenmodes_2d/index.rst
+   /gallery/extras/index.rst
 
 
 

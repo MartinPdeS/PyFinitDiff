@@ -7,7 +7,8 @@ from dataclasses import dataclass, field
 # Local imports
 import numpy
 from PyFinitDiff.triplet import Triplet
-import PyFinitDiff.finite_difference_1D as module
+from PyFinitDiff.finite_difference_1D.utils import MeshInfo
+from PyFinitDiff.finite_difference_1D.boundaries import Boundary
 
 
 @dataclass
@@ -24,7 +25,7 @@ class Diagonal():
     """ Offset of the column index for the diagonal. """
     values: float
     """ Value associated with the diagonal. """
-    boundary: module.Boundary
+    boundary: Boundary
     """ Instance of the boundary used for that diagonal. """
 
     @property
@@ -105,7 +106,7 @@ class Diagonal():
 
 
 class ConstantDiagonal(Diagonal):
-    def __init__(self, offset: int, value: float, mesh_info: list, boundary: module.Boundary):
+    def __init__(self, offset: int, value: float, mesh_info: list, boundary: Boundary):
         super().__init__(
             offset=offset,
             mesh_info=mesh_info,

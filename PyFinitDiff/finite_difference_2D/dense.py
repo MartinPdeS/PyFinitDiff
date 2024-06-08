@@ -2,26 +2,32 @@ import numpy as np
 import numpy
 import matplotlib.pyplot as plt
 from scipy import sparse
-from dataclasses import dataclass, field
-from typing import Dict
+from dataclasses import field
+from typing import Dict, Optional
+
+from pydantic.dataclasses import dataclass
+from pydantic import ConfigDict
 
 from PyFinitDiff.utils import NameSpace
 from PyFinitDiff.coefficients import FinitCoefficients
 
 
-@dataclass
+config_dict = ConfigDict(extra='forbid', strict=True, kw_only=True, frozen=True)
+
+
+@dataclass(config=config_dict)
 class FiniteDifference():
     """
     Reference : ['math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf']
     """
     n_x: int
     n_y: int
-    dx: float = 1
-    dy: float = 1
-    derivative: int = 1
-    accuracy: int = 2
-    naive: bool = False
-    symmetries: Dict[str, str] = field(default_factory=lambda: ({'left': 0, 'right': 0, 'top': 0, 'bottom': 0}))
+    dx: Optional[float] = 1
+    dy: Optional[float] = 1
+    derivative: Optional[int] = 1
+    accuracy: Optional[int] = 2
+    naive: Optional[bool] = False
+    symmetries: Dict[str, int] = field(default_factory=lambda: ({'left': 0, 'right': 0, 'top': 0, 'bottom': 0}))
 
     def __post_init__(self):
         self.finit_coefficient = FinitCoefficients(

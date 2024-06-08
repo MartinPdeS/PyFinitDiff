@@ -1,12 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from dataclasses import dataclass, field
-import PyFinitDiff.finite_difference_1D as module
+from pydantic.dataclasses import dataclass
+from pydantic import ConfigDict
+from dataclasses import field
+
 from PyFinitDiff.coefficients import FiniteCoefficients
+from PyFinitDiff.finite_difference_1D.boundaries import Boundaries
+from PyFinitDiff.finite_difference_1D.utils import MeshInfo
+from PyFinitDiff.finite_difference_1D.diagonals import DiagonalSet, ConstantDiagonal
 
 
-@dataclass
+config_dict = ConfigDict(
+    extra='forbid',
+    strict=True,
+    arbitrary_types_allowed=True,
+    kw_only=True,
+    frozen=True
+)
+
+
+@dataclass(config=config_dict)
 class FiniteDifference():
     """
     This class represent a specific finit difference configuration, which is defined with the descretization of the mesh, the derivative order,
@@ -20,13 +34,13 @@ class FiniteDifference():
     """ Derivative order to convert into finit-difference matrix. """
     accuracy: int = 2
     """ Accuracy of the derivative approximation [error is inversly proportional to the power of that value]. """
-    boundaries: module.Boundaries = field(default_factory=module.Boundaries())
+    boundaries: Boundaries = field(default_factory=Boundaries)
     """ Values of the four possible boundaries of the system. """
     x_derivative: bool = True
     """ Add the x derivative """
 
     def __post_init__(self):
-        self.mesh_info = module.MeshInfo(
+        self.mesh_info = MeshInfo(
             n_x=self.n_x,
             dx=self.dx,
         )
@@ -103,7 +117,7 @@ class FiniteDifference():
         :returns:   No return
         :rtype:     None
         """
-        diagonal_set = module.DiagonalSet(mesh_info=self.mesh_info)
+        diagonal_set = DiagonalSet(mesh_info=self.mesh_info)
 
         coefficients = getattr(self.finit_coefficient, coefficient_type)
 
@@ -113,7 +127,7 @@ class FiniteDifference():
         )
 
         for offset, value, boundary in iterator:
-            diagonal = module.ConstantDiagonal(
+            diagonal = ConstantDiagonal(
                 mesh_info=self.mesh_info,
                 offset=offset,
                 boundary=boundary,
