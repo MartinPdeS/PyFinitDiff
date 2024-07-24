@@ -63,5 +63,5 @@ documentation = [
 minversion = "6.0"
 xfail_strict = true
 log_cli_level = "INFO"
-testpaths = ["tests"]
+testpaths = "tests"
 addopts = ['-v', '-rA', '-rw']
