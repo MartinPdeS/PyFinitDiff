@@ -4,15 +4,10 @@
 import sys
 from sphinx_gallery.sorting import FileNameSortKey
 from sphinx_gallery.sorting import ExplicitOrder
-from packaging.version import parse
 from MPSPlots.styles import use_mpsplots_style
+import PyFinitDiff
 
-
-from PyFinitDiff.tools.directories import (
-    project_path,
-    doc_css_path,
-    version_path,
-)
+from PyFinitDiff.tools.directories import project_path, doc_css_path
 
 
 sys.path.insert(0, project_path)
@@ -37,8 +32,7 @@ copyright = '2023, Martin Poinsinet de Sivry-Houle'
 author = 'Martin Poinsinet de Sivry-Houle'
 
 
-with open(version_path, "r+") as f:
-    version = release = f.read()
+version = PyFinitDiff.__version__
 
 
 extensions = [
@@ -107,15 +101,8 @@ pygments_style = "sphinx"
 
 # -- Sphinx-gallery configuration --------------------------------------------
 
-v = parse(release)
-if v.release is None:
-    raise ValueError(f"Ill-formed version: {version!r}. Version should follow PEP440")
-
-if v.is_devrelease:
-    binder_branch = "main"
-else:
-    major, minor = v.release[:2]
-    binder_branch = f"v{major}.{minor}.x"
+major, minor = version[:2]
+binder_branch = f"v{major}.{minor}.x"
 
 html_theme_options = {
     # Navigation bar
