@@ -64,4 +64,4 @@ minversion = "6.0"
 xfail_strict = true
 log_cli_level = "INFO"
 testpaths = ["tests"]
-addopts = ["'-v', '-rA', '-rw']
+addopts = ['-v', '-rA', '-rw']
