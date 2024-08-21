@@ -2,121 +2,221 @@ import numpy
 
 from MPSPlots.render2D import SceneList
 from scipy.sparse import coo_matrix
+from dataclasses import dataclass
 
 
+@dataclass
 class Triplet():
-    def __init__(self, array: numpy.ndarray = None, add_extra_column: bool = False):
-        if array is None:
-            array = [[0, 0, 0]]
+    shape: list
+    array: numpy.ndarray
+    add_extra_column: bool = False
 
-        self._array = numpy.asarray(array)
-        self._array = numpy.atleast_2d(self._array)
+    def __post_init__(self):
+        self.array = numpy.atleast_2d(self.array)
+        self.shape = numpy.asarray(self.shape)
 
-        if add_extra_column:
-            self._array = numpy.c_[self._array, numpy.ones(self._array.shape[0])]
+        if self.add_extra_column:
+            self.array = numpy.c_[self.array, numpy.ones(self.array.shape[0])]
 
-        assert self._array.shape[1] == 3, 'Array shape error'
+        assert self.array.shape[1] == 3, 'Array shape error'
 
     @property
     def index(self) -> numpy.ndarray:
-        return self._array[:, 0:2].astype(int)
+        return self.array[:, 0:2].astype(int)
 
     @property
     def index_with_label(self) -> numpy.ndarray:
         return numpy.c_[self.label, self.index].astype(int)
 
     @property
+    def rows(self) -> numpy.ndarray:
+        """
+        Returns the first index i of the Triplet
+
+        :returns:   The values associated to the Triplet
+        :rtype:     numpy.ndarray
+        """
+        return self.array[:, 0].astype(int)
+
+    @property
+    def columns(self) -> numpy.ndarray:
+        """
+        Returns the second index j of the Triplet
+
+        :returns:   The values associated to the Triplet
+        :rtype:     numpy.ndarray
+        """
+        return self.array[:, 1].astype(int)
+
+    @property
     def i(self) -> numpy.ndarray:
-        return self._array[:, 0].astype(int)
+        """
+        Returns the first index i of the Triplet
+
+        :returns:   The values associated to the Triplet
+        :rtype:     numpy.ndarray
+        """
+        return self.array[:, 0].astype(int)
 
     @property
     def j(self) -> numpy.ndarray:
-        return self._array[:, 1].astype(int)
+        """
+        Returns the second index j of the Triplet
+
+        :returns:   The values associated to the Triplet
+        :rtype:     numpy.ndarray
+        """
+        return self.array[:, 1].astype(int)
 
     @property
     def values(self) -> numpy.ndarray:
-        return self._array[:, 2]
+        """
+        Returns the values of the Triplet
+
+        :returns:   The values associated to the Triplet
+        :rtype:     numpy.ndarray
+        """
+        return self.array[:, 2]
 
     @property
-    def size(self):
+    def size(self) -> int:
+        """
+        Return the size of the Triplet, which means the number of values.
+
+        :returns:   Size of the triplet
+        :rtype:     int
+        """
         return self.i.size
 
+    def remove_below_i(self, i_value: int) -> 'Triplet':
+        idx = self.i > i_value
+        self.array = self.array[idx, :]
+        return self
+
+    def remove_above_i(self, i_value: int) -> 'Triplet':
+        idx = self.i < i_value
+        self.array = self.array[idx, :]
+        return self
+
+    def remove_below_j(self, j_value: int) -> 'Triplet':
+        idx = self.j > j_value
+        self.array = self.array[idx, :]
+        return self
+
+    def remove_above_j(self, j_value: int) -> 'Triplet':
+        idx = self.j < j_value
+        self.array = self.array[idx, :]
+        return self
+
     @values.setter
-    def values(self, value) -> numpy.ndarray:
-        self._array[:, 2] = value
+    def values(self, value: float) -> None:
+        self.array[:, 2] = value
 
-    def delete(self, index):
-        self._array = numpy.delete(self._array, index.astype(int), axis=0)
+    def delete(self, index) -> None:
+        self.array = numpy.delete(self.array, index.astype(int), axis=0)
 
-    def append(self, other):
-        self._array = numpy.r_[self._array, other._array]
+    def append(self, other: object) -> None:
+        self.array = numpy.r_[self.array, other.array]
 
-    def __add__(self, other) -> 'Triplet':
+    def append_array(self, array: object) -> None:
+        self.array = numpy.r_[self.array, array]
+
+    def __add__(self, other: object) -> 'Triplet':
         """
         The methode concatenate the two triplet array and
         reduce if any coinciding index values.
 
         """
+        new_array = numpy.r_[self.array, other.array]
 
-        new_array = numpy.r_[self._array, other._array]
-
-        new_triplet = Triplet(new_array)
+        new_triplet = Triplet(array=new_array, shape=self.shape)
 
         return new_triplet.remove_duplicate()
 
-    def __mul__(self, factor) -> 'Triplet':
+    def __mul__(self, factor: float) -> 'Triplet':
         """
         The method output a new triplet where the values
-        are mutliplied by the factor
+        are left-multiplied by the factor
 
+        :param      factor:  The factor
+        :type       factor:  float
+
+        :returns:   The triplet after multiplication
+        :rtype:     Triplet
         """
-        new_triplet = Triplet(self._array)
+        new_triplet = Triplet(array=self.array, shape=self.shape)
 
         new_triplet.values *= factor
 
         return new_triplet
 
-    def __rmul__(self, factor):
+    def __rmul__(self, factor: float) -> 'Triplet':
+        """
+        The method output a new triplet where the values
+        are right-multiplied by the factor
+
+        :param      factor:  The factor
+        :type       factor:  float
+
+        :returns:   The triplet after multiplication
+        :rtype:     Triplet
+        """
         return self.__mul__(factor)
 
     def __div__(self, factor) -> 'Triplet':
         """
         The method output a new triplet where the values
-        are mutliplied by the factor
+        are left-divided by the factor
 
+        :param      factor:  The factor
+        :type       factor:  float
+
+        :returns:   The triplet after division
+        :rtype:     Triplet
         """
-        new_triplet = Triplet(self._array)
+        new_triplet = Triplet(array=self.array, shape=self.shape)
 
         new_triplet /= factor
 
         return new_triplet
 
-    def __rdiv__(self, factor) -> 'Triplet':
+    def __rdiv__(self, factor: float) -> 'Triplet':
         """
         The method output a new triplet where the values
-        are mutliplied by the factor
+        are right-divided by the factor
 
+        :param      factor:  The factor
+        :type       factor:  float
+
+        :returns:   The triplet after division
+        :rtype:     Triplet
         """
-        new_triplet = Triplet(self._array)
+        new_triplet = Triplet(array=self.array, shape=self.shape)
 
         new_triplet /= factor
 
         return new_triplet
 
     def add_triplet(self, *others) -> 'Triplet':
-        others_array = (other._array for other in others)
+        others_array = (other.array for other in others)
 
-        self._array = numpy.r_[(self._array, *others_array)]
+        self.array = numpy.r_[(self.array, *others_array)]
 
         self.merge_duplicate()
 
     def remove_duplicate(self) -> 'Triplet':
-        new_array = self._array
+        """
+        Removes the duplicate values of the Triplet.
+
+        :returns:   The triplet with removed duplicate values
+        :rtype:     Triplet
+        """
+        new_array = self.array
         index_to_delete = []
         duplicate = self.get_duplicate_index()
 
         if duplicate.size == 0:
-            return Triplet(self._array)
+            return Triplet(array=self.array, shape=self.shape)
 
         for duplicate in duplicate:
             index_to_keep = duplicate[0]
@@ -126,7 +226,7 @@ class Triplet():
 
         triplet_array = numpy.delete(new_array, index_to_delete, axis=0)
 
-        return Triplet(triplet_array)
+        return Triplet(array=triplet_array, shape=self.shape)
 
     def coincide_i(self, mask) -> 'Triplet':
         """
@@ -135,28 +235,52 @@ class Triplet():
         """
         mask_i = numpy.unique(mask.i[mask.values != 0])
 
-        temp = (self._array[self.i == i] for i in mask_i)
+        temp = (self.array[self.i == i] for i in mask_i)
 
-        self._array = numpy.r_[tuple(temp)]
+        self.array = numpy.r_[tuple(temp)]
 
-    def __sub__(self, other) -> 'Triplet':
+    def __sub__(self, other: object) -> 'Triplet':
         """
         The methode removing index[i] (rows) value corresponding between the two triplets.
         It doesn't change the other triplet, only the instance that called the method.
+
+        :param      other:  The other
+        :type       other:  object
+
+        :returns:   The substracted triplet
+        :rtype:     Triplet
         """
         index_duplicate = numpy.isin(self.i, other.i)
         index_duplicate = numpy.arange(self.size)[index_duplicate]
 
-        triplet_array = numpy.delete(self._array, index_duplicate, axis=0)
+        triplet_array = numpy.delete(self.array, index_duplicate, axis=0)
 
-        return Triplet(triplet_array)
+        return Triplet(array=triplet_array, shape=self.shape)
 
-    def __iter__(self):
-        for i, j, value in self._array:
+    def __iter__(self) -> tuple:
+        """
+        Creates an iterator for this container yielding the
+        indexes i, j and value.
+
+        :returns:   The iterator.
+        :rtype:     tuple
+        """
+        for i, j, value in self.array:
             yield (int(i), int(j)), value
 
-    def enumerate(self, start=None, stop=None):
-        for n, (i, j, value) in enumerate(self._array[start:stop, :]):
+    def enumerate(self, start: int = None, stop: int = None) -> tuple:
+        """
+        Does the same as __iter__ but adds an overall single index n.
+
+        :param      start:  The start
+        :type       start:  int
+        :param      stop:   The stop
+        :type       stop:   int
+
+        :returns:   The enumerator
+        :rtype:     tuple
+        """
+        for n, (i, j, value) in enumerate(self.array[start:stop, :]):
             yield n, (int(i), int(j), value)
 
     def get_duplicate_index(self) -> numpy.ndarray:
@@ -180,19 +304,22 @@ class Triplet():
         duplicates = self.get_duplicate_index()
 
         if numpy.size(duplicates) == 0:
-            return self._array
+            return self.array
 
         for duplicate in duplicates:  # merge values
-            self._array[int(duplicate[0]), 2] = self._array[duplicate.astype(int)][:, 2].sum()
+            self.array[int(duplicate[0]), 2] = self.array[duplicate.astype(int)][:, 2].sum()
 
         duplicates = [d[1:] for d in duplicates]
 
-        self._array = numpy.delete(self._array, numpy.concatenate(duplicates).astype(int), axis=0)
+        self.array = numpy.delete(self.array, numpy.concatenate(duplicates).astype(int), axis=0)
 
     @property
     def max_i(self) -> int:
         """
         Return max i value, which is the first element of the index format.
+
+        :returns:   The maximum index value i
+        :rtype:     int
         """
         return self.i.max()
 
@@ -200,6 +327,9 @@ class Triplet():
     def max_j(self) -> int:
         """
         Return max j value, which is the second element of the index format.
+
+        :returns:   The maximum index value j
+        :rtype:     int
         """
         return self.j.max()
 
@@ -207,6 +337,9 @@ class Triplet():
     def min_i(self) -> float:
         """
         Return min i value, which is the first element of the index format.
+
+        :returns:   The minimum index value i
+        :rtype:     float
         """
         return self.i.min()
 
@@ -214,12 +347,21 @@ class Triplet():
     def min_j(self) -> float:
         """
         Return max j value, which is the second element of the index format.
+
+        :returns:   The minimum index value j
+        :rtype:     float
         """
         return self.j.min()
 
     @property
-    def diagonal(self):
-        return self._array[self.i == self.j]
+    def diagonal(self) -> numpy.ndarray:
+        """
+        Return the diagonal element of the Triplet values.
+
+        :returns:   The diagonal elements
+        :rtype:     numpy.ndarray
+        """
+        return self.array[self.i == self.j]
 
     def shift_diagonal(self, value: float) -> None:
         """
@@ -234,6 +376,11 @@ class Triplet():
 
         return self + shift_triplet
 
+    def update_elements(self, other_triplet: 'Triplet', i_range: slice) -> 'Triplet':
+        self.array[i_range, :] = other_triplet.array[i_range, :]
+
+        return self
+
     def to_dense(self) -> numpy.ndarray:
         """
         Returns a dense representation of the object.
@@ -241,17 +388,19 @@ class Triplet():
         :returns:   Dense representation of the object.
         :rtype:     numpy.ndarray:
         """
-        matrix = numpy.zeros([self.max_i + 1, self.max_j + 1])
-        for index, value in self:
-            matrix[index] = value
+        dense_matrix = self.to_scipy_sparse().todense()
 
-        return matrix
+        dense_matrix = numpy.asarray(dense_matrix)
 
-    def plot(self) -> None:
+        return dense_matrix
+
+    def plot(self) -> SceneList:
         """
         Plot the dense matrix representation of the triplet.
-        """
 
+        :returns:   The figure
+        :rtype:     SceneList
+        """
         figure = SceneList(unit_size=(6, 6), tight_layout=True)
 
         ax = figure.append_ax(
@@ -260,11 +409,13 @@ class Triplet():
             show_grid=True,
         )
 
-        ax.add_mesh(
-            scalar=numpy.flip(self.to_dense(), axis=[0]), 
-            colormap='Blues',
-            show_colorbar=True
+        dense_matrix = numpy.flip(self.to_dense(), axis=[0])
+
+        artist = ax.add_mesh(
+            scalar=dense_matrix,
         )
+
+        ax.add_colorbar(artist=artist, colormap='Blues')
 
         return figure
 
@@ -275,18 +426,24 @@ class Triplet():
         :returns:   Scipy sparse representation of the object.
         :rtype:     coo_matrix
         """
-        return coo_matrix((self.values, (self.i, self.j)), shape=(self.max_i + 1, self.max_j + 1))
+        size = numpy.prod(self.shape)
+
+        output_shape = [size, size]
+
+        sparse_matrix = coo_matrix((self.values, (self.i, self.j)), shape=output_shape)
+
+        return sparse_matrix
 
 
 class DiagonalTriplet(Triplet):
-    def __init__(self, mesh: numpy.ndarray):
+    def __init__(self, mesh: numpy.ndarray, shape: list):
         size = mesh.size
         triplet_array = numpy.zeros([size, 3])
         triplet_array[:, 0] = numpy.arange(size)
         triplet_array[:, 1] = numpy.arange(size)
         triplet_array[:, 2] = mesh.ravel()
 
-        super().__init__(triplet_array)
+        super().__init__(array=triplet_array, shape=shape)
 
 
 # -

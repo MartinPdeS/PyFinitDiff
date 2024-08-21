@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_triplets_plot_triplets_0.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_triplets_plot_triplets_0.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -31,26 +31,27 @@ Example: triplets 0
    * - derivative: 2
    * - accuracy: 4
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-31
+.. GENERATED FROM PYTHON SOURCE LINES 14-33
 
 .. code-block:: python3
-   :lineno-start: 15
 
 
-    from PyFinitDiff.sparse2D import FiniteDifference2D
-    from PyFinitDiff.boundaries import Boundaries2D
+    from PyFinitDiff.finite_difference_2D import FiniteDifference
+    from PyFinitDiff.finite_difference_2D import Boundaries
 
-    sparse_instance = FiniteDifference2D(
+    sparse_instance = FiniteDifference(
         n_x=20,
         n_y=20,
         dx=1,
         dy=1,
         derivative=2,
         accuracy=2,
-        boundaries=Boundaries2D()
+        boundaries=Boundaries()
     )
 
-    sparse_instance.triplet.plot()
+    figure = sparse_instance.triplet.plot()
+
+    _ = figure.show()
 
     # -
 
@@ -68,7 +69,7 @@ Example: triplets 0
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.533 seconds)
+   **Total running time of the script:** (0 minutes 0.860 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_0.py:
@@ -76,6 +77,8 @@ Example: triplets 0
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

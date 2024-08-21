@@ -5,6 +5,7 @@ PyFinitDiff
 |docs|
 |unittest|
 |PyPi|
+|PyPi_download|
 
 A Python package to compute finit-difference matrices with an intuitive API.
 
@@ -37,6 +38,22 @@ As such, with the adequate configuration one can simply do
 
 ----
 
+Testing
+*******
+
+To test localy (with cloning the GitHub repository) you'll need to install the dependencies and run the coverage command as
+
+.. code:: python
+
+   >>> git clone https://github.com/MartinPdeS/PyFinitDiff.git
+   >>> cd PyFinitDiff
+   >>> pip install -r requirements/requirements.txt
+   >>> coverage run --source=PyFinitDiff --module pytest --verbose tests
+   >>> coverage report --show-missing
+
+----
+
+
 Contact Information
 *******************
 
@@ -51,12 +68,17 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :target: https://www.python.org/
 
 .. |docs| image:: https://readthedocs.org/projects/pyfinitdiff/badge/?version=latest
-   :target: hhttps://pyfinitdiff.readthedocs.io/en/latest/
+   :target: https://pyfinitdiff.readthedocs.io/en/latest/
    :alt: Documentation Status
 
-
-.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/8187f1d56dee6f004428f4d4298d024d/raw/f835afd55a4a0164a440f6681f8f332973afb815/PyFinitDiff_coverage_badge.json
-
+.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/19aef38017fa4be1dc71b6f5d853a932/raw
 
 .. |PyPi| image:: https://badge.fury.io/py/PyFinitDiff.svg
    :target: https://pypi.org/project/PyFinitDiff/
+
+.. |PyPi_download| image:: https://img.shields.io/pypi/dm/pyfinitdiff.svg
+   :target: https://pypistats.org/packages/pyfinitdiff
+
+
+
+
