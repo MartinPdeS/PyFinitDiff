@@ -72,12 +72,12 @@ addopts = [
     '-v',
     '-rA',
     '-rw',
-    '--cov=SuPyMode',
+    '--cov=PyFinitDiff',
     '--cov-report=html'
 ]
 
 [tool.coverage.run]
-source = ['SuPyMode']
+source = ['PyFinitDiff']
 omit = [
     '*\__init__.py',
     '*\_version.py',
