@@ -4,30 +4,23 @@
 
 | Name                                                     |    Stmts |     Miss |   Branch |   BrPart |   Cover |   Missing |
 |--------------------------------------------------------- | -------: | -------: | -------: | -------: | ------: | --------: |
-| PyFinitDiff/\_\_init\_\_.py                              |        4 |        2 |        0 |        0 |     50% |       5-6 |
-| PyFinitDiff/\_version.py                                 |       11 |        2 |        2 |        1 |     77% |       5-6 |
-| PyFinitDiff/coefficients/\_\_init\_\_.py                 |       83 |        8 |       38 |       11 |     83% |22-24, 50->49, 54->53, 58->57, 62->61, 66->65, 87->86, 91->90, 107-108, 111->110, 115->114, 116, 119->118, 127-128 |
 | PyFinitDiff/coefficients/backward.py                     |        3 |        0 |        0 |        0 |    100% |           |
 | PyFinitDiff/coefficients/central.py                      |        3 |        0 |        0 |        0 |    100% |           |
 | PyFinitDiff/coefficients/forward.py                      |        3 |        0 |        0 |        0 |    100% |           |
-| PyFinitDiff/finite\_difference\_1D/\_\_init\_\_.py       |        4 |        0 |        0 |        0 |    100% |           |
 | PyFinitDiff/finite\_difference\_1D/boundaries.py         |       70 |       11 |       34 |        6 |     80% |46, 49-52, 79-80, 114-115, 138, 181->184, 188 |
 | PyFinitDiff/finite\_difference\_1D/derivative.py         |        9 |        0 |        2 |        0 |    100% |           |
 | PyFinitDiff/finite\_difference\_1D/diagonals.py          |       96 |       17 |       10 |        1 |     83% |32->31, 92-98, 105, 128-130, 139-144, 175, 192-194, 244-246, 249 |
 | PyFinitDiff/finite\_difference\_1D/finite\_difference.py |       65 |        5 |       16 |        4 |     86% |56->55, 57, 60->59, 66-68, 71->70, 75->74, 76 |
 | PyFinitDiff/finite\_difference\_1D/utils.py              |       16 |        5 |        2 |        0 |     72% |     48-54 |
-| PyFinitDiff/finite\_difference\_2D/\_\_init\_\_.py       |        4 |        0 |        0 |        0 |    100% |           |
 | PyFinitDiff/finite\_difference\_2D/boundaries.py         |       88 |       15 |       46 |        3 |     78% |45-46, 72->77, 116-117, 140, 182->exit, 194-199, 207-212 |
 | PyFinitDiff/finite\_difference\_2D/dense.py              |      159 |      159 |       94 |        0 |      0% |     1-237 |
 | PyFinitDiff/finite\_difference\_2D/derivative.py         |        8 |        5 |        0 |        0 |     38% |     35-53 |
 | PyFinitDiff/finite\_difference\_2D/diagonals.py          |      106 |       23 |       10 |        1 |     79% |45->44, 93-97, 104, 153-154, 163-166, 198, 220-221, 279-281, 290-292, 304-305, 314 |
 | PyFinitDiff/finite\_difference\_2D/finite\_difference.py |       68 |        1 |       20 |        7 |     91% |70->69, 72, 75->74, 83->85, 88->87, 93->92, 191->198, 198->exit |
 | PyFinitDiff/finite\_difference\_2D/utils.py              |       18 |        5 |        2 |        0 |     75% |     56-65 |
-| PyFinitDiff/tools/\_\_init\_\_.py                        |        0 |        0 |        0 |        0 |    100% |           |
-| PyFinitDiff/tools/directories.py                         |       16 |       16 |        4 |        0 |      0% |      4-39 |
 | PyFinitDiff/triplet.py                                   |      175 |       67 |       50 |       15 |     58% |19, 24->23, 28->27, 29, 32->31, 42->41, 49, 52->51, 62->61, 72->71, 82->81, 89, 92-94, 97-99, 102-104, 107-109, 112->111, 113, 116, 119, 147-151, 164, 177-181, 194-198, 201-205, 236-240, 253-258, 268-269, 283-284, 304-314, 317->316, 324, 327->326, 334, 337->336, 344, 347->346, 354, 357->356, 364, 373-377, 380-382, 404-420 |
 | PyFinitDiff/utils.py                                     |       32 |       19 |       10 |        0 |     31% |10-29, 98-104 |
-|                                                **TOTAL** | **1041** |  **360** |  **340** |   **49** | **60%** |           |
+|                                                **TOTAL** |  **919** |  **332** |  **296** |   **37** | **59%** |           |
 
 
 ## Setup coverage badge
