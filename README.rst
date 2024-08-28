@@ -3,7 +3,7 @@ PyFinitDiff
 
 |python|
 |docs|
-|unittest|
+|coverage|
 |PyPi|
 |PyPi_download|
 
@@ -71,7 +71,9 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :target: https://pyfinitdiff.readthedocs.io/en/latest/
    :alt: Documentation Status
 
-.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/19aef38017fa4be1dc71b6f5d853a932/raw
+.. |coverage| image:: https://raw.githubusercontent.com/MartinPdeS/PyFinitDiff/python-coverage-comment-action-data/badge.svg
+   :alt: Unittest coverage
+   :target: https://htmlpreview.github.io/?https://github.com/MartinPdeS/PyFinitDiff/blob/python-coverage-comment-action-data/htmlcov/index.html
 
 .. |PyPi| image:: https://badge.fury.io/py/PyFinitDiff.svg
    :target: https://pypi.org/project/PyFinitDiff/
