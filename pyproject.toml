@@ -65,5 +65,23 @@ documentation = [
 minversion = "6.0"
 xfail_strict = true
 log_cli_level = "INFO"
-testpaths = "tests"
-addopts = ['-v', '-rA', '-rw']
+testpaths = [
+    "tests/*",
+]
+addopts = [
+    '-v',
+    '-rA',
+    '-rw',
+    '--cov=SuPyMode',
+    '--cov-report=html'
+]
+
+[tool.coverage.run]
+source = ['SuPyMode']
+omit = [
+    '*\__init__.py',
+    '*\_version.py',
+    '*\directories.py',
+]
+branch = true
+relative_files = true
