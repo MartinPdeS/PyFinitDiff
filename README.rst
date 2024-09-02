@@ -39,15 +39,25 @@ Below is a simple example to illustrate how to use PyFinitDiff:
 
 .. code-block:: python
 
-   import PyFinitDiff as pfd
+   from PyFinitDiff.finite_difference_1D import FiniteDifference
+   from PyFinitDiff.finite_difference_1D import Boundaries
 
-   # Create a finite-difference matrix for a second-order derivative
-   dx = 0.1
-   N = 10
-   D2 = pfd.finite_difference_matrix(order=2, size=N, spacing=dx)
+   boundaries = Boundaries(left='none', right='none')
 
-   # Print the matrix
-   print(D2)
+   n_x = 100
+   fd = FiniteDifference(
+      n_x=n_x,
+      dx=1,
+      derivative=2,
+      accuracy=2,
+      boundaries=boundaries
+   )
+
+   fd.triplet.plot()
+
+   dense_matrix = fd.triplet.to_scipy_sparse()
+
+   sparse_matrix = fd.triplet.to_scipy_sparse()
 
 This example demonstrates the creation of a second-order finite-difference matrix with a specified grid spacing and size.
 
