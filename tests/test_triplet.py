@@ -4,18 +4,21 @@
 import pytest
 import numpy
 from PyFinitDiff.triplet import Triplet
+from PyFinitDiff.utils import get_2D_circular_mesh_triplet
 from unittest.mock import patch
 
-@patch('matplotlib.pyplot.show')
-def test_triplet_operations(mock_show):
+@pytest.fixture
+def triplet():
     i_index = numpy.arange(100)
     j_index = numpy.arange(100)
     values = numpy.random.rand(100)
     array = numpy.c_[i_index, j_index, values]
 
-    triplet = Triplet(array=array, shape=(10, 10))
+    return Triplet(array=array, shape=(10, 10))
 
-    triplet = triplet * 2
+@patch('matplotlib.pyplot.show')
+def test_triplet_operations(mock_show, triplet):
+    triplet *= 2
 
     _ = triplet.max_i
     _ = triplet.max_j
