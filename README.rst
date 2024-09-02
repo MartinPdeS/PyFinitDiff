@@ -59,6 +59,10 @@ Below is a simple example to illustrate how to use PyFinitDiff:
 
    sparse_matrix = fd.triplet.to_scipy_sparse()
 
+This would produce the following figure:
+
+|example_triplet_0|
+
 This example demonstrates the creation of a second-order finite-difference matrix with a specified grid spacing and size.
 
 Testing
@@ -88,6 +92,9 @@ Email:`martin.poinsinet.de.sivry@gmail.ca <mailto:martin.poinsinet.de.sivry@gmai
 
 
 .. |python| image:: https://img.shields.io/pypi/pyversions/pyfinitdiff.svg
+    :target: https://www.python.org/
+
+.. |example_triplet_0| image:: https://github.com/MartinPdeS/PyFinitDiff/tree/master/docs/images/example_triplet_0.png
     :target: https://www.python.org/
 
 .. |docs| image:: https://readthedocs.org/projects/pyfinitdiff/badge/?version=latest
