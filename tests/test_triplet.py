@@ -3,8 +3,6 @@
 
 import pytest
 import numpy
-from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
-from PyFinitDiff.utils import get_2D_circular_mesh_triplet
 from PyFinitDiff.triplet import Triplet
 from unittest.mock import patch
 
@@ -28,6 +26,7 @@ def test_triplet_operations(mock_show):
     triplet.shift_diagonal(value=10)
 
     triplet.plot()
+
 
 if __name__ == "__main__":
     pytest.main([__file__])
