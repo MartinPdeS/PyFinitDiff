@@ -205,6 +205,7 @@ class Triplet:
         plt.pcolormesh(dense_matrix, cmap='Blues')
         plt.gca().set_aspect('equal')
         plt.grid(True)
+        plt.colorbar()
         plt.show()
 
     def to_scipy_sparse(self) -> coo_matrix:
