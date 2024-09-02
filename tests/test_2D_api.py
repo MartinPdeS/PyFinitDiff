@@ -4,32 +4,57 @@
 import pytest
 from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
 
-# Define accuracies and derivatives to be tested
-accuracies = [2, 4, 6]
-derivatives = [1, 2]
+# Define parameters for testing
+ACCURACIES = [2, 4, 6]
+DERIVATIVES = [1, 2]
 
-# Define boundary conditions for testing
-boundary_conditions = [
-    Boundaries(left='zero', right='zero', top='zero', bottom='zero'),
-    Boundaries(left='symmetric', right='zero', top='zero', bottom='zero'),
-    Boundaries(left='anti-symmetric', right='zero', top='zero', bottom='zero'),
-    Boundaries(left='anti-symmetric', right='zero', top='symmetric', bottom='zero')
+BOUNDARY_CONDITIONS = [
+    dict(left='zero', right='zero', top='zero', bottom='zero'),
+    dict(left='symmetric', right='zero', top='zero', bottom='zero'),
+    dict(left='anti-symmetric', right='zero', top='zero', bottom='zero'),
+    dict(left='anti-symmetric', right='zero', top='symmetric', bottom='zero')
 ]
 
-
-@pytest.mark.parametrize("boundaries", boundary_conditions, ids=[b.__repr__() for b in boundary_conditions])
-@pytest.mark.parametrize('accuracy', accuracies, ids=['accuracy_2', 'accuracy_4', 'accuracy_6'])
-@pytest.mark.parametrize('derivative', derivatives, ids=['derivative_1', 'derivative_2'])
-def test_compare_sparse_dense_0(boundaries, accuracy, derivative):
+def test_init_boundaries():
     """
-    Tests the FiniteDifference class with various boundary conditions, accuracy levels, and derivatives.
+    Test initialization of Boundaries with various valid and invalid boundary condition inputs.
+
+    This function tests whether the Boundaries class can be successfully initialized with valid
+    boundary conditions and raises the appropriate exceptions when provided with invalid inputs.
+    """
+    valid_kwargs_list = [
+        dict(left='zero', right='zero', top='zero', bottom='zero'),
+        dict(left='symmetric', right='zero', top='zero', bottom='zero'),
+        dict(left='anti-symmetric', right='zero', top='zero', bottom='zero'),
+        dict(left='anti-symmetric', right='zero', top='symmetric', bottom='zero')
+    ]
+
+    for kwargs in valid_kwargs_list:
+        boundaries = Boundaries(**kwargs)
+        assert isinstance(boundaries, Boundaries)
+
+    with pytest.raises(ValueError):
+        Boundaries(left='bad_input')
+
+
+@pytest.mark.parametrize("boundaries_kwargs", BOUNDARY_CONDITIONS, ids=lambda x: f'{x}')
+@pytest.mark.parametrize('accuracy', ACCURACIES, ids=lambda x: f'accuracy_{x}')
+@pytest.mark.parametrize('derivative', DERIVATIVES, ids=lambda x: f'derivative_{x}')
+def test_init_2D_triplet(boundaries_kwargs, accuracy, derivative):
+    """
+    Test the FiniteDifference class initialization and triplet construction with various parameters.
+
+    This function tests the FiniteDifference class by initializing it with different boundary
+    conditions, accuracy levels, and derivative orders, and checks if the triplet construction
+    proceeds without errors.
 
     Args:
-        boundaries (Boundaries): Boundary conditions for the finite difference calculation.
-        accuracy (int): Accuracy level of the finite difference calculation.
+        boundaries_kwargs (dict): Dictionary containing boundary conditions.
+        accuracy (int): Desired accuracy level for the finite difference calculation.
         derivative (int): Order of the derivative for the finite difference calculation.
     """
-    # Initialize a FiniteDifference instance with specified parameters
+    boundaries = Boundaries(**boundaries_kwargs)
+
     finite_diff_instance = FiniteDifference(
         n_x=20,
         n_y=20,
@@ -40,8 +65,19 @@ def test_compare_sparse_dense_0(boundaries, accuracy, derivative):
         boundaries=boundaries
     )
 
-    # Construct the finite difference triplet representation
     finite_diff_instance.construct_triplet()
+
+
+def test_raise_fails():
+    """
+    Test that invalid boundary condition inputs raise the appropriate exceptions.
+
+    This function ensures that the Boundaries class raises a ValueError when provided
+    with invalid boundary condition inputs.
+    """
+    with pytest.raises(ValueError):
+        Boundaries(left='andti-symmetric', right='zero', top='symmetric', bottom='zero')
+
 
 if __name__ == "__main__":
     pytest.main([__file__])

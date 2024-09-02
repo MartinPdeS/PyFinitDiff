@@ -9,7 +9,6 @@ def get_array_derivative(
         array: np.ndarray,
         derivative: int,
         accuracy: int = 4,
-        coefficient_type: str = 'central',
         dx: float = 1,
         dy: float = 1,
         x_derivative: bool = True,
@@ -22,7 +21,6 @@ def get_array_derivative(
         array (np.ndarray): The array for which to compute the nth derivative.
         derivative (int): The order of the derivative.
         accuracy (int, optional): The accuracy for the derivative. Defaults to 4.
-        coefficient_type (str, optional): The coefficient type. Defaults to 'central'.
         dx (float, optional): The delta value in the x direction. Defaults to 1.
         dy (float, optional): The delta value in the y direction. Defaults to 1.
         x_derivative (bool, optional): Whether to compute the x derivative. Defaults to True.
