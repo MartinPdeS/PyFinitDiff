@@ -58,3 +58,6 @@ def test_central_derivative(accuracy: int, coefficient_type: str, derivative: in
         f"[derivative = {derivative} | accuracy = {accuracy}] "
         f"Evaluation output is unexpected. evaluation = {evaluation:.7f} | theoretical = {theoretical:.7f}"
     )
+
+if __name__ == "__main__":
+    pytest.main([__file__])

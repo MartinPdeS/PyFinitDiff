@@ -55,4 +55,5 @@ def test_compute_eigenmode_sparse_0(boundaries):
         sigma=1.44
     )
 
-# -
+if __name__ == "__main__":
+    pytest.main([__file__])

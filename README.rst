@@ -1,71 +1,84 @@
 PyFinitDiff
 ===========
 
-|python|
-|docs|
-|coverage|
-|PyPi|
-|PyPi_download|
+|python| |docs| |coverage| |PyPi| |PyPi_download|
 
-A Python package to compute finit-difference matrices with an intuitive API.
+PyFinitDiff
+===========
 
-
-----
-
-Documentation
-**************
-All the latest available documentation is available `here <https://pyfinitdiff.readthedocs.io/en/latest/>`_ or you can click the following badge:
-
-|docs|
+PyFinitDiff is a robust Python package designed to compute finite-difference matrices with an intuitive API. This package provides an efficient and user-friendly interface for generating finite-difference approximations, making it ideal for numerical analysis and scientific computing.
 
 
-----
+Features
+********
+- **Intuitive API**: PyFinitDiff offers an easy-to-use interface that allows users to generate finite-difference matrices with minimal effort.
+- **Versatile Applications**: Suitable for a wide range of numerical methods including solving partial differential equations (PDEs), performing numerical differentiation, and more.
+- **Comprehensive Documentation**: Detailed documentation and examples to help users get started quickly.
 
 Installation
 ------------
 
+PyFinitDiff requires Python 3.10+ and is available on PyPi for various operating systems including Linux and macOS.
 
-Pip installation
-****************
+Install PyFinitDiff via pip:
 
-The package have been uploaded as wheel for a few OS (Linux, MacOS) and need Python 3.10+ version.
-As such, with the adequate configuration one can simply do
+.. code-block:: bash
+
+   pip install PyFinitDiff
+
+Documentation
+*************
+Comprehensive and up-to-date documentation is available online. You can access it `here <https://pyfinitdiff.readthedocs.io/en/latest/>`_ or by clicking the badge below:
+
+|docs|
+
+Usage Example
+*************
+
+Below is a simple example to illustrate how to use PyFinitDiff:
 
 .. code-block:: python
 
-   >>> pip3 install PyFinitDiff
+   import PyFinitDiff as pfd
 
+   # Create a finite-difference matrix for a second-order derivative
+   dx = 0.1
+   N = 10
+   D2 = pfd.finite_difference_matrix(order=2, size=N, spacing=dx)
 
-----
+   # Print the matrix
+   print(D2)
+
+This example demonstrates the creation of a second-order finite-difference matrix with a specified grid spacing and size.
 
 Testing
 *******
 
-To test localy (with cloning the GitHub repository) you'll need to install the dependencies and run the coverage command as
+To test PyFinitDiff locally, clone the GitHub repository and run the tests with coverage:
 
-.. code:: python
+.. code-block:: bash
 
-   >>> git clone https://github.com/MartinPdeS/PyFinitDiff.git
-   >>> cd PyFinitDiff
-   >>> pip install -r requirements/requirements.txt
-   >>> coverage run --source=PyFinitDiff --module pytest --verbose tests
-   >>> coverage report --show-missing
+   git clone https://github.com/MartinPdeS/PyFinitDiff.git
+   cd PyFinitDiff
+   pip install PyFinitDiff[testing]
+   pytest
 
-----
+Contributing
+************
 
+As PyFinitDiff is under continuous development, contributions are welcome! If you would like to collaborate or suggest improvements, feel free to fork the repository and submit a pull request. For major changes, please open an issue first to discuss your ideas.
 
 Contact Information
-*******************
+********************
+As of 2024, the project is still under development. If you want to collaborate, it would be a pleasure! I encourage you to contact me.
 
-As of 2021 the project is still under development if you want to collaborate it would be a pleasure. I encourage you to contact me.
+PyMieSim was written by `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdS>`_  .
 
-PyFinitDiff was written by `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdS>`_  .
-
-Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@polymtl.ca?subject=PyFinitDiff>`_ .
+Email:`martin.poinsinet.de.sivry@gmail.ca <mailto:martin.poinsinet.de.sivry@gmail.ca?subject=PyFinitDiff>`_ .
 
 
-.. |python| image:: https://img.shields.io/badge/Made%20with-Python-1f425f.svg
-   :target: https://www.python.org/
+.. |python| image:: https://img.shields.io/pypi/pyversions/pyfinitdiff.svg
+    :target: https://www.python.org/
 
 .. |docs| image:: https://readthedocs.org/projects/pyfinitdiff/badge/?version=latest
    :target: https://pyfinitdiff.readthedocs.io/en/latest/
@@ -80,7 +93,3 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
 
 .. |PyPi_download| image:: https://img.shields.io/pypi/dm/pyfinitdiff.svg
    :target: https://pypistats.org/packages/pyfinitdiff
-
-
-
-

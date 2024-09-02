@@ -7,7 +7,6 @@ from dataclasses import dataclass, field
 # Local imports
 import numpy
 from PyFinitDiff.triplet import Triplet
-from PyFinitDiff.finite_difference_1D.utils import MeshInfo
 from PyFinitDiff.finite_difference_1D.boundaries import Boundary
 
 

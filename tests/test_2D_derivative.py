@@ -74,3 +74,6 @@ def test_derivative(accuracy, derivative):
         f'Deviation from theoretical value for derivative. '
         f'Evaluation: {evaluation}, Theoretical: {theoretical}'
     )
+
+if __name__ == "__main__":
+    pytest.main([__file__])

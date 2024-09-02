@@ -34,3 +34,6 @@ def test_finite_difference(boundaries, accuracy, derivative):
 
     # Construct the finite difference triplet representation
     finite_diff_instance.construct_triplet()
+
+if __name__ == "__main__":
+    pytest.main([__file__])
