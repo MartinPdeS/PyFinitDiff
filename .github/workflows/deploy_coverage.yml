@@ -1,4 +1,4 @@
-# .github/workflows/coverage.yml
+# .github/workflows/deploy_coverage.yml
 name: Coverage
 
 on:
