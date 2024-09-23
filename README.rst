@@ -97,8 +97,8 @@ Email:`martin.poinsinet.de.sivry@gmail.ca <mailto:martin.poinsinet.de.sivry@gmai
 .. |example_triplet_0| image:: https://github.com/MartinPdeS/PyFinitDiff/blob/master/docs/images/triplet_example_0.png
     :target: https://www.python.org/
 
-.. |docs| image:: https://readthedocs.org/projects/pyfinitdiff/badge/?version=latest
-   :target: https://pyfinitdiff.readthedocs.io/en/latest/
+.. |docs| image:: https://github.com/martinpdes/pyfinitdiff/actions/workflows/deploy_documentation.yml/badge.svg
+   :target: https://martinpdes.github.io/PyFinitDiff/
    :alt: Documentation Status
 
 .. |coverage| image:: https://raw.githubusercontent.com/MartinPdeS/PyFinitDiff/python-coverage-comment-action-data/badge.svg
