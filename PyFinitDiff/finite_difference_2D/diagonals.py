@@ -18,7 +18,7 @@ config_dict = ConfigDict(
     extra='forbid',
     strict=True,
     kw_only=True,
-    frozen=True,
+    frozen=False,
     arbitrary_types_allowed=True
 )
 

@@ -16,7 +16,7 @@ config_dict = ConfigDict(
     strict=True,
     arbitrary_types_allowed=True,
     kw_only=True,
-    frozen=True
+    frozen=False
 )
 
 
