@@ -19,11 +19,10 @@ build
 *.egg*
 *.whl
 .pdf
-Perso/
-docs/source/ExampleGallery
 
 CMakeCache.txt
 CMakeFiles
 ./Makefile
 install_manifest.txt
 cmake_install.cmake
+.coverage

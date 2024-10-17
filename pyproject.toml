@@ -22,14 +22,13 @@ classifiers = [
     'Intended Audience :: Science/Research',
 ]
 
-keywords = ["finit-difference", "matrix"]
+keywords = ["finit-difference", "solving", "linear algebra"]
 
 dependencies = [
-    "pydantic>=2.6.3",
-    "numpy",
-    "scipy",
+    "pydantic ~=2.9",
+    "numpy ~=1.26",
     "MPSPlots",
-    "tabulate",
+    "tabulate ~=0.9",
 ]
 
 [project.urls]
@@ -44,21 +43,22 @@ local_scheme = "no-local-version"
 
 [project.optional-dependencies]
 testing = [
-    "pytest>=0.6",
-    "pytest-cov>=2.0",
-    "pytest-json-report==1.5.0",
-    "mypy>=0.910",
-    "flake8>=3.9",
-    "tox>=3.24",
-    "coverage==7.6.1"
+    "scipy ~=1.14",
+    "pytest ~=0.6",
+    "pytest-cov ~=2.0",
+    "pytest-json-report ~=1.5",
+    "mypy ~=0.910",
+    "flake8 ~=3.9",
+    "tox ~=3.24",
+    "coverage ~=7.6"
 ]
 
 documentation = [
-    "numpydoc==1.8.0",
-    "sphinx>=5.1.1",
-    "sphinx-gallery==0.17.1",
-    "sphinx-rtd-theme==2.0.0",
-    "pydata-sphinx-theme==0.15.4",
+    "numpydoc ~=1.8",
+    "sphinx ~=5.1",
+    "sphinx-gallery ~=0.17",
+    "sphinx-rtd-theme ~=2.0",
+    "pydata-sphinx-theme ~=0.15",
 ]
 
 [tool.pytest.ini_options]
@@ -73,7 +73,8 @@ addopts = [
     '-rA',
     '-rw',
     '--cov=PyFinitDiff',
-    '--cov-report=html'
+    '--cov-report=html',
+    "--cov-report=term"
 ]
 
 [tool.coverage.run]

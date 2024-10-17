@@ -86,7 +86,7 @@ Contact Information
 ********************
 As of 2024, the project is still under development. If you want to collaborate, it would be a pleasure! I encourage you to contact me.
 
-PyMieSim was written by `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdS>`_  .
+PyFinitDiff was written by `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdS>`_  .
 
 Email:`martin.poinsinet.de.sivry@gmail.ca <mailto:martin.poinsinet.de.sivry@gmail.ca?subject=PyFinitDiff>`_ .
 
