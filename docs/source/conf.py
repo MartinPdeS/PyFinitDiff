@@ -23,7 +23,6 @@ autodoc_mock_imports = [
     'matplotlib',
     'scipy'
     'numpydoc',
-    'MPSPlots',
 ]
 
 
@@ -37,28 +36,33 @@ version = PyFinitDiff.__version__
 
 extensions = [
     'sphinx.ext.mathjax',
-    'numpydoc',
+    'pyvista.ext.plot_directive',
     'sphinx_gallery.gen_gallery',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autosectionlabel',
+    'sphinx.ext.intersphinx',
 ]
+
+# Napoleon settings for docstrings
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
 
 
 def reset_mpl(gallery_conf, fname):
     use_mpsplots_style()
 
 
-subsection_order = ExplicitOrder(
-    [
-        "../examples/triplets",
-        "../examples/eigenmodes_1d",
-        "../examples/eigenmodes_2d",
-        "../examples/extras",
-    ]
-)
+examples_files = [
+    'triplets', 'eigenmodes_1d', 'eigenmodes_2d', 'extras'
+]
+
+
 
 sphinx_gallery_conf = {
-    'examples_dirs': '../examples',
-    'gallery_dirs': 'gallery',
-    'subsection_order': subsection_order,
+    "examples_dirs": ['../examples/' + f for f in examples_files],
+    "gallery_dirs": ['gallery/' + f for f in examples_files],
     'image_scrapers': ('matplotlib'),
     'ignore_pattern': '/__',
     'plot_gallery': True,
@@ -80,22 +84,20 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 
+autosectionlabel_prefix_document = True
 numpydoc_show_class_members = False
+add_module_names = False
 
 source_suffix = '.rst'
-
 master_doc = 'index'
-
 language = 'en'
-
 highlight_language = 'python3'
-
 html_theme = "pydata_sphinx_theme"
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 exclude_trees = []
-default_role = "autolink"
+# default_role = "autolink"
 pygments_style = "sphinx"
 
 # -- Sphinx-gallery configuration --------------------------------------------
@@ -119,6 +121,11 @@ html_theme_options = {
             "name": "PyPI",
             "url": "https://pypi.org/project/fiberfusing/",
             "icon": "fa-solid fa-box",
+        },
+        {
+            "name": "Anaconda",
+            "url": "https://anaconda.org/MartinPdeS/pyfinitdiff",
+            "icon": "fa-brands fa-python",
         },
     ],
     "navbar_align": "left",

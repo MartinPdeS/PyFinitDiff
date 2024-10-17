@@ -31,7 +31,7 @@ Example: triplets 3
    * - derivative: 2
    * - accuracy: 4
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-34
+.. GENERATED FROM PYTHON SOURCE LINES 14-32
 
 .. code-block:: python3
 
@@ -50,16 +50,14 @@ Example: triplets 3
         boundaries=Boundaries()
     )
 
-    figure = sparse_instance.triplet.plot()
-
-    _ = figure.show()
+    sparse_instance.triplet.plot()
 
     # -
 
 
 
 .. image-sg:: /gallery/triplets/images/sphx_glr_plot_triplets_3_001.png
-   :alt: , Finite-difference coefficients structure
+   :alt: Finite-difference coefficients structure
    :srcset: /gallery/triplets/images/sphx_glr_plot_triplets_3_001.png
    :class: sphx-glr-single-img
 
@@ -70,7 +68,7 @@ Example: triplets 3
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.203 seconds)
+   **Total running time of the script:** (0 minutes 0.157 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_3.py:

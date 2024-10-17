@@ -1,10 +1,24 @@
 PyFinitDiff
 ===========
 
-|python| |docs| |coverage| |PyPi| |PyPi_download|
+|logo|
 
-PyFinitDiff
-===========
+.. list-table::
+   :widths: 10 25 25
+   :header-rows: 0
+
+   * - Meta
+     - |python|
+     - |docs|
+   * - Testing
+     - |ci/cd|
+     - |coverage|
+   * - PyPi
+     - |PyPi|
+     - |PyPi_download|
+   * - Anaconda
+     - |anaconda|
+     - |anaconda_download|
 
 PyFinitDiff is a robust Python package designed to compute finite-difference matrices with an intuitive API. This package provides an efficient and user-friendly interface for generating finite-difference approximations, making it ideal for numerical analysis and scientific computing.
 
@@ -92,10 +106,11 @@ Email:`martin.poinsinet.de.sivry@gmail.ca <mailto:martin.poinsinet.de.sivry@gmai
 
 
 .. |python| image:: https://img.shields.io/pypi/pyversions/pyfinitdiff.svg
-    :target: https://www.python.org/
+   :alt: Python
+   :target: https://www.python.org/
 
-.. |example_triplet_0| image:: https://github.com/MartinPdeS/PyFinitDiff/blob/master/docs/images/triplet_example_0.png
-    :target: https://www.python.org/
+.. |logo| image:: https://github.com/MartinPdeS/PyFinitDiff/raw/master/docs/images/logo.png
+   :alt: PyFinitDiff logo
 
 .. |docs| image:: https://github.com/martinpdes/pyfinitdiff/actions/workflows/deploy_documentation.yml/badge.svg
    :target: https://martinpdes.github.io/PyFinitDiff/
@@ -106,7 +121,17 @@ Email:`martin.poinsinet.de.sivry@gmail.ca <mailto:martin.poinsinet.de.sivry@gmai
    :target: https://htmlpreview.github.io/?https://github.com/MartinPdeS/PyFinitDiff/blob/python-coverage-comment-action-data/htmlcov/index.html
 
 .. |PyPi| image:: https://badge.fury.io/py/PyFinitDiff.svg
+   :alt: PyPi version
    :target: https://pypi.org/project/PyFinitDiff/
 
 .. |PyPi_download| image:: https://img.shields.io/pypi/dm/pyfinitdiff.svg
+   :alt: PyPi version
    :target: https://pypistats.org/packages/pyfinitdiff
+
+.. |ci/cd| image:: https://github.com/martinpdes/pyfinitdiff/actions/workflows/deploy_coverage.yml/badge.svg
+   :target: https://martinpdes.github.io/PyFinitDiff/actions
+   :alt: Unittest Status
+
+
+.. |example_triplet_0| image:: https://github.com/MartinPdeS/PyFinitDiff/blob/master/docs/images/triplet_example_0.png
+    :target: https://www.python.org/
