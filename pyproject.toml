@@ -25,6 +25,7 @@ classifiers = [
 keywords = ["finite-difference", "solving", "linear algebra", "physics", "matrix", "engineering"]
 
 dependencies = [
+    "scipy ~=1.14",
     "pydantic ~=2.9",
     "numpy ~=1.26",
     "MPSPlots",
@@ -43,7 +44,6 @@ local_scheme = "no-local-version"
 
 [project.optional-dependencies]
 testing = [
-    "scipy ~=1.14",
     "pytest ~=7.4",
     "pytest-cov ~=2.0",
     "pytest-json-report ~=1.5",
