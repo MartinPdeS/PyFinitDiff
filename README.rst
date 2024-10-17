@@ -16,9 +16,9 @@ PyFinitDiff
    * - PyPi
      - |PyPi|
      - |PyPi_download|
-   * - Anaconda
-     - |anaconda|
-     - |anaconda_download|
+   .. * - Anaconda
+   ..   - |anaconda|
+   ..   - |anaconda_download|
 
 PyFinitDiff is a robust Python package designed to compute finite-difference matrices with an intuitive API. This package provides an efficient and user-friendly interface for generating finite-difference approximations, making it ideal for numerical analysis and scientific computing.
 
@@ -131,7 +131,6 @@ Email:`martin.poinsinet.de.sivry@gmail.ca <mailto:martin.poinsinet.de.sivry@gmai
 .. |ci/cd| image:: https://github.com/martinpdes/pyfinitdiff/actions/workflows/deploy_coverage.yml/badge.svg
    :target: https://martinpdes.github.io/PyFinitDiff/actions
    :alt: Unittest Status
-
 
 .. |example_triplet_0| image:: https://github.com/MartinPdeS/PyFinitDiff/blob/master/docs/images/triplet_example_0.png
     :target: https://www.python.org/
