@@ -14,26 +14,36 @@ config_dict = ConfigDict(
     frozen=False
 )
 
-
 @dataclass(config=config_dict)
 class Boundary:
-    """Class representing a boundary with a specific name, value, and mesh information.
-
-    Attributes:
-        name (str): The name of the boundary.
-        value (str): The value associated with the boundary.
-        mesh_info (object): The mesh information object.
     """
+    Represents a boundary with a specific name, value, and mesh information.
 
+    Parameters
+    ----------
+    name : str
+        The name of the boundary.
+    value : Optional[str]
+        The value associated with the boundary (e.g., 'symmetric', 'anti-symmetric').
+    mesh_info : object
+        Mesh information object, used to determine mesh-related properties.
+    """
     name: str
     value: Optional[str]
     mesh_info: object
 
     def get_factor(self) -> float:
-        """Gets the factor associated with the boundary value.
+        """
+        Gets the factor associated with the boundary value.
 
-        Returns:
-            float: The factor corresponding to the boundary value.
+        Returns
+        -------
+        float
+            The factor corresponding to the boundary value. Possible values are:
+            - 1.0 for 'symmetric'
+            - -1.0 for 'anti-symmetric'
+            - 0.0 for 'zero'
+            - numpy.nan for 'none'
         """
         match self.value:
             case 'symmetric':
@@ -45,14 +55,19 @@ class Boundary:
             case 'none':
                 return numpy.nan
 
-    def get_shift_vector(self, offset: int) -> numpy.ndarray:
-        """Calculates the shift vector based on the boundary name and offset.
+    def get_shift_vector(self, offset: int) -> Optional[numpy.ndarray]:
+        """
+        Calculates the shift vector based on the boundary name and offset.
 
-        Args:
-            offset (int): The offset value to be used in the shift vector calculation.
+        Parameters
+        ----------
+        offset : int
+            The offset value to be used in the shift vector calculation.
 
-        Returns:
-            numpy.ndarray: The shift vector as a numpy array.
+        Returns
+        -------
+        Optional[numpy.ndarray]
+            The shift vector as a numpy array, or None if the boundary is 'center'.
         """
         offset = abs(offset)
 
@@ -76,20 +91,26 @@ class Boundary:
 
         return shift_vector
 
-
 @dataclass(config=config_dict)
 class Boundaries:
-    """Class representing the boundaries with left, right, top, and bottom values.
-
-    Attributes:
-        left (str): Value of the left boundary. Defaults to 'zero' must be either ['zero', 'symmetric', 'anti-symmetric'].
-        right (str): Value of the right boundary. Defaults to 'zero' must be either ['zero', 'symmetric', 'anti-symmetric'].
-        top (str): Value of the top boundary. Defaults to 'zero' must be either ['zero', 'symmetric', 'anti-symmetric'].
-        bottom (str): Value of the bottom boundary. Defaults to 'zero' must be either ['zero', 'symmetric', 'anti-symmetric'].
-        acceptable_boundary (List[str]): List of acceptable boundary values.
-        all_boundaries (List[str]): List of all boundary names.
     """
+    Represents the boundary conditions for a 2D finite-difference mesh.
 
+    Parameters
+    ----------
+    left : str
+        Value of the left boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
+    right : str
+        Value of the right boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
+    top : str
+        Value of the top boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
+    bottom : str
+        Value of the bottom boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
+    acceptable_boundary : List[str]
+        List of acceptable boundary values.
+    all_boundaries : List[str]
+        List of all boundary names.
+    """
     left: str = 'zero'
     right: str = 'zero'
     top: str = 'zero'
@@ -99,31 +120,44 @@ class Boundaries:
     all_boundaries = ['left', 'right', 'top', 'bottom']
 
     def __post_init__(self) -> None:
-        """Post-initialization method to assert acceptable boundary values."""
+        """
+        Validates boundary values after initialization to ensure they are acceptable.
+        """
         for boundary in self.all_boundaries:
             self.assert_boundary_acceptable(boundary_string=boundary)
 
     def assert_both_boundaries_not_same(self, boundary_0: str, boundary_1: str) -> None:
-        """Asserts that both boundaries are not the same axis symmetries if they are not 'zero'.
+        """
+        Ensures that two boundaries on the same axis are not set to identical symmetry conditions unless they are 'zero'.
 
-        Args:
-            boundary_0 (str): The first boundary value.
-            boundary_1 (str): The second boundary value.
+        Parameters
+        ----------
+        boundary_0 : str
+            The first boundary value.
+        boundary_1 : str
+            The second boundary value.
 
-        Raises:
-            ValueError: If both boundaries are set to the same axis symmetries.
+        Raises
+        ------
+        ValueError
+            If both boundaries are set to the same symmetry condition and are not 'zero'.
         """
         if boundary_0 != 'zero' and boundary_1 != 'zero':
             raise ValueError("Same-axis symmetries shouldn't be set on both ends")
 
     def assert_boundary_acceptable(self, boundary_string: str) -> None:
-        """Asserts that a given boundary value is acceptable.
+        """
+        Checks whether the boundary value is acceptable.
 
-        Args:
-            boundary_string (str): The name of the boundary to check.
+        Parameters
+        ----------
+        boundary_string : str
+            The name of the boundary to validate.
 
-        Raises:
-            AssertionError: If the boundary value is not acceptable.
+        Raises
+        ------
+        AssertionError
+            If the boundary value is not within the list of acceptable values.
         """
         boundary_value = getattr(self, boundary_string)
         assert boundary_value in self.acceptable_boundary, (
@@ -132,21 +166,29 @@ class Boundaries:
         )
 
     def get_boundary_pairs(self) -> List[Tuple[str, str]]:
-        """Gets the pairs of boundaries.
+        """
+        Retrieves pairs of boundaries.
 
-        Returns:
-            List[Tuple[str, str]]: A list of tuples containing boundary pairs.
+        Returns
+        -------
+        List[Tuple[str, str]]
+            A list of tuples containing the pairs of boundaries.
         """
         return [(self.left, self.right), (self.top, self.bottom)]
 
     def get_boundary(self, name: str) -> Boundary:
-        """Returns a specific instance of the boundary.
+        """
+        Retrieves a Boundary instance by name.
 
-        Args:
-            name (str): The name of the boundary.
+        Parameters
+        ----------
+        name : str
+            The name of the boundary to retrieve.
 
-        Returns:
-            Boundary: The boundary instance.
+        Returns
+        -------
+        Boundary
+            An instance of the Boundary class for the given boundary name.
         """
         if not hasattr(self, name):
             value = None
@@ -161,14 +203,19 @@ class Boundaries:
 
         return boundary
 
-    def offset_to_boundary(self, offset: int) -> str:
-        """Determines the boundary based on the offset.
+    def offset_to_boundary(self, offset: int) -> Boundary:
+        """
+        Determines the boundary corresponding to the given offset.
 
-        Args:
-            offset (int): The offset value.
+        Parameters
+        ----------
+        offset : int
+            The offset value.
 
-        Returns:
-            str: The name of the boundary corresponding to the offset.
+        Returns
+        -------
+        Boundary
+            The boundary instance corresponding to the offset.
         """
         if offset == 0:
             return self.get_boundary('center')
@@ -186,10 +233,13 @@ class Boundaries:
                 return self.get_boundary('bottom')
 
     def get_x_parity(self) -> str:
-        """Determines the parity in the x direction based on the left and right boundaries.
+        """
+        Determines the parity in the x direction based on the left and right boundaries.
 
-        Returns:
-            str: The parity in the x direction ('symmetric', 'anti-symmetric', or 'zero').
+        Returns
+        -------
+        str
+            The parity in the x direction ('symmetric', 'anti-symmetric', or 'zero').
         """
         if self.left == 'symmetric' or self.right == 'symmetric':
             return 'symmetric'
@@ -199,10 +249,13 @@ class Boundaries:
             return 'zero'
 
     def get_y_parity(self) -> str:
-        """Determines the parity in the y direction based on the top and bottom boundaries.
+        """
+        Determines the parity in the y direction based on the top and bottom boundaries.
 
-        Returns:
-            str: The parity in the y direction ('symmetric', 'anti-symmetric', or 'zero').
+        Returns
+        -------
+        str
+            The parity in the y direction ('symmetric', 'anti-symmetric', or 'zero').
         """
         if self.top == 'symmetric' or self.bottom == 'symmetric':
             return 'symmetric'
@@ -210,5 +263,3 @@ class Boundaries:
             return 'anti-symmetric'
         else:
             return 'zero'
-
-# -

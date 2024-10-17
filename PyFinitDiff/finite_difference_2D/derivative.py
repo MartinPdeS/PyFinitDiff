@@ -4,7 +4,6 @@
 import numpy as np
 import PyFinitDiff.finite_difference_2D as module
 
-
 def get_array_derivative(
         array: np.ndarray,
         derivative: int,
@@ -15,20 +14,37 @@ def get_array_derivative(
         y_derivative: bool = True,
         boundaries: module.Boundaries = module.Boundaries()) -> np.ndarray:
     """
-    Computes the 2D gradient of a given array using finite differences.
+    Compute the 2D gradient of a given array using finite differences.
 
-    Args:
-        array (np.ndarray): The array for which to compute the nth derivative.
-        derivative (int): The order of the derivative.
-        accuracy (int, optional): The accuracy for the derivative. Defaults to 4.
-        dx (float, optional): The delta value in the x direction. Defaults to 1.
-        dy (float, optional): The delta value in the y direction. Defaults to 1.
-        x_derivative (bool, optional): Whether to compute the x derivative. Defaults to True.
-        y_derivative (bool, optional): Whether to compute the y derivative. Defaults to True.
-        boundaries (module.Boundaries, optional): The boundary conditions. Defaults to module.Boundaries().
+    Parameters
+    ----------
+    array : np.ndarray
+        The array for which to compute the nth derivative.
+    derivative : int
+        The order of the derivative.
+    accuracy : int, optional
+        The accuracy for the derivative approximation (default is 4).
+    dx : float, optional
+        The spacing in the x direction (default is 1).
+    dy : float, optional
+        The spacing in the y direction (default is 1).
+    x_derivative : bool, optional
+        Whether to compute the derivative in the x direction (default is True).
+    y_derivative : bool, optional
+        Whether to compute the derivative in the y direction (default is True).
+    boundaries : module.Boundaries, optional
+        The boundary conditions for the finite difference (default is module.Boundaries()).
 
-    Returns:
-        np.ndarray: The 2D gradient array.
+    Returns
+    -------
+    np.ndarray
+        The 2D gradient array computed using finite differences.
+
+    Examples
+    --------
+    >>> array = np.array([[1, 2], [3, 4]])
+    >>> get_array_derivative(array, derivative=1, dx=0.1, dy=0.1)
+    array([[ ... ], [ ... ]])
     """
     n_x, n_y = array.shape
 

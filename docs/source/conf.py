@@ -3,11 +3,10 @@
 
 import sys
 from sphinx_gallery.sorting import FileNameSortKey
-from sphinx_gallery.sorting import ExplicitOrder
 from MPSPlots.styles import use_mpsplots_style
 import PyFinitDiff
 
-from PyFinitDiff.tools.directories import project_path, doc_css_path
+from PyFinitDiff.directories import project_path, doc_css_path
 
 
 sys.path.insert(0, project_path)

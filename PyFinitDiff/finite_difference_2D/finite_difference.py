@@ -39,7 +39,7 @@ class FiniteDifference:
         Order of the derivative to convert into a finite-difference matrix (default is 1).
     accuracy : int, optional
         Accuracy of the derivative approximation (error is inversely proportional to the power of this value, default is 2).
-    boundaries : Boundaries, optional
+    boundaries : PyFinitDiff.finite_difference_2D.boundaries.Boundary, optional
         Values of the four possible boundaries of the system (default is an empty Boundaries object).
     x_derivative : bool, optional
         Whether to add the x derivative (default is True).
@@ -50,7 +50,7 @@ class FiniteDifference:
     ----------
     mesh_info : MeshInfo
         Contains information about the mesh, such as the number of points and spacing.
-    boundaries : Boundaries
+    boundaries : PyFinitDiff.finite_difference_2D.boundaries.Boundary
         Boundary conditions applied to the system.
     finite_coefficient : FiniteCoefficients
         Coefficients used for finite difference calculations.
