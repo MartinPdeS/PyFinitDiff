@@ -10,7 +10,6 @@ from PyFinitDiff.finite_difference_1D.boundaries import Boundaries
 from PyFinitDiff.finite_difference_1D.utils import MeshInfo
 from PyFinitDiff.finite_difference_1D.diagonals import DiagonalSet, ConstantDiagonal
 
-
 config_dict = ConfigDict(
     extra='forbid',
     strict=True,
@@ -19,25 +18,44 @@ config_dict = ConfigDict(
     frozen=False
 )
 
-
 @dataclass(config=config_dict)
-class FiniteDifference():
+class FiniteDifference:
     """
-    This class represent a specific finit difference configuration, which is defined with the descretization of the mesh, the derivative order,
-    accuracy and the boundary condition that are defined. More information is providided at the following link: 'math.toronto.edu/mpugh/Teaching/Mat1062/notes2.pdf'
+    Represents a specific finite difference configuration, including the discretization
+    of the mesh, derivative order, accuracy, and boundary conditions.
+
+    Parameters
+    ----------
+    n_x : int
+        Number of points in the x direction.
+    dx : float, optional
+        Infinitesimal displacement in the x direction (default is 1).
+    derivative : int, optional
+        Order of the derivative to convert into a finite-difference matrix (default is 1).
+    accuracy : int, optional
+        Accuracy of the derivative approximation (error is inversely proportional to the power of this value, default is 2).
+    boundaries : Boundaries, optional
+        Values of the four possible boundaries of the system (default is an empty Boundaries object).
+    x_derivative : bool, optional
+        Whether to add the x derivative (default is True).
+
+    Attributes
+    ----------
+    mesh_info : MeshInfo
+        Contains information about the mesh, such as the number of points and spacing.
+    boundaries : Boundaries
+        Boundary conditions applied to the system.
+    finit_coefficient : FiniteCoefficients
+        Coefficients used for finite difference calculation.
+    _triplet : tuple or None
+        The triplet representation of the finite-difference matrix, initialized to None.
     """
     n_x: int
-    """ Number of point in the x direction """
     dx: float = 1
-    """ Infinetisemal displacement in x direction """
     derivative: int = 1
-    """ Derivative order to convert into finit-difference matrix. """
     accuracy: int = 2
-    """ Accuracy of the derivative approximation [error is inversly proportional to the power of that value]. """
     boundaries: Boundaries = field(default_factory=Boundaries)
-    """ Values of the four possible boundaries of the system. """
     x_derivative: bool = True
-    """ Add the x derivative """
 
     def __post_init__(self):
         self.mesh_info = MeshInfo(
@@ -54,14 +72,26 @@ class FiniteDifference():
 
     @property
     def shape(self):
+        """
+        Tuple representing the shape of the finite-difference system.
+
+        Returns
+        -------
+        tuple
+            The shape of the system, represented by the number of points in the x direction.
+        """
         return (self.n_x,)
 
     @property
     def triplet(self):
         """
-        Triplet representing the non-nul values of the specific
-        finite-difference configuration.
+        Returns the triplet representation of the non-zero values of the finite-difference configuration.
+        Constructs the triplet if it has not been initialized.
 
+        Returns
+        -------
+        tuple
+            The triplet representation of the finite-difference matrix.
         """
         if not self._triplet:
             self.construct_triplet()
@@ -69,26 +99,43 @@ class FiniteDifference():
 
     @property
     def _dx(self) -> float:
+        """
+        Returns the scaled infinitesimal displacement for the x direction.
+
+        Returns
+        -------
+        float
+            The displacement scaled by the derivative order.
+        """
         return self.dx ** self.derivative
 
     @property
     def _dy(self) -> float:
+        """
+        Returns the scaled infinitesimal displacement for the y direction.
+
+        Returns
+        -------
+        float
+            The displacement scaled by the derivative order.
+        """
         return self.dy ** self.derivative
 
-    def iterate_central_coefficient(
-            self,
-            coefficients: str,
-            offset_multiplier: int) -> tuple:
+    def iterate_central_coefficient(self, coefficients: str, offset_multiplier: int) -> tuple:
         """
-        Iterate throught the given type coefficients
+        Iterates through the given type of coefficients to provide the offset, value, and boundary type.
 
-        :param      coefficient_type:   The coefficient type
-        :type       coefficient_type:   str
-        :param      offset_multiplier:  The offset multiplier
-        :type       offset_multiplier:  int
+        Parameters
+        ----------
+        coefficients : str
+            The type of coefficients to iterate over.
+        offset_multiplier : int
+            Multiplier applied to the coefficient offset.
 
-        :returns:   The offset, value, coefficient and boundary type
-        :rtype:     tuple
+        Yields
+        ------
+        tuple
+            A tuple containing the offset, value, and corresponding boundary type.
         """
         for offset, value in coefficients:
             offset *= offset_multiplier
@@ -97,25 +144,23 @@ class FiniteDifference():
 
             yield offset, value, boundary
 
-    def _add_diagonal_coefficient(
-            self,
-            coefficient_type: str,
-            offset_multiplier: int,
-            delta: float) -> None:
+    def _add_diagonal_coefficient(self, coefficient_type: str, offset_multiplier: int, delta: float) -> DiagonalSet:
         """
         Adds a diagonal coefficient to the list of diagonals.
 
-        :param      coefficient_type:   The coefficient type
-        :type       coefficient_type:   str
-        :param      diagonals:          The diagonals
-        :type       diagonals:          list
-        :param      offset_multiplier:  The offset multiplier
-        :type       offset_multiplier:  int
-        :param      delta:              The delta
-        :type       delta:              float
+        Parameters
+        ----------
+        coefficient_type : str
+            The type of coefficients to add (e.g., 'central', 'forward', 'backward').
+        offset_multiplier : int
+            Multiplier applied to the offset for each coefficient.
+        delta : float
+            Scaling factor for the coefficient values.
 
-        :returns:   No return
-        :rtype:     None
+        Returns
+        -------
+        DiagonalSet
+            A set of diagonals representing the finite-difference configuration.
         """
         diagonal_set = DiagonalSet(mesh_info=self.mesh_info)
 
@@ -140,18 +185,21 @@ class FiniteDifference():
 
         return diagonal_set
 
-    def get_diagonal_set_full(self, offset_multiplier: int, delta: float) -> None:
+    def get_diagonal_set_full(self, offset_multiplier: int, delta: float) -> DiagonalSet:
         """
-        Constructs and returns the central coefficents diagonals which is completed with
-        forward and backward coefficients if some 'nan' values are left.
+        Constructs and returns a complete set of diagonals, including central, forward, and backward coefficients.
 
-        :param      offset_multiplier:  The offset multiplier
-        :type       offset_multiplier:  int
-        :param      delta:              The delta
-        :type       delta:              float
+        Parameters
+        ----------
+        offset_multiplier : int
+            Multiplier applied to the coefficient offset.
+        delta : float
+            Scaling factor for the coefficient values.
 
-        :returns:   No return
-        :rtype:     None
+        Returns
+        -------
+        DiagonalSet
+            A set of diagonals representing the finite-difference configuration, including adjustments for boundaries.
         """
         central_diagonal = self._add_diagonal_coefficient(
             coefficient_type='central',
@@ -172,18 +220,19 @@ class FiniteDifference():
         )
 
         central_diagonal.replace_nan_rows_with(forward_diagonal)
-
         central_diagonal.replace_nan_rows_with(backward_diagonal)
 
         return central_diagonal
 
     def construct_triplet(self) -> None:
+        """
+        Constructs the triplet representation of the finite-difference matrix for the x direction.
+        """
         x_diagonals = self.get_diagonal_set_full(
             offset_multiplier=1,
             delta=self._dx
         )
 
         self._triplet = x_diagonals.triplet
-
 
 # -
