@@ -1,0 +1,66 @@
+package:
+  name: pyfinitdiff
+  version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+  path: ../
+  git_url: https://github.com/MartinPdeS/PyFinitDiff.git
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+channels:
+  - conda-forge
+  - martinpdes
+
+requirements:
+  host:
+    - python >=3.8
+    - setuptools >=40.8.0
+    - wheel
+    - setuptools-scm >=8.0
+    - pip
+    - martinpdes::mpsplots
+  run:
+    - martinpdes::mpsplots
+    - pydantic ~=2.9
+    - numpy ~=1.26
+    - tabulate ~=0.9
+
+
+about:
+  home: https://github.com/MartinPdeS/PyFinitDiff
+  license: MIT
+  summary: "A package for refractive index values."
+  description: PyOptik is a library that helps the end-user to build it's own refractive index library.
+  dev_url: https://github.com/MartinPdeS/PyFinitDiff
+  doc_url: https://pyfinitdiff.readthedocs.io
+  license_file: LICENSE
+  keywords:
+    - finite-difference
+    - solving
+    - linear algebra
+
+test:
+  imports:
+    - PyFinitDiff
+  requires:
+    - pip
+    - pint
+    - pytest>=0.6
+    - pytest-cov>=2.0
+    - pytest-json-report==1.5.0
+    - mypy>=0.910
+    - flake8>=3.9
+    - tox>=3.24
+    - coverage==7.6.1
+  commands:
+    - python -m pytest
+  source_files:
+    - tests
+
+extra:
+  recipe-maintainers:
+    - MartinPdeS
