@@ -5,30 +5,30 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "PyFinitDiff"
 dynamic = ["version"]
-description = "A package finit-difference matrix generation."
+description = "A package for generating finite-difference matrices, particularly suited for physics and engineering applications."
 license = {file = "LICENSE"}
 readme = "README.rst"
 requires-python = ">=3.10"
 authors = [{ name="Martin Poinsinet de Sivry-Houle", email="martin.poinsinet.de.sivry@gmail.com"}]
 classifiers = [
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.11',
-    'Programming Language :: Python :: 3.12',
-    'Programming Language :: Python :: Implementation :: CPython',
-    'Development Status :: 4 - Beta',
-    'Topic :: Scientific/Engineering :: Physics',
-    'License :: OSI Approved :: MIT License',
-    'Intended Audience :: Science/Research',
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Development Status :: 4 - Beta",
+    "Topic :: Scientific/Engineering :: Physics",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research"
 ]
 
-keywords = ["finit-difference", "solving", "linear algebra"]
+keywords = ["finite-difference", "solving", "linear algebra", "physics", "matrix", "engineering"]
 
 dependencies = [
     "pydantic ~=2.9",
     "numpy ~=1.26",
     "MPSPlots",
-    "tabulate ~=0.9",
+    "tabulate ~=0.9"
 ]
 
 [project.urls]
@@ -55,34 +55,38 @@ testing = [
 
 documentation = [
     "numpydoc ~=1.8",
-    "sphinx ~=5.1",
+    "sphinx >=6",
     "sphinx-gallery ~=0.17",
     "sphinx-rtd-theme ~=2.0",
-    "pydata-sphinx-theme ~=0.15",
+    "pydata-sphinx-theme ~=0.15"
+]
+
+dev = [
+    "black ~=22.3",  # Consistent code formatting
+    "isort ~=5.9",   # Sort imports
+    "pre-commit ~=2.19"  # Pre-commit hooks to enforce code quality
 ]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
 xfail_strict = true
 log_cli_level = "INFO"
-testpaths = [
-    "tests/*",
-]
+testpaths = ["tests/"]
 addopts = [
-    '-v',
-    '-rA',
-    '-rw',
-    '--cov=PyFinitDiff',
-    '--cov-report=html',
+    "-v",
+    "-rA",
+    "-rw",
+    "--cov=PyFinitDiff",
+    "--cov-report=html",
     "--cov-report=term"
 ]
 
 [tool.coverage.run]
-source = ['PyFinitDiff']
+source = ["PyFinitDiff"]
 omit = [
-    '*\__init__.py',
-    '*\_version.py',
-    '*\directories.py',
+    "*/__init__.py",
+    "*/_version.py",
+    "*/directories.py"
 ]
 branch = true
 relative_files = true
