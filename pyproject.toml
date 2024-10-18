@@ -34,7 +34,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/MartinPdeS/PyFinitDiff"
-Documentation = "https://pyfinitdiff.readthedocs.io/en/latest/"
+Documentation = "https://martinpdes.github.io/PyFinitDiff/"
 Repository = "https://github.com/MartinPdeS/PyFinitDiff.git"
 
 [tool.setuptools_scm]
