@@ -64,7 +64,7 @@ documentation = [
 dev = [
     "black ~=22.3",  # Consistent code formatting
     "isort ~=5.9",   # Sort imports
-    "pre-commit ~=2.19"  # Pre-commit hooks to enforce code quality
+    "pre-commit >=2.19,<5.0"  # Pre-commit hooks to enforce code quality
 ]
 
 [tool.pytest.ini_options]
