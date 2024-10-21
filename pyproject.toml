@@ -44,12 +44,9 @@ local_scheme = "no-local-version"
 
 [project.optional-dependencies]
 testing = [
-    "pytest ~=7.4",
-    "pytest-cov ~=2.0",
+    "pytest >=7.4,<9.0",
+    "pytest-cov >=2,<6",
     "pytest-json-report ~=1.5",
-    "mypy ~=0.910",
-    "flake8 ~=3.9",
-    "tox ~=3.24",
     "coverage ~=7.6"
 ]
 
@@ -62,9 +59,7 @@ documentation = [
 ]
 
 dev = [
-    "black ~=22.3",  # Consistent code formatting
-    "isort ~=5.9",   # Sort imports
-    "pre-commit ~=2.19"  # Pre-commit hooks to enforce code quality
+    "flake8 ==7.1.1",
 ]
 
 [tool.pytest.ini_options]
