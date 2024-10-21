@@ -3,8 +3,8 @@
 
 from dataclasses import dataclass
 import numpy
-from typing import Tuple
 from PyFinitDiff.triplet import DiagonalTriplet
+
 
 @dataclass
 class MeshInfo:

@@ -7,6 +7,7 @@ from scipy.sparse import coo_matrix
 from dataclasses import dataclass
 import matplotlib.pyplot as plt
 
+
 @dataclass
 class Triplet:
     """
@@ -497,4 +498,3 @@ class DiagonalTriplet(Triplet):
         size = mesh.size
         triplet_array = numpy.column_stack((numpy.arange(size), numpy.arange(size), mesh.ravel()))
         super().__init__(array=triplet_array, shape=shape)
-

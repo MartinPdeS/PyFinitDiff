@@ -58,11 +58,11 @@ examples_files = [
 ]
 
 
-
 sphinx_gallery_conf = {
     "examples_dirs": ['../examples/' + f for f in examples_files],
     "gallery_dirs": ['gallery/' + f for f in examples_files],
     'image_scrapers': ('matplotlib'),
+    'filename_pattern': '',
     'ignore_pattern': '/__',
     'plot_gallery': True,
     'thumbnail_size': [600, 600],

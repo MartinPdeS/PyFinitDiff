@@ -15,6 +15,7 @@ BOUNDARY_CONDITIONS = [
     dict(left='anti-symmetric', right='zero', top='symmetric', bottom='zero')
 ]
 
+
 def test_init_boundaries():
     """
     Test initialization of Boundaries with various valid and invalid boundary condition inputs.
@@ -80,4 +81,4 @@ def test_raise_fails():
 
 
 if __name__ == "__main__":
-    pytest.main([__file__])
+    pytest.main(["-W error", __file__])

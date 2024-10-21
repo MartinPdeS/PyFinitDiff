@@ -21,30 +21,55 @@
 Example: 1D eigenmodes 0
 ========================
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-15
+In this example, we calculate and visualize the eigenmodes of a 1D finite difference operator combined
+with a circular mesh potential. The boundary conditions, mesh properties, and eigenmode calculations
+are all set up for demonstration purposes.
 
-.. list-table:: 1D Finit-difference parameters
+.. GENERATED FROM PYTHON SOURCE LINES 12-19
+
+.. list-table:: 1D Finite-difference parameters
    :widths: 25
-   :header-rows: 1
+   :header-rows: 0
 
-   * - boundaries: {left: symmetric, right: symmetric}
+   * - boundaries: {left: none, right: none}
    * - derivative: 2
    * - accuracy: 6
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-65
+.. GENERATED FROM PYTHON SOURCE LINES 21-24
+
+Importing required packages
+---------------------------
+Here we import the necessary libraries for numerical computations, rendering, and finite difference operations.
+
+.. GENERATED FROM PYTHON SOURCE LINES 24-29
 
 .. code-block:: python3
 
 
     from scipy.sparse import linalg
+    import matplotlib.pyplot as plt
+    from PyFinitDiff.finite_difference_1D import FiniteDifference, get_circular_mesh_triplet, Boundaries
 
-    from MPSPlots.render2D import SceneList
 
-    from PyFinitDiff.finite_difference_1D import FiniteDifference
-    from PyFinitDiff.finite_difference_1D import get_circular_mesh_triplet
-    from PyFinitDiff.finite_difference_1D import Boundaries
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 30-33
+
+Setting up the finite difference instance and boundaries
+---------------------------------------------------------
+We define the grid size and set up the finite difference instance with specified boundary conditions.
+
+.. GENERATED FROM PYTHON SOURCE LINES 33-44
+
+.. code-block:: python3
+
 
     n_x = 100
+
     sparse_instance = FiniteDifference(
         n_x=n_x,
         dx=1,
@@ -52,6 +77,24 @@ Example: 1D eigenmodes 0
         accuracy=2,
         boundaries=Boundaries(left='none', right='none')
     )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 45-48
+
+Creating the circular mesh potential
+-------------------------------------
+We create a circular mesh triplet, specifying the inner and outer values, and offset parameters.
+
+.. GENERATED FROM PYTHON SOURCE LINES 48-57
+
+.. code-block:: python3
+
 
     mesh_triplet = get_circular_mesh_triplet(
         n_x=n_x,
@@ -61,7 +104,43 @@ Example: 1D eigenmodes 0
         x_offset=0
     )
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 58-61
+
+Combining the finite difference and mesh triplets
+--------------------------------------------------
+We add the circular mesh triplet to the finite difference operator to form the dynamic triplet.
+
+.. GENERATED FROM PYTHON SOURCE LINES 61-64
+
+.. code-block:: python3
+
+
     dynamic_triplet = sparse_instance.triplet + mesh_triplet
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 65-68
+
+Calculating the eigenmodes
+---------------------------
+We compute the first four eigenmodes of the combined operator using the scipy sparse linear algebra package.
+
+.. GENERATED FROM PYTHON SOURCE LINES 68-76
+
+.. code-block:: python3
+
 
     eigen_values, eigen_vectors = linalg.eigs(
         dynamic_triplet.to_dense(),
@@ -70,26 +149,41 @@ Example: 1D eigenmodes 0
         sigma=1.4444
     )
 
-    figure = SceneList(
-        unit_size=(3, 3),
-        tight_layout=True,
-        ax_orientation='horizontal'
-    )
-
-    for i in range(4):
-        Vector = eigen_vectors[:, i].real.reshape([sparse_instance.n_x])
-        ax = figure.append_ax(title=f'eigenvalues: \n{eigen_values[i]:.3f}')
-        _ = ax.add_line(y=Vector)
-
-    _ = figure.show()
 
 
-    # -
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 77-80
+
+Visualizing the eigenmodes with matplotlib
+-------------------------------------------
+We visualize the first four eigenmodes by reshaping the eigenvectors and plotting them using matplotlib.
+
+.. GENERATED FROM PYTHON SOURCE LINES 80-93
+
+.. code-block:: python3
+
+
+    fig, axes = plt.subplots(2, 2, figsize=(10, 8), constrained_layout=True)
+    axes = axes.flatten()
+
+    for i, ax in enumerate(axes):
+        vector = eigen_vectors[:, i].real
+        ax.plot(vector)
+        ax.set_title(f'eigenvalue: {eigen_values[i]:.3f}')
+        ax.set_xlabel('Index')
+        ax.set_ylabel('Amplitude')
+        ax.grid(True)
+
+    plt.show()
 
 
 
 .. image-sg:: /gallery/eigenmodes_1d/images/sphx_glr_plot_mode_0_001.png
-   :alt: , eigenvalues:  1.442+0.000j, eigenvalues:  1.435+0.000j, eigenvalues:  1.422+0.000j, eigenvalues:  1.405+0.000j
+   :alt: eigenvalue: 1.442+0.000j, eigenvalue: 1.435+0.000j, eigenvalue: 1.422+0.000j, eigenvalue: 1.405+0.000j
    :srcset: /gallery/eigenmodes_1d/images/sphx_glr_plot_mode_0_001.png
    :class: sphx-glr-single-img
 
@@ -100,7 +194,7 @@ Example: 1D eigenmodes 0
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.414 seconds)
+   **Total running time of the script:** (0 minutes 0.484 seconds)
 
 
 .. _sphx_glr_download_gallery_eigenmodes_1d_plot_mode_0.py:

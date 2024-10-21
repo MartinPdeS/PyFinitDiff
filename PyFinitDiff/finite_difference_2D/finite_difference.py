@@ -4,7 +4,6 @@
 from pydantic.dataclasses import dataclass
 from pydantic import ConfigDict
 from dataclasses import field
-
 from PyFinitDiff.coefficients import FiniteCoefficients
 from PyFinitDiff.triplet import Triplet
 from PyFinitDiff.finite_difference_2D.boundaries import Boundaries
@@ -18,6 +17,7 @@ config_dict = ConfigDict(
     kw_only=True,
     frozen=False
 )
+
 
 @dataclass(config=config_dict)
 class FiniteDifference:
@@ -136,7 +136,7 @@ class FiniteDifference:
         """
         return self.dy ** self.derivative
 
-    def iterate_central_coefficient(self, coefficients: str, offset_multiplier: int) -> tuple:
+    def iterate_central_coefficient(self, coefficients: str, offset_multiplier: int):
         """
         Iterates through the given type of coefficients to provide the offset, value, and boundary type.
 
@@ -253,4 +253,3 @@ class FiniteDifference:
                 delta=self._dy
             )
             self._triplet += y_diagonals.triplet
-

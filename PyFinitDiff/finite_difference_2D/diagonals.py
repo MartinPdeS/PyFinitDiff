@@ -21,6 +21,7 @@ config_dict = ConfigDict(
     arbitrary_types_allowed=True
 )
 
+
 @dataclass(config=config_dict)
 class Diagonal:
     """
@@ -104,6 +105,7 @@ class Diagonal:
         """
         return self.triplet.plot()
 
+
 class ConstantDiagonal(Diagonal):
     """
     Represents a diagonal with constant values for the finite-difference method.
@@ -117,6 +119,7 @@ class ConstantDiagonal(Diagonal):
             values=numpy.ones(mesh_info.size) * value,
             boundary=boundary,
         )
+
 
 @dataclass(config=config_dict)
 class DiagonalSet:

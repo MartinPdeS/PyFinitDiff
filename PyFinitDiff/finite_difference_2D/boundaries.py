@@ -14,6 +14,7 @@ config_dict = ConfigDict(
     frozen=False
 )
 
+
 @dataclass(config=config_dict)
 class Boundary:
     """
@@ -90,6 +91,7 @@ class Boundary:
                 shift_vector = numpy.tile(shift_vector, self.mesh_info.n_y)
 
         return shift_vector
+
 
 @dataclass(config=config_dict)
 class Boundaries:

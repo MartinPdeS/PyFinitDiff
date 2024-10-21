@@ -11,7 +11,7 @@ Extras
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Gradient of array">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate the gradient of a 2D array using finite difference methods. We wi...">
 
 .. only:: html
 
@@ -28,7 +28,7 @@ Extras
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Generating Whittle-Matérn field">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we generate a Whittle-Matérn field using a finite difference Laplacian operato...">
 
 .. only:: html
 

@@ -4,8 +4,8 @@
 import pytest
 import numpy
 from PyFinitDiff.triplet import Triplet
-from PyFinitDiff.utils import get_2D_circular_mesh_triplet
 from unittest.mock import patch
+
 
 @pytest.fixture
 def triplet():
@@ -15,6 +15,7 @@ def triplet():
     array = numpy.c_[i_index, j_index, values]
 
     return Triplet(array=array, shape=(10, 10))
+
 
 @patch('matplotlib.pyplot.show')
 def test_triplet_operations(mock_show, triplet):
@@ -32,4 +33,4 @@ def test_triplet_operations(mock_show, triplet):
 
 
 if __name__ == "__main__":
-    pytest.main([__file__])
+    pytest.main(["-W error", __file__])

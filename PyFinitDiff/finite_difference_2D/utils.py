@@ -4,7 +4,6 @@
 import numpy
 from PyFinitDiff.triplet import DiagonalTriplet
 from dataclasses import dataclass
-from typing import Tuple
 
 
 @dataclass

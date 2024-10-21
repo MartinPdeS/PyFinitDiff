@@ -11,14 +11,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: 1D eigenmodes 0">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a 1D finite difference operator c...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_0_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_example_0_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_0.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_example_0.py`
 
 .. raw:: html
 
@@ -28,14 +28,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: 1D eigenmodes 2">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a 1D finite difference operator c...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_1_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_example_1_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_1.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_example_1.py`
 
 .. raw:: html
 
@@ -45,14 +45,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: 1D eigenmodes 2">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a 1D finite difference operator c...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_2_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_example_2_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_2.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_example_2.py`
 
 .. raw:: html
 
@@ -62,14 +62,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: 1D eigenmodes 2">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a 1D finite difference operator c...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_plot_mode_3_thumb.png
+  .. image:: /gallery/eigenmodes_1d/images/thumb/sphx_glr_example_3_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_1d_plot_mode_3.py`
+  :ref:`sphx_glr_gallery_eigenmodes_1d_example_3.py`
 
 .. raw:: html
 
@@ -85,10 +85,10 @@
 .. toctree::
    :hidden:
 
-   /gallery/eigenmodes_1d/plot_mode_0
-   /gallery/eigenmodes_1d/plot_mode_1
-   /gallery/eigenmodes_1d/plot_mode_2
-   /gallery/eigenmodes_1d/plot_mode_3
+   /gallery/eigenmodes_1d/example_0
+   /gallery/eigenmodes_1d/example_1
+   /gallery/eigenmodes_1d/example_2
+   /gallery/eigenmodes_1d/example_3
 
 
 

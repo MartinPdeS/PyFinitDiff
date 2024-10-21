@@ -3,6 +3,7 @@
 
 from PyFinitDiff.coefficients import FiniteCoefficients
 
+
 def get_function_derivative(
         function: callable,
         x_eval: float,

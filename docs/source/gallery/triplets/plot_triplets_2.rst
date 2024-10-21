@@ -21,24 +21,49 @@
 Example: triplets 2
 ===================
 
-.. GENERATED FROM PYTHON SOURCE LINES 7-14
+In this example, we generate a finite difference instance and visualize the resulting triplets.
+The boundary conditions, derivative, and accuracy settings are specified for demonstration purposes.
 
-.. list-table:: Finit-difference parameters
+.. GENERATED FROM PYTHON SOURCE LINES 10-17
+
+.. list-table:: Finite-difference parameters
    :widths: 25
    :header-rows: 1
 
-   * - boundaries {'left': 1, 'right': 0, 'top': 0, 'bottom': 0}
+   * - boundaries: {left: 1, right: 0, top: 0, bottom: 0}
    * - derivative: 2
    * - accuracy: 4
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-33
+.. GENERATED FROM PYTHON SOURCE LINES 19-22
+
+Importing required packages
+---------------------------
+Here we import the necessary libraries for numerical computations and finite difference operations.
+
+.. GENERATED FROM PYTHON SOURCE LINES 22-26
 
 .. code-block:: python3
 
 
+    from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
+    import matplotlib.pyplot as plt
 
-    from PyFinitDiff.finite_difference_2D import FiniteDifference
-    from PyFinitDiff.finite_difference_2D import Boundaries
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 27-30
+
+Setting up the finite difference instance and boundaries
+---------------------------------------------------------
+We define the grid size and set up the finite difference instance with specified boundary conditions.
+
+.. GENERATED FROM PYTHON SOURCE LINES 30-41
+
+.. code-block:: python3
 
 
     sparse_instance = FiniteDifference(
@@ -48,10 +73,30 @@ Example: triplets 2
         dy=1,
         derivative=2,
         accuracy=4,
-        boundaries=Boundaries()
+        boundaries=Boundaries(left='symmetric', right='zero', top='zero', bottom='zero')
     )
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 42-45
+
+Visualizing the triplets with matplotlib
+-----------------------------------------
+We plot the triplets using matplotlib to visualize the finite difference operator.
+
+.. GENERATED FROM PYTHON SOURCE LINES 45-51
+
+.. code-block:: python3
+
+
     sparse_instance.triplet.plot()
+
+    plt.show()
 
     # -
 
@@ -69,7 +114,7 @@ Example: triplets 2
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.158 seconds)
+   **Total running time of the script:** (0 minutes 0.301 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_2.py:

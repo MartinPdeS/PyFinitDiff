@@ -1,10 +1,13 @@
 """
 Example: triplets 1
 ===================
+
+In this example, we generate a finite difference instance and visualize the resulting triplets.
+The boundary conditions, derivative, and accuracy settings are specified for demonstration purposes.
 """
 
 # %%
-# .. list-table:: Finit-difference parameters
+# .. list-table:: Finite-difference parameters
 #    :widths: 25
 #    :header-rows: 1
 #
@@ -12,10 +15,18 @@ Example: triplets 1
 #    * - derivative: 2
 #    * - accuracy: 4
 
+# %%
+# Importing required packages
+# ---------------------------
+# Here we import the necessary libraries for numerical computations and finite difference operations.
 
-from PyFinitDiff.finite_difference_2D import FiniteDifference
-from PyFinitDiff.finite_difference_2D import Boundaries
+from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
+import matplotlib.pyplot as plt
 
+# %%
+# Setting up the finite difference instance and boundaries
+# ---------------------------------------------------------
+# We define the grid size and set up the finite difference instance with specified boundary conditions.
 
 sparse_instance = FiniteDifference(
     n_x=12,
@@ -27,6 +38,13 @@ sparse_instance = FiniteDifference(
     boundaries=Boundaries()
 )
 
+# %%
+# Visualizing the triplets with matplotlib
+# -----------------------------------------
+# We plot the triplets using matplotlib to visualize the finite difference operator.
+
 sparse_instance.triplet.plot()
+
+plt.show()
 
 # -

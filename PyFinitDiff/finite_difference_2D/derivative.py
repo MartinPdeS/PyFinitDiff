@@ -4,6 +4,7 @@
 import numpy as np
 import PyFinitDiff.finite_difference_2D as module
 
+
 def get_array_derivative(
         array: np.ndarray,
         derivative: int,

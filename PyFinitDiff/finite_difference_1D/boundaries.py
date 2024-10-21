@@ -15,6 +15,7 @@ config_dict = ConfigDict(
     frozen=False
 )
 
+
 @dataclass(config=config_dict)
 class Boundary:
     """
@@ -94,6 +95,7 @@ class Boundary:
                 return shift_vector
             case _:
                 raise ValueError(f"Unexpected boundary name: {self.name}")
+
 
 @dataclass(config=config_dict)
 class Boundaries:

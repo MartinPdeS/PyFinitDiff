@@ -11,14 +11,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 0">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_bottom_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_0_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_bottom_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_0.py`
 
 .. raw:: html
 
@@ -28,14 +28,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 1">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_bottom_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_1_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_bottom_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_1.py`
 
 .. raw:: html
 
@@ -45,14 +45,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 2">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_left_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_2_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_left_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_2.py`
 
 .. raw:: html
 
@@ -62,14 +62,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 3">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_left_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_3_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_left_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_3.py`
 
 .. raw:: html
 
@@ -79,14 +79,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 4">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_no_symmetry_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_4_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_no_symmetry.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_4.py`
 
 .. raw:: html
 
@@ -96,14 +96,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 5">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_right_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_5_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_right_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_5.py`
 
 .. raw:: html
 
@@ -113,14 +113,14 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 6">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_right_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_6_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_right_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_6.py`
 
 .. raw:: html
 
@@ -130,35 +130,35 @@
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 7">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_top_anti_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_8_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_top_anti_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_example_8.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Example: eigenmodes 7</div>
+      <div class="sphx-glr-thumbnail-title">Example: eigenmodes 8</div>
     </div>
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: eigenmodes 8">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we calculate and visualize the eigenmodes of a finite difference operator comb...">
 
 .. only:: html
 
-  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_plot_top_symmetric_thumb.png
+  .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_examples_7_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_plot_top_symmetric.py`
+  :ref:`sphx_glr_gallery_eigenmodes_2d_examples_7.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Example: eigenmodes 8</div>
+      <div class="sphx-glr-thumbnail-title">Example: eigenmodes 7</div>
     </div>
 
 
@@ -170,15 +170,15 @@
 .. toctree::
    :hidden:
 
-   /gallery/eigenmodes_2d/plot_bottom_anti_symmetric
-   /gallery/eigenmodes_2d/plot_bottom_symmetric
-   /gallery/eigenmodes_2d/plot_left_anti_symmetric
-   /gallery/eigenmodes_2d/plot_left_symmetric
-   /gallery/eigenmodes_2d/plot_no_symmetry
-   /gallery/eigenmodes_2d/plot_right_anti_symmetric
-   /gallery/eigenmodes_2d/plot_right_symmetric
-   /gallery/eigenmodes_2d/plot_top_anti_symmetric
-   /gallery/eigenmodes_2d/plot_top_symmetric
+   /gallery/eigenmodes_2d/example_0
+   /gallery/eigenmodes_2d/example_1
+   /gallery/eigenmodes_2d/example_2
+   /gallery/eigenmodes_2d/example_3
+   /gallery/eigenmodes_2d/example_4
+   /gallery/eigenmodes_2d/example_5
+   /gallery/eigenmodes_2d/example_6
+   /gallery/eigenmodes_2d/example_8
+   /gallery/eigenmodes_2d/examples_7
 
 
 

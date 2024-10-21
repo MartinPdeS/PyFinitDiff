@@ -8,6 +8,7 @@ import numpy
 from PyFinitDiff.triplet import Triplet
 from PyFinitDiff.finite_difference_1D.boundaries import Boundary
 
+
 @dataclass
 class Diagonal:
     """
@@ -91,6 +92,7 @@ class Diagonal:
         """
         return self.triplet.plot()
 
+
 class ConstantDiagonal(Diagonal):
     """
     Represents a diagonal with constant values.
@@ -104,6 +106,7 @@ class ConstantDiagonal(Diagonal):
             values=numpy.ones(mesh_info.size) * value,
             boundary=boundary,
         )
+
 
 @dataclass
 class DiagonalSet:
@@ -319,4 +322,3 @@ class DiagonalSet:
         Plot the Triplet instance representing the entire DiagonalSet.
         """
         return self.triplet.plot()
-

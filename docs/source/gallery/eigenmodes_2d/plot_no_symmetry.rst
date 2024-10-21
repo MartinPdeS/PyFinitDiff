@@ -19,9 +19,13 @@
 
 
 Example: eigenmodes 4
-=====================
+======================
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-13
+In this example, we calculate and visualize the eigenmodes of a finite difference operator combined
+with a circular mesh potential. The boundary conditions, mesh properties, and eigenmode calculations
+are all set up for demonstration purposes.
+
+.. GENERATED FROM PYTHON SOURCE LINES 11-16
 
 +-------------+------------+--------------+------------+------------+
 | Boundaries  |    left    |     right    |    top     |   bottom   |
@@ -29,21 +33,40 @@ Example: eigenmodes 4
 |      -      |     zero   |     zero     |   zero     |   zero     |
 +-------------+------------+--------------+------------+------------+
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-64
+.. GENERATED FROM PYTHON SOURCE LINES 18-21
+
+Importing required packages
+---------------------------
+Here we import the necessary libraries for numerical computations, rendering, and finite difference operations.
+
+.. GENERATED FROM PYTHON SOURCE LINES 21-26
 
 .. code-block:: python3
 
 
     from scipy.sparse import linalg
-    from MPSPlots.render2D import SceneList
+    from PyFinitDiff.finite_difference_2D import FiniteDifference, get_circular_mesh_triplet, Boundaries
+    import matplotlib.pyplot as plt
 
-    from PyFinitDiff.finite_difference_2D import FiniteDifference
-    from PyFinitDiff.finite_difference_2D import get_circular_mesh_triplet
-    from PyFinitDiff.finite_difference_2D import Boundaries
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 27-30
+
+Setting up the finite difference instance and boundaries
+---------------------------------------------------------
+We define the grid size and set up the finite difference instance with specified boundary conditions.
+
+.. GENERATED FROM PYTHON SOURCE LINES 30-45
+
+.. code-block:: python3
 
 
     n_y = n_x = 80
-
 
     sparse_instance = FiniteDifference(
         n_x=n_x,
@@ -57,6 +80,24 @@ Example: eigenmodes 4
 
     triplet = sparse_instance.triplet
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 46-49
+
+Creating the circular mesh potential
+-------------------------------------
+We create a circular mesh triplet, specifying the inner and outer values, and offset parameters.
+
+.. GENERATED FROM PYTHON SOURCE LINES 49-60
+
+.. code-block:: python3
+
+
     mesh_triplet = get_circular_mesh_triplet(
         n_x=n_x,
         n_y=n_y,
@@ -67,205 +108,92 @@ Example: eigenmodes 4
         radius=70
     )
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 61-64
+
+Combining the finite difference and mesh triplets
+--------------------------------------------------
+We add the circular mesh triplet to the finite difference Laplacian to form the dynamic triplet.
+
+.. GENERATED FROM PYTHON SOURCE LINES 64-67
+
+.. code-block:: python3
+
+
     dynamic_triplet = sparse_instance.triplet + mesh_triplet
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 68-71
+
+Calculating the eigenmodes
+---------------------------
+We compute the first four eigenmodes of the combined operator using the scipy sparse linear algebra package.
+
+.. GENERATED FROM PYTHON SOURCE LINES 71-76
+
+.. code-block:: python3
+
 
     eigen_values, eigen_vectors = linalg.eigs(dynamic_triplet.to_scipy_sparse(), k=4, which='LM', sigma=1.4444)
 
     shape = [sparse_instance.n_x, sparse_instance.n_y]
 
-    figure = SceneList(unit_size=(3, 3), tight_layout=True, ax_orientation='horizontal')
-
-    for i in range(4):
-        Vector = eigen_vectors[:, i].real.reshape(shape)
-        ax = figure.append_ax(title=f'eigenvalues: \n{eigen_values[i]:.3f}')
-        ax.add_mesh(scalar=Vector)
-
-    figure.show()
 
 
-    # -
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 77-80
+
+Visualizing the eigenmodes with matplotlib
+-------------------------------------------
+We visualize the first four eigenmodes by reshaping the eigenvectors and plotting them using matplotlib.
+
+.. GENERATED FROM PYTHON SOURCE LINES 80-91
+
+.. code-block:: python3
+
+
+    fig, axes = plt.subplots(1, 4, figsize=(16, 4), constrained_layout=True)
+
+    for i, ax in enumerate(axes):
+        vector = eigen_vectors[:, i].real.reshape(shape)
+        mesh = ax.pcolormesh(vector, shading='auto', cmap='viridis')
+        ax.set_title(f'eigenvalue: {eigen_values[i]:.3f}')
+        ax.set_aspect('equal')
+        plt.colorbar(mesh, ax=ax)
+
+    plt.show()
 
 
 
 .. image-sg:: /gallery/eigenmodes_2d/images/sphx_glr_plot_no_symmetry_001.png
-   :alt: , eigenvalues:  1.438+0.000j, eigenvalues:  1.414+0.000j, eigenvalues:  1.427+0.000j, eigenvalues:  1.427+0.000j
+   :alt: eigenvalue: 1.438+0.000j, eigenvalue: 1.414+0.000j, eigenvalue: 1.427+0.000j, eigenvalue: 1.427+0.000j
    :srcset: /gallery/eigenmodes_2d/images/sphx_glr_plot_no_symmetry_001.png
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    SceneList(unit_size=(3, 3), tight_layout=True, transparent_background=False, title='', padding=1.0, axis_list=[Axis(row=0, col=0, x_label=None, y_label=None, title='eigenvalues: \n1.438+0.000j', show_grid=True, show_legend=False, legend_position='best', x_scale='linear', y_scale='linear', x_limits=None, y_limits=None, equal_limits=False, projection=None, font_size=16, tick_size=14, y_tick_position='left', x_tick_position='bottom', show_ticks=True, show_colorbar=None, legend_font_size=14, line_width=None, line_style=None, x_scale_factor=None, y_scale_factor=None, aspect_ratio='auto', _artist_list=[Mesh(scalar=array([[-6.26089418e-12, -1.38918128e-11, -2.45233213e-11, ...,
-            -2.45233213e-11, -1.38918156e-11, -6.26089315e-12],
-           [-1.38918169e-11, -3.08627759e-11, -5.45872510e-11, ...,
-            -5.45872491e-11, -3.08627766e-11, -1.38918172e-11],
-           [-2.45233161e-11, -5.45872493e-11, -9.68297446e-11, ...,
-            -9.68297448e-11, -5.45872463e-11, -2.45233233e-11],
-           ...,
-           [-2.45233170e-11, -5.45872500e-11, -9.68297466e-11, ...,
-            -9.68297469e-11, -5.45872521e-11, -2.45233230e-11],
-           [-1.38918170e-11, -3.08627739e-11, -5.45872483e-11, ...,
-            -5.45872512e-11, -3.08627740e-11, -1.38918152e-11],
-           [-6.26089071e-12, -1.38918122e-11, -2.45233166e-11, ...,
-            -2.45233205e-11, -1.38918123e-11, -6.26088811e-12]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x130e82790>), Mesh(scalar=array([[-6.26089418e-12, -1.38918128e-11, -2.45233213e-11, ...,
-            -2.45233213e-11, -1.38918156e-11, -6.26089315e-12],
-           [-1.38918169e-11, -3.08627759e-11, -5.45872510e-11, ...,
-            -5.45872491e-11, -3.08627766e-11, -1.38918172e-11],
-           [-2.45233161e-11, -5.45872493e-11, -9.68297446e-11, ...,
-            -9.68297448e-11, -5.45872463e-11, -2.45233233e-11],
-           ...,
-           [-2.45233170e-11, -5.45872500e-11, -9.68297466e-11, ...,
-            -9.68297469e-11, -5.45872521e-11, -2.45233230e-11],
-           [-1.38918170e-11, -3.08627739e-11, -5.45872483e-11, ...,
-            -5.45872512e-11, -3.08627740e-11, -1.38918152e-11],
-           [-6.26089071e-12, -1.38918122e-11, -2.45233166e-11, ...,
-            -2.45233205e-11, -1.38918123e-11, -6.26088811e-12]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x130e82790>)], mpl_ax=<Axes: title={'center': 'eigenvalues: \n1.438+0.000j'}>, colorbar=Colorbar(artist=None, discreet=False, position='right', colormap=<matplotlib.colors.LinearSegmentedColormap object at 0x125418050>, orientation='vertical', symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width='10%', padding=0.1, norm=None, label='', mappable=None)), Axis(row=0, col=1, x_label=None, y_label=None, title='eigenvalues: \n1.414+0.000j', show_grid=True, show_legend=False, legend_position='best', x_scale='linear', y_scale='linear', x_limits=None, y_limits=None, equal_limits=False, projection=None, font_size=16, tick_size=14, y_tick_position='left', x_tick_position='bottom', show_ticks=True, show_colorbar=None, legend_font_size=14, line_width=None, line_style=None, x_scale_factor=None, y_scale_factor=None, aspect_ratio='auto', _artist_list=[Mesh(scalar=array([[-3.45023122e-18, -7.33431869e-13, -3.23714609e-12, ...,
-            -3.23714516e-12, -7.33434391e-13, -4.26172518e-18],
-           [ 7.33428179e-13, -1.65906318e-18, -4.31983537e-12, ...,
-            -4.31983158e-12, -2.35632258e-18,  7.33424653e-13],
-           [ 3.23714892e-12,  4.31983349e-12,  6.96422904e-19, ...,
-             1.07039522e-18,  4.31983273e-12,  3.23714450e-12],
-           ...,
-           [ 3.23714625e-12,  4.31983204e-12, -3.94506511e-18, ...,
-            -9.52403632e-19,  4.31982969e-12,  3.23714442e-12],
-           [ 7.33428813e-13, -6.38570979e-19, -4.31983376e-12, ...,
-            -4.31983107e-12,  2.56385395e-19,  7.33430521e-13],
-           [-6.69079803e-19, -7.33428240e-13, -3.23714294e-12, ...,
-            -3.23714557e-12, -7.33427394e-13,  2.63211782e-18]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x1310d0c10>), Mesh(scalar=array([[-3.45023122e-18, -7.33431869e-13, -3.23714609e-12, ...,
-            -3.23714516e-12, -7.33434391e-13, -4.26172518e-18],
-           [ 7.33428179e-13, -1.65906318e-18, -4.31983537e-12, ...,
-            -4.31983158e-12, -2.35632258e-18,  7.33424653e-13],
-           [ 3.23714892e-12,  4.31983349e-12,  6.96422904e-19, ...,
-             1.07039522e-18,  4.31983273e-12,  3.23714450e-12],
-           ...,
-           [ 3.23714625e-12,  4.31983204e-12, -3.94506511e-18, ...,
-            -9.52403632e-19,  4.31982969e-12,  3.23714442e-12],
-           [ 7.33428813e-13, -6.38570979e-19, -4.31983376e-12, ...,
-            -4.31983107e-12,  2.56385395e-19,  7.33430521e-13],
-           [-6.69079803e-19, -7.33428240e-13, -3.23714294e-12, ...,
-            -3.23714557e-12, -7.33427394e-13,  2.63211782e-18]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x1310d0c10>)], mpl_ax=<Axes: title={'center': 'eigenvalues: \n1.414+0.000j'}>, colorbar=Colorbar(artist=None, discreet=False, position='right', colormap=<matplotlib.colors.LinearSegmentedColormap object at 0x125418050>, orientation='vertical', symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width='10%', padding=0.1, norm=None, label='', mappable=None)), Axis(row=0, col=2, x_label=None, y_label=None, title='eigenvalues: \n1.427+0.000j', show_grid=True, show_legend=False, legend_position='best', x_scale='linear', y_scale='linear', x_limits=None, y_limits=None, equal_limits=False, projection=None, font_size=16, tick_size=14, y_tick_position='left', x_tick_position='bottom', show_ticks=True, show_colorbar=None, legend_font_size=14, line_width=None, line_style=None, x_scale_factor=None, y_scale_factor=None, aspect_ratio='auto', _artist_list=[Mesh(scalar=array([[ 1.70015763e-11,  3.76214957e-11,  6.61418483e-11, ...,
-            -3.17945903e-12, -2.14193572e-12, -1.06722179e-12],
-           [ 3.76491762e-11,  8.34172966e-11,  1.46938401e-10, ...,
-            -7.92332455e-12, -5.23625954e-12, -2.58294539e-12],
-           [ 6.62644110e-11,  1.47102287e-10,  2.59876222e-10, ...,
-            -1.63129110e-11, -1.05341491e-11, -5.13192875e-12],
-           ...,
-           [ 5.13192858e-12,  1.05341514e-11,  1.63129080e-11, ...,
-            -2.59876225e-10, -1.47102288e-10, -6.62644103e-11],
-           [ 2.58294217e-12,  5.23625719e-12,  7.92332661e-12, ...,
-            -1.46938402e-10, -8.34172975e-11, -3.76491784e-11],
-           [ 1.06722027e-12,  2.14193635e-12,  3.17946090e-12, ...,
-            -6.61418488e-11, -3.76214935e-11, -1.70015772e-11]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x130fc8a50>), Mesh(scalar=array([[ 1.70015763e-11,  3.76214957e-11,  6.61418483e-11, ...,
-            -3.17945903e-12, -2.14193572e-12, -1.06722179e-12],
-           [ 3.76491762e-11,  8.34172966e-11,  1.46938401e-10, ...,
-            -7.92332455e-12, -5.23625954e-12, -2.58294539e-12],
-           [ 6.62644110e-11,  1.47102287e-10,  2.59876222e-10, ...,
-            -1.63129110e-11, -1.05341491e-11, -5.13192875e-12],
-           ...,
-           [ 5.13192858e-12,  1.05341514e-11,  1.63129080e-11, ...,
-            -2.59876225e-10, -1.47102288e-10, -6.62644103e-11],
-           [ 2.58294217e-12,  5.23625719e-12,  7.92332661e-12, ...,
-            -1.46938402e-10, -8.34172975e-11, -3.76491784e-11],
-           [ 1.06722027e-12,  2.14193635e-12,  3.17946090e-12, ...,
-            -6.61418488e-11, -3.76214935e-11, -1.70015772e-11]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x130fc8a50>)], mpl_ax=<Axes: title={'center': 'eigenvalues: \n1.427+0.000j'}>, colorbar=Colorbar(artist=None, discreet=False, position='right', colormap=<matplotlib.colors.LinearSegmentedColormap object at 0x125418050>, orientation='vertical', symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width='10%', padding=0.1, norm=None, label='', mappable=None)), Axis(row=0, col=3, x_label=None, y_label=None, title='eigenvalues: \n1.427+0.000j', show_grid=True, show_legend=False, legend_position='best', x_scale='linear', y_scale='linear', x_limits=None, y_limits=None, equal_limits=False, projection=None, font_size=16, tick_size=14, y_tick_position='left', x_tick_position='bottom', show_ticks=True, show_colorbar=None, legend_font_size=14, line_width=None, line_style=None, x_scale_factor=None, y_scale_factor=None, aspect_ratio='auto', _artist_list=[Mesh(scalar=array([[ 1.21197292e-12,  2.90324571e-12,  5.69502545e-12, ...,
-             6.62349291e-11,  3.76295715e-11,  1.69918749e-11],
-           [ 2.46248889e-12,  5.94647461e-12,  1.17851404e-11, ...,
-             1.47029475e-10,  8.33696804e-11,  3.75981339e-11],
-           [ 3.74366987e-12,  9.17580415e-12,  1.85255021e-11, ...,
-             2.59727874e-10,  1.46843360e-10,  6.60957458e-11],
-           ...,
-           [-6.60957456e-11, -1.46843360e-10, -2.59727872e-10, ...,
-            -1.85255018e-11, -9.17580563e-12, -3.74367027e-12],
-           [-3.75981332e-11, -8.33696788e-11, -1.47029475e-10, ...,
-            -1.17851411e-11, -5.94647515e-12, -2.46248913e-12],
-           [-1.69918731e-11, -3.76295713e-11, -6.62349289e-11, ...,
-            -5.69502451e-12, -2.90324684e-12, -1.21197288e-12]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x130e6cf10>), Mesh(scalar=array([[ 1.21197292e-12,  2.90324571e-12,  5.69502545e-12, ...,
-             6.62349291e-11,  3.76295715e-11,  1.69918749e-11],
-           [ 2.46248889e-12,  5.94647461e-12,  1.17851404e-11, ...,
-             1.47029475e-10,  8.33696804e-11,  3.75981339e-11],
-           [ 3.74366987e-12,  9.17580415e-12,  1.85255021e-11, ...,
-             2.59727874e-10,  1.46843360e-10,  6.60957458e-11],
-           ...,
-           [-6.60957456e-11, -1.46843360e-10, -2.59727872e-10, ...,
-            -1.85255018e-11, -9.17580563e-12, -3.74367027e-12],
-           [-3.75981332e-11, -8.33696788e-11, -1.47029475e-10, ...,
-            -1.17851411e-11, -5.94647515e-12, -2.46248913e-12],
-           [-1.69918731e-11, -3.76295713e-11, -6.62349289e-11, ...,
-            -5.69502451e-12, -2.90324684e-12, -1.21197288e-12]]), x=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), y=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
-           34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
-           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
-           68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]), x_scale_factor=1, y_scale_factor=1, layer_position=1, mappable=<matplotlib.collections.QuadMesh object at 0x130e6cf10>)], mpl_ax=<Axes: title={'center': 'eigenvalues: \n1.427+0.000j'}>, colorbar=Colorbar(artist=None, discreet=False, position='right', colormap=<matplotlib.colors.LinearSegmentedColormap object at 0x125418050>, orientation='vertical', symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width='10%', padding=0.1, norm=None, label='', mappable=None))], _mpl_figure=<Figure size 1200x300 with 4 Axes>, mpl_axis_generated=False, axis_generated=True, ax_orientation='horizontal')
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.805 seconds)
+   **Total running time of the script:** (0 minutes 0.788 seconds)
 
 
 .. _sphx_glr_download_gallery_eigenmodes_2d_plot_no_symmetry.py:

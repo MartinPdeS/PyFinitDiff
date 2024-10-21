@@ -19,43 +19,95 @@
 
 
 Gradient of array
-=================
+==================
 
-.. GENERATED FROM PYTHON SOURCE LINES 6-54
+In this example, we calculate the gradient of a 2D array using finite difference methods.
+We will explore different orders of derivatives and visualize their effects on the input array.
+
+.. GENERATED FROM PYTHON SOURCE LINES 10-13
+
+Importing required packages
+---------------------------
+Here we import the necessary libraries for numerical computations, rendering, and finite difference operations.
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-18
 
 .. code-block:: python3
 
-    from PyFinitDiff.finite_difference_2D import get_array_derivative
-    from PyFinitDiff.finite_difference_2D import Boundaries
 
-    import numpy
-    from MPSPlots.render2D import SceneList
+    import numpy as np
+    from PyFinitDiff.finite_difference_2D import get_array_derivative, Boundaries
+    import matplotlib.pyplot as plt
 
-    idx = numpy.linspace(-5, 5, 100)
-    x_array = numpy.exp(-idx**2)
-    y_array = numpy.exp(-idx**2)
 
-    y_array, x_array = numpy.meshgrid(x_array, y_array)
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 19-22
+
+Creating the input mesh
+------------------------
+We define a 2D Gaussian mesh using two 1D exponential arrays.
+
+.. GENERATED FROM PYTHON SOURCE LINES 22-31
+
+.. code-block:: python3
+
+
+    idx = np.linspace(-5, 5, 100)
+    x_array = np.exp(-idx**2)
+    y_array = np.exp(-idx**2)
+
+    y_array, x_array = np.meshgrid(x_array, y_array)
 
     mesh = x_array * y_array
 
-    condition = 'none'
-    boundaries = Boundaries(
-        top=condition,
-        bottom=condition,
-        left=condition,
-        right=condition,
-    )
 
-    scene = SceneList(
-        unit_size=(3, 3),
-        ax_orientation='horizontal'
-    )
 
-    ax = scene.append_ax(title='Initial mesh')
-    ax.add_mesh(scalar=mesh)
 
-    for derivative in [1, 2, 3]:
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 32-35
+
+Setting boundary conditions
+---------------------------
+Define boundary conditions for the gradient calculation. Here, we use 'none' for all boundaries.
+
+.. GENERATED FROM PYTHON SOURCE LINES 35-38
+
+.. code-block:: python3
+
+
+    boundaries = Boundaries(top='none', bottom='none', left='none', right='none')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 39-42
+
+Visualizing the gradient for different derivatives
+---------------------------------------------------
+We compute the gradient for first, second, and third derivatives and visualize them.
+
+.. GENERATED FROM PYTHON SOURCE LINES 42-63
+
+.. code-block:: python3
+
+
+
+    figure, axes = plt.subplots(1, 3, figsize=(12, 4), constrained_layout=True)
+    axes = axes.flatten()
+
+    for ax, derivative in zip(axes, [1, 2, 3]):
         gradient = get_array_derivative(
             array=mesh,
             accuracy=6,
@@ -65,19 +117,28 @@ Gradient of array
             boundaries=boundaries
         )
 
-        ax = scene.append_ax(title=f'derivative: {derivative}')
+        image = ax.pcolormesh(gradient.real, shading='auto', cmap='viridis')
+        ax.set_title(f'Derivative: {derivative}')
+        ax.set_aspect('equal')
+        plt.colorbar(image, ax=ax)
 
-        ax.add_mesh(scalar=gradient)
-
-    scene.show()
+    plt.show()
 
 
-    # -
+
+.. image-sg:: /gallery/extras/images/sphx_glr_gradient_001.png
+   :alt: Derivative: 1, Derivative: 2, Derivative: 3
+   :srcset: /gallery/extras/images/sphx_glr_gradient_001.png
+   :class: sphx-glr-single-img
+
+
+
+
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.000 seconds)
+   **Total running time of the script:** (0 minutes 3.836 seconds)
 
 
 .. _sphx_glr_download_gallery_extras_gradient.py:

@@ -11,7 +11,7 @@ triplets computation
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: triplets 0">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we generate a finite difference instance and visualize the resulting triplets....">
 
 .. only:: html
 
@@ -28,7 +28,7 @@ triplets computation
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: triplets 1">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we generate a finite difference instance and visualize the resulting triplets....">
 
 .. only:: html
 
@@ -45,7 +45,7 @@ triplets computation
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: triplets 2">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we generate a finite difference instance and visualize the resulting triplets....">
 
 .. only:: html
 
@@ -62,7 +62,7 @@ triplets computation
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Example: triplets 3">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we generate a finite difference instance and visualize the resulting triplets....">
 
 .. only:: html
 

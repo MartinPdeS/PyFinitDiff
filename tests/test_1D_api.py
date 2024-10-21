@@ -15,6 +15,7 @@ BOUNDARY_CONDITIONS = [
 ACCURACIES = [2, 4, 6]
 DERIVATIVES = [1, 2]
 
+
 @pytest.mark.parametrize("boundaries_kwargs", BOUNDARY_CONDITIONS, ids=lambda x: f"{x}")
 @pytest.mark.parametrize('accuracy', ACCURACIES, ids=[f'accuracy_{acc}' for acc in ACCURACIES])
 @pytest.mark.parametrize('derivative', DERIVATIVES, ids=[f'derivative_{deriv}' for deriv in DERIVATIVES])
@@ -43,5 +44,6 @@ def test_finite_difference(boundaries_kwargs, accuracy, derivative):
     # Attempt to construct the finite difference triplet representation
     finite_diff_instance.construct_triplet()
 
+
 if __name__ == "__main__":
-    pytest.main([__file__])
+    pytest.main(["-W error", __file__])
