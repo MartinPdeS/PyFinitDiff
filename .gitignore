@@ -4,6 +4,7 @@
 # Unignore the docs directory
 !docs/
 
+!docs/empty.txt
 !docs/latest
 !docs/latest/**
 !docs/latest/**/*
