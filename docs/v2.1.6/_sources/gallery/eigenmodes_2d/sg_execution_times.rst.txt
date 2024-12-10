@@ -1,0 +1,61 @@
+
+:orphan:
+
+.. _sphx_glr_gallery_eigenmodes_2d_sg_execution_times:
+
+
+Computation times
+=================
+**00:16.797** total execution time for 9 files **from gallery/eigenmodes_2d**:
+
+.. container::
+
+  .. raw:: html
+
+    <style scoped>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" class="init">
+    $(document).ready( function () {
+        $('table.sg-datatable').DataTable({order: [[1, 'desc']]});
+    } );
+    </script>
+
+  .. list-table::
+   :header-rows: 1
+   :class: table table-striped sg-datatable
+
+   * - Example
+     - Time
+     - Mem (MB)
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_6.py` (``example_6.py``)
+     - 00:02.084
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_examples_7.py` (``examples_7.py``)
+     - 00:02.083
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_5.py` (``example_5.py``)
+     - 00:02.081
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_2.py` (``example_2.py``)
+     - 00:02.052
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_3.py` (``example_3.py``)
+     - 00:02.038
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_1.py` (``example_1.py``)
+     - 00:02.035
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_4.py` (``example_4.py``)
+     - 00:01.632
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_0.py` (``example_0.py``)
+     - 00:01.547
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_8.py` (``example_8.py``)
+     - 00:01.246
+     - 0.0
