@@ -18,7 +18,7 @@ BOUNDARY_CONDITIONS = [
 
 def test_init_boundaries():
     """
-    Test initialization of Boundaries with various valid and invalid boundary condition inputs.
+    Test initialization of Boundaries with various valid and invalid boundary condition inputs .
 
     This function tests whether the Boundaries class can be successfully initialized with valid
     boundary conditions and raises the appropriate exceptions when provided with invalid inputs.
