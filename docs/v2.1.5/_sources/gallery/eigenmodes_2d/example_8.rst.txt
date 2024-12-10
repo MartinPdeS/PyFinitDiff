@@ -197,7 +197,7 @@ We visualize the first four eigenmodes by reshaping the eigenvectors and plottin
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.224 seconds)
+   **Total running time of the script:** (0 minutes 1.171 seconds)
 
 
 .. _sphx_glr_download_gallery_eigenmodes_2d_example_8.py:
