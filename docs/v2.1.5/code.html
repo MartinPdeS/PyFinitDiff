@@ -1,0 +1,1720 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Source code &#8212; PyFinitDiff  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/docs/source/_static/default.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/default.css?v=265c6c44" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'code';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Coding examples" href="gallery/index.html" />
+    <link rel="prev" title="Theoretical background" href="theory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.1.5.post0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://pyfinitdiff.readthedocs.io/en/master/">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyFinitDiff</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="theory.html">
+    Theoretical background
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Source code
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="gallery/index.html">
+    Coding examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="references.html">
+    References
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MartinPdeS/PyFinitDiff" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/fiberfusing/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-box fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://anaconda.org/MartinPdeS/pyfinitdiff" title="Anaconda" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Anaconda</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="theory.html">
+    Theoretical background
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Source code
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="gallery/index.html">
+    Coding examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="references.html">
+    References
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MartinPdeS/PyFinitDiff" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/fiberfusing/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-box fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://anaconda.org/MartinPdeS/pyfinitdiff" title="Anaconda" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Anaconda</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Source code</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="source-code">
+<span id="id1"></span><h1>Source code<a class="headerlink" href="#source-code" title="Link to this heading">#</a></h1>
+<section id="triplet">
+<h2>Triplet<a class="headerlink" href="#triplet" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><dl class="py class">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Triplet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_extra_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class representing a sparse matrix in triplet (COO) format, useful for finite-difference operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<em>tuple</em><em> of </em><em>int</em>) – Shape of the matrix (rows, columns).</p></li>
+<li><p><strong>array</strong> (<em>numpy.ndarray</em>) – A 2D array with three columns representing row indices, column indices, and values.</p></li>
+<li><p><strong>add_extra_column</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, adds an extra column of ones to the array (default is False).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.shape">
+<span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.shape" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.array">
+<span class="sig-name descname"><span class="pre">array</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.array" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.add_extra_column">
+<span class="sig-name descname"><span class="pre">add_extra_column</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.add_extra_column" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.index">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.index" title="Link to this definition">#</a></dt>
+<dd><p>Return the first two columns of the array, representing the indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of row and column indices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.rows">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rows</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.rows" title="Link to this definition">#</a></dt>
+<dd><p>Return the row indices (first column).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of row indices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.columns">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">columns</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.columns" title="Link to this definition">#</a></dt>
+<dd><p>Return the column indices (second column).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of column indices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.values">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.values" title="Link to this definition">#</a></dt>
+<dd><p>Return the values (third column).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.size" title="Link to this definition">#</a></dt>
+<dd><p>Return the number of entries in the triplet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of entries.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.remove_below_i">
+<span class="sig-name descname"><span class="pre">remove_below_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.remove_below_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.remove_below_i" title="Link to this definition">#</a></dt>
+<dd><p>Remove all entries with row indices below a specified value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i_value</strong> (<em>int</em>) – Threshold for row indices. Entries with row indices below this value are removed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The modified Triplet instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.remove_above_i">
+<span class="sig-name descname"><span class="pre">remove_above_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.remove_above_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.remove_above_i" title="Link to this definition">#</a></dt>
+<dd><p>Remove all entries with row indices above a specified value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i_value</strong> (<em>int</em>) – Threshold for row indices. Entries with row indices above this value are removed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The modified Triplet instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.remove_below_j">
+<span class="sig-name descname"><span class="pre">remove_below_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.remove_below_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.remove_below_j" title="Link to this definition">#</a></dt>
+<dd><p>Remove all entries with column indices below a specified value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>j_value</strong> (<em>int</em>) – Threshold for column indices. Entries with column indices below this value are removed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The modified Triplet instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.remove_above_j">
+<span class="sig-name descname"><span class="pre">remove_above_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.remove_above_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.remove_above_j" title="Link to this definition">#</a></dt>
+<dd><p>Remove all entries with column indices above a specified value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>j_value</strong> (<em>int</em>) – Threshold for column indices. Entries with column indices above this value are removed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The modified Triplet instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete entries at the given indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>numpy.ndarray</em>) – Indices of entries to delete.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.append" title="Link to this definition">#</a></dt>
+<dd><p>Append another triplet to this one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><em>Triplet</em></a>) – Another Triplet instance to append.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.append_array">
+<span class="sig-name descname"><span class="pre">append_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.append_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.append_array" title="Link to this definition">#</a></dt>
+<dd><p>Append a NumPy array to this triplet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> (<em>numpy.ndarray</em>) – The array to append to the triplet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.remove_duplicate">
+<span class="sig-name descname"><span class="pre">remove_duplicate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.remove_duplicate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.remove_duplicate" title="Link to this definition">#</a></dt>
+<dd><p>Remove duplicate entries by summing their values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new Triplet instance with duplicate entries removed.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.coincide_i">
+<span class="sig-name descname"><span class="pre">coincide_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.coincide_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.coincide_i" title="Link to this definition">#</a></dt>
+<dd><p>Remove entries whose row indices do not coincide with those in the mask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mask</strong> (<a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><em>Triplet</em></a>) – The mask triplet used to filter rows.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.enumerate">
+<span class="sig-name descname"><span class="pre">enumerate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.enumerate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.enumerate" title="Link to this definition">#</a></dt>
+<dd><p>Enumerate over the entries, yielding an index and the entry values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em><em>, </em><em>optional</em>) – Starting index for enumeration (default is 0).</p></li>
+<li><p><strong>stop</strong> (<em>int</em><em>, </em><em>optional</em>) – Stopping index for enumeration (default is None).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple</em> – Index and a tuple of row index, column index, and value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.merge_duplicate">
+<span class="sig-name descname"><span class="pre">merge_duplicate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.merge_duplicate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.merge_duplicate" title="Link to this definition">#</a></dt>
+<dd><p>Merge duplicate entries by summing their values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.get_duplicate_index">
+<span class="sig-name descname"><span class="pre">get_duplicate_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.get_duplicate_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.get_duplicate_index" title="Link to this definition">#</a></dt>
+<dd><p>Get indices of duplicate entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of duplicate indices.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.max_i">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_i</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.max_i" title="Link to this definition">#</a></dt>
+<dd><p>Return the maximum row index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Maximum row index.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.max_j">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_j</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.max_j" title="Link to this definition">#</a></dt>
+<dd><p>Return the maximum column index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Maximum column index.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.min_i">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">min_i</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.min_i" title="Link to this definition">#</a></dt>
+<dd><p>Return the minimum row index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Minimum row index.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.min_j">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">min_j</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.min_j" title="Link to this definition">#</a></dt>
+<dd><p>Return the minimum column index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Minimum column index.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.diagonal">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">diagonal</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.diagonal" title="Link to this definition">#</a></dt>
+<dd><p>Return the diagonal elements of the triplet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Diagonal elements.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.shift_diagonal">
+<span class="sig-name descname"><span class="pre">shift_diagonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.shift_diagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.shift_diagonal" title="Link to this definition">#</a></dt>
+<dd><p>Shift the diagonal elements by a specified value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Value to add to the diagonal elements.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new Triplet instance with the shifted diagonal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.update_elements">
+<span class="sig-name descname"><span class="pre">update_elements</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_triplet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">slice</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.update_elements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.update_elements" title="Link to this definition">#</a></dt>
+<dd><p>Update elements within a specified range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other_triplet</strong> (<a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><em>Triplet</em></a>) – The Triplet instance whose elements will be used for updating.</p></li>
+<li><p><strong>i_range</strong> (<em>slice</em>) – Range of rows to update.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated Triplet instance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.to_dense">
+<span class="sig-name descname"><span class="pre">to_dense</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.to_dense"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.to_dense" title="Link to this definition">#</a></dt>
+<dd><p>Convert the triplet to a dense matrix representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dense matrix representation of the triplet.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.plot" title="Link to this definition">#</a></dt>
+<dd><p>Plot the dense matrix representation of the triplet.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.triplet.Triplet.to_scipy_sparse">
+<span class="sig-name descname"><span class="pre">to_scipy_sparse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">coo_matrix</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/triplet.html#Triplet.to_scipy_sparse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.triplet.Triplet.to_scipy_sparse" title="Link to this definition">#</a></dt>
+<dd><p>Convert the triplet to a SciPy sparse matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coo_matrix</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>The scipy sparse matrix representation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</section>
+<section id="finitedifference1d">
+<h2>FiniteDifference1D<a class="headerlink" href="#finitedifference1d" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><dl class="py class">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/boundaries.html#Boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing a boundary with a specific name, value, and mesh information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the boundary.</p></li>
+<li><p><strong>value</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The value associated with the boundary, such as ‘symmetric’, ‘anti-symmetric’, ‘zero’, or ‘none’.</p></li>
+<li><p><strong>mesh_info</strong> (<em>object</em>) – The mesh information object containing information about the mesh size and structure.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.name" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary.mesh_info">
+<span class="sig-name descname"><span class="pre">mesh_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.mesh_info" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_factor">
+<span class="sig-name descname"><span class="pre">get_factor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/boundaries.html#Boundary.get_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_factor" title="Link to this definition">#</a></dt>
+<dd><p>Get the factor associated with the boundary value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The factor corresponding to the boundary value.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the boundary value is unexpected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_shift_vector">
+<span class="sig-name descname"><span class="pre">get_shift_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/boundaries.html#Boundary.get_shift_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_shift_vector" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the shift vector based on the boundary name and offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>offset</strong> (<em>int</em>) – The offset value to be used in the shift vector calculation.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The shift vector as a numpy array, or None if the boundary name is ‘center’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[numpy.ndarray]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the boundary name is unexpected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FiniteDifference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_x:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">derivative:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries:</span> <span class="pre">~PyFinitDiff.finite_difference_1D.boundaries.Boundaries</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_derivative:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/finite_difference.html#FiniteDifference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a specific finite difference configuration, including the discretization
+of the mesh, derivative order, accuracy, and boundary conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_x</strong> (<em>int</em>) – Number of points in the x direction.</p></li>
+<li><p><strong>dx</strong> (<em>float</em><em>, </em><em>optional</em>) – Infinitesimal displacement in the x direction (default is 1).</p></li>
+<li><p><strong>derivative</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of the derivative to convert into a finite-difference matrix (default is 1).</p></li>
+<li><p><strong>accuracy</strong> (<em>int</em><em>, </em><em>optional</em>) – Accuracy of the derivative approximation (error is inversely proportional to the power of this value, default is 2).</p></li>
+<li><p><strong>boundaries</strong> (<a class="reference internal" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="PyFinitDiff.finite_difference_1D.boundaries.Boundary"><em>PyFinitDiff.finite_difference_1D.boundaries.Boundary</em></a><em>, </em><em>optional</em>) – Values of the four possible boundaries of the system (default is an empty Boundaries object).</p></li>
+<li><p><strong>x_derivative</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to add the x derivative (default is True).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.mesh_info">
+<span class="sig-name descname"><span class="pre">mesh_info</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.mesh_info" title="Link to this definition">#</a></dt>
+<dd><p>Contains information about the mesh, such as the number of points and spacing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>MeshInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.boundaries">
+<span class="sig-name descname"><span class="pre">boundaries</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.boundaries" title="Link to this definition">#</a></dt>
+<dd><p>Boundary conditions applied to the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="PyFinitDiff.finite_difference_1D.boundaries.Boundary">PyFinitDiff.finite_difference_1D.boundaries.Boundary</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.finit_coefficient">
+<span class="sig-name descname"><span class="pre">finit_coefficient</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.finit_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Coefficients used for finite difference calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>FiniteCoefficients</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference._triplet">
+<span class="sig-name descname"><span class="pre">_triplet</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference._triplet" title="Link to this definition">#</a></dt>
+<dd><p>The triplet representation of the finite-difference matrix, initialized to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.n_x">
+<span class="sig-name descname"><span class="pre">n_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.n_x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.dx">
+<span class="sig-name descname"><span class="pre">dx</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.dx" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.derivative">
+<span class="sig-name descname"><span class="pre">derivative</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.derivative" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.accuracy">
+<span class="sig-name descname"><span class="pre">accuracy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.accuracy" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">boundaries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Boundaries</span></em><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.x_derivative">
+<span class="sig-name descname"><span class="pre">x_derivative</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.x_derivative" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.shape" title="Link to this definition">#</a></dt>
+<dd><p>Tuple representing the shape of the finite-difference system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The shape of the system, represented by the number of points in the x direction.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.triplet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triplet</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.triplet" title="Link to this definition">#</a></dt>
+<dd><p>Returns the triplet representation of the non-zero values of the finite-difference configuration.
+Constructs the triplet if it has not been initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The triplet representation of the finite-difference matrix.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.iterate_central_coefficient">
+<span class="sig-name descname"><span class="pre">iterate_central_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_multiplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/finite_difference.html#FiniteDifference.iterate_central_coefficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.iterate_central_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Iterates through the given type of coefficients to provide the offset, value, and boundary type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coefficients</strong> (<em>str</em>) – The type of coefficients to iterate over.</p></li>
+<li><p><strong>offset_multiplier</strong> (<em>int</em>) – Multiplier applied to the coefficient offset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple</em> – A tuple containing the offset, value, and corresponding boundary type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.get_diagonal_set_full">
+<span class="sig-name descname"><span class="pre">get_diagonal_set_full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset_multiplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DiagonalSet</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/finite_difference.html#FiniteDifference.get_diagonal_set_full"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.get_diagonal_set_full" title="Link to this definition">#</a></dt>
+<dd><p>Constructs and returns a complete set of diagonals, including central, forward, and backward coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset_multiplier</strong> (<em>int</em>) – Multiplier applied to the coefficient offset.</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Scaling factor for the coefficient values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of diagonals representing the finite-difference configuration, including adjustments for boundaries.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DiagonalSet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.construct_triplet">
+<span class="sig-name descname"><span class="pre">construct_triplet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/finite_difference.html#FiniteDifference.construct_triplet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.construct_triplet" title="Link to this definition">#</a></dt>
+<dd><p>Constructs the triplet representation of the finite-difference matrix for the x direction.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Diagonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="PyFinitDiff.finite_difference_1D.boundaries.Boundary"><span class="pre">Boundary</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/diagonals.html#Diagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a diagonal element of the finite-difference method.</p>
+<p>This class constructs a diagonal with parameters such as its offset and boundary condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mesh_info</strong> (<em>object</em>) – Instance describing the meta information on the mesh to be considered.</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – Offset of the column index for the diagonal.</p></li>
+<li><p><strong>values</strong> (<em>float</em>) – Value associated with the diagonal.</p></li>
+<li><p><strong>boundary</strong> (<a class="reference internal" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="PyFinitDiff.finite_difference_1D.boundaries.Boundary"><em>PyFinitDiff.finite_difference_1D.boundaries.Boundary</em></a>) – Instance of the boundary used for the diagonal.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.mesh_info">
+<span class="sig-name descname"><span class="pre">mesh_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.mesh_info" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.offset" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.values" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.boundary">
+<span class="sig-name descname"><span class="pre">boundary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="PyFinitDiff.finite_difference_1D.boundaries.Boundary"><span class="pre">Boundary</span></a></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.boundary" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.triplet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triplet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.triplet" title="Link to this definition">#</a></dt>
+<dd><p>Return the Triplet instance of the diagonal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Triplet instance representing the non-zero values in the diagonal.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.compute_triplet">
+<span class="sig-name descname"><span class="pre">compute_triplet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/diagonals.html#Diagonal.compute_triplet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.compute_triplet" title="Link to this definition">#</a></dt>
+<dd><p>Compute the diagonal indices and generate a Triplet instance out of it.</p>
+<p>The value of the third column in the triplet depends on the boundary condition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.apply_symmetry">
+<span class="sig-name descname"><span class="pre">apply_symmetry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/diagonals.html#Diagonal.apply_symmetry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.apply_symmetry" title="Link to this definition">#</a></dt>
+<dd><p>Apply boundary symmetry conditions to the diagonal.</p>
+<p>If the boundary is symmetric, the value stays the same. If it is anti-symmetric,
+a negative sign is added. If it is zero, the value becomes zero.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.validate_index">
+<span class="sig-name descname"><span class="pre">validate_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/diagonals.html#Diagonal.validate_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.validate_index" title="Link to this definition">#</a></dt>
+<dd><p>Remove all negative indices from the diagonal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.diagonals.Diagonal.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/diagonals.html#Diagonal.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.plot" title="Link to this definition">#</a></dt>
+<dd><p>Plot the Triplet instance representing the diagonal.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</section>
+<section id="finitedifference2d">
+<h2>FiniteDifference2D<a class="headerlink" href="#finitedifference2d" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><dl class="py class">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/boundaries.html#Boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a boundary with a specific name, value, and mesh information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the boundary.</p></li>
+<li><p><strong>value</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The value associated with the boundary (e.g., ‘symmetric’, ‘anti-symmetric’).</p></li>
+<li><p><strong>mesh_info</strong> (<em>object</em>) – Mesh information object, used to determine mesh-related properties.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.name" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary.mesh_info">
+<span class="sig-name descname"><span class="pre">mesh_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.mesh_info" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_factor">
+<span class="sig-name descname"><span class="pre">get_factor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/boundaries.html#Boundary.get_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_factor" title="Link to this definition">#</a></dt>
+<dd><p>Gets the factor associated with the boundary value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The factor corresponding to the boundary value. Possible values are:
+- 1.0 for ‘symmetric’
+- -1.0 for ‘anti-symmetric’
+- 0.0 for ‘zero’
+- numpy.nan for ‘none’</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_shift_vector">
+<span class="sig-name descname"><span class="pre">get_shift_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/boundaries.html#Boundary.get_shift_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_shift_vector" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the shift vector based on the boundary name and offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>offset</strong> (<em>int</em>) – The offset value to be used in the shift vector calculation.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The shift vector as a numpy array, or None if the boundary is ‘center’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[numpy.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FiniteDifference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_x:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_y:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">derivative:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries:</span> <span class="pre">~PyFinitDiff.finite_difference_2D.boundaries.Boundaries</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_derivative:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_derivative:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/finite_difference.html#FiniteDifference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a specific finite difference configuration, defined by the discretization
+of the mesh, derivative order, accuracy, and boundary conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_x</strong> (<em>int</em>) – Number of points in the x direction.</p></li>
+<li><p><strong>n_y</strong> (<em>int</em>) – Number of points in the y direction.</p></li>
+<li><p><strong>dx</strong> (<em>float</em><em>, </em><em>optional</em>) – Infinitesimal displacement in the x direction (default is 1).</p></li>
+<li><p><strong>dy</strong> (<em>float</em><em>, </em><em>optional</em>) – Infinitesimal displacement in the y direction (default is 1).</p></li>
+<li><p><strong>derivative</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of the derivative to convert into a finite-difference matrix (default is 1).</p></li>
+<li><p><strong>accuracy</strong> (<em>int</em><em>, </em><em>optional</em>) – Accuracy of the derivative approximation (error is inversely proportional to the power of this value, default is 2).</p></li>
+<li><p><strong>boundaries</strong> (<a class="reference internal" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary" title="PyFinitDiff.finite_difference_2D.boundaries.Boundary"><em>PyFinitDiff.finite_difference_2D.boundaries.Boundary</em></a><em>, </em><em>optional</em>) – Values of the four possible boundaries of the system (default is an empty Boundaries object).</p></li>
+<li><p><strong>x_derivative</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to add the x derivative (default is True).</p></li>
+<li><p><strong>y_derivative</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to add the y derivative (default is True).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.mesh_info">
+<span class="sig-name descname"><span class="pre">mesh_info</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.mesh_info" title="Link to this definition">#</a></dt>
+<dd><p>Contains information about the mesh, such as the number of points and spacing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>MeshInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.boundaries">
+<span class="sig-name descname"><span class="pre">boundaries</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.boundaries" title="Link to this definition">#</a></dt>
+<dd><p>Boundary conditions applied to the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary" title="PyFinitDiff.finite_difference_2D.boundaries.Boundary">PyFinitDiff.finite_difference_2D.boundaries.Boundary</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.finite_coefficient">
+<span class="sig-name descname"><span class="pre">finite_coefficient</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.finite_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Coefficients used for finite difference calculations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>FiniteCoefficients</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference._triplet">
+<span class="sig-name descname"><span class="pre">_triplet</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference._triplet" title="Link to this definition">#</a></dt>
+<dd><p>The triplet representation of the finite-difference matrix, initialized to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_x">
+<span class="sig-name descname"><span class="pre">n_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_y">
+<span class="sig-name descname"><span class="pre">n_y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_y" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dx">
+<span class="sig-name descname"><span class="pre">dx</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dx" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dy">
+<span class="sig-name descname"><span class="pre">dy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dy" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.derivative">
+<span class="sig-name descname"><span class="pre">derivative</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.derivative" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.accuracy">
+<span class="sig-name descname"><span class="pre">accuracy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.accuracy" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">boundaries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Boundaries</span></em><a class="headerlink" href="#id2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.x_derivative">
+<span class="sig-name descname"><span class="pre">x_derivative</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.x_derivative" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.y_derivative">
+<span class="sig-name descname"><span class="pre">y_derivative</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.y_derivative" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.shape" title="Link to this definition">#</a></dt>
+<dd><p>Returns the shape of the mesh as a tuple.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The shape of the system, represented by the number of points in the x and y directions.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.triplet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triplet</span></span><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.triplet" title="Link to this definition">#</a></dt>
+<dd><p>Returns the triplet representation of the non-null values of the finite-difference configuration.
+Constructs the triplet if it has not been initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Triplet instance containing the array and shape.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.iterate_central_coefficient">
+<span class="sig-name descname"><span class="pre">iterate_central_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_multiplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/finite_difference.html#FiniteDifference.iterate_central_coefficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.iterate_central_coefficient" title="Link to this definition">#</a></dt>
+<dd><p>Iterates through the given type of coefficients to provide the offset, value, and boundary type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coefficients</strong> (<em>str</em>) – The type of coefficients to iterate over.</p></li>
+<li><p><strong>offset_multiplier</strong> (<em>int</em>) – Multiplier applied to the coefficient offset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>tuple</em> – A tuple containing the offset, value, and corresponding boundary type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.get_diagonal_set_full">
+<span class="sig-name descname"><span class="pre">get_diagonal_set_full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset_multiplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DiagonalSet</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/finite_difference.html#FiniteDifference.get_diagonal_set_full"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.get_diagonal_set_full" title="Link to this definition">#</a></dt>
+<dd><p>Constructs and returns a complete set of diagonals, including central, forward, and backward coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset_multiplier</strong> (<em>int</em>) – Multiplier applied to the coefficient offset.</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – Scaling factor for the coefficient values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A set of diagonals representing the finite-difference configuration, including adjustments for boundaries.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DiagonalSet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.construct_triplet">
+<span class="sig-name descname"><span class="pre">construct_triplet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/finite_difference.html#FiniteDifference.construct_triplet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.construct_triplet" title="Link to this definition">#</a></dt>
+<dd><p>Constructs the Triplet instance for the finite-difference configuration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Diagonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MeshInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="PyFinitDiff.finite_difference_1D.boundaries.Boundary"><span class="pre">Boundary</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/diagonals.html#Diagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the diagonal elements of the finite-difference method.</p>
+<p>This class can be initialized with parameters such as its offset or boundary condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mesh_info</strong> (<em>MeshInfo</em>) – Instance describing the meta information on the mesh to be considered.</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – Offset of the column index for the diagonal.</p></li>
+<li><p><strong>values</strong> (<em>numpy.ndarray</em>) – Values associated with the diagonal.</p></li>
+<li><p><strong>boundary</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary" title="PyFinitDiff.finite_difference_2D.boundaries.Boundary"><em>PyFinitDiff.finite_difference_2D.boundaries.Boundary</em></a><em>]</em>) – Instance of the boundary used for that diagonal.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.mesh_info">
+<span class="sig-name descname"><span class="pre">mesh_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">MeshInfo</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.mesh_info" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.offset" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.values" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.boundary">
+<span class="sig-name descname"><span class="pre">boundary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary" title="PyFinitDiff.finite_difference_2D.boundaries.Boundary"><span class="pre">Boundary</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.boundary" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.triplet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">triplet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet"><span class="pre">Triplet</span></a></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.triplet" title="Link to this definition">#</a></dt>
+<dd><p>Returns the Triplet instance of the diagonal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Triplet instance containing the array and shape.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#PyFinitDiff.triplet.Triplet" title="PyFinitDiff.triplet.Triplet">Triplet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.compute_triplet">
+<span class="sig-name descname"><span class="pre">compute_triplet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/diagonals.html#Diagonal.compute_triplet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.compute_triplet" title="Link to this definition">#</a></dt>
+<dd><p>Computes the diagonal indices and generates a Triplet instance out of it.</p>
+<p>The value of the third triplet column depends on the boundary condition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.apply_symmetry">
+<span class="sig-name descname"><span class="pre">apply_symmetry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/diagonals.html#Diagonal.apply_symmetry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.apply_symmetry" title="Link to this definition">#</a></dt>
+<dd><p>Adjusts the values of the diagonal indices as defined by the boundary condition.</p>
+<p>If the boundary is symmetric, the value stays the same. If anti-symmetric, a minus sign is added.
+If zero, it returns zero.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.validate_index">
+<span class="sig-name descname"><span class="pre">validate_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/diagonals.html#Diagonal.validate_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.validate_index" title="Link to this definition">#</a></dt>
+<dd><p>Removes all negative indices from the diagonal.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.diagonals.Diagonal.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/diagonals.html#Diagonal.plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.plot" title="Link to this definition">#</a></dt>
+<dd><p>Plots the Triplet instance representing the diagonal.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div></blockquote>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triplet">Triplet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet"><code class="docutils literal notranslate"><span class="pre">Triplet</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.shape"><code class="docutils literal notranslate"><span class="pre">Triplet.shape</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.array"><code class="docutils literal notranslate"><span class="pre">Triplet.array</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.add_extra_column"><code class="docutils literal notranslate"><span class="pre">Triplet.add_extra_column</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.index"><code class="docutils literal notranslate"><span class="pre">Triplet.index</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.rows"><code class="docutils literal notranslate"><span class="pre">Triplet.rows</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.columns"><code class="docutils literal notranslate"><span class="pre">Triplet.columns</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.values"><code class="docutils literal notranslate"><span class="pre">Triplet.values</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.size"><code class="docutils literal notranslate"><span class="pre">Triplet.size</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.remove_below_i"><code class="docutils literal notranslate"><span class="pre">Triplet.remove_below_i()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.remove_above_i"><code class="docutils literal notranslate"><span class="pre">Triplet.remove_above_i()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.remove_below_j"><code class="docutils literal notranslate"><span class="pre">Triplet.remove_below_j()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.remove_above_j"><code class="docutils literal notranslate"><span class="pre">Triplet.remove_above_j()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.delete"><code class="docutils literal notranslate"><span class="pre">Triplet.delete()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.append"><code class="docutils literal notranslate"><span class="pre">Triplet.append()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.append_array"><code class="docutils literal notranslate"><span class="pre">Triplet.append_array()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.remove_duplicate"><code class="docutils literal notranslate"><span class="pre">Triplet.remove_duplicate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.coincide_i"><code class="docutils literal notranslate"><span class="pre">Triplet.coincide_i()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.enumerate"><code class="docutils literal notranslate"><span class="pre">Triplet.enumerate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.merge_duplicate"><code class="docutils literal notranslate"><span class="pre">Triplet.merge_duplicate()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.get_duplicate_index"><code class="docutils literal notranslate"><span class="pre">Triplet.get_duplicate_index()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.max_i"><code class="docutils literal notranslate"><span class="pre">Triplet.max_i</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.max_j"><code class="docutils literal notranslate"><span class="pre">Triplet.max_j</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.min_i"><code class="docutils literal notranslate"><span class="pre">Triplet.min_i</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.min_j"><code class="docutils literal notranslate"><span class="pre">Triplet.min_j</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.diagonal"><code class="docutils literal notranslate"><span class="pre">Triplet.diagonal</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.shift_diagonal"><code class="docutils literal notranslate"><span class="pre">Triplet.shift_diagonal()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.update_elements"><code class="docutils literal notranslate"><span class="pre">Triplet.update_elements()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.to_dense"><code class="docutils literal notranslate"><span class="pre">Triplet.to_dense()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.plot"><code class="docutils literal notranslate"><span class="pre">Triplet.plot()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.triplet.Triplet.to_scipy_sparse"><code class="docutils literal notranslate"><span class="pre">Triplet.to_scipy_sparse()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finitedifference1d">FiniteDifference1D</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary"><code class="docutils literal notranslate"><span class="pre">Boundary</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.name"><code class="docutils literal notranslate"><span class="pre">Boundary.name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.value"><code class="docutils literal notranslate"><span class="pre">Boundary.value</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.mesh_info"><code class="docutils literal notranslate"><span class="pre">Boundary.mesh_info</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_factor"><code class="docutils literal notranslate"><span class="pre">Boundary.get_factor()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_shift_vector"><code class="docutils literal notranslate"><span class="pre">Boundary.get_shift_vector()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference"><code class="docutils literal notranslate"><span class="pre">FiniteDifference</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.mesh_info"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.mesh_info</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.boundaries"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.boundaries</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.finit_coefficient"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.finit_coefficient</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference._triplet"><code class="docutils literal notranslate"><span class="pre">FiniteDifference._triplet</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.n_x"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.n_x</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.dx"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.dx</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.derivative"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.derivative</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.accuracy"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.accuracy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.boundaries</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.x_derivative"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.x_derivative</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.shape"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.shape</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.triplet"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.triplet</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.iterate_central_coefficient"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.iterate_central_coefficient()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.get_diagonal_set_full"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.get_diagonal_set_full()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.construct_triplet"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.construct_triplet()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal"><code class="docutils literal notranslate"><span class="pre">Diagonal</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.mesh_info"><code class="docutils literal notranslate"><span class="pre">Diagonal.mesh_info</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.offset"><code class="docutils literal notranslate"><span class="pre">Diagonal.offset</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.values"><code class="docutils literal notranslate"><span class="pre">Diagonal.values</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.boundary"><code class="docutils literal notranslate"><span class="pre">Diagonal.boundary</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.triplet"><code class="docutils literal notranslate"><span class="pre">Diagonal.triplet</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.compute_triplet"><code class="docutils literal notranslate"><span class="pre">Diagonal.compute_triplet()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.apply_symmetry"><code class="docutils literal notranslate"><span class="pre">Diagonal.apply_symmetry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.validate_index"><code class="docutils literal notranslate"><span class="pre">Diagonal.validate_index()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.plot"><code class="docutils literal notranslate"><span class="pre">Diagonal.plot()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finitedifference2d">FiniteDifference2D</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary"><code class="docutils literal notranslate"><span class="pre">Boundary</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.name"><code class="docutils literal notranslate"><span class="pre">Boundary.name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.value"><code class="docutils literal notranslate"><span class="pre">Boundary.value</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.mesh_info"><code class="docutils literal notranslate"><span class="pre">Boundary.mesh_info</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_factor"><code class="docutils literal notranslate"><span class="pre">Boundary.get_factor()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_shift_vector"><code class="docutils literal notranslate"><span class="pre">Boundary.get_shift_vector()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference"><code class="docutils literal notranslate"><span class="pre">FiniteDifference</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.mesh_info"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.mesh_info</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.boundaries"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.boundaries</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.finite_coefficient"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.finite_coefficient</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference._triplet"><code class="docutils literal notranslate"><span class="pre">FiniteDifference._triplet</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_x"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.n_x</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_y"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.n_y</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dx"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.dx</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dy"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.dy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.derivative"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.derivative</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.accuracy"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.accuracy</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.boundaries</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.x_derivative"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.x_derivative</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.y_derivative"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.y_derivative</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.shape"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.shape</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.triplet"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.triplet</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.iterate_central_coefficient"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.iterate_central_coefficient()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.get_diagonal_set_full"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.get_diagonal_set_full()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.construct_triplet"><code class="docutils literal notranslate"><span class="pre">FiniteDifference.construct_triplet()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal"><code class="docutils literal notranslate"><span class="pre">Diagonal</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.mesh_info"><code class="docutils literal notranslate"><span class="pre">Diagonal.mesh_info</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.offset"><code class="docutils literal notranslate"><span class="pre">Diagonal.offset</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.values"><code class="docutils literal notranslate"><span class="pre">Diagonal.values</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.boundary"><code class="docutils literal notranslate"><span class="pre">Diagonal.boundary</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.triplet"><code class="docutils literal notranslate"><span class="pre">Diagonal.triplet</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.compute_triplet"><code class="docutils literal notranslate"><span class="pre">Diagonal.compute_triplet()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.apply_symmetry"><code class="docutils literal notranslate"><span class="pre">Diagonal.apply_symmetry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.validate_index"><code class="docutils literal notranslate"><span class="pre">Diagonal.validate_index()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.plot"><code class="docutils literal notranslate"><span class="pre">Diagonal.plot()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/code.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, Martin Poinsinet de Sivry-Houle.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

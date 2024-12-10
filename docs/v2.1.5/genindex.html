@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; PyFinitDiff  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="/opt/hostedtoolcache/Python/3.11.10/x64/lib/python3.11/site-packages/docs/source/_static/default.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/default.css?v=265c6c44" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.1.5.post0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://pyfinitdiff.readthedocs.io/en/master/">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">PyFinitDiff</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="theory.html">
+    Theoretical background
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="code.html">
+    Source code
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="gallery/index.html">
+    Coding examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="references.html">
+    References
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MartinPdeS/PyFinitDiff" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/fiberfusing/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-box fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://anaconda.org/MartinPdeS/pyfinitdiff" title="Anaconda" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Anaconda</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="theory.html">
+    Theoretical background
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="code.html">
+    Source code
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="gallery/index.html">
+    Coding examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="references.html">
+    References
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MartinPdeS/PyFinitDiff" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/fiberfusing/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-box fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://anaconda.org/MartinPdeS/pyfinitdiff" title="Anaconda" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Anaconda</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference._triplet">_triplet (FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference._triplet">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.accuracy">accuracy (FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.accuracy">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.add_extra_column">add_extra_column (Triplet attribute)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.append">append() (Triplet method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.append_array">append_array() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.apply_symmetry">apply_symmetry() (Diagonal method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.apply_symmetry">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.array">array (Triplet attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.boundaries">boundaries (FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.boundaries">[1]</a>, <a href="code.html#id0">[2]</a>, <a href="code.html#id2">[3]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.boundaries.Boundary">Boundary (class in PyFinitDiff.finite_difference_1D.boundaries)</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.finite_difference_2D.boundaries.Boundary">(class in PyFinitDiff.finite_difference_2D.boundaries)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.boundary">boundary (Diagonal attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.boundary">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.coincide_i">coincide_i() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.columns">columns (Triplet property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.compute_triplet">compute_triplet() (Diagonal method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.compute_triplet">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.construct_triplet">construct_triplet() (FiniteDifference method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.construct_triplet">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.delete">delete() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.derivative">derivative (FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.derivative">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal">Diagonal (class in PyFinitDiff.finite_difference_1D.diagonals)</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal">(class in PyFinitDiff.finite_difference_2D.diagonals)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.diagonal">diagonal (Triplet property)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.dx">dx (FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dx">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.dy">dy (FiniteDifference attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.enumerate">enumerate() (Triplet method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.finit_coefficient">finit_coefficient (FiniteDifference attribute)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.finite_coefficient">finite_coefficient (FiniteDifference attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference">FiniteDifference (class in PyFinitDiff.finite_difference_1D.finite_difference)</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference">(class in PyFinitDiff.finite_difference_2D.finite_difference)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.get_diagonal_set_full">get_diagonal_set_full() (FiniteDifference method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.get_diagonal_set_full">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.get_duplicate_index">get_duplicate_index() (Triplet method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_factor">get_factor() (Boundary method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_factor">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.boundaries.Boundary.get_shift_vector">get_shift_vector() (Boundary method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.boundaries.Boundary.get_shift_vector">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.index">index (Triplet property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.iterate_central_coefficient">iterate_central_coefficient() (FiniteDifference method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.iterate_central_coefficient">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.max_i">max_i (Triplet property)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.max_j">max_j (Triplet property)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.merge_duplicate">merge_duplicate() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.boundaries.Boundary.mesh_info">mesh_info (Boundary attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.boundaries.Boundary.mesh_info">[1]</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.mesh_info">(Diagonal attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.mesh_info">[1]</a>
+</li>
+        <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.mesh_info">(FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.mesh_info">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.min_i">min_i (Triplet property)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.min_j">min_j (Triplet property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.n_x">n_x (FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_x">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.n_y">n_y (FiniteDifference attribute)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.boundaries.Boundary.name">name (Boundary attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.boundaries.Boundary.name">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.offset">offset (Diagonal attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.offset">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.plot">plot() (Diagonal method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.plot">[1]</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.triplet.Triplet.plot">(Triplet method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.remove_above_i">remove_above_i() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.remove_above_j">remove_above_j() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.remove_below_i">remove_below_i() (Triplet method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.remove_below_j">remove_below_j() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.remove_duplicate">remove_duplicate() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.rows">rows (Triplet property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.shape">shape (FiniteDifference property)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.shape">[1]</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.triplet.Triplet.shape">(Triplet attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.shift_diagonal">shift_diagonal() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.size">size (Triplet property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.to_dense">to_dense() (Triplet method)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.to_scipy_sparse">to_scipy_sparse() (Triplet method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet">Triplet (class in PyFinitDiff.triplet)</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.triplet">triplet (Diagonal property)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.triplet">[1]</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.triplet">(FiniteDifference property)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.triplet">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.triplet.Triplet.update_elements">update_elements() (Triplet method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.validate_index">validate_index() (Diagonal method)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.validate_index">[1]</a>
+</li>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.boundaries.Boundary.value">value (Boundary attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.boundaries.Boundary.value">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.diagonals.Diagonal.values">values (Diagonal attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.diagonals.Diagonal.values">[1]</a>
+
+      <ul>
+        <li><a href="code.html#PyFinitDiff.triplet.Triplet.values">(Triplet property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_1D.finite_difference.FiniteDifference.x_derivative">x_derivative (FiniteDifference attribute)</a>, <a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.x_derivative">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code.html#PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference.y_derivative">y_derivative (FiniteDifference attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, Martin Poinsinet de Sivry-Houle.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
