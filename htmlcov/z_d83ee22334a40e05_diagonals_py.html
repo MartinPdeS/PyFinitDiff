@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Coverage for PyFinitDiff/finite_difference_1D/diagonals.py: 82%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
-    <link rel="stylesheet" href="style_cb_8e611ae1.css" type="text/css">
+    <link rel="stylesheet" href="style_cb_6b508a39.css" type="text/css">
     <script src="coverage_html_cb_6fb7b396.js" defer></script>
 </head>
 <body class="pyfile">
@@ -66,8 +66,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="z_d83ee22334a40e05_finite_difference_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2024-12-10 18:02 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.10.0">coverage.py v7.10.0</a>,
+            created at 2025-08-04 17:43 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -129,9 +129,9 @@
     <p class="run"><span class="n"><a id="t45" href="#t45">45</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">array</span><span class="op">:</span> <span class="nam">numpy</span><span class="op">.</span><span class="nam">ndarray</span> <span class="op">=</span> <span class="nam">numpy</span><span class="op">.</span><span class="nam">c_</span><span class="op">[</span><span class="nam">self</span><span class="op">.</span><span class="nam">rows</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">columns</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">values</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t46" href="#t46">46</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t47" href="#t47">47</a></span><span class="t">        <span class="nam">triplet</span> <span class="op">=</span> <span class="nam">Triplet</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t48" href="#t48">48</a></span><span class="t">            <span class="nam">array</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">array</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t">            <span class="nam">shape</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">mesh_info</span><span class="op">.</span><span class="nam">shape</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t50" href="#t50">50</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t48" href="#t48">48</a></span><span class="t">            <span class="nam">array</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">array</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t">            <span class="nam">shape</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">mesh_info</span><span class="op">.</span><span class="nam">shape</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t50" href="#t50">50</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t51" href="#t51">51</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t52" href="#t52">52</a></span><span class="t">        <span class="key">return</span> <span class="nam">triplet</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t53" href="#t53">53</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -185,11 +185,11 @@
     <p class="pln"><span class="n"><a id="t101" href="#t101">101</a></span><span class="t"><span class="str">    """</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t102" href="#t102">102</a></span><span class="t">    <span class="key">def</span> <span class="nam">__init__</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">offset</span><span class="op">:</span> <span class="nam">int</span><span class="op">,</span> <span class="nam">value</span><span class="op">:</span> <span class="nam">float</span><span class="op">,</span> <span class="nam">mesh_info</span><span class="op">:</span> <span class="nam">list</span><span class="op">,</span> <span class="nam">boundary</span><span class="op">:</span> <span class="nam">Boundary</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t103" href="#t103">103</a></span><span class="t">        <span class="nam">super</span><span class="op">(</span><span class="op">)</span><span class="op">.</span><span class="nam">__init__</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t104" href="#t104">104</a></span><span class="t">            <span class="nam">offset</span><span class="op">=</span><span class="nam">offset</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t105" href="#t105">105</a></span><span class="t">            <span class="nam">mesh_info</span><span class="op">=</span><span class="nam">mesh_info</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t106" href="#t106">106</a></span><span class="t">            <span class="nam">values</span><span class="op">=</span><span class="nam">numpy</span><span class="op">.</span><span class="nam">ones</span><span class="op">(</span><span class="nam">mesh_info</span><span class="op">.</span><span class="nam">size</span><span class="op">)</span> <span class="op">*</span> <span class="nam">value</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t107" href="#t107">107</a></span><span class="t">            <span class="nam">boundary</span><span class="op">=</span><span class="nam">boundary</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t108" href="#t108">108</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t104" href="#t104">104</a></span><span class="t">            <span class="nam">offset</span><span class="op">=</span><span class="nam">offset</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t105" href="#t105">105</a></span><span class="t">            <span class="nam">mesh_info</span><span class="op">=</span><span class="nam">mesh_info</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t106" href="#t106">106</a></span><span class="t">            <span class="nam">values</span><span class="op">=</span><span class="nam">numpy</span><span class="op">.</span><span class="nam">ones</span><span class="op">(</span><span class="nam">mesh_info</span><span class="op">.</span><span class="nam">size</span><span class="op">)</span> <span class="op">*</span> <span class="nam">value</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t107" href="#t107">107</a></span><span class="t">            <span class="nam">boundary</span><span class="op">=</span><span class="nam">boundary</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t108" href="#t108">108</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t109" href="#t109">109</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t110" href="#t110">110</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t111" href="#t111">111</a></span><span class="t"><span class="op">@</span><span class="nam">dataclass</span>&nbsp;</span><span class="r"></span></p>
@@ -338,10 +338,10 @@
     <p class="pln"><span class="n"><a id="t254" href="#t254">254</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t255" href="#t255">255</a></span><span class="t">        <span class="nam">index_to_remove</span> <span class="op">=</span> <span class="nam">numpy</span><span class="op">.</span><span class="nam">isin</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">triplet</span><span class="op">.</span><span class="nam">rows</span><span class="op">,</span> <span class="nam">rows</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t256" href="#t256">256</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">triplet</span><span class="op">.</span><span class="nam">array</span> <span class="op">=</span> <span class="nam">numpy</span><span class="op">.</span><span class="nam">delete</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t257" href="#t257">257</a></span><span class="t">            <span class="nam">arr</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">triplet</span><span class="op">.</span><span class="nam">array</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t258" href="#t258">258</a></span><span class="t">            <span class="nam">obj</span><span class="op">=</span><span class="nam">index_to_remove</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t259" href="#t259">259</a></span><span class="t">            <span class="nam">axis</span><span class="op">=</span><span class="num">0</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t260" href="#t260">260</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t257" href="#t257">257</a></span><span class="t">            <span class="nam">arr</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">triplet</span><span class="op">.</span><span class="nam">array</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t258" href="#t258">258</a></span><span class="t">            <span class="nam">obj</span><span class="op">=</span><span class="nam">index_to_remove</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t259" href="#t259">259</a></span><span class="t">            <span class="nam">axis</span><span class="op">=</span><span class="num">0</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t260" href="#t260">260</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t261" href="#t261">261</a></span><span class="t">        <span class="key">return</span> <span class="nam">self</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t262" href="#t262">262</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t263" href="#t263">263</a></span><span class="t">    <span class="key">def</span> <span class="nam">replace_nan_rows_with</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">other</span><span class="op">:</span> <span class="str">'DiagonalSet'</span><span class="op">)</span> <span class="op">-></span> <span class="str">'DiagonalSet'</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -375,9 +375,9 @@
     <p class="pln"><span class="n"><a id="t291" href="#t291">291</a></span><span class="t"><span class="str">            The modified DiagonalSet instance with initialized Triplet.</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t292" href="#t292">292</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t293" href="#t293">293</a></span><span class="t">        <span class="nam">triplet</span> <span class="op">=</span> <span class="nam">Triplet</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t294" href="#t294">294</a></span><span class="t">            <span class="nam">array</span><span class="op">=</span><span class="op">[</span><span class="num">0</span><span class="op">,</span> <span class="num">0</span><span class="op">,</span> <span class="num">0</span><span class="op">]</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t295" href="#t295">295</a></span><span class="t">            <span class="nam">shape</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">mesh_info</span><span class="op">.</span><span class="nam">shape</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t296" href="#t296">296</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t294" href="#t294">294</a></span><span class="t">            <span class="nam">array</span><span class="op">=</span><span class="op">[</span><span class="num">0</span><span class="op">,</span> <span class="num">0</span><span class="op">,</span> <span class="num">0</span><span class="op">]</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t295" href="#t295">295</a></span><span class="t">            <span class="nam">shape</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">mesh_info</span><span class="op">.</span><span class="nam">shape</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t296" href="#t296">296</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t297" href="#t297">297</a></span><span class="t">        <span class="key">for</span> <span class="nam">diagonal</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">diagonals</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t298" href="#t298">298</a></span><span class="t">            <span class="nam">diagonal</span><span class="op">.</span><span class="nam">compute_triplet</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t299" href="#t299">299</a></span><span class="t">            <span class="nam">triplet</span> <span class="op">+=</span> <span class="nam">diagonal</span><span class="op">.</span><span class="nam">triplet</span>&nbsp;</span><span class="r"></span></p>
@@ -414,8 +414,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="z_d83ee22334a40e05_finite_difference_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2024-12-10 18:02 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.10.0">coverage.py v7.10.0</a>,
+            created at 2025-08-04 17:43 +0000
         </p>
     </div>
 </footer>
