@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import numpy
-from enum import Enum
 
-from typing import Optional, List, Tuple, Union
+from typing import Optional, List, Tuple
 from pydantic.dataclasses import dataclass
 from pydantic import ConfigDict
 from PyFinitDiff.boundary_values import BoundaryValue
@@ -17,7 +16,7 @@ config_dict = ConfigDict(
     frozen=False
 )
 
-@dataclass(config=config_dict)
+
 class Boundary:
     """
     Class representing a boundary with a specific name, value, and mesh information.
@@ -32,9 +31,10 @@ class Boundary:
         The mesh information object containing information about the mesh size and structure.
     """
 
-    name: str
-    value: Optional[BoundaryValue]
-    mesh_info: object
+    def __init__(self, name: str, value: Optional[BoundaryValue], mesh_info: object) -> None:
+        self.name = name
+        self.value = value
+        self.mesh_info = mesh_info
 
     def get_factor(self) -> float:
         """
@@ -109,29 +109,14 @@ class Boundaries:
         Value of the left boundary. Defaults to 'zero'. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
     right : Optional[Union[str, BoundaryValue]]
         Value of the right boundary. Defaults to 'zero'. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
-    acceptable_boundary : List[BoundaryValue]
-        List of acceptable boundary values.
+
     all_boundaries : List[str]
         List of all boundary names.
     """
-    left: Optional[Union[str, BoundaryValue]] = 'zero'
-    right: Optional[Union[str, BoundaryValue]] = 'zero'
+    left: Optional[BoundaryValue] = BoundaryValue.ZERO
+    right: Optional[BoundaryValue] = BoundaryValue.ZERO
 
-    acceptable_boundary = [BoundaryValue.ZERO, BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC, BoundaryValue.NONE]
     all_boundaries = ['left', 'right']
-
-    def __post_init__(self) -> None:
-        """
-        Post-initialization method to convert strings to enums and assert acceptable boundary values.
-        """
-        # Convert string inputs to enums
-        if isinstance(self.left, str):
-            object.__setattr__(self, 'left', BoundaryValue.from_string(self.left))
-        if isinstance(self.right, str):
-            object.__setattr__(self, 'right', BoundaryValue.from_string(self.right))
-
-        for boundary in self.all_boundaries:
-            self.assert_boundary_acceptable(boundary_string=boundary)
 
     def assert_both_boundaries_not_same(self, boundary_0: BoundaryValue, boundary_1: BoundaryValue) -> None:
         """
@@ -151,26 +136,6 @@ class Boundaries:
         """
         if boundary_0 != BoundaryValue.ZERO and boundary_1 != BoundaryValue.ZERO:
             raise ValueError("Same-axis symmetries shouldn't be set on both ends")
-
-    def assert_boundary_acceptable(self, boundary_string: str) -> None:
-        """
-        Assert that a given boundary value is acceptable.
-
-        Parameters
-        ----------
-        boundary_string : str
-            The name of the boundary to check.
-
-        Raises
-        ------
-        AssertionError
-            If the boundary value is not acceptable.
-        """
-        boundary_value = getattr(self, boundary_string)
-        assert boundary_value in self.acceptable_boundary, (
-            f"Error: {boundary_string} boundary: {boundary_value} argument not accepted. "
-            f"Input must be in: {self.acceptable_boundary}"
-        )
 
     def get_boundary_pairs(self) -> List[Tuple[BoundaryValue, BoundaryValue]]:
         """

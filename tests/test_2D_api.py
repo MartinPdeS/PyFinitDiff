@@ -25,10 +25,10 @@ def test_init_boundaries():
     boundary conditions and raises the appropriate exceptions when provided with invalid inputs.
     """
     valid_kwargs_list = [
-        dict(left='zero', right='zero', top='zero', bottom='zero'),
-        dict(left='symmetric', right='zero', top='zero', bottom='zero'),
-        dict(left='anti-symmetric', right='zero', top='zero', bottom='zero'),
-        dict(left='anti-symmetric', right='zero', top='symmetric', bottom='zero')
+        dict(left=BoundaryValue.ZERO, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+        dict(left=BoundaryValue.SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+        dict(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+        dict(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.SYMMETRIC, bottom=BoundaryValue.ZERO)
     ]
 
     for kwargs in valid_kwargs_list:
