@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:02.480** total execution time for 4 files **from gallery/eigenmodes_1d**:
+**00:02.490** total execution time for 4 files **from gallery/eigenmodes_1d**:
 
 .. container::
 
@@ -33,14 +33,14 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_0.py` (``example_0.py``)
-     - 00:00.661
+     - 00:00.664
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_1.py` (``example_1.py``)
-     - 00:00.616
-     - 0.0
-   * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_2.py` (``example_2.py``)
-     - 00:00.603
+     - 00:00.611
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_3.py` (``example_3.py``)
-     - 00:00.600
+     - 00:00.608
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_2.py` (``example_2.py``)
+     - 00:00.607
      - 0.0
