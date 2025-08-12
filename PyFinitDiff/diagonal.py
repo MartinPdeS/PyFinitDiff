@@ -6,7 +6,6 @@ from dataclasses import dataclass
 # Local imports
 import numpy
 from PyFinitDiff.triplet import Triplet
-from PyFinitDiff.finite_difference_1D.boundaries import Boundary
 
 
 @dataclass
@@ -24,13 +23,13 @@ class Diagonal:
         Offset of the column index for the diagonal.
     values : float
         Value associated with the diagonal.
-    boundary : PyFinitDiff.finite_difference_1D.boundaries.Boundary
+    boundary : object
         Instance of the boundary used for the diagonal.
     """
     mesh_info: object
     offset: int
     values: float
-    boundary: Boundary
+    boundary: object
 
     @property
     def triplet(self) -> Triplet:
@@ -98,7 +97,7 @@ class ConstantDiagonal(Diagonal):
 
     This subclass of Diagonal is initialized with constant values for the entire diagonal.
     """
-    def __init__(self, offset: int, value: float, mesh_info: list, boundary: Boundary):
+    def __init__(self, offset: int, value: float, mesh_info: list, boundary: object):
         super().__init__(
             offset=offset,
             mesh_info=mesh_info,

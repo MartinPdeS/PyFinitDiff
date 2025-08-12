@@ -4,7 +4,7 @@
 import pytest
 from scipy.sparse import linalg
 from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
-from PyFinitDiff.utils import get_2D_circular_mesh_triplet
+from PyFinitDiff.finite_difference_2D.utils import get_circular_mesh_triplet
 from PyFinitDiff import BoundaryValue
 
 # Define boundary conditions for testing
@@ -35,7 +35,7 @@ def test_compute_eigenmode_sparse_0(boundaries):
     )
 
     # Create a 2D circular mesh triplet
-    mesh_triplet = get_2D_circular_mesh_triplet(
+    mesh_triplet = get_circular_mesh_triplet(
         n_x=n_x,
         n_y=n_y,
         value_in=1.0,

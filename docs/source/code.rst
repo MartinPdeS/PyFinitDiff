@@ -13,6 +13,20 @@ Triplet
      :member-order: bysource
 
 
+Diagonal
+~~~~~~~~
+
+ .. autoclass:: PyFinitDiff.diagonal.Diagonal
+     :members:
+     :inherited-members:
+     :member-order: bysource
+
+ .. autoclass:: PyFinitDiff.diagonal.ConstantDiagonal
+     :members:
+     :inherited-members:
+     :member-order: bysource
+
+
 FiniteDifference1D
 ~~~~~~~~~~~~~~~~~~
 
@@ -26,12 +40,6 @@ FiniteDifference1D
      :inherited-members:
      :member-order: bysource
 
- .. autoclass:: PyFinitDiff.finite_difference_1D.diagonals.Diagonal
-     :members:
-     :inherited-members:
-     :member-order: bysource
-
-
 
 FiniteDifference2D
 ~~~~~~~~~~~~~~~~~~
@@ -42,11 +50,6 @@ FiniteDifference2D
      :member-order: bysource
 
  .. autoclass:: PyFinitDiff.finite_difference_2D.finite_difference.FiniteDifference
-     :members:
-     :inherited-members:
-     :member-order: bysource
-
- .. autoclass:: PyFinitDiff.finite_difference_2D.diagonals.Diagonal
      :members:
      :inherited-members:
      :member-order: bysource
