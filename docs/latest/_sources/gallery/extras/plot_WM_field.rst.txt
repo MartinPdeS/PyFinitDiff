@@ -30,7 +30,7 @@ Importing required packages
 ---------------------------
 Here we import the necessary libraries for numerical computations, rendering, and finite difference operations.
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-19
+.. GENERATED FROM PYTHON SOURCE LINES 13-20
 
 .. code-block:: Python
 
@@ -39,6 +39,7 @@ Here we import the necessary libraries for numerical computations, rendering, an
     from scipy import linalg
     import matplotlib.pyplot as plt
     from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
+    from PyFinitDiff import BoundaryValue
 
 
 
@@ -47,13 +48,13 @@ Here we import the necessary libraries for numerical computations, rendering, an
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 20-23
+.. GENERATED FROM PYTHON SOURCE LINES 21-24
 
 Setting up the finite difference Laplacian
 ------------------------------------------
 We define a grid and create a finite difference instance that provides us with a Laplacian operator.
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-38
+.. GENERATED FROM PYTHON SOURCE LINES 24-39
 
 .. code-block:: Python
 
@@ -67,7 +68,7 @@ We define a grid and create a finite difference instance that provides us with a
         dy=1000 / n_y,
         derivative=2,
         accuracy=2,
-        boundaries=Boundaries(top='symmetric')
+        boundaries=Boundaries(top=BoundaryValue.SYMMETRIC)
     )
 
     laplacian = sparse_instance.triplet.to_dense()
@@ -79,13 +80,13 @@ We define a grid and create a finite difference instance that provides us with a
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-42
+.. GENERATED FROM PYTHON SOURCE LINES 40-43
 
 Defining the function to generate the Whittle-Matérn field
 -----------------------------------------------------------
 The following function generates a field by solving a linear system involving the Laplacian and random noise.
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-55
+.. GENERATED FROM PYTHON SOURCE LINES 43-56
 
 .. code-block:: Python
 
@@ -109,13 +110,13 @@ The following function generates a field by solving a linear system involving th
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-59
+.. GENERATED FROM PYTHON SOURCE LINES 57-60
 
 Visualizing the fields for different correlation lengths
 ---------------------------------------------------------
 We generate and visualize fields with varying correlation lengths to see their impact on the structure of the field.
 
-.. GENERATED FROM PYTHON SOURCE LINES 59-72
+.. GENERATED FROM PYTHON SOURCE LINES 60-73
 
 .. code-block:: Python
 
@@ -147,7 +148,7 @@ We generate and visualize fields with varying correlation lengths to see their i
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.727 seconds)
+   **Total running time of the script:** (0 minutes 0.751 seconds)
 
 
 .. _sphx_glr_download_gallery_extras_plot_WM_field.py:

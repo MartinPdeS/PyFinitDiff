@@ -40,13 +40,14 @@ Importing required packages
 ---------------------------
 Here we import the necessary libraries for numerical computations and finite difference operations.
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-26
+.. GENERATED FROM PYTHON SOURCE LINES 22-27
 
 .. code-block:: Python
 
 
     from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
     import matplotlib.pyplot as plt
+    from PyFinitDiff import BoundaryValue
 
 
 
@@ -55,13 +56,13 @@ Here we import the necessary libraries for numerical computations and finite dif
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-30
+.. GENERATED FROM PYTHON SOURCE LINES 28-31
 
 Setting up the finite difference instance and boundaries
 ---------------------------------------------------------
 We define the grid size and set up the finite difference instance with specified boundary conditions.
 
-.. GENERATED FROM PYTHON SOURCE LINES 30-41
+.. GENERATED FROM PYTHON SOURCE LINES 31-42
 
 .. code-block:: Python
 
@@ -73,7 +74,7 @@ We define the grid size and set up the finite difference instance with specified
         dy=1,
         derivative=2,
         accuracy=4,
-        boundaries=Boundaries(left='anti-symmetric', right='zero', top='zero', bottom='zero')
+        boundaries=Boundaries(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO)
     )
 
 
@@ -83,13 +84,13 @@ We define the grid size and set up the finite difference instance with specified
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-45
+.. GENERATED FROM PYTHON SOURCE LINES 43-46
 
 Visualizing the triplets with matplotlib
 -----------------------------------------
 We plot the triplets using matplotlib to visualize the finite difference operator.
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-51
+.. GENERATED FROM PYTHON SOURCE LINES 46-52
 
 .. code-block:: Python
 
@@ -114,7 +115,7 @@ We plot the triplets using matplotlib to visualize the finite difference operato
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.306 seconds)
+   **Total running time of the script:** (0 minutes 0.310 seconds)
 
 
 .. _sphx_glr_download_gallery_triplets_plot_triplets_3.py:

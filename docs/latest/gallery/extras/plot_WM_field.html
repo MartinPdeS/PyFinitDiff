@@ -499,6 +499,7 @@ We will explore different correlation lengths and observe their effect on the re
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">PyFinitDiff.finite_difference_2D</span><span class="w"> </span><span class="kn">import</span> <span class="n">FiniteDifference</span><span class="p">,</span> <span class="n">Boundaries</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyFinitDiff</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundaryValue</span>
 </pre></div>
 </div>
 </section>
@@ -514,7 +515,7 @@ We will explore different correlation lengths and observe their effect on the re
     <span class="n">dy</span><span class="o">=</span><span class="mi">1000</span> <span class="o">/</span> <span class="n">n_y</span><span class="p">,</span>
     <span class="n">derivative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">accuracy</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">boundaries</span><span class="o">=</span><span class="n">Boundaries</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">)</span>
+    <span class="n">boundaries</span><span class="o">=</span><span class="n">Boundaries</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="n">BoundaryValue</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="n">laplacian</span> <span class="o">=</span> <span class="n">sparse_instance</span><span class="o">.</span><span class="n">triplet</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
@@ -553,7 +554,7 @@ We will explore different correlation lengths and observe their effect on the re
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_WM_field_001.png" srcset="../../_images/sphx_glr_plot_WM_field_001.png" alt="Correlation length: 1, Correlation length: 2, Correlation length: 4" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.727 seconds)</p>
+<img src="../../_images/sphx_glr_plot_WM_field_001.png" srcset="../../_images/sphx_glr_plot_WM_field_001.png" alt="Correlation length: 1, Correlation length: 2, Correlation length: 4" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.751 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-extras-plot-wm-field-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f9c9024ec225795e5399e91a054aa128/plot_WM_field.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_WM_field.ipynb</span></code></a></p>

@@ -39,7 +39,7 @@ Importing required packages
 ---------------------------
 Here we import the necessary libraries for numerical computations, rendering, and finite difference operations.
 
-.. GENERATED FROM PYTHON SOURCE LINES 21-26
+.. GENERATED FROM PYTHON SOURCE LINES 21-27
 
 .. code-block:: Python
 
@@ -47,6 +47,7 @@ Here we import the necessary libraries for numerical computations, rendering, an
     from scipy.sparse import linalg
     from PyFinitDiff.finite_difference_2D import FiniteDifference, get_circular_mesh_triplet, Boundaries
     import matplotlib.pyplot as plt
+    from PyFinitDiff import BoundaryValue
 
 
 
@@ -55,13 +56,13 @@ Here we import the necessary libraries for numerical computations, rendering, an
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-30
+.. GENERATED FROM PYTHON SOURCE LINES 28-31
 
 Setting up the finite difference instance and boundaries
 ---------------------------------------------------------
 We define the grid size and set up the finite difference instance with specified boundary conditions.
 
-.. GENERATED FROM PYTHON SOURCE LINES 30-45
+.. GENERATED FROM PYTHON SOURCE LINES 31-46
 
 .. code-block:: Python
 
@@ -75,7 +76,7 @@ We define the grid size and set up the finite difference instance with specified
         dy=1,
         derivative=2,
         accuracy=4,
-        boundaries=Boundaries(left='anti-symmetric')
+        boundaries=Boundaries(left=BoundaryValue.ANTI_SYMMETRIC)
     )
 
     triplet = sparse_instance.triplet
@@ -87,13 +88,13 @@ We define the grid size and set up the finite difference instance with specified
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-49
+.. GENERATED FROM PYTHON SOURCE LINES 47-50
 
 Creating the circular mesh potential
 -------------------------------------
 We create a circular mesh triplet, specifying the inner and outer values, and offset parameters.
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-60
+.. GENERATED FROM PYTHON SOURCE LINES 50-61
 
 .. code-block:: Python
 
@@ -115,13 +116,13 @@ We create a circular mesh triplet, specifying the inner and outer values, and of
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-64
+.. GENERATED FROM PYTHON SOURCE LINES 62-65
 
 Combining the finite difference and mesh triplets
 --------------------------------------------------
 We add the circular mesh triplet to the finite difference Laplacian to form the dynamic triplet.
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-67
+.. GENERATED FROM PYTHON SOURCE LINES 65-68
 
 .. code-block:: Python
 
@@ -135,13 +136,13 @@ We add the circular mesh triplet to the finite difference Laplacian to form the 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 68-71
+.. GENERATED FROM PYTHON SOURCE LINES 69-72
 
 Calculating the eigenmodes
 ---------------------------
 We compute the first four eigenmodes of the combined operator using the scipy sparse linear algebra package.
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-81
+.. GENERATED FROM PYTHON SOURCE LINES 72-82
 
 .. code-block:: Python
 
@@ -162,13 +163,13 @@ We compute the first four eigenmodes of the combined operator using the scipy sp
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-85
+.. GENERATED FROM PYTHON SOURCE LINES 83-86
 
 Visualizing the eigenmodes with matplotlib
 -------------------------------------------
 We visualize the first four eigenmodes by reshaping the eigenvectors and plotting them using matplotlib.
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-96
+.. GENERATED FROM PYTHON SOURCE LINES 86-97
 
 .. code-block:: Python
 
@@ -198,7 +199,7 @@ We visualize the first four eigenmodes by reshaping the eigenvectors and plottin
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 2.051 seconds)
+   **Total running time of the script:** (0 minutes 2.058 seconds)
 
 
 .. _sphx_glr_download_gallery_eigenmodes_2d_example_2.py:

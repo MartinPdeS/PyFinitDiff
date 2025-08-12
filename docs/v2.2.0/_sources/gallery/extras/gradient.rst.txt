@@ -30,7 +30,7 @@ Importing required packages
 ---------------------------
 Here we import the necessary libraries for numerical computations, rendering, and finite difference operations.
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-18
+.. GENERATED FROM PYTHON SOURCE LINES 13-19
 
 .. code-block:: Python
 
@@ -38,6 +38,7 @@ Here we import the necessary libraries for numerical computations, rendering, an
     import numpy as np
     from PyFinitDiff.finite_difference_2D import get_array_derivative, Boundaries
     import matplotlib.pyplot as plt
+    from PyFinitDiff import BoundaryValue
 
 
 
@@ -46,13 +47,13 @@ Here we import the necessary libraries for numerical computations, rendering, an
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-22
+.. GENERATED FROM PYTHON SOURCE LINES 20-23
 
 Creating the input mesh
 ------------------------
 We define a 2D Gaussian mesh using two 1D exponential arrays.
 
-.. GENERATED FROM PYTHON SOURCE LINES 22-31
+.. GENERATED FROM PYTHON SOURCE LINES 23-32
 
 .. code-block:: Python
 
@@ -72,18 +73,18 @@ We define a 2D Gaussian mesh using two 1D exponential arrays.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 32-35
+.. GENERATED FROM PYTHON SOURCE LINES 33-36
 
 Setting boundary conditions
 ---------------------------
 Define boundary conditions for the gradient calculation. Here, we use 'none' for all boundaries.
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-38
+.. GENERATED FROM PYTHON SOURCE LINES 36-39
 
 .. code-block:: Python
 
 
-    boundaries = Boundaries(top='none', bottom='none', left='none', right='none')
+    boundaries = Boundaries(top=BoundaryValue.NONE, bottom=BoundaryValue.NONE, left=BoundaryValue.NONE, right=BoundaryValue.NONE)
 
 
 
@@ -92,13 +93,13 @@ Define boundary conditions for the gradient calculation. Here, we use 'none' for
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-42
+.. GENERATED FROM PYTHON SOURCE LINES 40-43
 
 Visualizing the gradient for different derivatives
 ---------------------------------------------------
 We compute the gradient for first, second, and third derivatives and visualize them.
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-63
+.. GENERATED FROM PYTHON SOURCE LINES 43-64
 
 .. code-block:: Python
 
@@ -138,7 +139,7 @@ We compute the gradient for first, second, and third derivatives and visualize t
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 6.965 seconds)
+   **Total running time of the script:** (0 minutes 6.985 seconds)
 
 
 .. _sphx_glr_download_gallery_extras_gradient.py:

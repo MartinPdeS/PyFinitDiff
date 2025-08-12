@@ -861,14 +861,14 @@
 <blockquote>
 <div><dl class="py class">
 <dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/boundaries.html#Boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundaryValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_1D/boundaries.html#Boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class representing a boundary with a specific name, value, and mesh information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – The name of the boundary.</p></li>
-<li><p><strong>value</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The value associated with the boundary, such as ‘symmetric’, ‘anti-symmetric’, ‘zero’, or ‘none’.</p></li>
+<li><p><strong>value</strong> (<em>Optional</em><em>[</em><em>BoundaryValue</em><em>]</em>) – The value associated with the boundary, such as BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC, BoundaryValue.ZERO, or BoundaryValue.NONE.</p></li>
 <li><p><strong>mesh_info</strong> (<em>object</em>) – The mesh information object containing information about the mesh size and structure.</p></li>
 </ul>
 </dd>
@@ -880,7 +880,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PyFinitDiff.finite_difference_1D.boundaries.Boundary.value">
-<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.value" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BoundaryValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_1D.boundaries.Boundary.value" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1179,14 +1179,14 @@ a negative sign is added. If it is zero, the value becomes zero.</p>
 <blockquote>
 <div><dl class="py class">
 <dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/boundaries.html#Boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary" title="Link to this definition">#</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Boundary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BoundaryValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PyFinitDiff/finite_difference_2D/boundaries.html#Boundary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents a boundary with a specific name, value, and mesh information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – The name of the boundary.</p></li>
-<li><p><strong>value</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The value associated with the boundary (e.g., ‘symmetric’, ‘anti-symmetric’).</p></li>
+<li><p><strong>value</strong> (<em>Optional</em><em>[</em><em>BoundaryValue</em><em>]</em>) – The value associated with the boundary (e.g., BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC).</p></li>
 <li><p><strong>mesh_info</strong> (<em>object</em>) – Mesh information object, used to determine mesh-related properties.</p></li>
 </ul>
 </dd>
@@ -1198,7 +1198,7 @@ a negative sign is added. If it is zero, the value becomes zero.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="PyFinitDiff.finite_difference_2D.boundaries.Boundary.value">
-<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.value" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BoundaryValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#PyFinitDiff.finite_difference_2D.boundaries.Boundary.value" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1213,10 +1213,10 @@ a negative sign is added. If it is zero, the value becomes zero.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The factor corresponding to the boundary value. Possible values are:
-- 1.0 for ‘symmetric’
-- -1.0 for ‘anti-symmetric’
-- 0.0 for ‘zero’
-- numpy.nan for ‘none’</p>
+- 1.0 for BoundaryValue.SYMMETRIC
+- -1.0 for BoundaryValue.ANTI_SYMMETRIC
+- 0.0 for BoundaryValue.ZERO
+- numpy.nan for BoundaryValue.NONE</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>float</p>

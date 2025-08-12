@@ -438,10 +438,12 @@
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic.dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyFinitDiff.boundary_values</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundaryValue</span>
 
 <span class="n">config_dict</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span>
     <span class="n">extra</span><span class="o">=</span><span class="s1">&#39;forbid&#39;</span><span class="p">,</span>
@@ -450,7 +452,6 @@
     <span class="n">kw_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">frozen</span><span class="o">=</span><span class="kc">False</span>
 <span class="p">)</span>
-
 
 <div class="viewcode-block" id="Boundary">
 <a class="viewcode-back" href="../../../code.html#PyFinitDiff.finite_difference_1D.boundaries.Boundary">[docs]</a>
@@ -463,14 +464,14 @@
 <span class="sd">    ----------</span>
 <span class="sd">    name : str</span>
 <span class="sd">        The name of the boundary.</span>
-<span class="sd">    value : Optional[str]</span>
-<span class="sd">        The value associated with the boundary, such as &#39;symmetric&#39;, &#39;anti-symmetric&#39;, &#39;zero&#39;, or &#39;none&#39;.</span>
+<span class="sd">    value : Optional[BoundaryValue]</span>
+<span class="sd">        The value associated with the boundary, such as BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC, BoundaryValue.ZERO, or BoundaryValue.NONE.</span>
 <span class="sd">    mesh_info : object</span>
 <span class="sd">        The mesh information object containing information about the mesh size and structure.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoundaryValue</span><span class="p">]</span>
     <span class="n">mesh_info</span><span class="p">:</span> <span class="nb">object</span>
 
 <div class="viewcode-block" id="Boundary.get_factor">
@@ -490,13 +491,13 @@
 <span class="sd">            If the boundary value is unexpected.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-            <span class="k">case</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mf">1.0</span>
-            <span class="k">case</span> <span class="s1">&#39;anti-symmetric&#39;</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">ANTI_SYMMETRIC</span><span class="p">:</span>
                 <span class="k">return</span> <span class="o">-</span><span class="mf">1.0</span>
-            <span class="k">case</span> <span class="s1">&#39;zero&#39;</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">ZERO</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mf">0.0</span>
-            <span class="k">case</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nan</span>
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected boundary value: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
@@ -549,37 +550,43 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    left : Optional[str]</span>
-<span class="sd">        Value of the left boundary. Defaults to &#39;zero&#39;. Must be either &#39;zero&#39;, &#39;symmetric&#39;, or &#39;anti-symmetric&#39;.</span>
-<span class="sd">    right : Optional[str]</span>
-<span class="sd">        Value of the right boundary. Defaults to &#39;zero&#39;. Must be either &#39;zero&#39;, &#39;symmetric&#39;, or &#39;anti-symmetric&#39;.</span>
-<span class="sd">    acceptable_boundary : List[str]</span>
+<span class="sd">    left : Optional[Union[str, BoundaryValue]]</span>
+<span class="sd">        Value of the left boundary. Defaults to &#39;zero&#39;. Can be either a string (&#39;zero&#39;, &#39;symmetric&#39;, &#39;anti-symmetric&#39;, &#39;none&#39;) or a BoundaryValue enum.</span>
+<span class="sd">    right : Optional[Union[str, BoundaryValue]]</span>
+<span class="sd">        Value of the right boundary. Defaults to &#39;zero&#39;. Can be either a string (&#39;zero&#39;, &#39;symmetric&#39;, &#39;anti-symmetric&#39;, &#39;none&#39;) or a BoundaryValue enum.</span>
+<span class="sd">    acceptable_boundary : List[BoundaryValue]</span>
 <span class="sd">        List of acceptable boundary values.</span>
 <span class="sd">    all_boundaries : List[str]</span>
 <span class="sd">        List of all boundary names.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">left</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zero&#39;</span>
-    <span class="n">right</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zero&#39;</span>
+    <span class="n">left</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;zero&#39;</span>
+    <span class="n">right</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="p">]]</span> <span class="o">=</span> <span class="s1">&#39;zero&#39;</span>
 
-    <span class="n">acceptable_boundary</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">,</span> <span class="s1">&#39;anti-symmetric&#39;</span><span class="p">,</span> <span class="s1">&#39;none&#39;</span><span class="p">]</span>
+    <span class="n">acceptable_boundary</span> <span class="o">=</span> <span class="p">[</span><span class="n">BoundaryValue</span><span class="o">.</span><span class="n">ZERO</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">ANTI_SYMMETRIC</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">NONE</span><span class="p">]</span>
     <span class="n">all_boundaries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Post-initialization method to assert acceptable boundary values.</span>
+<span class="sd">        Post-initialization method to convert strings to enums and assert acceptable boundary values.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert string inputs to enums</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">))</span>
+
         <span class="k">for</span> <span class="n">boundary</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_boundaries</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">assert_boundary_acceptable</span><span class="p">(</span><span class="n">boundary_string</span><span class="o">=</span><span class="n">boundary</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">assert_both_boundaries_not_same</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundary_0</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">boundary_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assert_both_boundaries_not_same</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundary_0</span><span class="p">:</span> <span class="n">BoundaryValue</span><span class="p">,</span> <span class="n">boundary_1</span><span class="p">:</span> <span class="n">BoundaryValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Assert that both boundaries are not the same axis symmetries if they are not &#39;zero&#39;.</span>
+<span class="sd">        Assert that both boundaries are not the same axis symmetries if they are not BoundaryValue.ZERO.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        boundary_0 : str</span>
+<span class="sd">        boundary_0 : BoundaryValue</span>
 <span class="sd">            The first boundary value.</span>
-<span class="sd">        boundary_1 : str</span>
+<span class="sd">        boundary_1 : BoundaryValue</span>
 <span class="sd">            The second boundary value.</span>
 
 <span class="sd">        Raises</span>
@@ -587,7 +594,7 @@
 <span class="sd">        ValueError</span>
 <span class="sd">            If both boundaries are set to the same axis symmetries.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">boundary_0</span> <span class="o">!=</span> <span class="s1">&#39;zero&#39;</span> <span class="ow">and</span> <span class="n">boundary_1</span> <span class="o">!=</span> <span class="s1">&#39;zero&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">boundary_0</span> <span class="o">!=</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">ZERO</span> <span class="ow">and</span> <span class="n">boundary_1</span> <span class="o">!=</span> <span class="n">BoundaryValue</span><span class="o">.</span><span class="n">ZERO</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Same-axis symmetries shouldn&#39;t be set on both ends&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">assert_boundary_acceptable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundary_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -610,13 +617,13 @@
             <span class="sa">f</span><span class="s2">&quot;Input must be in: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acceptable_boundary</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_boundary_pairs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_boundary_pairs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">BoundaryValue</span><span class="p">,</span> <span class="n">BoundaryValue</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the pairs of boundaries.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        List[Tuple[str, str]]</span>
+<span class="sd">        List[Tuple[BoundaryValue, BoundaryValue]]</span>
 <span class="sd">            A list of tuples containing boundary pairs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)]</span>

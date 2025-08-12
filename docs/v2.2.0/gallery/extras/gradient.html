@@ -498,6 +498,7 @@ We will explore different orders of derivatives and visualize their effects on t
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">PyFinitDiff.finite_difference_2D</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_array_derivative</span><span class="p">,</span> <span class="n">Boundaries</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyFinitDiff</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundaryValue</span>
 </pre></div>
 </div>
 </section>
@@ -517,7 +518,7 @@ We will explore different orders of derivatives and visualize their effects on t
 <section id="setting-boundary-conditions">
 <h2>Setting boundary conditions<a class="headerlink" href="#setting-boundary-conditions" title="Link to this heading">#</a></h2>
 <p>Define boundary conditions for the gradient calculation. Here, we use ‘none’ for all boundaries.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">boundaries</span> <span class="o">=</span> <span class="n">Boundaries</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">boundaries</span> <span class="o">=</span> <span class="n">Boundaries</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="n">BoundaryValue</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">BoundaryValue</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="n">BoundaryValue</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">BoundaryValue</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -545,7 +546,7 @@ We will explore different orders of derivatives and visualize their effects on t
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_gradient_001.png" srcset="../../_images/sphx_glr_gradient_001.png" alt="Derivative: 1, Derivative: 2, Derivative: 3" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 6.965 seconds)</p>
+<img src="../../_images/sphx_glr_gradient_001.png" srcset="../../_images/sphx_glr_gradient_001.png" alt="Derivative: 1, Derivative: 2, Derivative: 3" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 6.985 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-extras-gradient-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/f83e8b3a0ad38e1be2f2508808fd0cf6/gradient.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">gradient.ipynb</span></code></a></p>

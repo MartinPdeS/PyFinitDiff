@@ -14,6 +14,7 @@ We will explore different orders of derivatives and visualize their effects on t
 import numpy as np
 from PyFinitDiff.finite_difference_2D import get_array_derivative, Boundaries
 import matplotlib.pyplot as plt
+from PyFinitDiff import BoundaryValue
 
 # %%
 # Creating the input mesh
@@ -33,7 +34,7 @@ mesh = x_array * y_array
 # ---------------------------
 # Define boundary conditions for the gradient calculation. Here, we use 'none' for all boundaries.
 
-boundaries = Boundaries(top='none', bottom='none', left='none', right='none')
+boundaries = Boundaries(top=BoundaryValue.NONE, bottom=BoundaryValue.NONE, left=BoundaryValue.NONE, right=BoundaryValue.NONE)
 
 # %%
 # Visualizing the gradient for different derivatives
