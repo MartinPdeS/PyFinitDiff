@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 # Local imports
 import numpy
@@ -92,7 +92,6 @@ class Diagonal:
         """
         return self.triplet.plot()
 
-
 class ConstantDiagonal(Diagonal):
     """
     Represents a diagonal with constant values.
@@ -108,63 +107,76 @@ class ConstantDiagonal(Diagonal):
         )
 
 
-@dataclass
 class DiagonalSet:
     """
-    Represents a set of diagonals for the finite-difference matrix.
+    Represents a set of diagonals for the finite-difference method.
+
+    This class provides various utilities for manipulating and analyzing the set of diagonals.
 
     Parameters
     ----------
-    mesh_info : object
-        Instance describing the meta information on the mesh.
-    diagonals : list of Diagonal
-        List containing diagonal elements.
+    mesh_info : MeshInfo
+        Meta information about the mesh.
+    diagonals : List[Diagonal]
+        List of Diagonal objects.
     """
-    mesh_info: object
-    diagonals: list = field(default_factory=list)
+
+    def __init__(self, mesh_info: object, diagonals: list = None) -> None:
+        """
+        Initializes the DiagonalSet with mesh information and an optional list of diagonals.
+
+        Parameters
+        ----------
+        mesh_info : object
+            Meta information about the mesh.
+        diagonals : list, optional
+            List of Diagonal objects, defaults to an empty list.
+        """
+        self.mesh_info = mesh_info
+        self.diagonals = diagonals if diagonals is not None else []
 
     def append(self, diagonal: Diagonal) -> 'DiagonalSet':
         """
-        Append a diagonal to the set.
+        Appends a Diagonal to the set.
 
         Parameters
         ----------
         diagonal : Diagonal
-            The diagonal to be added to the set.
+            The diagonal to append.
 
         Returns
         -------
         DiagonalSet
-            The modified DiagonalSet instance.
+            The updated DiagonalSet.
         """
         self.diagonals.append(diagonal)
         return self
 
     def concatenate(self, other_diagonal_set: 'DiagonalSet') -> 'DiagonalSet':
         """
-        Concatenate another DiagonalSet to this one.
+        Concatenates another DiagonalSet to this one.
 
         Parameters
         ----------
-        other_diagonal_set : DiagonalSet
+        other_diagonal_set : 'DiagonalSet'
             The other DiagonalSet to concatenate.
 
         Returns
         -------
         DiagonalSet
-            The modified DiagonalSet instance.
+            The updated DiagonalSet.
         """
         self.diagonals += other_diagonal_set.diagonals
         return self
 
     def get_row_nan_bool(self) -> numpy.ndarray:
         """
-        Get a boolean array indicating which rows have NaN values.
+        Returns a boolean array with True where the associated rows have a NaN value.
 
         Returns
         -------
         numpy.ndarray
-            Boolean array with True where rows have NaN values.
+            Boolean array indicating NaN rows.
         """
         nan_index = self.get_nan_index()
         nan_rows = self.triplet.rows[nan_index]
@@ -173,12 +185,12 @@ class DiagonalSet:
 
     def get_list_of_nan_rows(self) -> numpy.ndarray:
         """
-        Get a list of rows containing NaN values.
+        Gets a list of rows containing NaN values.
 
         Returns
         -------
         numpy.ndarray
-            Unique list of rows with NaN values.
+            Array of rows with NaN values.
         """
         nan_index = numpy.isnan(self.triplet.values)
         nan_rows = self.triplet.rows[nan_index]
@@ -186,12 +198,12 @@ class DiagonalSet:
 
     def get_list_of_not_nan_rows(self) -> numpy.ndarray:
         """
-        Get a list of rows without NaN values.
+        Gets a list of rows without NaN values.
 
         Returns
         -------
         numpy.ndarray
-            List of rows that do not have NaN values.
+            Array of rows without NaN values.
         """
         nan_rows = self.get_list_of_nan_rows()
         non_nan_index = ~numpy.isin(self.triplet.rows, nan_rows)
@@ -200,79 +212,75 @@ class DiagonalSet:
 
     def get_nan_index(self) -> numpy.ndarray:
         """
-        Get a boolean array indicating which entries have NaN values.
+        Gets a boolean array indicating the indices of NaN values in the triplet.
 
         Returns
         -------
         numpy.ndarray
-            Boolean array indicating which entries in the triplet have NaN values.
+            Boolean array indicating NaN indices.
         """
         return numpy.isnan(self.triplet.values)
 
     def get_array_from_rows(self, rows: numpy.ndarray) -> numpy.ndarray:
         """
-        Get the array elements for the specified rows.
+        Returns the array elements for the specified rows.
 
         Parameters
         ----------
         rows : numpy.ndarray
-            Rows to search for in the triplet.
+            The rows to search for.
 
         Returns
         -------
         numpy.ndarray
-            Array elements corresponding to the specified rows.
+            The array elements corresponding to the specified rows.
         """
         rows_index = numpy.isin(self.triplet.rows, rows)
         return self.triplet.array[rows_index]
 
     def remove_nan_rows(self) -> 'DiagonalSet':
         """
-        Remove rows with NaN values from the DiagonalSet.
+        Removes rows containing NaN values from the triplet.
 
         Returns
         -------
         DiagonalSet
-            The modified DiagonalSet instance with NaN rows removed.
+            The updated DiagonalSet with NaN rows removed.
         """
         nan_rows = self.get_row_nan_bool()
         return self.remove_rows(rows=nan_rows)
 
     def remove_rows(self, rows: numpy.ndarray) -> 'DiagonalSet':
         """
-        Remove specified rows from the DiagonalSet.
+        Removes the specified rows from the triplet.
 
         Parameters
         ----------
         rows : numpy.ndarray
-            Rows to be removed.
+            The rows to remove.
 
         Returns
         -------
         DiagonalSet
-            The modified DiagonalSet instance with specified rows removed.
+            The updated DiagonalSet with the specified rows removed.
         """
         index_to_remove = numpy.isin(self.triplet.rows, rows)
-        self.triplet.array = numpy.delete(
-            arr=self.triplet.array,
-            obj=index_to_remove,
-            axis=0
-        )
+        self.triplet.array = numpy.delete(self.triplet.array, index_to_remove, axis=0)
         return self
 
     def replace_nan_rows_with(self, other: 'DiagonalSet') -> 'DiagonalSet':
         """
-        Replace NaN rows in this DiagonalSet with corresponding rows from another DiagonalSet.
+        Replaces NaN rows in this DiagonalSet with the equivalent rows from another DiagonalSet.
 
         Parameters
         ----------
-        other : DiagonalSet
-            The other DiagonalSet whose non-NaN rows will replace NaN rows in this set.
+        other : 'DiagonalSet'
+            The other DiagonalSet to source non-NaN rows from.
 
         Returns
         -------
         DiagonalSet
-            The modified DiagonalSet instance with replaced rows.
+            The updated DiagonalSet with NaN rows replaced.
         """
         self_nan_rows = self.get_list_of_nan_rows()
         other_not_nan_rows = other.get_list_of_not_nan_rows()
@@ -280,18 +288,19 @@ class DiagonalSet:
         self.remove_rows(replace_rows)
         add_array = other.get_array_from_rows(self_nan_rows)
         self.triplet.append_array(add_array)
+        return self
 
     def initialize_triplet(self) -> 'DiagonalSet':
         """
-        Initialize the Triplet instance by concatenating all diagonal triplets.
+        Initializes the triplet by combining all diagonals in the set.
 
         Returns
         -------
         DiagonalSet
-            The modified DiagonalSet instance with initialized Triplet.
+            The initialized DiagonalSet.
         """
         triplet = Triplet(
-            array=[0, 0, 0],
+            array=numpy.array([0, 0, 0]),
             shape=self.mesh_info.shape
         )
         for diagonal in self.diagonals:
@@ -300,25 +309,51 @@ class DiagonalSet:
         self.triplet = triplet
         return self
 
+    def get_lowest_nan(self) -> int:
+        """
+        Gets the lowest row index containing a NaN value.
+
+        Returns
+        -------
+        int
+            The lowest row index with a NaN value.
+        """
+        nan_index = self.get_nan_index()
+        rows = self.triplet.rows[nan_index]
+        return rows.min()
+
+    def get_highest_nan(self) -> int:
+        """
+        Gets the highest row index containing a NaN value.
+
+        Returns
+        -------
+        int
+            The highest row index with a NaN value.
+        """
+        nan_index = self.get_nan_index()
+        rows = self.triplet.rows[nan_index]
+        return rows.max()
+
     def __add__(self, other: 'DiagonalSet') -> 'DiagonalSet':
         """
-        Add another DiagonalSet to this one.
+        Adds another DiagonalSet to this one.
 
         Parameters
         ----------
-        other : DiagonalSet
+        other : 'DiagonalSet'
             The other DiagonalSet to add.
 
         Returns
         -------
         DiagonalSet
-            The combined DiagonalSet instance.
+            The updated DiagonalSet.
         """
         self.diagonals += other.diagonals
         return self
 
-    def plot(self):
+    def plot(self) -> None:
         """
-        Plot the Triplet instance representing the entire DiagonalSet.
+        Plots the Triplet instance representing the entire DiagonalSet.
         """
         return self.triplet.plot()

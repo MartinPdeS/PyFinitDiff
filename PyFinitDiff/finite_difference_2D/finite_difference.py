@@ -8,7 +8,7 @@ from PyFinitDiff.coefficients import FiniteCoefficients
 from PyFinitDiff.triplet import Triplet
 from PyFinitDiff.finite_difference_2D.boundaries import Boundaries
 from PyFinitDiff.finite_difference_2D.utils import MeshInfo
-from PyFinitDiff.finite_difference_2D.diagonals import DiagonalSet, ConstantDiagonal
+from PyFinitDiff.diagonal import ConstantDiagonal, DiagonalSet
 
 config_dict = ConfigDict(
     extra='forbid',

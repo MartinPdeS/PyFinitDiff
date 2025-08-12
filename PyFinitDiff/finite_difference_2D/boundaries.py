@@ -105,13 +105,13 @@ class Boundaries:
     Parameters
     ----------
     left : Union[str, BoundaryValue]
-        Value of the left boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+        Value of the left boundary.
     right : Union[str, BoundaryValue]
-        Value of the right boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+        Value of the right boundary.
     top : Union[str, BoundaryValue]
-        Value of the top boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+        Value of the top boundary.
     bottom : Union[str, BoundaryValue]
-        Value of the bottom boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+        Value of the bottom boundary.
     all_boundaries : List[str]
         List of all boundary names.
     """

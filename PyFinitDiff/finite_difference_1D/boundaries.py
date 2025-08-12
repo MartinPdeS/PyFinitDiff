@@ -105,10 +105,10 @@ class Boundaries:
 
     Parameters
     ----------
-    left : Optional[Union[str, BoundaryValue]]
-        Value of the left boundary. Defaults to 'zero'. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
-    right : Optional[Union[str, BoundaryValue]]
-        Value of the right boundary. Defaults to 'zero'. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+    left : Optional[BoundaryValue]
+        Value of the left boundary. Defaults to BoundaryValue.ZERO.
+    right : Optional[BoundaryValue]
+        Value of the right boundary. Defaults to BoundaryValue.ZERO.
 
     all_boundaries : List[str]
         List of all boundary names.
