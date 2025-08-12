@@ -24,6 +24,7 @@ are all set up for demonstration purposes.
 from scipy.sparse import linalg
 import matplotlib.pyplot as plt
 from PyFinitDiff.finite_difference_1D import FiniteDifference, get_circular_mesh_triplet, Boundaries
+from PyFinitDiff import BoundaryValue
 
 # %%
 # Setting up the finite difference instance and boundaries
@@ -37,7 +38,7 @@ sparse_instance = FiniteDifference(
     dx=1,
     derivative=2,
     accuracy=6,
-    boundaries=Boundaries(left='symmetric', right='symmetric')
+    boundaries=Boundaries(left=BoundaryValue.SYMMETRIC, right=BoundaryValue.SYMMETRIC)
 )
 
 # %%

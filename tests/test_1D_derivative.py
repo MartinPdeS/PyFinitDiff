@@ -6,7 +6,6 @@ import numpy as np
 import math
 from PyFinitDiff.finite_difference_1D import get_function_derivative
 
-
 def foo(x, power: int):
     """
     A simple function to return x raised to the power specified.

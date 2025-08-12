@@ -15,6 +15,7 @@ import numpy as np
 from scipy import linalg
 import matplotlib.pyplot as plt
 from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
+from PyFinitDiff import BoundaryValue
 
 # %%
 # Setting up the finite difference Laplacian
@@ -30,7 +31,7 @@ sparse_instance = FiniteDifference(
     dy=1000 / n_y,
     derivative=2,
     accuracy=2,
-    boundaries=Boundaries(top='symmetric')
+    boundaries=Boundaries(top=BoundaryValue.SYMMETRIC)
 )
 
 laplacian = sparse_instance.triplet.to_dense()

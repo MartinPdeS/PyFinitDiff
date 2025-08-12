@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import numpy
-from typing import Optional, List, Tuple
+
+from typing import Optional, List, Tuple, Union
 from pydantic.dataclasses import dataclass
 from pydantic import ConfigDict
+from PyFinitDiff.boundary_values import BoundaryValue
 
 config_dict = ConfigDict(
     extra='forbid',
@@ -24,13 +26,13 @@ class Boundary:
     ----------
     name : str
         The name of the boundary.
-    value : Optional[str]
-        The value associated with the boundary (e.g., 'symmetric', 'anti-symmetric').
+    value : Optional[BoundaryValue]
+        The value associated with the boundary (e.g., BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC).
     mesh_info : object
         Mesh information object, used to determine mesh-related properties.
     """
     name: str
-    value: Optional[str]
+    value: Optional[BoundaryValue]
     mesh_info: object
 
     def get_factor(self) -> float:
@@ -41,19 +43,19 @@ class Boundary:
         -------
         float
             The factor corresponding to the boundary value. Possible values are:
-            - 1.0 for 'symmetric'
-            - -1.0 for 'anti-symmetric'
-            - 0.0 for 'zero'
-            - numpy.nan for 'none'
+            - 1.0 for BoundaryValue.SYMMETRIC
+            - -1.0 for BoundaryValue.ANTI_SYMMETRIC
+            - 0.0 for BoundaryValue.ZERO
+            - numpy.nan for BoundaryValue.NONE
         """
         match self.value:
-            case 'symmetric':
+            case BoundaryValue.SYMMETRIC:
                 return 1.0
-            case 'anti-symmetric':
+            case BoundaryValue.ANTI_SYMMETRIC:
                 return -1.0
-            case 'zero':
+            case BoundaryValue.ZERO:
                 return 0.0
-            case 'none':
+            case BoundaryValue.NONE:
                 return numpy.nan
 
     def get_shift_vector(self, offset: int) -> Optional[numpy.ndarray]:
@@ -100,51 +102,61 @@ class Boundaries:
 
     Parameters
     ----------
-    left : str
-        Value of the left boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
-    right : str
-        Value of the right boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
-    top : str
-        Value of the top boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
-    bottom : str
-        Value of the bottom boundary. Must be one of ['zero', 'symmetric', 'anti-symmetric', 'none'].
-    acceptable_boundary : List[str]
+    left : Union[str, BoundaryValue]
+        Value of the left boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+    right : Union[str, BoundaryValue]
+        Value of the right boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+    top : Union[str, BoundaryValue]
+        Value of the top boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+    bottom : Union[str, BoundaryValue]
+        Value of the bottom boundary. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+    acceptable_boundary : List[BoundaryValue]
         List of acceptable boundary values.
     all_boundaries : List[str]
         List of all boundary names.
     """
-    left: str = 'zero'
-    right: str = 'zero'
-    top: str = 'zero'
-    bottom: str = 'zero'
+    left: Union[str, BoundaryValue] = 'zero'
+    right: Union[str, BoundaryValue] = 'zero'
+    top: Union[str, BoundaryValue] = 'zero'
+    bottom: Union[str, BoundaryValue] = 'zero'
 
-    acceptable_boundary = ['zero', 'symmetric', 'anti-symmetric', 'none']
+    acceptable_boundary = [BoundaryValue.ZERO, BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC, BoundaryValue.NONE]
     all_boundaries = ['left', 'right', 'top', 'bottom']
 
     def __post_init__(self) -> None:
         """
-        Validates boundary values after initialization to ensure they are acceptable.
+        Validates boundary values after initialization and converts strings to enums.
         """
+        # Convert string inputs to enums
+        if isinstance(self.left, str):
+            object.__setattr__(self, 'left', BoundaryValue.from_string(self.left))
+        if isinstance(self.right, str):
+            object.__setattr__(self, 'right', BoundaryValue.from_string(self.right))
+        if isinstance(self.top, str):
+            object.__setattr__(self, 'top', BoundaryValue.from_string(self.top))
+        if isinstance(self.bottom, str):
+            object.__setattr__(self, 'bottom', BoundaryValue.from_string(self.bottom))
+
         for boundary in self.all_boundaries:
             self.assert_boundary_acceptable(boundary_string=boundary)
 
-    def assert_both_boundaries_not_same(self, boundary_0: str, boundary_1: str) -> None:
+    def assert_both_boundaries_not_same(self, boundary_0: BoundaryValue, boundary_1: BoundaryValue) -> None:
         """
-        Ensures that two boundaries on the same axis are not set to identical symmetry conditions unless they are 'zero'.
+        Ensures that two boundaries on the same axis are not set to identical symmetry conditions unless they are BoundaryValue.ZERO.
 
         Parameters
         ----------
-        boundary_0 : str
+        boundary_0 : BoundaryValue
             The first boundary value.
-        boundary_1 : str
+        boundary_1 : BoundaryValue
             The second boundary value.
 
         Raises
         ------
         ValueError
-            If both boundaries are set to the same symmetry condition and are not 'zero'.
+            If both boundaries are set to the same symmetry condition and are not BoundaryValue.ZERO.
         """
-        if boundary_0 != 'zero' and boundary_1 != 'zero':
+        if boundary_0 != BoundaryValue.ZERO and boundary_1 != BoundaryValue.ZERO:
             raise ValueError("Same-axis symmetries shouldn't be set on both ends")
 
     def assert_boundary_acceptable(self, boundary_string: str) -> None:
@@ -167,13 +179,13 @@ class Boundaries:
             f"Input must be in: {self.acceptable_boundary}"
         )
 
-    def get_boundary_pairs(self) -> List[Tuple[str, str]]:
+    def get_boundary_pairs(self) -> List[Tuple[BoundaryValue, BoundaryValue]]:
         """
         Retrieves pairs of boundaries.
 
         Returns
         -------
-        List[Tuple[str, str]]
+        List[Tuple[BoundaryValue, BoundaryValue]]
             A list of tuples containing the pairs of boundaries.
         """
         return [(self.left, self.right), (self.top, self.bottom)]
@@ -243,9 +255,9 @@ class Boundaries:
         str
             The parity in the x direction ('symmetric', 'anti-symmetric', or 'zero').
         """
-        if self.left == 'symmetric' or self.right == 'symmetric':
+        if self.left == BoundaryValue.SYMMETRIC or self.right == BoundaryValue.SYMMETRIC:
             return 'symmetric'
-        elif self.left == 'anti-symmetric' or self.right == 'anti-symmetric':
+        elif self.left == BoundaryValue.ANTI_SYMMETRIC or self.right == BoundaryValue.ANTI_SYMMETRIC:
             return 'anti-symmetric'
         else:
             return 'zero'
@@ -259,9 +271,9 @@ class Boundaries:
         str
             The parity in the y direction ('symmetric', 'anti-symmetric', or 'zero').
         """
-        if self.top == 'symmetric' or self.bottom == 'symmetric':
+        if self.top == BoundaryValue.SYMMETRIC or self.bottom == BoundaryValue.SYMMETRIC:
             return 'symmetric'
-        elif self.top == 'anti-symmetric' or self.bottom == 'anti-symmetric':
+        elif self.top == BoundaryValue.ANTI_SYMMETRIC or self.bottom == BoundaryValue.ANTI_SYMMETRIC:
             return 'anti-symmetric'
         else:
             return 'zero'

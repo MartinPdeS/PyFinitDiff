@@ -3,13 +3,14 @@
 
 import pytest
 from PyFinitDiff.finite_difference_1D import FiniteDifference, Boundaries
+from PyFinitDiff import BoundaryValue
 
 # Define boundary conditions for testing as a list of dictionaries
 BOUNDARY_CONDITIONS = [
-    {'left': 'zero', 'right': 'zero'},
-    {'left': 'symmetric', 'right': 'zero'},
-    {'left': 'anti-symmetric', 'right': 'zero'},
-    {'left': 'symmetric', 'right': 'none'}
+    {'left': BoundaryValue.ZERO, 'right': BoundaryValue.ZERO},
+    {'left': BoundaryValue.SYMMETRIC, 'right': BoundaryValue.ZERO},
+    {'left': BoundaryValue.ANTI_SYMMETRIC, 'right': BoundaryValue.ZERO},
+    {'left': BoundaryValue.SYMMETRIC, 'right': BoundaryValue.NONE}
 ]
 
 ACCURACIES = [2, 4, 6]

@@ -2,10 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy
+from enum import Enum
 
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Union
 from pydantic.dataclasses import dataclass
 from pydantic import ConfigDict
+from PyFinitDiff.boundary_values import BoundaryValue
 
 config_dict = ConfigDict(
     extra='forbid',
@@ -14,7 +16,6 @@ config_dict = ConfigDict(
     kw_only=True,
     frozen=False
 )
-
 
 @dataclass(config=config_dict)
 class Boundary:
@@ -25,14 +26,14 @@ class Boundary:
     ----------
     name : str
         The name of the boundary.
-    value : Optional[str]
-        The value associated with the boundary, such as 'symmetric', 'anti-symmetric', 'zero', or 'none'.
+    value : Optional[BoundaryValue]
+        The value associated with the boundary, such as BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC, BoundaryValue.ZERO, or BoundaryValue.NONE.
     mesh_info : object
         The mesh information object containing information about the mesh size and structure.
     """
 
     name: str
-    value: Optional[str]
+    value: Optional[BoundaryValue]
     mesh_info: object
 
     def get_factor(self) -> float:
@@ -50,13 +51,13 @@ class Boundary:
             If the boundary value is unexpected.
         """
         match self.value:
-            case 'symmetric':
+            case BoundaryValue.SYMMETRIC:
                 return 1.0
-            case 'anti-symmetric':
+            case BoundaryValue.ANTI_SYMMETRIC:
                 return -1.0
-            case 'zero':
+            case BoundaryValue.ZERO:
                 return 0.0
-            case 'none':
+            case BoundaryValue.NONE:
                 return numpy.nan
             case _:
                 raise ValueError(f"Unexpected boundary value: {self.value}")
@@ -104,37 +105,43 @@ class Boundaries:
 
     Parameters
     ----------
-    left : Optional[str]
-        Value of the left boundary. Defaults to 'zero'. Must be either 'zero', 'symmetric', or 'anti-symmetric'.
-    right : Optional[str]
-        Value of the right boundary. Defaults to 'zero'. Must be either 'zero', 'symmetric', or 'anti-symmetric'.
-    acceptable_boundary : List[str]
+    left : Optional[Union[str, BoundaryValue]]
+        Value of the left boundary. Defaults to 'zero'. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+    right : Optional[Union[str, BoundaryValue]]
+        Value of the right boundary. Defaults to 'zero'. Can be either a string ('zero', 'symmetric', 'anti-symmetric', 'none') or a BoundaryValue enum.
+    acceptable_boundary : List[BoundaryValue]
         List of acceptable boundary values.
     all_boundaries : List[str]
         List of all boundary names.
     """
-    left: Optional[str] = 'zero'
-    right: Optional[str] = 'zero'
+    left: Optional[Union[str, BoundaryValue]] = 'zero'
+    right: Optional[Union[str, BoundaryValue]] = 'zero'
 
-    acceptable_boundary = ['zero', 'symmetric', 'anti-symmetric', 'none']
+    acceptable_boundary = [BoundaryValue.ZERO, BoundaryValue.SYMMETRIC, BoundaryValue.ANTI_SYMMETRIC, BoundaryValue.NONE]
     all_boundaries = ['left', 'right']
 
     def __post_init__(self) -> None:
         """
-        Post-initialization method to assert acceptable boundary values.
+        Post-initialization method to convert strings to enums and assert acceptable boundary values.
         """
+        # Convert string inputs to enums
+        if isinstance(self.left, str):
+            object.__setattr__(self, 'left', BoundaryValue.from_string(self.left))
+        if isinstance(self.right, str):
+            object.__setattr__(self, 'right', BoundaryValue.from_string(self.right))
+
         for boundary in self.all_boundaries:
             self.assert_boundary_acceptable(boundary_string=boundary)
 
-    def assert_both_boundaries_not_same(self, boundary_0: str, boundary_1: str) -> None:
+    def assert_both_boundaries_not_same(self, boundary_0: BoundaryValue, boundary_1: BoundaryValue) -> None:
         """
-        Assert that both boundaries are not the same axis symmetries if they are not 'zero'.
+        Assert that both boundaries are not the same axis symmetries if they are not BoundaryValue.ZERO.
 
         Parameters
         ----------
-        boundary_0 : str
+        boundary_0 : BoundaryValue
             The first boundary value.
-        boundary_1 : str
+        boundary_1 : BoundaryValue
             The second boundary value.
 
         Raises
@@ -142,7 +149,7 @@ class Boundaries:
         ValueError
             If both boundaries are set to the same axis symmetries.
         """
-        if boundary_0 != 'zero' and boundary_1 != 'zero':
+        if boundary_0 != BoundaryValue.ZERO and boundary_1 != BoundaryValue.ZERO:
             raise ValueError("Same-axis symmetries shouldn't be set on both ends")
 
     def assert_boundary_acceptable(self, boundary_string: str) -> None:
@@ -165,13 +172,13 @@ class Boundaries:
             f"Input must be in: {self.acceptable_boundary}"
         )
 
-    def get_boundary_pairs(self) -> List[Tuple[str, str]]:
+    def get_boundary_pairs(self) -> List[Tuple[BoundaryValue, BoundaryValue]]:
         """
         Get the pairs of boundaries.
 
         Returns
         -------
-        List[Tuple[str, str]]
+        List[Tuple[BoundaryValue, BoundaryValue]]
             A list of tuples containing boundary pairs.
         """
         return [(self.left, self.right)]

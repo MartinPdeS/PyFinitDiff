@@ -3,16 +3,17 @@
 
 import pytest
 from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
+from PyFinitDiff import BoundaryValue
 
 # Define parameters for testing
 ACCURACIES = [2, 4, 6]
 DERIVATIVES = [1, 2]
 
 BOUNDARY_CONDITIONS = [
-    dict(left='zero', right='zero', top='zero', bottom='zero'),
-    dict(left='symmetric', right='zero', top='zero', bottom='zero'),
-    dict(left='anti-symmetric', right='zero', top='zero', bottom='zero'),
-    dict(left='anti-symmetric', right='zero', top='symmetric', bottom='zero')
+    dict(left=BoundaryValue.ZERO, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+    dict(left=BoundaryValue.SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+    dict(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+    dict(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.SYMMETRIC, bottom=BoundaryValue.ZERO)
 ]
 
 

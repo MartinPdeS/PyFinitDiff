@@ -22,6 +22,7 @@ The boundary conditions, derivative, and accuracy settings are specified for dem
 
 from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
 import matplotlib.pyplot as plt
+from PyFinitDiff import BoundaryValue
 
 # %%
 # Setting up the finite difference instance and boundaries
@@ -35,7 +36,7 @@ sparse_instance = FiniteDifference(
     dy=1,
     derivative=2,
     accuracy=4,
-    boundaries=Boundaries(left='anti-symmetric', right='zero', top='zero', bottom='zero')
+    boundaries=Boundaries(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO)
 )
 
 # %%

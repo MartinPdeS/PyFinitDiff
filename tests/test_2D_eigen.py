@@ -5,13 +5,14 @@ import pytest
 from scipy.sparse import linalg
 from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
 from PyFinitDiff.utils import get_2D_circular_mesh_triplet
+from PyFinitDiff import BoundaryValue
 
 # Define boundary conditions for testing
 boundary_conditions = [
-    Boundaries(left='zero', right='zero', top='zero', bottom='zero'),
-    Boundaries(left='symmetric', right='zero', top='zero', bottom='zero'),
-    Boundaries(left='anti-symmetric', right='zero', top='zero', bottom='zero'),
-    Boundaries(left='anti-symmetric', right='zero', top='symmetric', bottom='zero')
+    Boundaries(left=BoundaryValue.ZERO, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+    Boundaries(left=BoundaryValue.SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+    Boundaries(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.ZERO, bottom=BoundaryValue.ZERO),
+    Boundaries(left=BoundaryValue.ANTI_SYMMETRIC, right=BoundaryValue.ZERO, top=BoundaryValue.SYMMETRIC, bottom=BoundaryValue.ZERO)
 ]
 
 

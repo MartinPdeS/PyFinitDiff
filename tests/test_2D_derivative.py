@@ -5,7 +5,7 @@ import numpy as np
 import math
 import pytest
 from PyFinitDiff.finite_difference_2D import FiniteDifference, Boundaries
-
+from PyFinitDiff import BoundaryValue
 
 def foo(power: int, size: int = 20):
     """
@@ -45,10 +45,10 @@ def test_derivative(accuracy, derivative):
     x_array, y_array = foo(power=derivative, size=size)
 
     boundaries = Boundaries(
-        top='symmetric',
-        bottom='symmetric',
-        right='symmetric',
-        left='symmetric'
+        top=BoundaryValue.SYMMETRIC,
+        bottom=BoundaryValue.SYMMETRIC,
+        right=BoundaryValue.SYMMETRIC,
+        left=BoundaryValue.SYMMETRIC
     )
 
     finite_difference = FiniteDifference(
