@@ -8,7 +8,7 @@
 | PyFinitDiff/coefficients/backward.py                     |        3 |        0 |        0 |        0 |    100% |           |
 | PyFinitDiff/coefficients/central.py                      |        3 |        0 |        0 |        0 |    100% |           |
 | PyFinitDiff/coefficients/forward.py                      |        3 |        0 |        0 |        0 |    100% |           |
-| PyFinitDiff/diagonal.py                                  |      100 |       23 |        4 |        0 |     78% |84-87, 93, 169-170, 181-184, 222, 250-251, 321-323, 334-336, 352-353, 359 |
+| PyFinitDiff/diagonal.py                                  |       99 |       23 |        4 |        0 |     78% |83-86, 92, 168-169, 180-183, 221, 249-250, 320-322, 333-335, 351-352, 358 |
 | PyFinitDiff/finite\_difference\_1D/boundaries.py         |       64 |        8 |       28 |        5 |     84% |62-63, 97-98, 137-138, 149, 206->209, 213 |
 | PyFinitDiff/finite\_difference\_1D/derivative.py         |        9 |        0 |        2 |        0 |    100% |           |
 | PyFinitDiff/finite\_difference\_1D/finite\_difference.py |       59 |        5 |        6 |        0 |     89% |83, 96-98, 122 |
@@ -16,10 +16,9 @@
 | PyFinitDiff/finite\_difference\_2D/boundaries.py         |       82 |       15 |       40 |        3 |     75% |60-61, 92->97, 141-142, 153, 205->exit, 220-225, 236-241 |
 | PyFinitDiff/finite\_difference\_2D/derivative.py         |        8 |        5 |        0 |        0 |     38% |     50-68 |
 | PyFinitDiff/finite\_difference\_2D/finite\_difference.py |       68 |        1 |       10 |        3 |     95% |98, 111->113, 243->250, 250->exit |
-| PyFinitDiff/finite\_difference\_2D/utils.py              |       18 |        5 |        0 |        0 |     72% |     79-88 |
+| PyFinitDiff/finite\_difference\_2D/utils.py              |       18 |        0 |        0 |        0 |    100% |           |
 | PyFinitDiff/triplet.py                                   |      136 |       30 |       16 |        2 |     75% |39, 42, 102, 114, 130-131, 147-148, 164-165, 181-182, 193, 204, 287-288, 304-305, 316, 334-335, 341-347, 455-456 |
-| PyFinitDiff/utils.py                                     |       32 |       19 |       10 |        0 |     31% |10-29, 98-104 |
-|                                                **TOTAL** |  **613** |  **120** |  **120** |   **13** | **77%** |           |
+|                                                **TOTAL** |  **580** |   **96** |  **110** |   **13** | **80%** |           |
 
 
 ## Setup coverage badge
