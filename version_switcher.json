@@ -6,6 +6,12 @@
 }
 ,
 {
+  "name": "v2.3.0",
+  "version": "v2.3.0",
+  "url": "https://martinpdes.github.io/PyFinitDiff/docs/v2.3.0"
+}
+,
+{
   "name": "v2.2.0",
   "version": "v2.2.0",
   "url": "https://martinpdes.github.io/PyFinitDiff/docs/v2.2.0"
