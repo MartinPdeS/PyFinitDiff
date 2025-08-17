@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:07.768** total execution time for 2 files **from gallery/extras**:
+**00:07.722** total execution time for 2 files **from gallery/extras**:
 
 .. container::
 
@@ -33,8 +33,8 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_gallery_extras_gradient.py` (``gradient.py``)
-     - 00:07.013
+     - 00:06.977
      - 0.0
    * - :ref:`sphx_glr_gallery_extras_plot_WM_field.py` (``plot_WM_field.py``)
-     - 00:00.755
+     - 00:00.745
      - 0.0

@@ -11,7 +11,7 @@ are all set up for demonstration purposes.
 # +-------------+------------+--------------+------------+------------+
 # | Boundaries  |    left    |     right    |    top     |   bottom   |
 # +=============+============+==============+============+============+
-# |      -      |    zero    |   anti-sym   |   zero     |   zero     |
+# |      -      |    zero    |     zero     |  anti-sym  |   zero     |
 # +-------------+------------+--------------+------------+------------+
 
 # %%
@@ -38,7 +38,7 @@ sparse_instance = FiniteDifference(
     dy=1,
     derivative=2,
     accuracy=4,
-    boundaries=Boundaries(right=BoundaryValue.ANTI_SYMMETRIC)
+    boundaries=Boundaries(top=BoundaryValue.ANTI_SYMMETRIC)
 )
 
 # %%
