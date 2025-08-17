@@ -38,7 +38,7 @@ sparse_instance = FiniteDifference(
     dy=1,
     derivative=2,
     accuracy=4,
-    boundaries=Boundaries(right=BoundaryValue.SYMMETRIC)
+    boundaries=Boundaries(right=BoundaryValue.ANTI_SYMMETRIC)
 )
 
 # %%
