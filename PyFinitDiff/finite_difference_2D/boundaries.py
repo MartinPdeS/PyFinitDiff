@@ -17,7 +17,6 @@ config_dict = ConfigDict(
 )
 
 
-
 class Boundary:
     """
     Represents a boundary with a specific name, value, and mesh information.
