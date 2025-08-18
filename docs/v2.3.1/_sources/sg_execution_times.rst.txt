@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:28.438** total execution time for 19 files **from all galleries**:
+**00:28.330** total execution time for 19 files **from all galleries**:
 
 .. container::
 
@@ -33,59 +33,59 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_gallery_extras_gradient.py` (``../examples/extras/gradient.py``)
-     - 00:06.986
+     - 00:06.963
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_examples_7.py` (``../examples/eigenmodes_2d/examples_7.py``)
-     - 00:02.086
-     - 0.0
-   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_2.py` (``../examples/eigenmodes_2d/example_2.py``)
-     - 00:02.054
+     - 00:02.084
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_5.py` (``../examples/eigenmodes_2d/example_5.py``)
-     - 00:02.054
+     - 00:02.058
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_6.py` (``../examples/eigenmodes_2d/example_6.py``)
+     - 00:02.050
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_2.py` (``../examples/eigenmodes_2d/example_2.py``)
      - 00:02.048
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_1.py` (``../examples/eigenmodes_2d/example_1.py``)
-     - 00:02.042
+     - 00:02.043
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_3.py` (``../examples/eigenmodes_2d/example_3.py``)
-     - 00:02.036
+     - 00:02.039
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_4.py` (``../examples/eigenmodes_2d/example_4.py``)
-     - 00:01.576
+     - 00:01.579
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_0.py` (``../examples/eigenmodes_2d/example_0.py``)
-     - 00:01.559
+     - 00:01.497
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_8.py` (``../examples/eigenmodes_2d/example_8.py``)
-     - 00:01.115
+     - 00:01.112
      - 0.0
    * - :ref:`sphx_glr_gallery_extras_plot_WM_field.py` (``../examples/extras/plot_WM_field.py``)
-     - 00:00.787
+     - 00:00.736
      - 0.0
    * - :ref:`sphx_glr_gallery_triplets_plot_triplets_0.py` (``../examples/triplets/plot_triplets_0.py``)
-     - 00:00.710
+     - 00:00.721
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_0.py` (``../examples/eigenmodes_1d/example_0.py``)
-     - 00:00.650
-     - 0.0
-   * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_1.py` (``../examples/eigenmodes_1d/example_1.py``)
-     - 00:00.599
-     - 0.0
-   * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_3.py` (``../examples/eigenmodes_1d/example_3.py``)
-     - 00:00.597
+     - 00:00.651
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_2.py` (``../examples/eigenmodes_1d/example_2.py``)
-     - 00:00.595
+     - 00:00.605
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_1.py` (``../examples/eigenmodes_1d/example_1.py``)
+     - 00:00.602
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_1d_example_3.py` (``../examples/eigenmodes_1d/example_3.py``)
+     - 00:00.602
      - 0.0
    * - :ref:`sphx_glr_gallery_triplets_plot_triplets_2.py` (``../examples/triplets/plot_triplets_2.py``)
-     - 00:00.320
+     - 00:00.324
      - 0.0
    * - :ref:`sphx_glr_gallery_triplets_plot_triplets_1.py` (``../examples/triplets/plot_triplets_1.py``)
-     - 00:00.313
+     - 00:00.308
      - 0.0
    * - :ref:`sphx_glr_gallery_triplets_plot_triplets_3.py` (``../examples/triplets/plot_triplets_3.py``)
-     - 00:00.311
+     - 00:00.307
      - 0.0
