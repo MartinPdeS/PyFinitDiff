@@ -13,7 +13,7 @@
 | PyFinitDiff/finite\_difference\_1D/derivative.py         |        9 |        0 |        2 |        0 |    100% |           |
 | PyFinitDiff/finite\_difference\_1D/finite\_difference.py |       59 |        5 |        6 |        0 |     89% |83, 96-98, 122 |
 | PyFinitDiff/finite\_difference\_1D/utils.py              |       16 |        5 |        0 |        0 |     69% |     67-72 |
-| PyFinitDiff/finite\_difference\_2D/boundaries.py         |       82 |       15 |       40 |        3 |     75% |60-61, 92->97, 141-142, 153, 205->exit, 220-225, 236-241 |
+| PyFinitDiff/finite\_difference\_2D/boundaries.py         |       82 |       15 |       40 |        3 |     75% |59-60, 91->96, 140-141, 152, 204->exit, 219-224, 235-240 |
 | PyFinitDiff/finite\_difference\_2D/derivative.py         |        8 |        5 |        0 |        0 |     38% |     50-68 |
 | PyFinitDiff/finite\_difference\_2D/finite\_difference.py |       68 |        1 |       10 |        3 |     95% |98, 111->113, 243->250, 250->exit |
 | PyFinitDiff/finite\_difference\_2D/utils.py              |       18 |        0 |        0 |        0 |    100% |           |
