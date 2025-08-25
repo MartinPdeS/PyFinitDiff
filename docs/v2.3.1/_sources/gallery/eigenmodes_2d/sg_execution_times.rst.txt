@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:16.511** total execution time for 9 files **from gallery/eigenmodes_2d**:
+**00:16.731** total execution time for 9 files **from gallery/eigenmodes_2d**:
 
 .. container::
 
@@ -33,29 +33,29 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_examples_7.py` (``examples_7.py``)
-     - 00:02.084
+     - 00:02.099
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_5.py` (``example_5.py``)
-     - 00:02.058
-     - 0.0
-   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_6.py` (``example_6.py``)
-     - 00:02.050
+     - 00:02.090
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_2.py` (``example_2.py``)
-     - 00:02.048
+     - 00:02.078
+     - 0.0
+   * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_6.py` (``example_6.py``)
+     - 00:02.072
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_1.py` (``example_1.py``)
-     - 00:02.043
+     - 00:02.071
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_3.py` (``example_3.py``)
-     - 00:02.039
+     - 00:02.062
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_4.py` (``example_4.py``)
-     - 00:01.579
+     - 00:01.604
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_0.py` (``example_0.py``)
-     - 00:01.497
+     - 00:01.525
      - 0.0
    * - :ref:`sphx_glr_gallery_eigenmodes_2d_example_8.py` (``example_8.py``)
-     - 00:01.112
+     - 00:01.130
      - 0.0
