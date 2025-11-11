@@ -1,0 +1,22 @@
+# .coveragerc
+[run]
+source = PyFinitDiff
+branch = True
+relative_files = True
+parallel = True
+omit =
+    **/__init__.py
+    PyFinitDiff/_version.py
+    PyFinitDiff/directories.py
+    PyFinitDiff/**/__main__.py
+
+[report]
+skip_covered = True
+show_missing = True
+precision = 2
+
+[html]
+directory = htmlcov
+
+[xml]
+output = coverage.xml
