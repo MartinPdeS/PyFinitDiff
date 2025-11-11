@@ -193,9 +193,9 @@ We visualize the first four eigenmodes by reshaping the eigenvectors and plottin
 
  .. code-block:: none
 
-    /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages/matplotlib/cbook.py:1719: ComplexWarning: Casting complex values to real discards the imaginary part
+    /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/matplotlib/cbook.py:1719: ComplexWarning: Casting complex values to real discards the imaginary part
       return math.isfinite(val)
-    /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages/matplotlib/cbook.py:1355: ComplexWarning: Casting complex values to real discards the imaginary part
+    /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/matplotlib/cbook.py:1355: ComplexWarning: Casting complex values to real discards the imaginary part
       return np.asarray(x, float)
 
 
@@ -204,7 +204,7 @@ We visualize the first four eigenmodes by reshaping the eigenvectors and plottin
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.618 seconds)
+   **Total running time of the script:** (0 minutes 0.592 seconds)
 
 
 .. _sphx_glr_download_gallery_eigenmodes_1d_example_1.py:
