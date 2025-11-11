@@ -2,23 +2,20 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/MartinPdeS/PyFinitDiff/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                                                     |    Stmts |     Miss |   Branch |   BrPart |   Cover |   Missing |
-|--------------------------------------------------------- | -------: | -------: | -------: | -------: | ------: | --------: |
-| PyFinitDiff/boundary\_values.py                          |       12 |        4 |        4 |        0 |     50% |     36-39 |
-| PyFinitDiff/coefficients/backward.py                     |        3 |        0 |        0 |        0 |    100% |           |
-| PyFinitDiff/coefficients/central.py                      |        3 |        0 |        0 |        0 |    100% |           |
-| PyFinitDiff/coefficients/forward.py                      |        3 |        0 |        0 |        0 |    100% |           |
-| PyFinitDiff/diagonal.py                                  |       99 |       23 |        4 |        0 |     78% |83-86, 92, 168-169, 180-183, 221, 249-250, 320-322, 333-335, 351-352, 358 |
-| PyFinitDiff/finite\_difference\_1D/boundaries.py         |       64 |        8 |       28 |        5 |     84% |62-63, 97-98, 137-138, 149, 206->209, 213 |
-| PyFinitDiff/finite\_difference\_1D/derivative.py         |        9 |        0 |        2 |        0 |    100% |           |
-| PyFinitDiff/finite\_difference\_1D/finite\_difference.py |       59 |        5 |        6 |        0 |     89% |83, 96-98, 122 |
-| PyFinitDiff/finite\_difference\_1D/utils.py              |       16 |        5 |        0 |        0 |     69% |     67-72 |
-| PyFinitDiff/finite\_difference\_2D/boundaries.py         |       82 |       15 |       40 |        3 |     75% |59-60, 91->96, 140-141, 152, 204->exit, 219-224, 235-240 |
-| PyFinitDiff/finite\_difference\_2D/derivative.py         |        8 |        5 |        0 |        0 |     38% |     50-68 |
-| PyFinitDiff/finite\_difference\_2D/finite\_difference.py |       68 |        1 |       10 |        3 |     95% |98, 111->113, 243->250, 250->exit |
-| PyFinitDiff/finite\_difference\_2D/utils.py              |       18 |        0 |        0 |        0 |    100% |           |
-| PyFinitDiff/triplet.py                                   |      136 |       30 |       16 |        2 |     75% |39, 42, 102, 114, 130-131, 147-148, 164-165, 181-182, 193, 204, 287-288, 304-305, 316, 334-335, 341-347, 455-456 |
-|                                                **TOTAL** |  **580** |   **96** |  **110** |   **13** | **80%** |           |
+| Name                                                     |    Stmts |     Miss |   Branch |   BrPart |      Cover |   Missing |
+|--------------------------------------------------------- | -------: | -------: | -------: | -------: | ---------: | --------: |
+| PyFinitDiff/boundary\_values.py                          |       12 |        4 |        4 |        0 |     50.00% |     36-39 |
+| PyFinitDiff/diagonal.py                                  |       95 |       23 |        4 |        0 |     76.77% |83-86, 92, 168-169, 180-183, 221, 249-250, 320-322, 333-335, 351-352, 358 |
+| PyFinitDiff/finite\_difference\_1D/boundaries.py         |       64 |        8 |       28 |        5 |     83.70% |62-63, 97-98, 137-138, 149, 206->209, 213 |
+| PyFinitDiff/finite\_difference\_1D/finite\_difference.py |       58 |        5 |        6 |        0 |     89.06% |83, 96-98, 122 |
+| PyFinitDiff/finite\_difference\_1D/utils.py              |       15 |        5 |        0 |        0 |     66.67% |     67-72 |
+| PyFinitDiff/finite\_difference\_2D/boundaries.py         |       82 |       15 |       40 |        3 |     75.41% |59-60, 91->96, 140-141, 152, 204->exit, 219-224, 235-240 |
+| PyFinitDiff/finite\_difference\_2D/derivative.py         |        8 |        5 |        0 |        0 |     37.50% |     50-68 |
+| PyFinitDiff/finite\_difference\_2D/finite\_difference.py |       66 |        1 |       10 |        3 |     94.74% |98, 111->113, 243->250, 250->exit |
+| PyFinitDiff/triplet.py                                   |      134 |       30 |       16 |        2 |     74.67% |39, 42, 102, 114, 130-131, 147-148, 164-165, 181-182, 193, 204, 287-288, 304-305, 316, 334-335, 341-347, 455-456 |
+|                                                **TOTAL** |  **568** |   **96** |  **110** |   **13** | **80.09%** |           |
+
+5 files skipped due to complete coverage.
 
 
 ## Setup coverage badge
