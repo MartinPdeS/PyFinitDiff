@@ -3,6 +3,10 @@
 triplets computation
 ~~~~~~~~~~~~~~~~~~~~
 
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
 
 .. raw:: html
 
@@ -19,7 +23,7 @@ triplets computation
   .. image:: /gallery/triplets/images/thumb/sphx_glr_plot_triplets_0_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_triplets_plot_triplets_0.py`
+  :doc:`/gallery/triplets/plot_triplets_0`
 
 .. raw:: html
 
@@ -36,7 +40,7 @@ triplets computation
   .. image:: /gallery/triplets/images/thumb/sphx_glr_plot_triplets_1_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_triplets_plot_triplets_1.py`
+  :doc:`/gallery/triplets/plot_triplets_1`
 
 .. raw:: html
 
@@ -53,7 +57,7 @@ triplets computation
   .. image:: /gallery/triplets/images/thumb/sphx_glr_plot_triplets_2_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_triplets_plot_triplets_2.py`
+  :doc:`/gallery/triplets/plot_triplets_2`
 
 .. raw:: html
 
@@ -70,7 +74,7 @@ triplets computation
   .. image:: /gallery/triplets/images/thumb/sphx_glr_plot_triplets_3_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_triplets_plot_triplets_3.py`
+  :doc:`/gallery/triplets/plot_triplets_3`
 
 .. raw:: html
 

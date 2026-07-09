@@ -3,6 +3,10 @@
 Extras
 ~~~~~~
 
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
 
 .. raw:: html
 
@@ -19,7 +23,7 @@ Extras
   .. image:: /gallery/extras/images/thumb/sphx_glr_gradient_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_extras_gradient.py`
+  :doc:`/gallery/extras/gradient`
 
 .. raw:: html
 
@@ -36,7 +40,7 @@ Extras
   .. image:: /gallery/extras/images/thumb/sphx_glr_plot_WM_field_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_extras_plot_WM_field.py`
+  :doc:`/gallery/extras/plot_WM_field`
 
 .. raw:: html
 

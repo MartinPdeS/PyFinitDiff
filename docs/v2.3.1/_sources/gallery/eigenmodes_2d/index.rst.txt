@@ -3,6 +3,10 @@
 2-dimensional eigenmodes
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
 
 .. raw:: html
 
@@ -19,7 +23,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_0_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_0.py`
+  :doc:`/gallery/eigenmodes_2d/example_0`
 
 .. raw:: html
 
@@ -36,7 +40,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_1_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_1.py`
+  :doc:`/gallery/eigenmodes_2d/example_1`
 
 .. raw:: html
 
@@ -53,7 +57,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_2_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_2.py`
+  :doc:`/gallery/eigenmodes_2d/example_2`
 
 .. raw:: html
 
@@ -70,7 +74,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_3_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_3.py`
+  :doc:`/gallery/eigenmodes_2d/example_3`
 
 .. raw:: html
 
@@ -87,7 +91,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_4_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_4.py`
+  :doc:`/gallery/eigenmodes_2d/example_4`
 
 .. raw:: html
 
@@ -104,7 +108,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_5_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_5.py`
+  :doc:`/gallery/eigenmodes_2d/example_5`
 
 .. raw:: html
 
@@ -121,7 +125,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_6_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_6.py`
+  :doc:`/gallery/eigenmodes_2d/example_6`
 
 .. raw:: html
 
@@ -138,7 +142,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_example_8_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_example_8.py`
+  :doc:`/gallery/eigenmodes_2d/example_8`
 
 .. raw:: html
 
@@ -155,7 +159,7 @@
   .. image:: /gallery/eigenmodes_2d/images/thumb/sphx_glr_examples_7_thumb.png
     :alt:
 
-  :ref:`sphx_glr_gallery_eigenmodes_2d_examples_7.py`
+  :doc:`/gallery/eigenmodes_2d/examples_7`
 
 .. raw:: html
 
